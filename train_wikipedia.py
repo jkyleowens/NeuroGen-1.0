@@ -41,9 +41,36 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
+class RateLimiter:
+    """Thread-safe rate limiter using proper synchronization"""
+
+    def __init__(self, min_interval=0.5):
+        """
+        Initialize rate limiter.
+
+        Args:
+            min_interval: Minimum interval between requests in seconds
+        """
+        self.min_interval = min_interval
+        self.last_request_time = 0
+        self.lock = threading.Lock()
+
+    def wait_if_needed(self):
+        """Wait only if necessary to maintain rate limit"""
+        with self.lock:
+            current_time = time.time()
+            time_since_last = current_time - self.last_request_time
+
+            if time_since_last < self.min_interval:
+                wait_time = self.min_interval - time_since_last
+                time.sleep(wait_time)
+
+            self.last_request_time = time.time()
+
+
 class WikipediaDataLoader:
     """Download and preprocess Wikipedia articles"""
-    
+
     def __init__(self, cache_dir='./wikipedia_cache'):
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -51,6 +78,7 @@ class WikipediaDataLoader:
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Research Bot)'
         })
+        self.rate_limiter = RateLimiter(min_interval=0.5)
         
     def get_random_articles(self, num_articles=100):
         """
@@ -87,8 +115,9 @@ class WikipediaDataLoader:
                     article = self._get_article_content(page['id'], page['title'])
                     if article and len(article['text']) > 200:  # Filter short articles
                         articles.append(article)
-                
-                time.sleep(0.5)  # Rate limiting
+
+                # Rate limiting - only wait if needed
+                self.rate_limiter.wait_if_needed()
                 
             except Exception as e:
                 print(f"\n[Warning] Error fetching batch: {str(e)}")
@@ -800,6 +829,85 @@ class NeuroGenAgent:
                 break
         return "".join(stdout_lines), "".join(stderr_lines)
 
+    def _wait_for_process_ready(self, timeout=5.0):
+        """
+        Wait for process to be ready by polling output streams.
+
+        Args:
+            timeout: Maximum time to wait in seconds
+
+        Returns:
+            True if process is ready, False otherwise
+        """
+        start_time = time.time()
+        poll_interval = 0.1
+
+        while time.time() - start_time < timeout:
+            # Check if process has crashed
+            if self.process.poll() is not None:
+                return False
+
+            # Check for any output indicating the process is running
+            stdout, stderr = self._read_streams()
+            if stdout or stderr:
+                # Process has produced output, it's ready
+                return True
+
+            # Brief sleep before next poll
+            time.sleep(poll_interval)
+
+        # Timeout - check one more time if process is still alive
+        return self.process.poll() is None
+
+    def _wait_for_response(self, timeout=1.0, poll_interval=0.01):
+        """
+        Wait for agent response by polling output streams.
+
+        Args:
+            timeout: Maximum time to wait in seconds
+            poll_interval: How often to check for output in seconds
+
+        Returns:
+            Tuple of (stdout, stderr) strings
+        """
+        start_time = time.time()
+        accumulated_stdout = []
+        accumulated_stderr = []
+
+        while time.time() - start_time < timeout:
+            # Check if process has crashed
+            if self.process.poll() is not None:
+                break
+
+            # Try to read from queues
+            stdout, stderr = self._read_streams()
+
+            if stdout:
+                accumulated_stdout.append(stdout)
+            if stderr:
+                accumulated_stderr.append(stderr)
+
+            # If we have output, check if it's a complete response
+            if accumulated_stdout or accumulated_stderr:
+                combined_stdout = "".join(accumulated_stdout)
+                combined_stderr = "".join(accumulated_stderr)
+
+                # Check if we have a complete response (contains expected markers)
+                # For next-token prediction, we look for the prediction marker
+                if "NEXT_WORD_PREDICTION:" in combined_stdout:
+                    return combined_stdout, combined_stderr
+
+                # If no prediction marker yet, continue waiting but return after a short delay
+                # to avoid waiting too long if the agent doesn't produce the expected format
+                if time.time() - start_time > 0.2:  # After 200ms, return what we have
+                    return combined_stdout, combined_stderr
+
+            # Brief sleep before next poll
+            time.sleep(poll_interval)
+
+        # Return whatever we've accumulated
+        return "".join(accumulated_stdout), "".join(accumulated_stderr)
+
     def initialize(self, corpus_path=None):
         """Initialize the NeuroGen C++ agent"""
         print(f"\n[NeuroGen] Starting C++ agent: {self.executable_path}")
@@ -829,17 +937,17 @@ class NeuroGenAgent:
             self.stdout_thread.start()
             self.stderr_thread.start()
 
-            # Wait for initialization
-            time.sleep(2)
-            
+            # Wait for process to be ready (with timeout)
+            print("[NeuroGen] Waiting for process to initialize...")
+            if not self._wait_for_process_ready(timeout=5.0):
+                stdout, stderr = self._read_streams()
+                raise RuntimeError(f"NeuroGen process failed to start within timeout. Stderr: {stderr}")
+
             stdout, stderr = self._read_streams()
             if stdout:
                 print(f"[NeuroGen STDOUT] {stdout.strip()}")
             if stderr:
                 print(f"[NeuroGen STDERR] {stderr.strip()}")
-
-            if self.process.poll() is not None:
-                raise RuntimeError(f"NeuroGen process failed to start. Stderr: {stderr}")
             
             print("[NeuroGen] C++ agent initialized successfully")
             return True
@@ -922,11 +1030,8 @@ class NeuroGenAgent:
                 self.process.stdin.write(content_bytes)
                 self.process.stdin.flush()
 
-                # Give the process a moment to respond
-                time.sleep(0.05)  # Shorter delay for efficiency
-
-                # Read agent's prediction
-                stdout, stderr = self._read_streams()
+                # Wait for agent response with timeout (much more efficient than fixed sleep)
+                stdout, stderr = self._wait_for_response(timeout=0.5, poll_interval=0.01)
 
                 # Parse prediction and compare with target
                 predicted_token = None

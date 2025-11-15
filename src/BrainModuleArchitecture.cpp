@@ -1,6 +1,7 @@
 #include "NeuroGen/BrainModuleArchitecture.h"
 #include "NeuroGen/LearningState.h"
-#include "NeuroGen/cuda/NetworkCUDA.cuh"
+// CUDA support is optional - forward declaration in header is sufficient
+// #include "NeuroGen/cuda/NetworkCUDA.cuh"
 #include <string>
 #include <vector>
 #include <map>
@@ -553,10 +554,11 @@ void BrainModuleArchitecture::updateConnectionUsage(const std::string& source_mo
 
 void BrainModuleArchitecture::setCUDANetwork(std::shared_ptr<NetworkCUDA> cuda_network) {
     cuda_network_ = cuda_network;
-    
+
     if (cuda_network_) {
-        cuda_network_->setBrainArchitecture(shared_from_this());
-        std::cout << "🚀 CUDA network integration enabled" << std::endl;
+        // CUDA functionality disabled in this build
+        // cuda_network_->setBrainArchitecture(shared_from_this());
+        std::cout << "⚠️  CUDA support not available in this build" << std::endl;
     }
 }
 

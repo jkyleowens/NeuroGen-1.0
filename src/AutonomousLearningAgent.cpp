@@ -551,7 +551,7 @@ std::string AutonomousLearningAgent::generateNextWordPrediction(const std::strin
     if (neural_output.empty()) return "<unknown>";
 
     // Generate token sequence from neural output
-    std::vector<int> token_ids = generateTokenSequence(neural_output, 10);  // Generate up to 10 tokens
+    std::vector<int> token_ids = generateTokenSequence(neural_output, 1);  // Generate only 1 token for easier training
 
     // Store the tokens for later decoding
     last_generated_tokens_ = token_ids;
@@ -679,7 +679,7 @@ std::vector<int> AutonomousLearningAgent::generateTokenSequence(const std::vecto
         }
     }
 
-    std::cout << "🎲 Generated " << token_ids.size() << " tokens" << std::endl << std::flush;
+    std::cout << "🎲 Generated " << token_ids.size() << " token(s)" << std::endl << std::flush;
 
     return token_ids;
 }

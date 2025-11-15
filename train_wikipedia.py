@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
-Main Training Script - Train Autonomous Agent on Wikipedia Data
+Main Training Script - Train Autonomous Agent on Wikipedia Data with Next-Token Prediction
 
-This script:
+This script implements proper next-token prediction training as used in modern LLMs:
 1. Downloads Wikipedia articles
 2. Trains a SentencePiece tokenizer on Wikipedia text
-3. Trains the modular autonomous agent on Wikipedia content
-4. Saves checkpoints and monitors progress
+3. Trains the modular autonomous agent using next-token prediction:
+   - For each text, creates multiple training examples
+   - At each position i, the model sees tokens[0:i] and predicts token[i]
+   - Provides immediate feedback based on prediction accuracy
+4. Saves checkpoints and monitors training progress
 
 Usage:
     python train_wikipedia.py --num_articles 1000 --epochs 5
@@ -279,107 +282,156 @@ class NeuroGenAgent:
     
     def browse_page(self, url, content):
         """
-        Send article content to the NeuroGen agent for processing.
-        
+        Train agent using next-token prediction on article content.
+
+        This implements proper next-token prediction as used in LLM training:
+        - For each position i in the token sequence, the model sees tokens[0:i]
+        - And is trained to predict tokens[i] (the next token)
+        - This creates multiple training examples from a single text
+
         Args:
             url: Article URL
             content: Article text content
-            
+
         Returns:
             Result dictionary with reward and token info
         """
         if not self.process or self.process.poll() is not None:
             print("[Warning] NeuroGen process not running")
             return {'reward': 0.0, 'error': 'Process not running', 'tokens': []}
-        
+
         try:
             # Tokenize content if tokenizer is available
             tokens = []
-            tokenized_text = content[:2000]
-            
-            if self.tokenizer:
-                try:
-                    # Encode text to token IDs
-                    tokens = self.tokenizer.encode(content[:2000], add_bos=True, add_eos=True)
-                    self.stats['tokenizer']['tokens_processed'] += len(tokens)
-                    
-                    # Convert tokens to string representation for processing
-                    token_pieces = self.tokenizer.encode_as_pieces(content[:2000])
-                    tokenized_text = " ".join(token_pieces[:100])  # Limit to first 100 pieces
-                    
-                    if len(tokens) > 0:
-                        print(f"[Tokenizer] Encoded {len(tokens)} tokens from text")
-                except Exception as e:
-                    print(f"[Warning] Tokenization failed: {e}")
-                    tokenized_text = content[:2000]
-            
-            # Send content to NeuroGen via stdin using the command format
-            command = f"process_text: {tokenized_text}\n"
-            content_bytes = command.encode('utf-8', errors='replace')
-            self.process.stdin.write(content_bytes)
-            self.process.stdin.flush()
 
-            # Give the process a moment to respond
-            time.sleep(0.1)
+            if not self.tokenizer:
+                print("[Warning] No tokenizer available, skipping training")
+                return {'reward': 0.0, 'error': 'No tokenizer', 'tokens': []}
 
-            # Read any output to prevent buffer overflow
-            stdout, stderr = self._read_streams()
+            try:
+                # Encode text to token IDs (limit to first 512 tokens for efficiency)
+                tokens = self.tokenizer.encode(content[:4000], add_bos=True, add_eos=True)
 
-            # Parse and decode generated tokens
-            generated_text = ""
-            if stdout:
-                print(f"[NeuroGen STDOUT] {stdout.strip()}")
+                if len(tokens) < 2:
+                    print("[Warning] Text too short for next-token prediction")
+                    return {'reward': 0.0, 'tokens': []}
 
-                # Look for TOKEN_IDS in output
-                if "TOKEN_IDS:" in stdout:
+                print(f"[Next-Token Training] Processing {len(tokens)} tokens")
+
+            except Exception as e:
+                print(f"[Warning] Tokenization failed: {e}")
+                return {'reward': 0.0, 'error': str(e), 'tokens': []}
+
+            # Next-token prediction training
+            # For each position i, we predict token[i] given tokens[0:i]
+            total_reward = 0.0
+            correct_predictions = 0
+            num_predictions = 0
+
+            # Sample positions for training (to avoid overwhelming the system)
+            # In a real LLM, we'd train on ALL positions, but for efficiency we sample
+            max_training_examples = min(50, len(tokens) - 1)  # Train on up to 50 examples per article
+            training_positions = np.random.choice(
+                range(1, len(tokens)),
+                size=min(max_training_examples, len(tokens) - 1),
+                replace=False
+            )
+            training_positions = sorted(training_positions)
+
+            for i, position in enumerate(training_positions):
+                # Context: all tokens up to (but not including) position
+                context_tokens = tokens[:position]
+                # Target: the token at position
+                target_token = tokens[position]
+
+                # Convert context tokens to text for the agent
+                context_text = self.tokenizer.decode(context_tokens)
+                target_text = self.tokenizer.decode([target_token])
+
+                # Send context to agent for next-token prediction
+                command = f"process_text: {context_text}\n"
+                content_bytes = command.encode('utf-8', errors='replace')
+                self.process.stdin.write(content_bytes)
+                self.process.stdin.flush()
+
+                # Give the process a moment to respond
+                time.sleep(0.05)  # Shorter delay for efficiency
+
+                # Read agent's prediction
+                stdout, stderr = self._read_streams()
+
+                # Parse prediction and compare with target
+                predicted_token = None
+                if stdout and "NEXT_WORD_PREDICTION:" in stdout:
                     try:
-                        # Extract token IDs from output
-                        token_line = [line for line in stdout.split('\n') if 'TOKEN_IDS:' in line][0]
-                        token_ids_str = token_line.split('TOKEN_IDS:')[1].strip()
+                        # Extract the predicted text
+                        pred_line = [line for line in stdout.split('\n') if 'NEXT_WORD_PREDICTION:' in line][0]
+                        predicted_text = pred_line.split('NEXT_WORD_PREDICTION:')[1].strip()
 
-                        if token_ids_str and self.tokenizer:
-                            # Parse comma-separated token IDs
-                            token_ids = [int(tid) for tid in token_ids_str.split(',')]
+                        # Calculate reward based on similarity to target
+                        # Simple reward: 1.0 if exact match, partial credit for similarity
+                        if predicted_text.lower() == target_text.lower():
+                            reward = 1.0
+                            correct_predictions += 1
+                        elif predicted_text and target_text.lower() in predicted_text.lower():
+                            reward = 0.5
+                        elif predicted_text:
+                            reward = 0.1
+                        else:
+                            reward = 0.0
 
-                            # Decode tokens to text using sentencepiece
-                            generated_text = self.tokenizer.decode(token_ids)
+                        # Send reward signal to agent for learning
+                        reward_command = f"REWARD_SIGNAL: {reward}\n"
+                        self.process.stdin.write(reward_command.encode('utf-8'))
+                        self.process.stdin.flush()
 
-                            print(f"[Generated Response] Token IDs: {token_ids}")
-                            print(f"[Generated Response] Text: {generated_text}")
+                        total_reward += reward
+                        num_predictions += 1
 
-                            # Update stats
-                            self.stats['tokenizer']['tokens_generated'] = \
-                                self.stats['tokenizer'].get('tokens_generated', 0) + len(token_ids)
+                        # Log progress every 10 predictions
+                        if (i + 1) % 10 == 0:
+                            accuracy = correct_predictions / num_predictions if num_predictions > 0 else 0
+                            print(f"  [{i+1}/{len(training_positions)}] Accuracy: {accuracy:.2%}, "
+                                  f"Avg reward: {total_reward/num_predictions:.3f}")
+
                     except Exception as e:
-                        print(f"[Warning] Failed to decode tokens: {e}")
+                        print(f"[Warning] Failed to parse prediction: {e}")
+                        num_predictions += 1
 
-            if stderr:
-                print(f"[NeuroGen STDERR] {stderr.strip()}")
+                # Update stats
+                self.stats['tokenizer']['tokens_processed'] = \
+                    self.stats['tokenizer'].get('tokens_processed', 0) + len(context_tokens)
 
-            # Enhanced reward mechanism considering tokenization and generation
-            base_reward = len(stdout.strip()) / 100.0
-            token_reward = len(tokens) / 1000.0 if tokens else 0.0
-            generation_reward = len(generated_text.split()) / 50.0 if generated_text else 0.0  # Reward for generating coherent text
-            reward = base_reward + token_reward + generation_reward
+            # Calculate final metrics
+            avg_reward = total_reward / max(1, num_predictions)
+            accuracy = correct_predictions / max(1, num_predictions)
+
+            print(f"[Next-Token Training Complete]")
+            print(f"  Training examples: {num_predictions}")
+            print(f"  Correct predictions: {correct_predictions}/{num_predictions} ({accuracy:.1%})")
+            print(f"  Average reward: {avg_reward:.3f}")
 
             # Update stats
             self.stats['browsing']['urls_visited'] += 1
             self.stats['browsing']['pages_read'] += 1
 
             return {
-                'reward': reward,
+                'reward': avg_reward,
                 'tokens': tokens,
                 'num_tokens': len(tokens),
-                'generated_text': generated_text,
-                'num_generated_tokens': len(generated_text.split()) if generated_text else 0
+                'num_training_examples': num_predictions,
+                'accuracy': accuracy,
+                'correct_predictions': correct_predictions
             }
-            
+
         except (IOError, BrokenPipeError) as e:
             print(f"[Error] Communication error with NeuroGen process: {e}")
             self.shutdown()
             return {'reward': 0.0, 'error': str(e), 'tokens': []}
         except Exception as e:
             print(f"[Error] An unexpected error occurred in browse_page: {e}")
+            import traceback
+            traceback.print_exc()
             return {'reward': 0.0, 'error': str(e), 'tokens': []}
     
     def save(self, path):
@@ -564,37 +616,47 @@ class WikipediaTrainer:
     
     def _process_article(self, article):
         """
-        Process a single Wikipedia article.
-        
+        Process a single Wikipedia article using next-token prediction.
+
         Args:
             article: Article dictionary
-            
+
         Returns:
             Reward value
         """
-        # Simulate browsing the article
+        print(f"\n[Article] {article['title']} ({article['length']} chars)")
+
+        # Train using next-token prediction
         result = self.agent.browse_page(
             url=article['url'],
             content=article['text']
         )
 
-        # Display generated response if available
-        if result.get('generated_text'):
-            print(f"\n[Agent Response] Generated: {result['generated_text'][:200]}...")  # Show first 200 chars
+        # Display training metrics
+        if result.get('accuracy') is not None:
+            accuracy = result['accuracy']
+            num_examples = result.get('num_training_examples', 0)
+            correct = result.get('correct_predictions', 0)
+            print(f"[Training Metrics] {correct}/{num_examples} correct ({accuracy:.1%} accuracy)")
 
         # Calculate reward based on multiple factors
         reward = result['reward']
-        
+
+        # Bonus for high accuracy in next-token prediction
+        if result.get('accuracy') is not None:
+            accuracy_bonus = result['accuracy'] * 0.2  # Up to 0.2 bonus for perfect accuracy
+            reward += accuracy_bonus
+
         # Additional reward for longer, more informative articles
         length_bonus = min(0.1, article['length'] / 10000)
         reward += length_bonus
-        
+
         # Reward for maintaining curiosity (exploration)
         curiosity_bonus = self.agent.curiosity_score * 0.1
         reward += curiosity_bonus
-        
-        reward = np.clip(reward, 0, 1)
-        
+
+        reward = np.clip(reward, 0, 1.5)  # Allow higher rewards for good performance
+
         return reward
     
     def _update_metrics(self):

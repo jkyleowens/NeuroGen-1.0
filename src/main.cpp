@@ -360,7 +360,7 @@ int main(int argc, char* argv[]) {
         config.enable_neurogenesis = true;
         config.enable_stdp = true;
         config.enable_pruning = true;
-        config.enable_structural_plasticity = false;  // Disable for performance
+        config.enable_structural_plasticity = true;  // Disable for performance
         
         // Use available NetworkConfig members
         config.dt = 0.02;                    // Larger time step for faster processing

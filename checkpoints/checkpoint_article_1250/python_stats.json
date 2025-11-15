@@ -15,7 +15,7 @@
   "modules": {},
   "tokenizer": {
     "vocab_size": 32000,
-    "tokens_processed": 397929,
-    "tokens_generated": 5930
+    "tokens_processed": 403172,
+    "tokens_generated": 6810
   }
 }

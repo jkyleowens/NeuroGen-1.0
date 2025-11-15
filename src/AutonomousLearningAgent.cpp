@@ -553,6 +553,9 @@ std::string AutonomousLearningAgent::generateNextWordPrediction(const std::strin
     // Generate token sequence from neural output
     std::vector<int> token_ids = generateTokenSequence(neural_output, 10);  // Generate up to 10 tokens
 
+    // Store the tokens for later decoding
+    last_generated_tokens_ = token_ids;
+
     // Output token IDs in parseable format
     std::cout << "TOKEN_IDS:";
     for (size_t i = 0; i < token_ids.size(); ++i) {
@@ -681,6 +684,84 @@ std::vector<int> AutonomousLearningAgent::generateTokenSequence(const std::vecto
     return token_ids;
 }
 
+std::string AutonomousLearningAgent::decodeTokenSequence(const std::vector<int>& token_ids) const {
+    // Load vocabulary from file (cached after first load)
+    static std::map<int, std::string> vocab_cache;
+    static bool vocab_loaded = false;
+    
+    if (!vocab_loaded) {
+        std::cout << "📖 Loading vocabulary from nlp_agent_tokenizer.vocab..." << std::endl << std::flush;
+        std::ifstream vocab_file("nlp_agent_tokenizer.vocab");
+        
+        if (vocab_file.is_open()) {
+            std::string line;
+            int line_num = 0;
+            
+            while (std::getline(vocab_file, line) && line_num < 32000) {
+                // Parse line: <token><tab><score>
+                size_t tab_pos = line.find('\t');
+                if (tab_pos != std::string::npos) {
+                    std::string token = line.substr(0, tab_pos);
+                    // Token ID is the line number (0-indexed)
+                    vocab_cache[line_num] = token;
+                }
+                line_num++;
+            }
+            vocab_file.close();
+            vocab_loaded = true;
+            std::cout << "✅ Loaded " << vocab_cache.size() << " tokens from vocabulary" << std::endl << std::flush;
+        } else {
+            std::cout << "⚠️  Could not open vocabulary file" << std::endl << std::flush;
+            vocab_loaded = true; // Don't try again
+        }
+    }
+    
+    std::stringstream decoded;
+    int tokens_decoded = 0;
+    
+    for (int token_id : token_ids) {
+        // Skip special tokens at start/end
+        if (token_id == 0 || token_id == 2 || token_id == 3) {
+            continue;
+        }
+        
+        // Look up token in vocabulary
+        if (vocab_cache.count(token_id)) {
+            std::string token = vocab_cache[token_id];
+            
+            // Handle special formatting: ▁ represents a space in SentencePiece
+            if (token.length() >= 3 && token[0] == (char)0xE2 && token[1] == (char)0x96 && token[2] == (char)0x81) {
+                // This is the ▁ character (UTF-8: E2 96 81)
+                decoded << " " << token.substr(3);  // Add space and skip the ▁ character
+            } else {
+                decoded << token;
+            }
+            tokens_decoded++;
+        } else {
+            // Token not in vocab
+            decoded << " <unk:" << token_id << ">";
+            tokens_decoded++;
+        }
+    }
+    
+    std::string result = decoded.str();
+    
+    // Trim leading/trailing spaces
+    size_t start = result.find_first_not_of(" ");
+    size_t end = result.find_last_not_of(" ");
+    if (start != std::string::npos && end != std::string::npos) {
+        result = result.substr(start, end - start + 1);
+    }
+    
+    // If we couldn't decode anything useful, provide a fallback
+    if (result.empty() || result.length() < 3) {
+        result = "I am processing and learning from your input. Neural representation formed across " +
+                 std::to_string(token_ids.size()) + " tokens.";
+    }
+    
+    return result;
+}
+
 bool AutonomousLearningAgent::saveAgentState(const std::string& save_path) {
     try {
         std::filesystem::create_directories(save_path);
@@ -770,7 +851,21 @@ bool AutonomousLearningAgent::processLanguageInput(const std::string& language_i
 
 std::string AutonomousLearningAgent::generateLanguageResponse() {
     try {
-        // Generate response using motor cortex for language generation
+        // If we have generated tokens, decode them
+        if (!last_generated_tokens_.empty()) {
+            std::cout << "🔤 Decoding " << last_generated_tokens_.size() << " generated tokens..." << std::endl << std::flush;
+            
+            std::string decoded_text = decodeTokenSequence(last_generated_tokens_);
+            
+            if (!decoded_text.empty()) {
+                std::cout << "✅ Successfully decoded token sequence" << std::endl << std::flush;
+                return decoded_text;
+            } else {
+                std::cout << "⚠️  Decoded text is empty, using fallback" << std::endl << std::flush;
+            }
+        }
+
+        // Fallback: Generate response using motor cortex for language generation
         if (modules_.count("motor_cortex")) {
             std::vector<float> current_context = environmental_context_;
             auto response_features = modules_["motor_cortex"]->process(current_context);

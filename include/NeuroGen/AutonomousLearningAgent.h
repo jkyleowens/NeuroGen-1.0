@@ -286,6 +286,7 @@ private:
     static constexpr int VOCAB_SIZE = 32000;
     mutable std::vector<std::vector<float>> output_embedding_weights_;  // Neural output -> token logits projection
     mutable bool output_layer_initialized_ = false;
+    mutable std::vector<int> last_generated_tokens_;  // Store last generated token IDs
 
     // ========================================================================
     // INTERNAL METHODS
@@ -356,6 +357,7 @@ private:
     std::vector<float> computeTokenLogits(const std::vector<float>& neural_output) const;
     int sampleToken(const std::vector<float>& logits, float temperature = 1.0f) const;
     std::vector<int> generateTokenSequence(const std::vector<float>& neural_output, int max_tokens = 20) const;
+    std::string decodeTokenSequence(const std::vector<int>& token_ids) const;
 
     /**
      * @brief Update exploration rate based on performance

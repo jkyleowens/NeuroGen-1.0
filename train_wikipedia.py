@@ -324,21 +324,55 @@ class NeuroGenAgent:
 
             # Read any output to prevent buffer overflow
             stdout, stderr = self._read_streams()
+
+            # Parse and decode generated tokens
+            generated_text = ""
             if stdout:
                 print(f"[NeuroGen STDOUT] {stdout.strip()}")
+
+                # Look for TOKEN_IDS in output
+                if "TOKEN_IDS:" in stdout:
+                    try:
+                        # Extract token IDs from output
+                        token_line = [line for line in stdout.split('\n') if 'TOKEN_IDS:' in line][0]
+                        token_ids_str = token_line.split('TOKEN_IDS:')[1].strip()
+
+                        if token_ids_str and self.tokenizer:
+                            # Parse comma-separated token IDs
+                            token_ids = [int(tid) for tid in token_ids_str.split(',')]
+
+                            # Decode tokens to text using sentencepiece
+                            generated_text = self.tokenizer.decode(token_ids)
+
+                            print(f"[Generated Response] Token IDs: {token_ids}")
+                            print(f"[Generated Response] Text: {generated_text}")
+
+                            # Update stats
+                            self.stats['tokenizer']['tokens_generated'] = \
+                                self.stats['tokenizer'].get('tokens_generated', 0) + len(token_ids)
+                    except Exception as e:
+                        print(f"[Warning] Failed to decode tokens: {e}")
+
             if stderr:
                 print(f"[NeuroGen STDERR] {stderr.strip()}")
 
-            # Enhanced reward mechanism considering tokenization
+            # Enhanced reward mechanism considering tokenization and generation
             base_reward = len(stdout.strip()) / 100.0
             token_reward = len(tokens) / 1000.0 if tokens else 0.0
-            reward = base_reward + token_reward
-            
+            generation_reward = len(generated_text.split()) / 50.0 if generated_text else 0.0  # Reward for generating coherent text
+            reward = base_reward + token_reward + generation_reward
+
             # Update stats
             self.stats['browsing']['urls_visited'] += 1
             self.stats['browsing']['pages_read'] += 1
-            
-            return {'reward': reward, 'tokens': tokens, 'num_tokens': len(tokens)}
+
+            return {
+                'reward': reward,
+                'tokens': tokens,
+                'num_tokens': len(tokens),
+                'generated_text': generated_text,
+                'num_generated_tokens': len(generated_text.split()) if generated_text else 0
+            }
             
         except (IOError, BrokenPipeError) as e:
             print(f"[Error] Communication error with NeuroGen process: {e}")
@@ -543,7 +577,11 @@ class WikipediaTrainer:
             url=article['url'],
             content=article['text']
         )
-        
+
+        # Display generated response if available
+        if result.get('generated_text'):
+            print(f"\n[Agent Response] Generated: {result['generated_text'][:200]}...")  # Show first 200 chars
+
         # Calculate reward based on multiple factors
         reward = result['reward']
         

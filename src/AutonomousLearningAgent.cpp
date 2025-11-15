@@ -549,25 +549,136 @@ std::string AutonomousLearningAgent::convertNeuralToLanguage(const std::vector<f
 
 std::string AutonomousLearningAgent::generateNextWordPrediction(const std::string& context, const std::vector<float>& neural_output) {
     if (neural_output.empty()) return "<unknown>";
-    
-    // Simple word prediction based on neural output
-    std::vector<std::string> common_words = {
-        "the", "is", "and", "to", "of", "in", "for", "with", "on", "at",
-        "learning", "neural", "network", "processing", "understanding", "knowledge",
-        "information", "data", "patterns", "system"
-    };
-    
-    // Use neural output to select word
-    float activation = 0.0f;
-    for (size_t i = 0; i < std::min(neural_output.size(), size_t(20)); ++i) {
-        activation += neural_output[i];
+
+    // Generate token sequence from neural output
+    std::vector<int> token_ids = generateTokenSequence(neural_output, 10);  // Generate up to 10 tokens
+
+    // Output token IDs in parseable format
+    std::cout << "TOKEN_IDS:";
+    for (size_t i = 0; i < token_ids.size(); ++i) {
+        std::cout << token_ids[i];
+        if (i < token_ids.size() - 1) std::cout << ",";
     }
-    
-    size_t word_idx = static_cast<size_t>(std::abs(activation * 100)) % common_words.size();
-    std::string predicted = common_words[word_idx];
-    
-    std::cout << "🔮 Predicted next word: " << predicted << std::endl << std::flush;
-    return predicted;
+    std::cout << std::endl << std::flush;
+
+    return "<tokens_generated>";  // Placeholder return
+}
+
+// ============================================================================
+// TOKEN GENERATION IMPLEMENTATION
+// ============================================================================
+
+std::vector<float> AutonomousLearningAgent::computeTokenLogits(const std::vector<float>& neural_output) const {
+    // Initialize output embedding layer on first use
+    if (!output_layer_initialized_) {
+        std::cout << "🔧 Initializing output embedding layer (32K vocab)..." << std::endl << std::flush;
+
+        // Initialize weights matrix: neural_dim x vocab_size
+        int neural_dim = neural_output.size();
+        output_embedding_weights_.resize(neural_dim);
+
+        // Xavier initialization
+        std::random_device rd;
+        std::mt19937 rng(rd());
+        float scale = std::sqrt(2.0f / (neural_dim + VOCAB_SIZE));
+        std::normal_distribution<float> dist(0.0f, scale);
+
+        for (int i = 0; i < neural_dim; ++i) {
+            output_embedding_weights_[i].resize(VOCAB_SIZE);
+            for (int j = 0; j < VOCAB_SIZE; ++j) {
+                output_embedding_weights_[i][j] = dist(rng);
+            }
+        }
+
+        output_layer_initialized_ = true;
+        std::cout << "✅ Output layer initialized: " << neural_dim << " -> " << VOCAB_SIZE << std::endl << std::flush;
+    }
+
+    // Compute logits = neural_output @ weights
+    std::vector<float> logits(VOCAB_SIZE, 0.0f);
+
+    for (size_t i = 0; i < neural_output.size(); ++i) {
+        for (int j = 0; j < VOCAB_SIZE; ++j) {
+            logits[j] += neural_output[i] * output_embedding_weights_[i][j];
+        }
+    }
+
+    return logits;
+}
+
+int AutonomousLearningAgent::sampleToken(const std::vector<float>& logits, float temperature) const {
+    if (logits.empty()) return 0;  // Return padding token
+
+    // Apply temperature scaling
+    std::vector<float> scaled_logits(logits.size());
+    float max_logit = *std::max_element(logits.begin(), logits.end());
+
+    for (size_t i = 0; i < logits.size(); ++i) {
+        scaled_logits[i] = (logits[i] - max_logit) / temperature;
+    }
+
+    // Compute softmax probabilities
+    std::vector<float> probs(logits.size());
+    float sum_exp = 0.0f;
+
+    for (size_t i = 0; i < logits.size(); ++i) {
+        probs[i] = std::exp(scaled_logits[i]);
+        sum_exp += probs[i];
+    }
+
+    for (size_t i = 0; i < probs.size(); ++i) {
+        probs[i] /= sum_exp;
+    }
+
+    // Sample from categorical distribution
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_real_distribution<float> uniform(0.0f, 1.0f);
+
+    float random_val = uniform(rng);
+    float cumsum = 0.0f;
+
+    for (size_t i = 0; i < probs.size(); ++i) {
+        cumsum += probs[i];
+        if (random_val <= cumsum) {
+            return static_cast<int>(i);
+        }
+    }
+
+    // Fallback to argmax
+    return static_cast<int>(std::distance(probs.begin(), std::max_element(probs.begin(), probs.end())));
+}
+
+std::vector<int> AutonomousLearningAgent::generateTokenSequence(const std::vector<float>& neural_output, int max_tokens) const {
+    std::vector<int> token_ids;
+
+    // Generate tokens autoregressively
+    std::vector<float> current_state = neural_output;
+
+    for (int i = 0; i < max_tokens; ++i) {
+        // Compute logits from current state
+        std::vector<float> logits = computeTokenLogits(current_state);
+
+        // Sample next token
+        int token_id = sampleToken(logits, 0.8f);  // temperature = 0.8 for some randomness
+
+        // Stop if we generate end-of-sequence token (token 3)
+        if (token_id == 3) {
+            break;
+        }
+
+        token_ids.push_back(token_id);
+
+        // Update state (simple approach: just modify slightly)
+        // In a real implementation, this would feedback the token embedding
+        for (size_t j = 0; j < current_state.size() && j < 10; ++j) {
+            current_state[j] += 0.01f * (token_id % 100 - 50);
+        }
+    }
+
+    std::cout << "🎲 Generated " << token_ids.size() << " tokens" << std::endl << std::flush;
+
+    return token_ids;
 }
 
 bool AutonomousLearningAgent::saveAgentState(const std::string& save_path) {

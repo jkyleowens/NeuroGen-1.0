@@ -1,0 +1,204 @@
+#include <NeuroGen/EnhancedSTDPFramework.h>
+#include <NeuroGen/cuda/GPUNeuralStructures.h>
+#include <cuda_runtime.h>
+#include <iostream>
+#include <fstream>
+
+// External C wrapper function declarations
+extern "C" {
+    void launch_enhanced_stdp_wrapper(void* d_synapses, const void* d_neurons,
+                                     void* d_plasticity_states, void* d_stdp_config,
+                                     void* d_global_neuromodulators, float current_time,
+                                     float dt, int num_synapses);
+    
+    void launch_bcm_learning_wrapper(void* d_synapses, const void* d_neurons,
+                                    void* d_plasticity_states, float current_time,
+                                    float dt, int num_synapses);
+    
+    void launch_homeostatic_regulation_wrapper(void* d_synapses, void* d_neurons,
+                                              float target_activity, float regulation_strength,
+                                              float dt, int num_neurons, int num_synapses);
+}
+
+// ============================================================================
+// ENHANCED STDP FRAMEWORK IMPLEMENTATION
+// ============================================================================
+
+EnhancedSTDPFramework::EnhancedSTDPFramework() 
+    : d_synapses_(nullptr), d_neurons_(nullptr), d_plasticity_states_(nullptr),
+      d_neuromodulator_states_(nullptr), num_synapses_(0), num_neurons_(0),
+      cuda_initialized_(false), stdp_learning_rate_(0.01f), bcm_learning_rate_(0.001f),
+      homeostatic_rate_(0.0001f), neuromodulation_strength_(1.0f),
+      total_weight_change_(0.0f), plasticity_events_(0.0f), last_update_time_(0.0f) {
+    
+    std::cout << "Enhanced STDP Framework: Initializing advanced plasticity system..." << std::endl;
+}
+
+EnhancedSTDPFramework::~EnhancedSTDPFramework() {
+    cleanup_cuda_resources();
+    std::cout << "Enhanced STDP Framework: Cleanup completed." << std::endl;
+}
+
+bool EnhancedSTDPFramework::initialize(int num_neurons, int num_synapses) {
+    num_neurons_ = num_neurons;
+    num_synapses_ = num_synapses;
+    
+    std::cout << "Enhanced STDP Framework: Initializing with " << num_neurons 
+              << " neurons and " << num_synapses << " synapses..." << std::endl;
+    
+    if (!initialize_cuda_resources()) {
+        std::cerr << "Enhanced STDP Framework: Failed to initialize CUDA resources!" << std::endl;
+        return false;
+    }
+    
+    cuda_initialized_ = true;
+    std::cout << "Enhanced STDP Framework: Successfully initialized!" << std::endl;
+    return true;
+}
+
+void EnhancedSTDPFramework::configure_learning_parameters(float stdp_rate, float bcm_rate, 
+                                                         float homeostatic_rate, float neuromod_strength) {
+    stdp_learning_rate_ = stdp_rate;
+    bcm_learning_rate_ = bcm_rate;
+    homeostatic_rate_ = homeostatic_rate;
+    neuromodulation_strength_ = neuromod_strength;
+    
+    std::cout << "Enhanced STDP Framework: Configured learning parameters - "
+              << "STDP: " << stdp_rate << ", BCM: " << bcm_rate 
+              << ", Homeostatic: " << homeostatic_rate << std::endl;
+}
+
+void EnhancedSTDPFramework::update_enhanced_stdp(float current_time, float dt) {
+    if (!cuda_initialized_) return;
+    
+    launch_enhanced_stdp_kernel(current_time, dt);
+    update_performance_metrics();
+    
+    plasticity_events_ += 1.0f;
+    last_update_time_ = current_time;
+}
+
+void EnhancedSTDPFramework::update_bcm_learning(float current_time, float dt) {
+    if (!cuda_initialized_) return;
+    
+    launch_bcm_learning_kernel(current_time, dt);
+    update_performance_metrics();
+}
+
+void EnhancedSTDPFramework::update_homeostatic_regulation(float target_activity, float dt) {
+    if (!cuda_initialized_) return;
+    
+    launch_homeostatic_kernel(target_activity, dt);
+    update_performance_metrics();
+}
+
+void EnhancedSTDPFramework::update_all_plasticity_mechanisms(float current_time, float dt, 
+                                                           float dopamine_level, float target_activity) {
+    if (!cuda_initialized_) return;
+    
+    // Update all plasticity mechanisms in sequence
+    update_enhanced_stdp(current_time, dt);
+    update_bcm_learning(current_time, dt);
+    update_homeostatic_regulation(target_activity, dt);
+    update_neuromodulation(dopamine_level, 0.1f, dt); // Default ACh level
+    
+    // Synchronize GPU operations
+    cudaDeviceSynchronize();
+}
+
+bool EnhancedSTDPFramework::initialize_cuda_resources() {
+    cudaError_t error;
+    
+    // Allocate GPU memory for synapses
+    size_t synapse_size = num_synapses_ * sizeof(GPUSynapse);
+    error = cudaMalloc(&d_synapses_, synapse_size);
+    if (error != cudaSuccess) {
+        std::cerr << "Enhanced STDP Framework: Failed to allocate synapse memory: " 
+                  << cudaGetErrorString(error) << std::endl;
+        return false;
+    }
+    
+    // Allocate GPU memory for neurons
+    size_t neuron_size = num_neurons_ * sizeof(GPUNeuronState);
+    error = cudaMalloc(&d_neurons_, neuron_size);
+    if (error != cudaSuccess) {
+        std::cerr << "Enhanced STDP Framework: Failed to allocate neuron memory: " 
+                  << cudaGetErrorString(error) << std::endl;
+        return false;
+    }
+    
+    // Allocate plasticity states
+    error = cudaMalloc(&d_plasticity_states_, sizeof(GPUPlasticityState));
+    if (error != cudaSuccess) {
+        std::cerr << "Enhanced STDP Framework: Failed to allocate plasticity states: " 
+                  << cudaGetErrorString(error) << std::endl;
+        return false;
+    }
+    
+    // Allocate neuromodulator states
+    error = cudaMalloc(&d_neuromodulator_states_, sizeof(GPUNeuromodulatorState));
+    if (error != cudaSuccess) {
+        std::cerr << "Enhanced STDP Framework: Failed to allocate neuromodulator states: " 
+                  << cudaGetErrorString(error) << std::endl;
+        return false;
+    }
+    
+    // Initialize GPU memory
+    error = cudaMemset(d_synapses_, 0, synapse_size);
+    error |= cudaMemset(d_neurons_, 0, neuron_size);
+    error |= cudaMemset(d_plasticity_states_, 0, sizeof(GPUPlasticityState));
+    error |= cudaMemset(d_neuromodulator_states_, 0, sizeof(GPUNeuromodulatorState));
+    
+    if (error != cudaSuccess) {
+        std::cerr << "Enhanced STDP Framework: Failed to initialize GPU memory: " 
+                  << cudaGetErrorString(error) << std::endl;
+        return false;
+    }
+    
+    std::cout << "Enhanced STDP Framework: CUDA resources initialized successfully." << std::endl;
+    return true;
+}
+
+void EnhancedSTDPFramework::cleanup_cuda_resources() {
+    if (d_synapses_) cudaFree(d_synapses_);
+    if (d_neurons_) cudaFree(d_neurons_);
+    if (d_plasticity_states_) cudaFree(d_plasticity_states_);
+    if (d_neuromodulator_states_) cudaFree(d_neuromodulator_states_);
+    
+    d_synapses_ = nullptr;
+    d_neurons_ = nullptr;
+    d_plasticity_states_ = nullptr;
+    d_neuromodulator_states_ = nullptr;
+    
+    cuda_initialized_ = false;
+}
+
+void EnhancedSTDPFramework::launch_enhanced_stdp_kernel(float current_time, float dt) {
+    launch_enhanced_stdp_wrapper(d_synapses_, d_neurons_, d_plasticity_states_,
+                                nullptr, d_neuromodulator_states_, current_time,
+                                dt, num_synapses_);
+}
+
+void EnhancedSTDPFramework::launch_bcm_learning_kernel(float current_time, float dt) {
+    launch_bcm_learning_wrapper(d_synapses_, d_neurons_, d_plasticity_states_,
+                               current_time, dt, num_synapses_);
+}
+
+void EnhancedSTDPFramework::launch_homeostatic_kernel(float target_activity, float dt) {
+    launch_homeostatic_regulation_wrapper(d_synapses_, d_neurons_, target_activity,
+                                         homeostatic_rate_, dt, num_neurons_, num_synapses_);
+}
+
+void EnhancedSTDPFramework::update_performance_metrics() {
+    // Simple performance tracking - in a full implementation, 
+    // this would copy statistics from GPU
+    total_weight_change_ += 0.001f; // Placeholder
+}
+
+float EnhancedSTDPFramework::get_total_weight_change() const {
+    return total_weight_change_;
+}
+
+float EnhancedSTDPFramework::get_plasticity_events() const {
+    return plasticity_events_;
+}

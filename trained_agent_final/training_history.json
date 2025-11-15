@@ -1,0 +1,53 @@
+{
+  "total_epochs": 1,
+  "total_articles": 93,
+  "final_reward": 93.0,
+  "episode_rewards": [
+    1.0
+  ],
+  "metrics": {
+    "articles_processed": 93,
+    "total_reward": 93.0,
+    "avg_reward_per_article": 1.0,
+    "learning_progress": [
+      {
+        "epoch": 1,
+        "articles": 93,
+        "reward": 93.0,
+        "avg_reward": 1.0
+      }
+    ]
+  },
+  "config": {
+    "embedding_dim": 512,
+    "vocab_size": 32000,
+    "tokenizer": {
+      "model_type": "bpe",
+      "max_length": 512
+    },
+    "embedding": {
+      "use_positional_encoding": true,
+      "positional_encoding_type": "learned"
+    },
+    "attention": {
+      "num_heads": 8,
+      "dropout": 0.1
+    },
+    "vision": {
+      "image_size": 224,
+      "patch_size": 16,
+      "num_layers": 6
+    },
+    "memory": {
+      "working_memory_capacity": 100,
+      "episodic_memory_capacity": 10000,
+      "consolidation_threshold": 0.65
+    },
+    "control": {
+      "max_active_modules": 5,
+      "use_adaptive_routing": true,
+      "learning_rate": 0.01
+    }
+  },
+  "completed_at": "2025-11-13T17:43:06.529242"
+}

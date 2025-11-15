@@ -1,0 +1,298 @@
+mkdir -p obj
+mkdir -p build/deps
+mkdir -p obj/cuda
+mkdir -p build/deps/cuda
+Compiling C++ source: src/BrainModuleArchitecture.cpp
+Compiling C++ source: src/AutonomousLearningAgent.cpp
+Compiling C++ source: src/CentralController.cpp
+Compiling C++ source: src/ControllerModule.cpp
+Compiling C++ source: src/DecisionAndActionSystems.cpp
+g++ -std=c++17 -Iinclude -I/opt/cuda/include -O3 -g -fPIC -Wall -c src/AutonomousLearningAgent.cpp -o obj/AutonomousLearningAgent.o
+Compiling C++ source: src/EnhancedLearningSystem.cpp
+g++ -std=c++17 -Iinclude -I/opt/cuda/include -O3 -g -fPIC -Wall -c src/BrainModuleArchitecture.cpp -o obj/BrainModuleArchitecture.o
+g++ -std=c++17 -Iinclude -I/opt/cuda/include -O3 -g -fPIC -Wall -c src/CentralController.cpp -o obj/CentralController.o
+g++ -std=c++17 -Iinclude -I/opt/cuda/include -O3 -g -fPIC -Wall -c src/ControllerModule.cpp -o obj/ControllerModule.o
+g++ -std=c++17 -Iinclude -I/opt/cuda/include -O3 -g -fPIC -Wall -c src/DecisionAndActionSystems.cpp -o obj/DecisionAndActionSystems.o
+g++ -std=c++17 -Iinclude -I/opt/cuda/include -O3 -g -fPIC -Wall -c src/EnhancedLearningSystem.cpp -o obj/EnhancedLearningSystem.o
+Compiling C++ source: src/EnhancedNeuralModule.cpp
+Compiling C++ source: src/main_autonomous.cpp
+g++ -std=c++17 -Iinclude -I/opt/cuda/include -O3 -g -fPIC -Wall -c src/EnhancedNeuralModule.cpp -o obj/EnhancedNeuralModule.o
+g++ -std=c++17 -Iinclude -I/opt/cuda/include -O3 -g -fPIC -Wall -c src/main_autonomous.cpp -o obj/main_autonomous.o
+src/EnhancedNeuralModule.cpp: In member function ‘void EnhancedNeuralModule::updateDevelopmentalState(float)’:
+src/EnhancedNeuralModule.cpp:406:11: warning: unused variable ‘development_rate’ [-Wunused-variable]
+  406 |     float development_rate = 0.001f * avg_activity;
+      |           ^~~~~~~~~~~~~~~~
+src/ControllerModule.cpp: In member function ‘float ControllerModule::get_concentration(NeuromodulatorType) const’:
+src/ControllerModule.cpp:440:28: error: ‘struct NeuromodulatorState’ has no member named ‘current_level’
+  440 |         return it->second->current_level;
+      |                            ^~~~~~~~~~~~~
+src/ControllerModule.cpp: In member function ‘void ControllerModule::emergency_stop()’:
+src/ControllerModule.cpp:448:19: error: ‘struct NeuromodulatorState’ has no member named ‘current_level’
+  448 |         neuromod->current_level = neuromod->baseline_level;
+      |                   ^~~~~~~~~~~~~
+src/ControllerModule.cpp: In member function ‘float ControllerModule::calculate_overall_system_performance()’:
+src/ControllerModule.cpp:514:59: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<RewardSignal>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  514 |     for (int i = reward_history_.size() - recent_count; i < reward_history_.size(); ++i) {
+      |                                                         ~~^~~~~~~~~~~~~~~~~~~~~~~~
+src/ControllerModule.cpp: In member function ‘void ControllerModule::update_neuromodulator_dynamics(float)’:
+src/ControllerModule.cpp:538:35: error: ‘struct NeuromodulatorState’ has no member named ‘current_level’
+  538 |         float current = neuromod->current_level;
+      |                                   ^~~~~~~~~~~~~
+src/ControllerModule.cpp:540:19: error: ‘struct NeuromodulatorState’ has no member named ‘current_level’
+  540 |         neuromod->current_level = current + (target - current) * decay_rate * dt;
+      |                   ^~~~~~~~~~~~~
+src/ControllerModule.cpp:541:19: error: ‘struct NeuromodulatorState’ has no member named ‘current_level’
+  541 |         neuromod->current_level = std::clamp(neuromod->current_level, 0.0f, 1.0f);
+      |                   ^~~~~~~~~~~~~
+src/ControllerModule.cpp:541:56: error: ‘struct NeuromodulatorState’ has no member named ‘current_level’
+  541 |         neuromod->current_level = std::clamp(neuromod->current_level, 0.0f, 1.0f);
+      |                                                        ^~~~~~~~~~~~~
+src/ControllerModule.cpp: In member function ‘void ControllerModule::assess_system_state()’:
+src/ControllerModule.cpp:558:55: error: ‘calculate_learning_efficiency’ was not declared in this scope; did you mean ‘calculate_learning_opportunity’?
+  558 |     system_performance_metrics_.learning_efficiency = calculate_learning_efficiency();
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                       calculate_learning_opportunity
+src/ControllerModule.cpp: At global scope:
+src/ControllerModule.cpp:581:7: error: no declaration matches ‘float ControllerModule::calculate_learning_efficiency()’
+  581 | float ControllerModule::calculate_learning_efficiency() {
+      |       ^~~~~~~~~~~~~~~~
+src/ControllerModule.cpp:581:7: note: no functions named ‘float ControllerModule::calculate_learning_efficiency()’
+In file included from src/ControllerModule.cpp:6:
+include/NeuroGen/ControllerModule.h:128:7: note: ‘class ControllerModule’ defined here
+  128 | class ControllerModule {
+      |       ^~~~~~~~~~~~~~~~
+src/DecisionAndActionSystems.cpp: In member function ‘std::vector<float> AutonomousLearningAgent::evaluate_action_candidates(const std::vector<BrowsingAction>&, const std::vector<MemorySystem::MemoryTrace>&)’:
+src/DecisionAndActionSystems.cpp:509:51: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<float>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  509 |                 if (static_cast<int>(action.type) < episode.action_vector.size()) {
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/CentralController.cpp: In member function ‘void CentralController::process_screen_elements()’:
+src/CentralController.cpp:192:16: error: ‘struct RewardSignal’ has no member named ‘type’
+  192 |         signal.type = RewardSignalType::NOVELTY_DETECTION;
+      |                ^~~~
+In file included from src/main_autonomous.cpp:18:
+include/NeuroGen/NetworkIntegration.h: In constructor ‘EnhancedNetworkManager::EnhancedNetworkManager(const NetworkConfig&)’:
+include/NeuroGen/NetworkIntegration.h:69:43: error: ‘class Network’ has no member named ‘getNumSynapses’; did you mean ‘get_synapse’?
+   69 |         int num_synapses = base_network_->getNumSynapses();
+      |                                           ^~~~~~~~~~~~~~
+      |                                           get_synapse
+include/NeuroGen/NetworkIntegration.h:70:42: error: ‘class Network’ has no member named ‘getNumNeurons’; did you mean ‘get_neuron’?
+   70 |         int num_neurons = base_network_->getNumNeurons();
+      |                                          ^~~~~~~~~~~~~
+      |                                          get_neuron
+include/NeuroGen/NetworkIntegration.h:76:9: error: ‘memset’ was not declared in this scope
+   76 |         memset(&metrics_, 0, sizeof(PerformanceMetrics));
+      |         ^~~~~~
+include/NeuroGen/NetworkIntegration.h:8:1: note: ‘memset’ is defined in header ‘<cstring>’; this is probably fixable by adding ‘#include <cstring>’
+    7 | #include <NeuroGen/EnhancedLearningSystem.h>
+  +++ |+#include <cstring>
+    8 | #include <NeuroGen/LearningRuleConstants.h>
+include/NeuroGen/NetworkIntegration.h: In member function ‘void EnhancedNetworkManager::simulateStep(float, float)’:
+include/NeuroGen/NetworkIntegration.h:95:30: error: no matching function for call to ‘Network::update(float&)’
+   95 |         base_network_->update(dt);
+      |         ~~~~~~~~~~~~~~~~~~~~~^~~~
+In file included from include/NeuroGen/NeuralModule.h:10,
+                 from include/NeuroGen/TaskAutomationModules.h:4,
+                 from src/main_autonomous.cpp:14:
+include/NeuroGen/Network.h:93:10: note: candidate: ‘void Network::update(float, const std::vector<float>&, float)’
+   93 |     void update(float dt, const std::vector<float>& input_currents, float reward = 0.0f);
+      |          ^~~~~~
+include/NeuroGen/Network.h:93:10: note:   candidate expects 3 arguments, 1 provided
+include/NeuroGen/NetworkIntegration.h:111:51: error: ‘class Network’ has no member named ‘getGPUSynapses’; did you mean ‘get_synapse’?
+  111 |             GPUSynapse* synapses = base_network_->getGPUSynapses();
+      |                                                   ^~~~~~~~~~~~~~
+      |                                                   get_synapse
+include/NeuroGen/NetworkIntegration.h:112:54: error: ‘class Network’ has no member named ‘getGPUNeurons’; did you mean ‘get_neuron’?
+  112 |             GPUNeuronState* neurons = base_network_->getGPUNeurons();
+      |                                                      ^~~~~~~~~~~~~
+      |                                                      get_neuron
+include/NeuroGen/NetworkIntegration.h:113:49: error: ‘class Network’ has no member named ‘getCurrentTime’
+  113 |             float current_time = base_network_->getCurrentTime();
+      |                                                 ^~~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘void EnhancedNetworkManager::setInputs(const std::vector<double>&)’:
+include/NeuroGen/NetworkIntegration.h:146:24: error: ‘class Network’ has no member named ‘setInputValues’
+  146 |         base_network_->setInputValues(inputs);
+      |                        ^~~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘std::vector<double> EnhancedNetworkManager::getOutputs() const’:
+include/NeuroGen/NetworkIntegration.h:153:31: error: ‘class Network’ has no member named ‘getOutputValues’
+  153 |         return base_network_->getOutputValues();
+      |                               ^~~~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘void EnhancedNetworkManager::resetEpisode()’:
+include/NeuroGen/NetworkIntegration.h:182:24: error: ‘class Network’ has no member named ‘resetDynamics’
+  182 |         base_network_->resetDynamics();
+      |                        ^~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘EnhancedNetworkManager::NetworkStatistics EnhancedNetworkManager::getStatistics() const’:
+include/NeuroGen/NetworkIntegration.h:237:45: error: ‘class Network’ has no member named ‘getTotalSpikes’
+  237 |         stats.total_spikes = base_network_->getTotalSpikes();
+      |                                             ^~~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘bool EnhancedNetworkManager::saveNetworkState(const std::string&) const’:
+include/NeuroGen/NetworkIntegration.h:255:28: error: ‘class Network’ has no member named ‘saveToFile’
+  255 |             base_network_->saveToFile(filename + "_network.dat");
+      |                            ^~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘bool EnhancedNetworkManager::loadNetworkState(const std::string&)’:
+include/NeuroGen/NetworkIntegration.h:288:33: error: ‘class Network’ has no member named ‘loadFromFile’
+  288 |             if (!base_network_->loadFromFile(filename + "_network.dat")) {
+      |                                 ^~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘float EnhancedNetworkManager::processRewardSignal(float)’:
+include/NeuroGen/NetworkIntegration.h:373:67: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<float>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  373 |             for (int i = reward_history_.size() - recent_count; i < reward_history_.size(); i++) {
+      |                                                                 ~~^~~~~~~~~~~~~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘void EnhancedNetworkManager::updateNetworkMonitoring()’:
+include/NeuroGen/NetworkIntegration.h:390:49: error: ‘class Network’ has no member named ‘getAverageActivity’
+  390 |         float current_activity = base_network_->getAverageActivity();
+      |                                                 ^~~~~~~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘float EnhancedNetworkManager::calculateLearningProgress() const’:
+include/NeuroGen/NetworkIntegration.h:458:36: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<float>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  458 |         for (int i = half_point; i < weight_change_history_.size(); i++) {
+      |                                  ~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h: In member function ‘float EnhancedNetworkManager::calculateWeightStability() const’:
+include/NeuroGen/NetworkIntegration.h:481:16: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<float>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  481 |              i < weight_change_history_.size(); i++) {
+      |              ~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/NeuroGen/NetworkIntegration.h:488:16: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<float>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  488 |              i < weight_change_history_.size(); i++) {
+      |              ~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp: In function ‘void runBasicModularSimulation()’:
+src/main_autonomous.cpp:91:23: error: ‘struct ControllerConfig’ has no member named ‘curiosity_drive_strength’
+   91 |     controller_config.curiosity_drive_strength = 0.4f;  // Strong exploration drive
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:92:23: error: ‘struct ControllerConfig’ has no member named ‘enable_adaptive_baselines’
+   92 |     controller_config.enable_adaptive_baselines = true;
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:93:23: error: ‘struct ControllerConfig’ has no member named ‘enable_stress_response’
+   93 |     controller_config.enable_stress_response = true;
+      |                       ^~~~~~~~~~~~~~~~~~~~~~
+make: *** [Makefile:72: obj/ControllerModule.o] Error 1
+make: *** Waiting for unfinished jobs....
+src/main_autonomous.cpp:167:28: error: ‘struct RewardSignal’ has no member named ‘type’
+  167 |             novelty_signal.type = RewardSignalType::NOVELTY_DETECTION;
+      |                            ^~~~
+src/main_autonomous.cpp:169:28: error: ‘struct RewardSignal’ has no member named ‘confidence’
+  169 |             novelty_signal.confidence = 0.8f;
+      |                            ^~~~~~~~~~
+src/main_autonomous.cpp:171:28: error: ‘struct RewardSignal’ has no member named ‘target_module’
+  171 |             novelty_signal.target_module = "PerceptionNet";
+      |                            ^~~~~~~~~~~~~
+src/main_autonomous.cpp:172:31: error: ‘class ControllerModule’ has no member named ‘process_reward_signal’
+  172 |             neuro_controller->process_reward_signal(novelty_signal);
+      |                               ^~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:200:25: error: ‘struct RewardSignal’ has no member named ‘type’
+  200 |             coop_signal.type = RewardSignalType::SOCIAL_COOPERATION;
+      |                         ^~~~
+src/main_autonomous.cpp:202:25: error: ‘struct RewardSignal’ has no member named ‘confidence’
+  202 |             coop_signal.confidence = 0.9f;
+      |                         ^~~~~~~~~~
+src/main_autonomous.cpp:204:25: error: ‘struct RewardSignal’ has no member named ‘target_module’
+  204 |             coop_signal.target_module = ""; // All modules
+      |                         ^~~~~~~~~~~~~
+src/main_autonomous.cpp:205:31: error: ‘class ControllerModule’ has no member named ‘process_reward_signal’
+  205 |             neuro_controller->process_reward_signal(coop_signal);
+      |                               ^~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:231:35: error: ‘class ControllerModule’ has no member named ‘allocate_attention’
+  231 |                 neuro_controller->allocate_attention(attention_weights);
+      |                                   ^~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:250:53: error: ‘class ControllerModule’ has no member named ‘calculate_module_performance’; did you mean ‘calculate_overall_system_performance’?
+  250 |                 float perc_perf = neuro_controller->calculate_module_performance("PerceptionNet");
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                     calculate_overall_system_performance
+src/main_autonomous.cpp:251:53: error: ‘class ControllerModule’ has no member named ‘calculate_module_performance’; did you mean ‘calculate_overall_system_performance’?
+  251 |                 float plan_perf = neuro_controller->calculate_module_performance("PlanningNet");
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                     calculate_overall_system_performance
+src/main_autonomous.cpp:252:54: error: ‘class ControllerModule’ has no member named ‘calculate_module_performance’; did you mean ‘calculate_overall_system_performance’?
+  252 |                 float motor_perf = neuro_controller->calculate_module_performance("MotorControlNet");
+      |                                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                      calculate_overall_system_performance
+src/main_autonomous.cpp:295:53: error: ‘class ControllerModule’ has no member named ‘get_all_concentrations’; did you mean ‘get_concentration’?
+  295 |             auto concentrations = neuro_controller->get_all_concentrations();
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~~
+      |                                                     get_concentration
+src/main_autonomous.cpp:296:67: error: ‘setprecision’ is not a member of ‘std’
+  296 |             std::cout << "   🧬 Dopamine: " << std::fixed << std::setprecision(2)
+      |                                                                   ^~~~~~~~~~~~
+src/main_autonomous.cpp:19:1: note: ‘std::setprecision’ is defined in header ‘<iomanip>’; this is probably fixable by adding ‘#include <iomanip>’
+   18 | #include "NeuroGen/NetworkIntegration.h"
+  +++ |+#include <iomanip>
+   19 | #include "NeuroGen/ControllerModule.h"
+src/main_autonomous.cpp:303:63: error: ‘setprecision’ is not a member of ‘std’
+  303 |             std::cout << "   📈 System Performance: " << std::setprecision(1) << system_perf * 100 << "%" << std::endl;
+      |                                                               ^~~~~~~~~~~~
+src/main_autonomous.cpp:303:63: note: ‘std::setprecision’ is defined in header ‘<iomanip>’; this is probably fixable by adding ‘#include <iomanip>’
+src/main_autonomous.cpp: In function ‘void runAutonomousLearningSimulation()’:
+src/main_autonomous.cpp:324:5: error: ‘AutonomousAgentConfig’ was not declared in this scope
+  324 |     AutonomousAgentConfig agent_config;
+      |     ^~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:325:5: error: ‘agent_config’ was not declared in this scope
+  325 |     agent_config.initial_neuron_count = 512;        // Start with more neurons
+      |     ^~~~~~~~~~~~
+src/main_autonomous.cpp:439:32: error: cannot convert ‘runAutonomousLearningSimulation()::<lambda()>’ to ‘std::function<BrowsingState()>’
+  439 |     agent.setEnvironmentSensor(environment_sensor);
+      |                                ^~~~~~~~~~~~~~~~~~
+      |                                |
+      |                                runAutonomousLearningSimulation()::<lambda()>
+In file included from src/main_autonomous.cpp:17:
+include/NeuroGen/AutonomousLearningAgent.h:341:62: note:   initializing argument 1 of ‘void AutonomousLearningAgent::setEnvironmentSensor(std::function<BrowsingState()>)’
+  341 |     void setEnvironmentSensor(std::function<BrowsingState()> sensor) {
+      |                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+src/main_autonomous.cpp:440:11: error: ‘class AutonomousLearningAgent’ has no member named ‘setEnvironmentActuator’; did you mean ‘setEnvironmentSensor’?
+  440 |     agent.setEnvironmentActuator(environment_actuator);
+      |           ^~~~~~~~~~~~~~~~~~~~~~
+      |           setEnvironmentSensor
+src/main_autonomous.cpp:441:11: error: ‘class AutonomousLearningAgent’ has no member named ‘setEnvironmentRewardSignal’
+  441 |     agent.setEnvironmentRewardSignal(environment_reward_signal);
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:454:22: error: ‘struct AutonomousGoal’ has no member named ‘target_competence’
+  454 |     adaptation_goal->target_competence = 0.8f;
+      |                      ^~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:456:22: error: ‘struct AutonomousGoal’ has no member named ‘evaluation_fn’
+  456 |     adaptation_goal->evaluation_fn = [&environment_complexity](const std::vector<float>& state) {
+      |                      ^~~~~~~~~~~~~
+src/main_autonomous.cpp:464:21: error: ‘struct AutonomousGoal’ has no member named ‘target_competence’
+  464 |     diversity_goal->target_competence = 0.7f;
+      |                     ^~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:466:21: error: ‘struct AutonomousGoal’ has no member named ‘evaluation_fn’
+  466 |     diversity_goal->evaluation_fn = [](const std::vector<float>& state) {
+      |                     ^~~~~~~~~~~~~
+src/main_autonomous.cpp:478:22: error: ‘struct AutonomousGoal’ has no member named ‘target_competence’
+  478 |     prediction_goal->target_competence = 0.85f;
+      |                      ^~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:480:22: error: ‘struct AutonomousGoal’ has no member named ‘evaluation_fn’
+  480 |     prediction_goal->evaluation_fn = [](const std::vector<float>& state) {
+      |                      ^~~~~~~~~~~~~
+src/main_autonomous.cpp:516:34: error: ‘class AutonomousLearningAgent’ has no member named ‘getPerformanceMetrics’
+  516 |             auto metrics = agent.getPerformanceMetrics();
+      |                                  ^~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:517:40: error: ‘class AutonomousLearningAgent’ has no member named ‘getNetworkStatistics’
+  517 |             auto network_stats = agent.getNetworkStatistics();
+      |                                        ^~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:518:39: error: ‘class AutonomousLearningAgent’ has no member named ‘getGoalCompetencies’
+  518 |             auto competencies = agent.getGoalCompetencies();
+      |                                       ^~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:523:69: error: ‘setprecision’ is not a member of ‘std’
+  523 |             std::cout << "   📊 Avg Reward: " << std::fixed << std::setprecision(3)
+      |                                                                     ^~~~~~~~~~~~
+src/main_autonomous.cpp:523:69: note: ‘std::setprecision’ is defined in header ‘<iomanip>’; this is probably fixable by adding ‘#include <iomanip>’
+src/main_autonomous.cpp:525:57: error: ‘class AutonomousLearningAgent’ has no member named ‘getExplorationEffectiveness’
+  525 |             std::cout << "   🔍 Exploration: " << agent.getExplorationEffectiveness() << std::endl;
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:531:35: error: ‘setprecision’ is not a member of ‘std’
+  531 |                           << std::setprecision(2) << comp.second * 100 << "%" << std::endl;
+      |                                   ^~~~~~~~~~~~
+src/main_autonomous.cpp:531:35: note: ‘std::setprecision’ is defined in header ‘<iomanip>’; this is probably fixable by adding ‘#include <iomanip>’
+src/main_autonomous.cpp:566:38: error: ‘class AutonomousLearningAgent’ has no member named ‘generateLearningReport’
+  566 |     std::string final_report = agent.generateLearningReport();
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:570:32: error: ‘class AutonomousLearningAgent’ has no member named ‘getPerformanceMetrics’
+  570 |     auto final_metrics = agent.getPerformanceMetrics();
+      |                                ^~~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:571:38: error: ‘class AutonomousLearningAgent’ has no member named ‘getNetworkStatistics’
+  571 |     auto final_network_stats = agent.getNetworkStatistics();
+      |                                      ^~~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:572:37: error: ‘class AutonomousLearningAgent’ has no member named ‘getGoalCompetencies’
+  572 |     auto final_competencies = agent.getGoalCompetencies();
+      |                                     ^~~~~~~~~~~~~~~~~~~
+src/main_autonomous.cpp:574:64: error: ‘setprecision’ is not a member of ‘std’
+  574 |     std::cout << "⏱️ Learning Duration: " << std::fixed << std::setprecision(1)
+      |                                                                ^~~~~~~~~~~~
+src/main_autonomous.cpp:574:64: note: ‘std::setprecision’ is defined in header ‘<iomanip>’; this is probably fixable by adding ‘#include <iomanip>’
+make: *** [Makefile:72: obj/CentralController.o] Error 1
+make: *** [Makefile:72: obj/main_autonomous.o] Error 1

@@ -1,0 +1,16 @@
+{
+  "browsing": {
+    "urls_visited": 0,
+    "pages_read": 0
+  },
+  "learning": {
+    "total_reward": 0.0,
+    "curiosity_score": 0.5
+  },
+  "memory": {
+    "working_memory_size": 0,
+    "episodic_memory_size": 0,
+    "total_stored": 0
+  },
+  "modules": {}
+}

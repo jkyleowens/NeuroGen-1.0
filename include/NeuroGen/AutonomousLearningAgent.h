@@ -282,6 +282,11 @@ private:
 
     AgentMetrics metrics_;
 
+    // Token generation state
+    static constexpr int VOCAB_SIZE = 32000;
+    mutable std::vector<std::vector<float>> output_embedding_weights_;  // Neural output -> token logits projection
+    mutable bool output_layer_initialized_ = false;
+
     // ========================================================================
     // INTERNAL METHODS
     // ========================================================================
@@ -346,6 +351,11 @@ private:
     std::vector<float> extractLanguageFeatures(const std::string& text) const;
     float computeLanguageComprehension(const std::vector<float>& neural_output) const;
     std::string convertNeuralToLanguage(const std::vector<float>& neural_features) const;
+
+    // Token generation methods
+    std::vector<float> computeTokenLogits(const std::vector<float>& neural_output) const;
+    int sampleToken(const std::vector<float>& logits, float temperature = 1.0f) const;
+    std::vector<int> generateTokenSequence(const std::vector<float>& neural_output, int max_tokens = 20) const;
 
     /**
      * @brief Update exploration rate based on performance

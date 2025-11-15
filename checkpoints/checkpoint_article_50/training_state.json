@@ -1,7 +1,7 @@
 {
   "epoch": 1,
   "article_idx": 50,
-  "total_reward": 20.940700000000007,
+  "total_reward": 19.186399999999995,
   "episode_rewards": [],
   "metrics": {
     "articles_processed": 0,
@@ -9,5 +9,5 @@
     "avg_reward_per_article": 0.0,
     "learning_progress": []
   },
-  "timestamp": "2025-11-15T13:07:44.020181"
+  "timestamp": "2025-11-15T13:46:49.932672"
 }

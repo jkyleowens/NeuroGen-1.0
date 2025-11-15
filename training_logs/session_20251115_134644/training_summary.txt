@@ -1,0 +1,143 @@
+================================================================================
+TRAINING SUMMARY REPORT
+================================================================================
+
+Session ID: 20251115_134644
+Date: 2025-11-15 13:47:35
+Total Training Time: 0.84 minutes
+
+CONFIGURATION:
+--------------------------------------------------------------------------------
+  num_epochs: 1
+  articles_per_epoch: 453
+  total_articles: 453
+  checkpoint_every: 50
+  total_time_minutes: 0.77229905128479
+
+FINAL STATISTICS:
+--------------------------------------------------------------------------------
+  articles_processed: 453
+  total_reward: 419.3794
+  avg_reward_per_article: 0.9257823399558498
+  final_curiosity_score: 0.5
+
+ARTICLE PROCESSING STATS:
+--------------------------------------------------------------------------------
+  Total articles: 453
+  Average reward: 0.9258
+  Reward std dev: 0.2103
+  Min reward: 0.1147
+  Max reward: 1.0000
+
+  Average processing time: 101.5ms
+  Total processing time: 45.98s
+
+TOKEN STATISTICS:
+--------------------------------------------------------------------------------
+  total_tokens: 136547
+  articles_with_tokens: 453
+  total_generated_tokens: 136547
+  Average tokens per article: 301.4
+
+LEARNING PROGRESS ANALYSIS:
+--------------------------------------------------------------------------------
+  Total training steps: 453
+  Initial reward (first 10 avg): 0.4472
+  Final reward (last 10 avg): 1.0000
+  Overall improvement: 0.5528
+  First half average: 0.8512
+  Second half average: 1.0000
+  Improvement rate: 17.48%
+
+TOP 10 BEST PERFORMING ARTICLES:
+--------------------------------------------------------------------------------
+  1. Le Sueur (surname)...
+     Reward: 1.0000, Tokens: 496
+
+  2. Jamie Shea...
+     Reward: 1.0000, Tokens: 359
+
+  3. National records in the 400 metres hurdles...
+     Reward: 1.0000, Tokens: 69
+
+  4. Camille Martin...
+     Reward: 1.0000, Tokens: 468
+
+  5. 1953 Tennessee Volunteers football team...
+     Reward: 1.0000, Tokens: 116
+
+  6. Montegufoni Castle...
+     Reward: 1.0000, Tokens: 503
+
+  7. Roger Johnson...
+     Reward: 1.0000, Tokens: 116
+
+  8. Arthur Dinaux...
+     Reward: 1.0000, Tokens: 172
+
+  9. National Register of Historic Places listings in Wayne Count...
+     Reward: 1.0000, Tokens: 147
+
+  10. Tess Girard...
+     Reward: 1.0000, Tokens: 299
+
+SAMPLE INTERACTIONS:
+================================================================================
+
+FIRST INTERACTION (Article 0):
+--------------------------------------------------------------------------------
+Title: Le Sueur (surname)
+Input Text (first 500 chars):
+Le Sueur or Lesueur is a French surname. Notable people with the surname include:
+
+Hubert Le Sueur (c. 1580–1658), French sculptor
+Jean Le Sueur (c. 1598–1668, also known as Abbé Saint-Sauveur), French-born Quebecois  priest
+Eustache Le Sueur (1617–1655), painter and a founder of the French Academy
+Pierre-Charles Le Sueur (c. 1657–1704), French trapper and explorer of North America
+Jacques-François le Sueur (fl. 1704–1754), French Jesuit missionary and linguist of the Abnaki in Canada
+Jacques-Ph...
+
+Agent Response:
+...
+
+Reward: 1.0000
+
+MIDDLE INTERACTION (Article 226):
+--------------------------------------------------------------------------------
+Title: List of literary works relating to Tamil sexual minorities
+Input Text (first 500 chars):
+A large amount of literary works have been composed in the Tamil language since the dawn of the Sangam Era in 600 BCE – a time widely considered to be when Tamil diverged from Dravidian to form its own language group.
+This article lists a variety of works relating to sexual minorities that have been conducted in the Tamil language, and/or by people of Tamil ethnicity, and/or about works that play an exceptional role for Tamil people.
+
+
+Tamil
+
+
+Pre-Sangam
+The folklore of Aravan
+
+
+Sangam
+The love ...
+
+Agent Response:
+onna...
+
+Reward: 1.0000
+
+FINAL INTERACTION (Article 452):
+--------------------------------------------------------------------------------
+Title: Opstad
+Input Text (first 500 chars):
+Opstad is a surname. Notable people with the surname include:
+
+Jan-Lauritz Opstad (1950–2018), Norwegian museum director and art historian
+Lauritz Opstad (1917–2003), Norwegian museum director and historian
+Steinar Opstad (born 1971), Norwegian poet...
+
+Agent Response:
+Guitarra...
+
+Reward: 1.0000
+
+================================================================================

@@ -29,6 +29,13 @@ import sentencepiece as spm
 import threading
 import queue
 from sentencepiece_module import TokenizerModule
+import logging
+import csv
+from collections import defaultdict
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 class WikipediaDataLoader:
@@ -178,6 +185,567 @@ class WikipediaDataLoader:
         print(f"[Wikipedia] Corpus created: {corpus_path} ({size_mb:.2f} MB)")
         
         return str(corpus_path)
+
+
+class TrainingLogger:
+    """Comprehensive logging and metrics tracking for training"""
+    
+    def __init__(self, log_dir='./training_logs'):
+        self.log_dir = Path(log_dir)
+        self.log_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create timestamp for this training session
+        self.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.session_dir = self.log_dir / f"session_{self.session_id}"
+        self.session_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Setup logging
+        self.setup_logging()
+        
+        # Metrics storage
+        self.metrics = defaultdict(list)
+        self.article_logs = []
+        self.token_stats = defaultdict(int)
+        
+        # Learning progress tracking
+        self.metrics['reward_progression'] = []
+        self.metrics['comprehension_scores'] = []
+        self.metrics['correct_answers'] = []
+        self.metrics['learning_rate'] = []
+        
+        # Performance tracking
+        self.start_time = time.time()
+        self.article_times = []
+        
+        logging.info(f"Training session started: {self.session_id}")
+        logging.info(f"Log directory: {self.session_dir}")
+    
+    def setup_logging(self):
+        """Setup file and console logging"""
+        log_file = self.session_dir / 'training.log'
+        
+        # Configure root logger
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s [%(levelname)s] %(message)s',
+            handlers=[
+                logging.FileHandler(log_file),
+                logging.StreamHandler(sys.stdout)
+            ]
+        )
+    
+    def log_article_processing(self, article_idx, article, response, tokens_processed, reward, processing_time):
+        """Log detailed information about each article processed"""
+        article_log = {
+            'index': article_idx,
+            'title': article['title'],
+            'url': article['url'],
+            'text_length': len(article['text']),
+            'input_text': article['text'][:1000],  # Store first 1000 chars
+            'full_input_text': article['text'],  # Store full text
+            'agent_response': response.get('generated_text', ''),
+            'comprehension_score': response.get('comprehension', 0.0),
+            'tokens_processed': tokens_processed,
+            'reward': reward,
+            'processing_time_ms': processing_time,
+            'timestamp': datetime.now().isoformat()
+        }
+        
+        # Track learning progress metrics
+        if 'comprehension' in response:
+            article_log['comprehension'] = response['comprehension']
+            self.metrics['comprehension_scores'].append(response['comprehension'])
+        
+        # Extract token IDs from response if available
+        if 'num_tokens' in response:
+            article_log['num_tokens'] = response['num_tokens']
+            self.token_stats['total_tokens'] += response['num_tokens']
+            self.token_stats['articles_with_tokens'] += 1
+        
+        # Track token generation
+        if 'tokens' in response and len(response['tokens']) > 0:
+            article_log['generated_tokens'] = response['tokens']
+            self.token_stats['total_generated_tokens'] += len(response['tokens'])
+        
+        self.article_logs.append(article_log)
+        self.article_times.append(processing_time)
+        
+        # Track reward progression for learning curves
+        self.metrics['reward_progression'].append(reward)
+        
+        # Log to file
+        logging.info(f"Article {article_idx}: '{article['title'][:50]}...' - "
+                    f"Reward: {reward:.3f}, Comprehension: {article_log.get('comprehension', 0):.3f}, "
+                    f"Tokens: {tokens_processed}, Time: {processing_time:.1f}ms")
+        
+        # Save detailed entry to separate file
+        detailed_log_file = self.session_dir / 'detailed_interactions.jsonl'
+        with open(detailed_log_file, 'a') as f:
+            json.dump(article_log, f)
+            f.write('\n')
+    
+    def log_epoch_metrics(self, epoch, articles_processed, avg_reward, total_reward):
+        """Log epoch-level metrics"""
+        self.metrics['epoch'].append(epoch)
+        self.metrics['avg_reward'].append(avg_reward)
+        self.metrics['total_reward'].append(total_reward)
+        self.metrics['articles_processed'].append(articles_processed)
+        
+        logging.info(f"Epoch {epoch} complete - Articles: {articles_processed}, "
+                    f"Avg Reward: {avg_reward:.3f}, Total: {total_reward:.2f}")
+    
+    def log_training_step(self, step, reward, comprehension=None, tokens=None):
+        """Log individual training step metrics"""
+        self.metrics['step'].append(step)
+        self.metrics['step_reward'].append(reward)
+        
+        if comprehension is not None:
+            self.metrics['comprehension'].append(comprehension)
+        if tokens is not None:
+            self.metrics['tokens_per_step'].append(tokens)
+    
+    def save_detailed_logs(self):
+        """Save detailed logs to CSV files"""
+        # Save article-level logs
+        if self.article_logs:
+            csv_path = self.session_dir / 'article_logs.csv'
+            with open(csv_path, 'w', newline='') as f:
+                writer = csv.DictWriter(f, fieldnames=self.article_logs[0].keys())
+                writer.writeheader()
+                writer.writerows(self.article_logs)
+            logging.info(f"Saved article logs to {csv_path}")
+        
+        # Save aggregated metrics
+        metrics_path = self.session_dir / 'metrics.json'
+        with open(metrics_path, 'w') as f:
+            json.dump(dict(self.metrics), f, indent=2)
+        logging.info(f"Saved metrics to {metrics_path}")
+        
+        # Save token statistics
+        token_stats_path = self.session_dir / 'token_stats.json'
+        with open(token_stats_path, 'w') as f:
+            json.dump(dict(self.token_stats), f, indent=2)
+        logging.info(f"Saved token statistics to {token_stats_path}")
+    
+    def generate_visualizations(self):
+        """Generate comprehensive training visualizations"""
+        logging.info("Generating training visualizations...")
+        
+        # Set style
+        sns.set_style("whitegrid")
+        plt.rcParams['figure.figsize'] = (12, 8)
+        
+        # 1. Reward progression over epochs
+        if 'epoch' in self.metrics and len(self.metrics['epoch']) > 0:
+            fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+            
+            # Average reward per epoch
+            axes[0, 0].plot(self.metrics['epoch'], self.metrics['avg_reward'], 
+                           marker='o', linewidth=2, markersize=8)
+            axes[0, 0].set_xlabel('Epoch')
+            axes[0, 0].set_ylabel('Average Reward')
+            axes[0, 0].set_title('Average Reward per Epoch')
+            axes[0, 0].grid(True, alpha=0.3)
+            
+            # Total reward per epoch
+            axes[0, 1].plot(self.metrics['epoch'], self.metrics['total_reward'], 
+                           marker='s', color='green', linewidth=2, markersize=8)
+            axes[0, 1].set_xlabel('Epoch')
+            axes[0, 1].set_ylabel('Total Reward')
+            axes[0, 1].set_title('Total Reward per Epoch')
+            axes[0, 1].grid(True, alpha=0.3)
+            
+            # Articles processed per epoch
+            axes[1, 0].bar(self.metrics['epoch'], self.metrics['articles_processed'], 
+                          color='steelblue', alpha=0.7)
+            axes[1, 0].set_xlabel('Epoch')
+            axes[1, 0].set_ylabel('Articles Processed')
+            axes[1, 0].set_title('Articles Processed per Epoch')
+            axes[1, 0].grid(True, alpha=0.3, axis='y')
+            
+            # Cumulative reward
+            cumulative_reward = np.cumsum(self.metrics['total_reward'])
+            axes[1, 1].plot(self.metrics['epoch'], cumulative_reward, 
+                           marker='d', color='orange', linewidth=2, markersize=8)
+            axes[1, 1].set_xlabel('Epoch')
+            axes[1, 1].set_ylabel('Cumulative Reward')
+            axes[1, 1].set_title('Cumulative Reward Over Training')
+            axes[1, 1].grid(True, alpha=0.3)
+            
+            plt.tight_layout()
+            plt.savefig(self.session_dir / 'reward_progression.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            logging.info("Saved reward progression chart")
+        
+        # 2. Processing time analysis
+        if self.article_times:
+            fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+            
+            # Processing time distribution
+            axes[0].hist(self.article_times, bins=50, color='skyblue', edgecolor='black', alpha=0.7)
+            axes[0].set_xlabel('Processing Time (ms)')
+            axes[0].set_ylabel('Frequency')
+            axes[0].set_title('Article Processing Time Distribution')
+            axes[0].axvline(np.mean(self.article_times), color='red', linestyle='--', 
+                           label=f'Mean: {np.mean(self.article_times):.1f}ms')
+            axes[0].legend()
+            axes[0].grid(True, alpha=0.3)
+            
+            # Processing time over articles
+            axes[1].plot(range(len(self.article_times)), self.article_times, 
+                        alpha=0.6, linewidth=1)
+            axes[1].set_xlabel('Article Index')
+            axes[1].set_ylabel('Processing Time (ms)')
+            axes[1].set_title('Processing Time Over Training')
+            # Add moving average
+            if len(self.article_times) > 10:
+                moving_avg = np.convolve(self.article_times, np.ones(10)/10, mode='valid')
+                axes[1].plot(range(9, len(self.article_times)), moving_avg, 
+                           color='red', linewidth=2, label='Moving Average (10)')
+                axes[1].legend()
+            axes[1].grid(True, alpha=0.3)
+            
+            plt.tight_layout()
+            plt.savefig(self.session_dir / 'processing_time_analysis.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            logging.info("Saved processing time analysis")
+        
+        # 3. Token statistics
+        if self.article_logs and any('num_tokens' in log for log in self.article_logs):
+            token_counts = [log.get('num_tokens', 0) for log in self.article_logs if 'num_tokens' in log]
+            
+            if token_counts:
+                fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+                
+                # Token distribution
+                axes[0].hist(token_counts, bins=30, color='lightgreen', edgecolor='black', alpha=0.7)
+                axes[0].set_xlabel('Tokens per Article')
+                axes[0].set_ylabel('Frequency')
+                axes[0].set_title('Token Count Distribution')
+                axes[0].axvline(np.mean(token_counts), color='red', linestyle='--', 
+                               label=f'Mean: {np.mean(token_counts):.1f}')
+                axes[0].legend()
+                axes[0].grid(True, alpha=0.3)
+                
+                # Cumulative tokens
+                cumulative_tokens = np.cumsum(token_counts)
+                axes[1].plot(range(len(cumulative_tokens)), cumulative_tokens, 
+                           linewidth=2, color='darkgreen')
+                axes[1].set_xlabel('Article Index')
+                axes[1].set_ylabel('Cumulative Tokens')
+                axes[1].set_title('Cumulative Tokens Processed')
+                axes[1].grid(True, alpha=0.3)
+                
+                plt.tight_layout()
+                plt.savefig(self.session_dir / 'token_statistics.png', dpi=300, bbox_inches='tight')
+                plt.close()
+                logging.info("Saved token statistics")
+        
+        # 4. Reward vs article length correlation
+        if self.article_logs:
+            lengths = [log['text_length'] for log in self.article_logs]
+            rewards = [log['reward'] for log in self.article_logs]
+            
+            fig, ax = plt.subplots(1, 1, figsize=(10, 6))
+            scatter = ax.scatter(lengths, rewards, alpha=0.5, s=50, c=range(len(lengths)), 
+                               cmap='viridis', edgecolors='black', linewidth=0.5)
+            ax.set_xlabel('Article Length (characters)')
+            ax.set_ylabel('Reward')
+            ax.set_title('Reward vs Article Length Correlation')
+            ax.grid(True, alpha=0.3)
+            
+            # Add colorbar to show progression
+            cbar = plt.colorbar(scatter, ax=ax)
+            cbar.set_label('Article Index (Training Progress)', rotation=270, labelpad=20)
+            
+            # Add trend line
+            z = np.polyfit(lengths, rewards, 1)
+            p = np.poly1d(z)
+            ax.plot(sorted(lengths), p(sorted(lengths)), "r--", alpha=0.8, 
+                   label=f'Trend: y={z[0]:.2e}x+{z[1]:.3f}')
+            ax.legend()
+            
+            plt.tight_layout()
+            plt.savefig(self.session_dir / 'reward_length_correlation.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            logging.info("Saved reward-length correlation")
+        
+        # 5. Learning progress over time
+        if self.metrics['reward_progression']:
+            fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+            
+            # Reward progression with moving average
+            axes[0, 0].plot(self.metrics['reward_progression'], alpha=0.4, linewidth=1, label='Raw Reward')
+            if len(self.metrics['reward_progression']) > 50:
+                window = min(50, len(self.metrics['reward_progression']) // 10)
+                moving_avg = np.convolve(self.metrics['reward_progression'], 
+                                        np.ones(window)/window, mode='valid')
+                axes[0, 0].plot(range(window-1, len(self.metrics['reward_progression'])), 
+                               moving_avg, linewidth=2, color='red', label=f'Moving Avg ({window})')
+            axes[0, 0].set_xlabel('Training Step (Article)')
+            axes[0, 0].set_ylabel('Reward')
+            axes[0, 0].set_title('Learning Progress: Reward Over Time')
+            axes[0, 0].legend()
+            axes[0, 0].grid(True, alpha=0.3)
+            
+            # Comprehension scores over time
+            if self.metrics['comprehension_scores']:
+                axes[0, 1].plot(self.metrics['comprehension_scores'], alpha=0.4, linewidth=1, 
+                               color='green', label='Comprehension')
+                if len(self.metrics['comprehension_scores']) > 50:
+                    window = min(50, len(self.metrics['comprehension_scores']) // 10)
+                    moving_avg = np.convolve(self.metrics['comprehension_scores'], 
+                                            np.ones(window)/window, mode='valid')
+                    axes[0, 1].plot(range(window-1, len(self.metrics['comprehension_scores'])), 
+                                   moving_avg, linewidth=2, color='darkgreen', 
+                                   label=f'Moving Avg ({window})')
+                axes[0, 1].set_xlabel('Training Step (Article)')
+                axes[0, 1].set_ylabel('Comprehension Score')
+                axes[0, 1].set_title('Learning Progress: Comprehension Over Time')
+                axes[0, 1].legend()
+                axes[0, 1].grid(True, alpha=0.3)
+            
+            # Learning rate (reward improvement over time)
+            if len(self.metrics['reward_progression']) > 100:
+                window_size = 100
+                learning_rate = []
+                for i in range(window_size, len(self.metrics['reward_progression'])):
+                    recent_avg = np.mean(self.metrics['reward_progression'][i-window_size:i])
+                    previous_avg = np.mean(self.metrics['reward_progression'][i-2*window_size:i-window_size]) if i >= 2*window_size else 0
+                    rate = recent_avg - previous_avg
+                    learning_rate.append(rate)
+                
+                axes[1, 0].plot(range(window_size, len(self.metrics['reward_progression'])), 
+                               learning_rate, linewidth=2, color='purple')
+                axes[1, 0].axhline(y=0, color='black', linestyle='--', alpha=0.5)
+                axes[1, 0].set_xlabel('Training Step (Article)')
+                axes[1, 0].set_ylabel('Learning Rate (Δ Reward)')
+                axes[1, 0].set_title('Learning Rate: Rate of Improvement')
+                axes[1, 0].grid(True, alpha=0.3)
+            
+            # Reward distribution over training phases
+            if len(self.metrics['reward_progression']) > 300:
+                phases = 4
+                phase_size = len(self.metrics['reward_progression']) // phases
+                phase_data = []
+                phase_labels = []
+                for i in range(phases):
+                    start = i * phase_size
+                    end = start + phase_size if i < phases - 1 else len(self.metrics['reward_progression'])
+                    phase_data.append(self.metrics['reward_progression'][start:end])
+                    phase_labels.append(f'Phase {i+1}\n({start}-{end})')
+                
+                axes[1, 1].boxplot(phase_data, labels=phase_labels)
+                axes[1, 1].set_ylabel('Reward')
+                axes[1, 1].set_title('Reward Distribution Across Training Phases')
+                axes[1, 1].grid(True, alpha=0.3, axis='y')
+            
+            plt.tight_layout()
+            plt.savefig(self.session_dir / 'learning_progress.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            logging.info("Saved learning progress visualization")
+        
+        # 6. Comprehension score distribution and statistics
+        if self.metrics['comprehension_scores']:
+            fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+            
+            # Comprehension score histogram
+            axes[0].hist(self.metrics['comprehension_scores'], bins=30, color='lightblue', 
+                        edgecolor='black', alpha=0.7)
+            axes[0].set_xlabel('Comprehension Score')
+            axes[0].set_ylabel('Frequency')
+            axes[0].set_title('Comprehension Score Distribution')
+            axes[0].axvline(np.mean(self.metrics['comprehension_scores']), color='red', 
+                          linestyle='--', label=f'Mean: {np.mean(self.metrics["comprehension_scores"]):.3f}')
+            axes[0].axvline(np.median(self.metrics['comprehension_scores']), color='green', 
+                          linestyle='--', label=f'Median: {np.median(self.metrics["comprehension_scores"]):.3f}')
+            axes[0].legend()
+            axes[0].grid(True, alpha=0.3)
+            
+            # Comprehension improvement over training
+            if len(self.metrics['comprehension_scores']) > 100:
+                chunk_size = max(10, len(self.metrics['comprehension_scores']) // 20)
+                chunk_means = []
+                chunk_positions = []
+                for i in range(0, len(self.metrics['comprehension_scores']), chunk_size):
+                    chunk = self.metrics['comprehension_scores'][i:i+chunk_size]
+                    chunk_means.append(np.mean(chunk))
+                    chunk_positions.append(i + chunk_size // 2)
+                
+                axes[1].plot(chunk_positions, chunk_means, marker='o', linewidth=2, 
+                           markersize=6, color='blue')
+                axes[1].set_xlabel('Training Step (Article)')
+                axes[1].set_ylabel('Average Comprehension Score')
+                axes[1].set_title('Comprehension Improvement Over Training')
+                axes[1].grid(True, alpha=0.3)
+                
+                # Add trend line
+                z = np.polyfit(chunk_positions, chunk_means, 1)
+                p = np.poly1d(z)
+                axes[1].plot(chunk_positions, p(chunk_positions), "r--", alpha=0.8, 
+                           label=f'Trend: slope={z[0]:.4f}')
+                axes[1].legend()
+            
+            plt.tight_layout()
+            plt.savefig(self.session_dir / 'comprehension_analysis.png', dpi=300, bbox_inches='tight')
+            plt.close()
+            logging.info("Saved comprehension analysis")
+        
+        logging.info(f"All visualizations saved to {self.session_dir}")
+    
+    def generate_summary_report(self, training_config, final_stats):
+        """Generate a comprehensive training summary report"""
+        report_path = self.session_dir / 'training_summary.txt'
+        
+        total_time = time.time() - self.start_time
+        
+        with open(report_path, 'w') as f:
+            f.write("="*80 + "\n")
+            f.write("TRAINING SUMMARY REPORT\n")
+            f.write("="*80 + "\n\n")
+            
+            f.write(f"Session ID: {self.session_id}\n")
+            f.write(f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"Total Training Time: {total_time/60:.2f} minutes\n\n")
+            
+            f.write("CONFIGURATION:\n")
+            f.write("-"*80 + "\n")
+            for key, value in training_config.items():
+                f.write(f"  {key}: {value}\n")
+            f.write("\n")
+            
+            f.write("FINAL STATISTICS:\n")
+            f.write("-"*80 + "\n")
+            for key, value in final_stats.items():
+                f.write(f"  {key}: {value}\n")
+            f.write("\n")
+            
+            if self.article_logs:
+                f.write("ARTICLE PROCESSING STATS:\n")
+                f.write("-"*80 + "\n")
+                f.write(f"  Total articles: {len(self.article_logs)}\n")
+                
+                rewards = [log['reward'] for log in self.article_logs]
+                f.write(f"  Average reward: {np.mean(rewards):.4f}\n")
+                f.write(f"  Reward std dev: {np.std(rewards):.4f}\n")
+                f.write(f"  Min reward: {np.min(rewards):.4f}\n")
+                f.write(f"  Max reward: {np.max(rewards):.4f}\n\n")
+                
+                times = [log['processing_time_ms'] for log in self.article_logs]
+                f.write(f"  Average processing time: {np.mean(times):.1f}ms\n")
+                f.write(f"  Total processing time: {sum(times)/1000:.2f}s\n\n")
+            
+            if self.token_stats:
+                f.write("TOKEN STATISTICS:\n")
+                f.write("-"*80 + "\n")
+                for key, value in self.token_stats.items():
+                    f.write(f"  {key}: {value}\n")
+                if self.token_stats.get('articles_with_tokens', 0) > 0:
+                    avg_tokens = self.token_stats['total_tokens'] / self.token_stats['articles_with_tokens']
+                    f.write(f"  Average tokens per article: {avg_tokens:.1f}\n")
+                f.write("\n")
+            
+            # Learning progress statistics
+            if self.metrics['reward_progression']:
+                f.write("LEARNING PROGRESS ANALYSIS:\n")
+                f.write("-"*80 + "\n")
+                
+                rewards = self.metrics['reward_progression']
+                f.write(f"  Total training steps: {len(rewards)}\n")
+                f.write(f"  Initial reward (first 10 avg): {np.mean(rewards[:10]):.4f}\n")
+                f.write(f"  Final reward (last 10 avg): {np.mean(rewards[-10:]):.4f}\n")
+                f.write(f"  Overall improvement: {np.mean(rewards[-10:]) - np.mean(rewards[:10]):.4f}\n")
+                
+                if len(rewards) > 100:
+                    # Calculate improvement rate
+                    mid_point = len(rewards) // 2
+                    first_half_avg = np.mean(rewards[:mid_point])
+                    second_half_avg = np.mean(rewards[mid_point:])
+                    f.write(f"  First half average: {first_half_avg:.4f}\n")
+                    f.write(f"  Second half average: {second_half_avg:.4f}\n")
+                    f.write(f"  Improvement rate: {((second_half_avg - first_half_avg) / first_half_avg * 100):.2f}%\n")
+                f.write("\n")
+            
+            if self.metrics['comprehension_scores']:
+                f.write("COMPREHENSION ANALYSIS:\n")
+                f.write("-"*80 + "\n")
+                
+                comp_scores = self.metrics['comprehension_scores']
+                f.write(f"  Average comprehension: {np.mean(comp_scores):.4f}\n")
+                f.write(f"  Comprehension std dev: {np.std(comp_scores):.4f}\n")
+                f.write(f"  Min comprehension: {np.min(comp_scores):.4f}\n")
+                f.write(f"  Max comprehension: {np.max(comp_scores):.4f}\n")
+                f.write(f"  Median comprehension: {np.median(comp_scores):.4f}\n")
+                
+                if len(comp_scores) > 100:
+                    initial_comp = np.mean(comp_scores[:10])
+                    final_comp = np.mean(comp_scores[-10:])
+                    f.write(f"  Initial comprehension: {initial_comp:.4f}\n")
+                    f.write(f"  Final comprehension: {final_comp:.4f}\n")
+                    f.write(f"  Comprehension improvement: {final_comp - initial_comp:.4f}\n")
+                f.write("\n")
+            
+            f.write("TOP 10 BEST PERFORMING ARTICLES:\n")
+            f.write("-"*80 + "\n")
+            sorted_articles = sorted(self.article_logs, key=lambda x: x['reward'], reverse=True)[:10]
+            for i, article in enumerate(sorted_articles, 1):
+                f.write(f"  {i}. {article['title'][:60]}...\n")
+                f.write(f"     Reward: {article['reward']:.4f}, Tokens: {article['tokens_processed']}\n")
+                if 'comprehension' in article:
+                    f.write(f"     Comprehension: {article['comprehension']:.4f}\n")
+                f.write("\n")
+            
+            # Sample interactions
+            if len(self.article_logs) > 0:
+                f.write("SAMPLE INTERACTIONS:\n")
+                f.write("="*80 + "\n\n")
+                
+                # Show first interaction
+                f.write("FIRST INTERACTION (Article 0):\n")
+                f.write("-"*80 + "\n")
+                first_log = self.article_logs[0]
+                f.write(f"Title: {first_log['title']}\n")
+                f.write(f"Input Text (first 500 chars):\n{first_log.get('input_text', '')[:500]}...\n\n")
+                f.write(f"Agent Response:\n{first_log.get('agent_response', 'No response recorded')[:500]}...\n\n")
+                f.write(f"Reward: {first_log['reward']:.4f}\n")
+                if 'comprehension' in first_log:
+                    f.write(f"Comprehension: {first_log['comprehension']:.4f}\n")
+                f.write("\n")
+                
+                # Show middle interaction
+                if len(self.article_logs) > 10:
+                    mid_idx = len(self.article_logs) // 2
+                    f.write(f"MIDDLE INTERACTION (Article {mid_idx}):\n")
+                    f.write("-"*80 + "\n")
+                    mid_log = self.article_logs[mid_idx]
+                    f.write(f"Title: {mid_log['title']}\n")
+                    f.write(f"Input Text (first 500 chars):\n{mid_log.get('input_text', '')[:500]}...\n\n")
+                    f.write(f"Agent Response:\n{mid_log.get('agent_response', 'No response recorded')[:500]}...\n\n")
+                    f.write(f"Reward: {mid_log['reward']:.4f}\n")
+                    if 'comprehension' in mid_log:
+                        f.write(f"Comprehension: {mid_log['comprehension']:.4f}\n")
+                    f.write("\n")
+                
+                # Show last interaction
+                f.write(f"FINAL INTERACTION (Article {len(self.article_logs)-1}):\n")
+                f.write("-"*80 + "\n")
+                last_log = self.article_logs[-1]
+                f.write(f"Title: {last_log['title']}\n")
+                f.write(f"Input Text (first 500 chars):\n{last_log.get('input_text', '')[:500]}...\n\n")
+                f.write(f"Agent Response:\n{last_log.get('agent_response', 'No response recorded')[:500]}...\n\n")
+                f.write(f"Reward: {last_log['reward']:.4f}\n")
+                if 'comprehension' in last_log:
+                    f.write(f"Comprehension: {last_log['comprehension']:.4f}\n")
+                f.write("\n")
+            
+            f.write("="*80 + "\n")
+        
+        logging.info(f"Training summary report saved to {report_path}")
+        
+        # Also print to console
+        print("\n" + "="*80)
+        print("TRAINING COMPLETE - Summary saved to:", report_path)
+        print("="*80)
 
 
 class NeuroGenAgent:
@@ -476,6 +1044,9 @@ class WikipediaTrainer:
             'avg_reward_per_article': 0.0,
             'learning_progress': []
         }
+        
+        # Initialize logger
+        self.logger = TrainingLogger()
     
     def train(self, num_epochs=5, articles_per_epoch=None, checkpoint_every=50):
         """
@@ -541,6 +1112,14 @@ class WikipediaTrainer:
             print(f"  Average reward: {avg_epoch_reward:.3f}")
             print(f"  Cumulative reward: {self.total_reward:.2f}")
             
+            # Log epoch metrics
+            self.logger.log_epoch_metrics(
+                self.epoch, 
+                len(epoch_articles), 
+                avg_epoch_reward, 
+                epoch_reward
+            )
+            
             # Update metrics
             self._update_metrics()
             
@@ -560,6 +1139,28 @@ class WikipediaTrainer:
         # Save final model
         self._save_final_model()
         
+        # Save detailed logs
+        self.logger.save_detailed_logs()
+        
+        # Generate visualizations and summary report
+        training_config = {
+            'num_epochs': num_epochs,
+            'articles_per_epoch': articles_per_epoch,
+            'total_articles': total_articles,
+            'checkpoint_every': checkpoint_every,
+            'total_time_minutes': elapsed / 60
+        }
+        
+        final_stats = {
+            'articles_processed': self.article_idx,
+            'total_reward': self.total_reward,
+            'avg_reward_per_article': self.total_reward / self.article_idx,
+            'final_curiosity_score': self.agent.curiosity_score
+        }
+        
+        self.logger.generate_visualizations()
+        self.logger.generate_summary_report(training_config, final_stats)
+        
         return self.metrics
     
     def _process_article(self, article):
@@ -572,6 +1173,9 @@ class WikipediaTrainer:
         Returns:
             Reward value
         """
+        # Track processing time for this article
+        article_start = time.time()
+        
         # Simulate browsing the article
         result = self.agent.browse_page(
             url=article['url'],
@@ -594,6 +1198,20 @@ class WikipediaTrainer:
         reward += curiosity_bonus
         
         reward = np.clip(reward, 0, 1)
+        
+        # Calculate processing time for this article
+        processing_time = (time.time() - article_start) * 1000  # in milliseconds
+        
+        # Log article processing
+        tokens_processed = len(result.get('tokens', []))
+        self.logger.log_article_processing(
+            self.article_idx, 
+            article, 
+            result, 
+            tokens_processed, 
+            reward, 
+            processing_time
+        )
         
         return reward
     

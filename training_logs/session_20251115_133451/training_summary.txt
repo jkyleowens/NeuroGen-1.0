@@ -1,0 +1,73 @@
+================================================================================
+TRAINING SUMMARY REPORT
+================================================================================
+
+Session ID: 20251115_133451
+Date: 2025-11-15 13:37:13
+Total Training Time: 2.36 minutes
+
+CONFIGURATION:
+--------------------------------------------------------------------------------
+  num_epochs: 3
+  articles_per_epoch: 453
+  total_articles: 1359
+  checkpoint_every: 50
+  total_time_minutes: 2.308006052176158
+
+FINAL STATISTICS:
+--------------------------------------------------------------------------------
+  articles_processed: 1359
+  total_reward: 1328.6035
+  avg_reward_per_article: 0.9776331861662987
+  final_curiosity_score: 0.5
+
+ARTICLE PROCESSING STATS:
+--------------------------------------------------------------------------------
+  Total articles: 1359
+  Average reward: 0.9776
+  Reward std dev: 0.1143
+  Min reward: 0.1371
+  Max reward: 1.0000
+
+  Average processing time: 101.5ms
+  Total processing time: 137.93s
+
+TOKEN STATISTICS:
+--------------------------------------------------------------------------------
+  total_tokens: 409641
+  articles_with_tokens: 1359
+  Average tokens per article: 301.4
+
+TOP 10 BEST PERFORMING ARTICLES:
+--------------------------------------------------------------------------------
+  1. Paul Christie (musician)...
+     Reward: 1.0000, Tokens: 528
+
+  2. Bragernes...
+     Reward: 1.0000, Tokens: 258
+
+  3. Russell Winter (rugby union)...
+     Reward: 1.0000, Tokens: 236
+
+  4. Christian Jankowski...
+     Reward: 1.0000, Tokens: 470
+
+  5. Edward Cotton (priest, died 1675)...
+     Reward: 1.0000, Tokens: 91
+
+  6. Sanya Phoenix International Airport...
+     Reward: 1.0000, Tokens: 427
+
+  7. Drumore, Pennsylvania...
+     Reward: 1.0000, Tokens: 97
+
+  8. 1954 Philadelphia Athletics season...
+     Reward: 1.0000, Tokens: 405
+
+  9. Dominion of Newfoundland...
+     Reward: 1.0000, Tokens: 398
+
+  10. Celtic Folkweave...
+     Reward: 1.0000, Tokens: 497
+
+================================================================================

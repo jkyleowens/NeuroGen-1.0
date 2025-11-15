@@ -1,0 +1,1374 @@
+2025-11-15 13:34:51,976 [INFO] Training session started: 20251115_133451
+2025-11-15 13:34:51,976 [INFO] Log directory: training_logs/session_20251115_133451
+2025-11-15 13:34:52,079 [INFO] Article 1: 'Paul Christie (musician)...' - Reward: 1.000, Tokens: 528, Time: 101.9ms
+2025-11-15 13:34:52,181 [INFO] Article 2: 'Michael Mirolla...' - Reward: 0.493, Tokens: 343, Time: 101.3ms
+2025-11-15 13:34:52,283 [INFO] Article 3: 'Thillalangadi...' - Reward: 0.666, Tokens: 516, Time: 102.4ms
+2025-11-15 13:34:52,384 [INFO] Article 4: 'Foothill Horizons Outdoor School...' - Reward: 0.359, Tokens: 213, Time: 100.9ms
+2025-11-15 13:34:52,486 [INFO] Article 5: 'List of Hapoel Hadera F.C. seasons...' - Reward: 0.331, Tokens: 189, Time: 100.9ms
+2025-11-15 13:34:52,587 [INFO] Article 6: 'Dave Naylor...' - Reward: 0.171, Tokens: 83, Time: 100.6ms
+2025-11-15 13:34:52,688 [INFO] Article 7: 'Oliver Duff Greene...' - Reward: 0.367, Tokens: 217, Time: 101.0ms
+2025-11-15 13:34:52,790 [INFO] Article 8: 'Trapdoor Fucking Exit...' - Reward: 0.310, Tokens: 181, Time: 101.5ms
+2025-11-15 13:34:52,891 [INFO] Article 9: 'Vogelsang (Bavarian Forest)...' - Reward: 0.253, Tokens: 153, Time: 100.6ms
+2025-11-15 13:34:52,992 [INFO] Article 10: 'Alberto Leanizbarrutia...' - Reward: 0.185, Tokens: 96, Time: 100.6ms
+2025-11-15 13:34:53,093 [INFO] Article 11: 'Noriko Sakai discography...' - Reward: 0.137, Tokens: 53, Time: 100.5ms
+2025-11-15 13:34:53,195 [INFO] Article 12: 'Gasparia lomasi...' - Reward: 0.284, Tokens: 167, Time: 101.4ms
+2025-11-15 13:34:53,297 [INFO] Article 13: '2000 FIFA Club World Championship...' - Reward: 0.588, Tokens: 438, Time: 102.0ms
+2025-11-15 13:34:53,400 [INFO] Article 14: 'Carnage (band)...' - Reward: 0.482, Tokens: 332, Time: 101.2ms
+2025-11-15 13:34:53,503 [INFO] Article 15: 'Kenvue...' - Reward: 0.612, Tokens: 462, Time: 102.2ms
+2025-11-15 13:34:53,604 [INFO] Article 16: 'Aizuma Station...' - Reward: 0.422, Tokens: 272, Time: 101.0ms
+2025-11-15 13:34:53,705 [INFO] Article 17: 'Mick Murray...' - Reward: 0.163, Tokens: 77, Time: 100.6ms
+2025-11-15 13:34:53,807 [INFO] Article 18: 'Miroslav Šmíd...' - Reward: 0.677, Tokens: 527, Time: 101.7ms
+2025-11-15 13:34:53,909 [INFO] Article 19: 'Muhammadu Dikko Yusufu...' - Reward: 0.634, Tokens: 484, Time: 102.2ms
+2025-11-15 13:34:54,011 [INFO] Article 20: 'Most favoured nation...' - Reward: 0.567, Tokens: 417, Time: 101.6ms
+2025-11-15 13:34:54,113 [INFO] Article 21: 'Vyshchi Lubianky...' - Reward: 0.415, Tokens: 278, Time: 100.8ms
+2025-11-15 13:34:54,214 [INFO] Article 22: 'Pleurotomella amphiblestrum...' - Reward: 0.357, Tokens: 243, Time: 100.8ms
+2025-11-15 13:34:54,315 [INFO] Article 23: 'Chater Plain...' - Reward: 0.226, Tokens: 126, Time: 100.7ms
+2025-11-15 13:34:54,416 [INFO] Article 24: 'Xwejni Bay...' - Reward: 0.205, Tokens: 116, Time: 100.6ms
+2025-11-15 13:34:54,518 [INFO] Article 25: 'Trouw...' - Reward: 0.594, Tokens: 444, Time: 101.8ms
+2025-11-15 13:34:54,620 [INFO] Article 26: 'Elina Lampela...' - Reward: 0.543, Tokens: 393, Time: 101.5ms
+2025-11-15 13:34:54,721 [INFO] Article 27: 'Gramola...' - Reward: 0.543, Tokens: 393, Time: 101.5ms
+2025-11-15 13:34:54,823 [INFO] Article 28: 'Battle of Megara...' - Reward: 0.603, Tokens: 453, Time: 101.5ms
+2025-11-15 13:34:54,925 [INFO] Article 29: 'Geology of Kansas...' - Reward: 0.641, Tokens: 491, Time: 101.5ms
+2025-11-15 13:34:55,027 [INFO] Article 30: 'Royal County of Berkshire Polo Club...' - Reward: 0.581, Tokens: 431, Time: 101.5ms
+2025-11-15 13:34:55,129 [INFO] Article 31: 'Tarashcha...' - Reward: 0.612, Tokens: 462, Time: 101.6ms
+2025-11-15 13:34:55,230 [INFO] Article 32: 'Beregovka...' - Reward: 0.170, Tokens: 88, Time: 100.5ms
+2025-11-15 13:34:55,331 [INFO] Article 33: 'Andy Stevenson (motorsport)...' - Reward: 0.239, Tokens: 127, Time: 100.7ms
+2025-11-15 13:34:55,433 [INFO] Article 34: 'David Lewiston...' - Reward: 0.609, Tokens: 459, Time: 101.7ms
+2025-11-15 13:34:55,534 [INFO] Article 35: 'Robert McLaren...' - Reward: 0.226, Tokens: 126, Time: 100.6ms
+2025-11-15 13:34:55,635 [INFO] Article 36: 'Swinside (Derwent Water)...' - Reward: 0.374, Tokens: 227, Time: 100.9ms
+2025-11-15 13:34:55,737 [INFO] Article 37: 'Paul Terasaki...' - Reward: 0.592, Tokens: 442, Time: 101.6ms
+2025-11-15 13:34:55,838 [INFO] Article 38: 'Monteverde (Rome)...' - Reward: 0.510, Tokens: 360, Time: 101.3ms
+2025-11-15 13:34:55,940 [INFO] Article 39: 'Meneval...' - Reward: 0.655, Tokens: 505, Time: 101.5ms
+2025-11-15 13:34:56,042 [INFO] Article 40: 'Jimmy Conway (footballer)...' - Reward: 0.563, Tokens: 413, Time: 101.5ms
+2025-11-15 13:34:56,144 [INFO] Article 41: 'Lloyd R. Welch...' - Reward: 0.370, Tokens: 220, Time: 101.0ms
+2025-11-15 13:34:56,245 [INFO] Article 42: 'Josua Vici...' - Reward: 0.220, Tokens: 119, Time: 100.6ms
+2025-11-15 13:34:56,346 [INFO] Article 43: 'Dal Fiachrach Suighe...' - Reward: 0.367, Tokens: 231, Time: 101.1ms
+2025-11-15 13:34:56,447 [INFO] Article 44: 'China Gate Castle Park...' - Reward: 0.215, Tokens: 121, Time: 100.6ms
+2025-11-15 13:34:56,548 [INFO] Article 45: 'Harrigan Hill...' - Reward: 0.225, Tokens: 123, Time: 100.6ms
+2025-11-15 13:34:56,649 [INFO] Article 46: 'Eidangerfjord...' - Reward: 0.335, Tokens: 213, Time: 100.7ms
+2025-11-15 13:34:56,751 [INFO] Article 47: 'Naseer Shamma...' - Reward: 0.658, Tokens: 508, Time: 101.5ms
+2025-11-15 13:34:56,853 [INFO] Article 48: 'NASUWT...' - Reward: 0.544, Tokens: 394, Time: 101.5ms
+2025-11-15 13:34:56,954 [INFO] Article 49: 'Saint Francis with the Blood of Christ...' - Reward: 0.517, Tokens: 367, Time: 101.3ms
+2025-11-15 13:34:57,056 [INFO] Article 50: 'Chris Houston (American football)...' - Reward: 0.563, Tokens: 413, Time: 101.5ms
+2025-11-15 13:34:57,160 [INFO] Article 51: 'Said bin Ahmad Al Busaidi...' - Reward: 0.546, Tokens: 396, Time: 101.3ms
+2025-11-15 13:34:57,262 [INFO] Article 52: 'Bradly van Hoeven...' - Reward: 0.448, Tokens: 298, Time: 101.0ms
+2025-11-15 13:34:57,364 [INFO] Article 53: 'Hyomin...' - Reward: 0.626, Tokens: 476, Time: 102.1ms
+2025-11-15 13:34:57,466 [INFO] Article 54: 'McLouth Steel...' - Reward: 0.612, Tokens: 462, Time: 101.5ms
+2025-11-15 13:34:57,568 [INFO] Article 55: 'Planing (shaping)...' - Reward: 0.589, Tokens: 439, Time: 101.6ms
+2025-11-15 13:34:57,669 [INFO] Article 56: 'SMS Teluk Intan...' - Reward: 0.808, Tokens: 248, Time: 101.0ms
+2025-11-15 13:34:57,771 [INFO] Article 57: 'Bragernes...' - Reward: 1.000, Tokens: 258, Time: 101.6ms
+2025-11-15 13:34:57,873 [INFO] Article 58: 'Russell Winter (rugby union)...' - Reward: 1.000, Tokens: 236, Time: 101.5ms
+2025-11-15 13:34:57,976 [INFO] Article 59: 'Christian Jankowski...' - Reward: 1.000, Tokens: 470, Time: 102.3ms
+2025-11-15 13:34:58,077 [INFO] Article 60: 'Edward Cotton (priest, died 1675)...' - Reward: 1.000, Tokens: 91, Time: 101.1ms
+2025-11-15 13:34:58,181 [INFO] Article 61: 'Sanya Phoenix International Airport...' - Reward: 1.000, Tokens: 427, Time: 102.7ms
+2025-11-15 13:34:58,282 [INFO] Article 62: 'Drumore, Pennsylvania...' - Reward: 1.000, Tokens: 97, Time: 101.0ms
+2025-11-15 13:34:58,384 [INFO] Article 63: '1954 Philadelphia Athletics season...' - Reward: 1.000, Tokens: 405, Time: 101.8ms
+2025-11-15 13:34:58,486 [INFO] Article 64: 'Dominion of Newfoundland...' - Reward: 1.000, Tokens: 398, Time: 102.2ms
+2025-11-15 13:34:58,589 [INFO] Article 65: 'Celtic Folkweave...' - Reward: 1.000, Tokens: 497, Time: 102.2ms
+2025-11-15 13:34:58,691 [INFO] Article 66: 'Anatoly Demitkov...' - Reward: 1.000, Tokens: 469, Time: 101.9ms
+2025-11-15 13:34:58,794 [INFO] Article 67: 'Apple (name)...' - Reward: 1.000, Tokens: 411, Time: 101.9ms
+2025-11-15 13:34:58,896 [INFO] Article 68: 'Member of the Scottish Parliament...' - Reward: 1.000, Tokens: 419, Time: 101.9ms
+2025-11-15 13:34:59,000 [INFO] Article 69: 'Rıdvan Şimşek...' - Reward: 1.000, Tokens: 278, Time: 104.4ms
+2025-11-15 13:34:59,102 [INFO] Article 70: 'Thryssa setirostris...' - Reward: 1.000, Tokens: 60, Time: 101.0ms
+2025-11-15 13:34:59,204 [INFO] Article 71: 'Hedemora stadshotell...' - Reward: 1.000, Tokens: 375, Time: 101.7ms
+2025-11-15 13:34:59,305 [INFO] Article 72: 'Pollex laosi...' - Reward: 1.000, Tokens: 91, Time: 100.8ms
+2025-11-15 13:34:59,406 [INFO] Article 73: 'King of the Dead...' - Reward: 1.000, Tokens: 94, Time: 100.9ms
+2025-11-15 13:34:59,508 [INFO] Article 74: 'Canoabo...' - Reward: 1.000, Tokens: 65, Time: 100.9ms
+2025-11-15 13:34:59,610 [INFO] Article 75: 'Japan National Route 8...' - Reward: 1.000, Tokens: 583, Time: 101.9ms
+2025-11-15 13:34:59,712 [INFO] Article 76: 'Stefon...' - Reward: 1.000, Tokens: 448, Time: 102.1ms
+2025-11-15 13:34:59,814 [INFO] Article 77: 'Eastern Argus...' - Reward: 1.000, Tokens: 265, Time: 101.5ms
+2025-11-15 13:34:59,917 [INFO] Article 78: 'Hototogisu (magazine)...' - Reward: 1.000, Tokens: 548, Time: 101.8ms
+2025-11-15 13:35:00,018 [INFO] Article 79: 'Margarete Kupfer...' - Reward: 1.000, Tokens: 78, Time: 100.9ms
+2025-11-15 13:35:00,119 [INFO] Article 80: '1992 Italian general election in Sardinia...' - Reward: 1.000, Tokens: 65, Time: 100.8ms
+2025-11-15 13:35:00,220 [INFO] Article 81: '1956 French Togoland autonomy referendum...' - Reward: 1.000, Tokens: 157, Time: 101.0ms
+2025-11-15 13:35:00,322 [INFO] Article 82: 'Tamagotchi (Omar Apollo song)...' - Reward: 1.000, Tokens: 471, Time: 102.0ms
+2025-11-15 13:35:00,424 [INFO] Article 83: 'Turkana Central Constituency...' - Reward: 1.000, Tokens: 41, Time: 100.9ms
+2025-11-15 13:35:00,526 [INFO] Article 84: '2025–26 PBA season...' - Reward: 1.000, Tokens: 416, Time: 101.7ms
+2025-11-15 13:35:00,628 [INFO] Article 85: 'Tau Orionis...' - Reward: 1.000, Tokens: 559, Time: 102.0ms
+2025-11-15 13:35:00,730 [INFO] Article 86: 'William Lee Scott...' - Reward: 1.000, Tokens: 292, Time: 101.5ms
+2025-11-15 13:35:00,831 [INFO] Article 87: 'Sir John Hopkins, 1st Baronet...' - Reward: 1.000, Tokens: 160, Time: 101.1ms
+2025-11-15 13:35:00,933 [INFO] Article 88: 'Chip Banks...' - Reward: 1.000, Tokens: 386, Time: 101.8ms
+2025-11-15 13:35:01,035 [INFO] Article 89: 'Anthony Pleeth...' - Reward: 1.000, Tokens: 423, Time: 101.8ms
+2025-11-15 13:35:01,136 [INFO] Article 90: 'Hovgaard Islands...' - Reward: 1.000, Tokens: 144, Time: 100.8ms
+2025-11-15 13:35:01,238 [INFO] Article 91: 'HIST1H2BK...' - Reward: 1.000, Tokens: 215, Time: 101.1ms
+2025-11-15 13:35:01,340 [INFO] Article 92: 'Jim (book)...' - Reward: 1.000, Tokens: 404, Time: 101.8ms
+2025-11-15 13:35:01,442 [INFO] Article 93: 'St Olaf's Church, Wasdale...' - Reward: 1.000, Tokens: 463, Time: 102.1ms
+2025-11-15 13:35:01,545 [INFO] Article 94: 'Le Sueur (surname)...' - Reward: 1.000, Tokens: 496, Time: 102.0ms
+2025-11-15 13:35:01,646 [INFO] Article 95: 'Men in White (TV series)...' - Reward: 1.000, Tokens: 82, Time: 101.0ms
+2025-11-15 13:35:01,748 [INFO] Article 96: 'Stanley Glacier...' - Reward: 1.000, Tokens: 132, Time: 100.9ms
+2025-11-15 13:35:01,850 [INFO] Article 97: 'Grace Bussell...' - Reward: 1.000, Tokens: 466, Time: 101.9ms
+2025-11-15 13:35:01,951 [INFO] Article 98: '2015 Chrono des Nations...' - Reward: 1.000, Tokens: 54, Time: 100.9ms
+2025-11-15 13:35:02,053 [INFO] Article 99: 'Maths Mansion...' - Reward: 1.000, Tokens: 474, Time: 102.0ms
+2025-11-15 13:35:02,156 [INFO] Article 100: 'Kanaighat Upazila...' - Reward: 1.000, Tokens: 505, Time: 102.1ms
+2025-11-15 13:35:02,260 [INFO] Article 101: 'Boris Eidelmann...' - Reward: 1.000, Tokens: 409, Time: 101.8ms
+2025-11-15 13:35:02,362 [INFO] Article 102: 'River Calder, Cumbria...' - Reward: 1.000, Tokens: 156, Time: 101.0ms
+2025-11-15 13:35:02,463 [INFO] Article 103: 'Olavi Mannonen...' - Reward: 1.000, Tokens: 144, Time: 101.0ms
+2025-11-15 13:35:02,565 [INFO] Article 104: '1878 lynchings in Posey County, Indiana...' - Reward: 1.000, Tokens: 463, Time: 101.8ms
+2025-11-15 13:35:02,667 [INFO] Article 105: 'Dennison School House...' - Reward: 1.000, Tokens: 350, Time: 101.8ms
+2025-11-15 13:35:02,769 [INFO] Article 106: 'High-field domain...' - Reward: 1.000, Tokens: 372, Time: 101.7ms
+2025-11-15 13:35:02,871 [INFO] Article 107: 'Camilla Grudova...' - Reward: 1.000, Tokens: 207, Time: 101.3ms
+2025-11-15 13:35:02,973 [INFO] Article 108: 'Muhammad Yusuf Khan Hazara...' - Reward: 1.000, Tokens: 486, Time: 101.7ms
+2025-11-15 13:35:03,074 [INFO] Article 109: 'Saifuzzaman...' - Reward: 1.000, Tokens: 105, Time: 100.8ms
+2025-11-15 13:35:03,177 [INFO] Article 110: 'Euglossa mixta...' - Reward: 1.000, Tokens: 467, Time: 101.9ms
+2025-11-15 13:35:03,279 [INFO] Article 111: 'Elm, Cambridgeshire...' - Reward: 1.000, Tokens: 468, Time: 102.0ms
+2025-11-15 13:35:03,380 [INFO] Article 112: 'Konstantinos Spetsiotis...' - Reward: 1.000, Tokens: 85, Time: 101.0ms
+2025-11-15 13:35:03,482 [INFO] Article 113: 'National records in the 400 metres hurdles...' - Reward: 1.000, Tokens: 69, Time: 101.0ms
+2025-11-15 13:35:03,584 [INFO] Article 114: 'USS Bergen...' - Reward: 1.000, Tokens: 460, Time: 101.6ms
+2025-11-15 13:35:03,685 [INFO] Article 115: 'Melanie Bolaños...' - Reward: 1.000, Tokens: 69, Time: 100.6ms
+2025-11-15 13:35:03,787 [INFO] Article 116: 'Jonathan C. Jones...' - Reward: 1.000, Tokens: 383, Time: 101.9ms
+2025-11-15 13:35:03,888 [INFO] Article 117: 'List of UK garage songs...' - Reward: 1.000, Tokens: 95, Time: 101.1ms
+2025-11-15 13:35:03,990 [INFO] Article 118: 'Robert McNeill (footballer)...' - Reward: 1.000, Tokens: 104, Time: 101.1ms
+2025-11-15 13:35:04,092 [INFO] Article 119: 'Barbudan independence movement...' - Reward: 1.000, Tokens: 386, Time: 101.8ms
+2025-11-15 13:35:04,193 [INFO] Article 120: 'Standing Advisory Committee before the European Pa...' - Reward: 1.000, Tokens: 191, Time: 100.9ms
+2025-11-15 13:35:04,295 [INFO] Article 121: 'Greathed Manor...' - Reward: 1.000, Tokens: 451, Time: 101.9ms
+2025-11-15 13:35:04,397 [INFO] Article 122: 'Good Views, Bad News...' - Reward: 1.000, Tokens: 432, Time: 101.8ms
+2025-11-15 13:35:04,500 [INFO] Article 123: 'Women's literary salons and societies in the Arab ...' - Reward: 1.000, Tokens: 400, Time: 101.8ms
+2025-11-15 13:35:04,601 [INFO] Article 124: 'Grandcour Castle...' - Reward: 1.000, Tokens: 43, Time: 100.9ms
+2025-11-15 13:35:04,703 [INFO] Article 125: 'Digital Dog...' - Reward: 1.000, Tokens: 636, Time: 102.0ms
+2025-11-15 13:35:04,805 [INFO] Article 126: 'Costa Rican Athletics Federation...' - Reward: 1.000, Tokens: 238, Time: 101.1ms
+2025-11-15 13:35:04,906 [INFO] Article 127: 'KXDD (FM)...' - Reward: 1.000, Tokens: 307, Time: 101.4ms
+2025-11-15 13:35:05,008 [INFO] Article 128: 'Hingston...' - Reward: 1.000, Tokens: 110, Time: 101.0ms
+2025-11-15 13:35:05,110 [INFO] Article 129: 'Golisoda...' - Reward: 1.000, Tokens: 503, Time: 102.1ms
+2025-11-15 13:35:05,213 [INFO] Article 130: 'Summits On The Air...' - Reward: 1.000, Tokens: 420, Time: 102.1ms
+2025-11-15 13:35:05,315 [INFO] Article 131: 'Juancho Polo Valencia...' - Reward: 1.000, Tokens: 441, Time: 102.0ms
+2025-11-15 13:35:05,416 [INFO] Article 132: 'Deltobathra...' - Reward: 1.000, Tokens: 104, Time: 100.8ms
+2025-11-15 13:35:05,518 [INFO] Article 133: 'Wirelesspt...' - Reward: 1.000, Tokens: 374, Time: 101.9ms
+2025-11-15 13:35:05,621 [INFO] Article 134: 'Cimarron Hotel...' - Reward: 1.000, Tokens: 419, Time: 102.1ms
+2025-11-15 13:35:05,724 [INFO] Article 135: 'Hovnatanian...' - Reward: 1.000, Tokens: 411, Time: 102.7ms
+2025-11-15 13:35:05,826 [INFO] Article 136: 'Turgyn Syzdyqov...' - Reward: 1.000, Tokens: 527, Time: 101.9ms
+2025-11-15 13:35:05,928 [INFO] Article 137: 'Die (manufacturing)...' - Reward: 1.000, Tokens: 435, Time: 102.1ms
+2025-11-15 13:35:06,030 [INFO] Article 138: 'The School Teacher...' - Reward: 1.000, Tokens: 361, Time: 101.3ms
+2025-11-15 13:35:06,131 [INFO] Article 139: 'Erkki Kataja...' - Reward: 1.000, Tokens: 66, Time: 100.8ms
+2025-11-15 13:35:06,232 [INFO] Article 140: 'Toother...' - Reward: 1.000, Tokens: 197, Time: 101.0ms
+2025-11-15 13:35:06,334 [INFO] Article 141: 'David Chadwick Smith...' - Reward: 1.000, Tokens: 79, Time: 101.0ms
+2025-11-15 13:35:06,436 [INFO] Article 142: 'The Tax Inspector...' - Reward: 1.000, Tokens: 482, Time: 101.9ms
+2025-11-15 13:35:06,537 [INFO] Article 143: 'First Goh Chok Tong Cabinet...' - Reward: 1.000, Tokens: 101, Time: 101.1ms
+2025-11-15 13:35:06,639 [INFO] Article 144: 'Aleksandar Radosavljević (footballer, born 1979)...' - Reward: 1.000, Tokens: 262, Time: 101.2ms
+2025-11-15 13:35:06,740 [INFO] Article 145: 'Stuffed ribs...' - Reward: 1.000, Tokens: 223, Time: 101.0ms
+2025-11-15 13:35:06,842 [INFO] Article 146: 'Izani Husin...' - Reward: 1.000, Tokens: 212, Time: 101.3ms
+2025-11-15 13:35:06,943 [INFO] Article 147: 'Chickenpox (disambiguation)...' - Reward: 1.000, Tokens: 113, Time: 100.9ms
+2025-11-15 13:35:07,045 [INFO] Article 148: 'Vuma FM...' - Reward: 1.000, Tokens: 141, Time: 101.3ms
+2025-11-15 13:35:07,148 [INFO] Article 149: 'Universal Bank...' - Reward: 1.000, Tokens: 86, Time: 101.8ms
+2025-11-15 13:35:07,250 [INFO] Article 150: 'Asperula albiflora...' - Reward: 1.000, Tokens: 133, Time: 101.2ms
+2025-11-15 13:35:07,355 [INFO] Article 151: 'Hillside School, Addis Ababa...' - Reward: 1.000, Tokens: 104, Time: 100.9ms
+2025-11-15 13:35:07,457 [INFO] Article 152: 'Millersville Marauders...' - Reward: 1.000, Tokens: 505, Time: 102.0ms
+2025-11-15 13:35:07,559 [INFO] Article 153: '2019 Men's EuroHockey Junior Championship...' - Reward: 1.000, Tokens: 274, Time: 101.7ms
+2025-11-15 13:35:07,661 [INFO] Article 154: 'Ozegna Castle...' - Reward: 1.000, Tokens: 301, Time: 101.6ms
+2025-11-15 13:35:07,763 [INFO] Article 155: 'List of literary works relating to Tamil sexual mi...' - Reward: 1.000, Tokens: 489, Time: 101.8ms
+2025-11-15 13:35:07,864 [INFO] Article 156: 'Robert Staddon (English sportsman)...' - Reward: 1.000, Tokens: 130, Time: 100.7ms
+2025-11-15 13:35:07,966 [INFO] Article 157: 'Rodislav Chizhikov...' - Reward: 1.000, Tokens: 222, Time: 101.5ms
+2025-11-15 13:35:08,068 [INFO] Article 158: 'Wattisfield...' - Reward: 1.000, Tokens: 475, Time: 102.1ms
+2025-11-15 13:35:08,170 [INFO] Article 159: '2023 Asian Shooting Championships...' - Reward: 1.000, Tokens: 142, Time: 100.9ms
+2025-11-15 13:35:08,272 [INFO] Article 160: 'Neddie Seagoon...' - Reward: 1.000, Tokens: 534, Time: 101.9ms
+2025-11-15 13:35:08,373 [INFO] Article 161: 'Gianduja (commedia dell'arte)...' - Reward: 1.000, Tokens: 335, Time: 101.1ms
+2025-11-15 13:35:08,474 [INFO] Article 162: 'Hasanabad, Khalajestan...' - Reward: 1.000, Tokens: 68, Time: 100.6ms
+2025-11-15 13:35:08,575 [INFO] Article 163: 'Thein Tun...' - Reward: 1.000, Tokens: 112, Time: 100.9ms
+2025-11-15 13:35:08,677 [INFO] Article 164: 'WFRM...' - Reward: 1.000, Tokens: 497, Time: 101.7ms
+2025-11-15 13:35:08,779 [INFO] Article 165: 'Crown Prince Frederik Land...' - Reward: 1.000, Tokens: 167, Time: 101.1ms
+2025-11-15 13:35:08,881 [INFO] Article 166: 'Kongsi Raya (film)...' - Reward: 1.000, Tokens: 495, Time: 102.0ms
+2025-11-15 13:35:08,982 [INFO] Article 167: 'National Institute of Infectious Diseases...' - Reward: 1.000, Tokens: 90, Time: 100.7ms
+2025-11-15 13:35:09,087 [INFO] Article 168: 'Pamplonita River...' - Reward: 1.000, Tokens: 493, Time: 104.0ms
+2025-11-15 13:35:09,191 [INFO] Article 169: 'George Tuchet, 1st Earl of Castlehaven...' - Reward: 1.000, Tokens: 533, Time: 103.3ms
+2025-11-15 13:35:09,295 [INFO] Article 170: 'Ramona Badescu (author)...' - Reward: 1.000, Tokens: 359, Time: 103.6ms
+2025-11-15 13:35:09,398 [INFO] Article 171: 'Annah Mac...' - Reward: 1.000, Tokens: 398, Time: 101.7ms
+2025-11-15 13:35:09,499 [INFO] Article 172: 'Jan Jeřábek (footballer, born 1992)...' - Reward: 1.000, Tokens: 66, Time: 100.8ms
+2025-11-15 13:35:09,602 [INFO] Article 173: 'Cyril Fagan...' - Reward: 1.000, Tokens: 211, Time: 102.3ms
+2025-11-15 13:35:09,704 [INFO] Article 174: 'List of lighthouses in Friesland...' - Reward: 1.000, Tokens: 87, Time: 101.7ms
+2025-11-15 13:35:09,806 [INFO] Article 175: 'Golf Club Halt railway station (England)...' - Reward: 1.000, Tokens: 69, Time: 101.4ms
+2025-11-15 13:35:09,909 [INFO] Article 176: 'Enicostema...' - Reward: 1.000, Tokens: 93, Time: 102.0ms
+2025-11-15 13:35:10,011 [INFO] Article 177: 'Stephen Myler...' - Reward: 1.000, Tokens: 450, Time: 101.7ms
+2025-11-15 13:35:10,113 [INFO] Article 178: 'List of current Philippine vice governors...' - Reward: 1.000, Tokens: 394, Time: 101.7ms
+2025-11-15 13:35:10,216 [INFO] Article 179: 'Andrew Smith (Maroon)...' - Reward: 1.000, Tokens: 446, Time: 102.4ms
+2025-11-15 13:35:10,317 [INFO] Article 180: '2018–19 Maltese Division 1...' - Reward: 1.000, Tokens: 127, Time: 100.9ms
+2025-11-15 13:35:10,419 [INFO] Article 181: 'Lantung...' - Reward: 1.000, Tokens: 417, Time: 101.9ms
+2025-11-15 13:35:10,521 [INFO] Article 182: 'Brute Force: Cracking the Data Encryption Standard...' - Reward: 1.000, Tokens: 208, Time: 101.2ms
+2025-11-15 13:35:10,623 [INFO] Article 183: 'Nicholas Segrave, 1st Baron Segrave...' - Reward: 1.000, Tokens: 473, Time: 101.9ms
+2025-11-15 13:35:10,724 [INFO] Article 184: 'Frequency domain decomposition...' - Reward: 1.000, Tokens: 249, Time: 101.2ms
+2025-11-15 13:35:10,826 [INFO] Article 185: 'Baliya...' - Reward: 1.000, Tokens: 107, Time: 101.1ms
+2025-11-15 13:35:10,928 [INFO] Article 186: 'The Patriots (TV series)...' - Reward: 1.000, Tokens: 457, Time: 101.9ms
+2025-11-15 13:35:11,030 [INFO] Article 187: 'Charles Stuart Gregson...' - Reward: 1.000, Tokens: 231, Time: 101.3ms
+2025-11-15 13:35:11,133 [INFO] Article 188: 'Franc Weerwind...' - Reward: 1.000, Tokens: 429, Time: 102.6ms
+2025-11-15 13:35:11,234 [INFO] Article 189: 'Isayevo, Novlenskoye Rural Settlement, Vologodsky ...' - Reward: 1.000, Tokens: 87, Time: 100.9ms
+2025-11-15 13:35:11,336 [INFO] Article 190: 'Raipur, Sareni...' - Reward: 1.000, Tokens: 489, Time: 101.9ms
+2025-11-15 13:35:11,438 [INFO] Article 191: 'Wadi El Haour...' - Reward: 1.000, Tokens: 86, Time: 101.3ms
+2025-11-15 13:35:11,539 [INFO] Article 192: 'Aioiyama Station...' - Reward: 1.000, Tokens: 138, Time: 100.9ms
+2025-11-15 13:35:11,641 [INFO] Article 193: 'Duke Keomuka...' - Reward: 1.000, Tokens: 446, Time: 101.6ms
+2025-11-15 13:35:11,744 [INFO] Article 194: 'West Side High School (New Jersey)...' - Reward: 1.000, Tokens: 416, Time: 102.3ms
+2025-11-15 13:35:11,845 [INFO] Article 195: 'Progomphus...' - Reward: 1.000, Tokens: 124, Time: 101.0ms
+2025-11-15 13:35:11,946 [INFO] Article 196: 'Phoebemima...' - Reward: 1.000, Tokens: 122, Time: 100.8ms
+2025-11-15 13:35:12,047 [INFO] Article 197: 'Adelabad...' - Reward: 1.000, Tokens: 89, Time: 100.7ms
+2025-11-15 13:35:12,149 [INFO] Article 198: '1925 Burmese general election...' - Reward: 1.000, Tokens: 364, Time: 101.7ms
+2025-11-15 13:35:12,251 [INFO] Article 199: 'Peter Gabriel...' - Reward: 1.000, Tokens: 435, Time: 101.8ms
+2025-11-15 13:35:12,353 [INFO] Article 200: 'Hoo Anthiya Uhoo Anthiya...' - Reward: 1.000, Tokens: 327, Time: 101.6ms
+2025-11-15 13:35:12,458 [INFO] Article 201: 'Lopholatilus...' - Reward: 1.000, Tokens: 160, Time: 101.5ms
+2025-11-15 13:35:12,560 [INFO] Article 202: 'Dudley Norton...' - Reward: 1.000, Tokens: 313, Time: 101.9ms
+2025-11-15 13:35:12,662 [INFO] Article 203: 'Walter Wigmore...' - Reward: 1.000, Tokens: 405, Time: 101.8ms
+2025-11-15 13:35:12,764 [INFO] Article 204: 'List of ships named Oracabessa...' - Reward: 1.000, Tokens: 251, Time: 101.1ms
+2025-11-15 13:35:12,866 [INFO] Article 205: 'This Is 40...' - Reward: 1.000, Tokens: 448, Time: 101.7ms
+2025-11-15 13:35:12,967 [INFO] Article 206: 'Irwin Belk...' - Reward: 1.000, Tokens: 190, Time: 101.1ms
+2025-11-15 13:35:13,069 [INFO] Article 207: 'Asbel Rutto...' - Reward: 1.000, Tokens: 267, Time: 101.5ms
+2025-11-15 13:35:13,171 [INFO] Article 208: 'Bellavia...' - Reward: 1.000, Tokens: 113, Time: 101.1ms
+2025-11-15 13:35:13,273 [INFO] Article 209: 'The Less Deceived...' - Reward: 1.000, Tokens: 474, Time: 102.0ms
+2025-11-15 13:35:13,374 [INFO] Article 210: 'Yoann Martelat...' - Reward: 1.000, Tokens: 235, Time: 101.1ms
+2025-11-15 13:35:13,476 [INFO] Article 211: 'Lukas Zuccarello...' - Reward: 1.000, Tokens: 83, Time: 100.9ms
+2025-11-15 13:35:13,577 [INFO] Article 212: 'List of non-Dinosauria fossil trackway articles...' - Reward: 1.000, Tokens: 157, Time: 100.8ms
+2025-11-15 13:35:13,679 [INFO] Article 213: 'Polar motion...' - Reward: 1.000, Tokens: 469, Time: 101.9ms
+2025-11-15 13:35:13,781 [INFO] Article 214: 'Necton...' - Reward: 1.000, Tokens: 459, Time: 101.9ms
+2025-11-15 13:35:13,883 [INFO] Article 215: 'Roderick S. McCook...' - Reward: 1.000, Tokens: 254, Time: 101.5ms
+2025-11-15 13:35:13,984 [INFO] Article 216: 'Make Love to Me (1941 song)...' - Reward: 1.000, Tokens: 68, Time: 100.9ms
+2025-11-15 13:35:14,086 [INFO] Article 217: 'Beth Elliott...' - Reward: 1.000, Tokens: 448, Time: 101.8ms
+2025-11-15 13:35:14,188 [INFO] Article 218: 'Kōyasan chōishi-michi...' - Reward: 1.000, Tokens: 518, Time: 101.7ms
+2025-11-15 13:35:14,290 [INFO] Article 219: 'Verbascum virgatum...' - Reward: 1.000, Tokens: 150, Time: 101.0ms
+2025-11-15 13:35:14,391 [INFO] Article 220: '2015 Malaysia FA Cup final...' - Reward: 1.000, Tokens: 67, Time: 100.9ms
+2025-11-15 13:35:14,493 [INFO] Article 221: 'Lois Jackman...' - Reward: 1.000, Tokens: 226, Time: 101.4ms
+2025-11-15 13:35:14,595 [INFO] Article 222: 'American Satellite Corporation...' - Reward: 1.000, Tokens: 405, Time: 101.8ms
+2025-11-15 13:35:14,696 [INFO] Article 223: 'List of county routes in Westchester County, New Y...' - Reward: 1.000, Tokens: 168, Time: 101.3ms
+2025-11-15 13:35:14,798 [INFO] Article 224: 'List of Moyashimon chapters...' - Reward: 1.000, Tokens: 193, Time: 101.0ms
+2025-11-15 13:35:14,898 [INFO] Article 225: 'Xu Yinghui...' - Reward: 1.000, Tokens: 68, Time: 100.6ms
+2025-11-15 13:35:15,000 [INFO] Article 226: 'Esther Nkansah...' - Reward: 1.000, Tokens: 230, Time: 101.3ms
+2025-11-15 13:35:15,102 [INFO] Article 227: 'Tuku Morgan...' - Reward: 1.000, Tokens: 437, Time: 102.0ms
+2025-11-15 13:35:15,205 [INFO] Article 228: 'KJ-52...' - Reward: 1.000, Tokens: 543, Time: 101.8ms
+2025-11-15 13:35:15,306 [INFO] Article 229: 'Christopher Edwards (clinician)...' - Reward: 1.000, Tokens: 164, Time: 101.2ms
+2025-11-15 13:35:15,408 [INFO] Article 230: 'Windwagon Smith...' - Reward: 1.000, Tokens: 461, Time: 101.9ms
+2025-11-15 13:35:15,510 [INFO] Article 231: 'Trent Barrett...' - Reward: 1.000, Tokens: 455, Time: 101.9ms
+2025-11-15 13:35:15,612 [INFO] Article 232: 'I'll Never Get Out of This World Alive (album)...' - Reward: 1.000, Tokens: 361, Time: 101.5ms
+2025-11-15 13:35:15,714 [INFO] Article 233: 'Ayesem...' - Reward: 1.000, Tokens: 255, Time: 101.2ms
+2025-11-15 13:35:15,816 [INFO] Article 234: 'Kemner v. Monsanto...' - Reward: 1.000, Tokens: 439, Time: 102.0ms
+2025-11-15 13:35:15,918 [INFO] Article 235: 'Jodi (musician)...' - Reward: 1.000, Tokens: 144, Time: 101.2ms
+2025-11-15 13:35:16,019 [INFO] Article 236: 'Vassmolösa...' - Reward: 1.000, Tokens: 92, Time: 100.8ms
+2025-11-15 13:35:16,120 [INFO] Article 237: '56th Golden Bell Awards...' - Reward: 1.000, Tokens: 116, Time: 101.0ms
+2025-11-15 13:35:16,222 [INFO] Article 238: 'Scott Mountains (California)...' - Reward: 1.000, Tokens: 353, Time: 101.6ms
+2025-11-15 13:35:16,323 [INFO] Article 239: 'Witta, son of Wecta...' - Reward: 1.000, Tokens: 90, Time: 101.0ms
+2025-11-15 13:35:16,425 [INFO] Article 240: 'Yuri Stepanov (actor)...' - Reward: 1.000, Tokens: 179, Time: 101.2ms
+2025-11-15 13:35:16,527 [INFO] Article 241: '2003–04 FIBA Europe League...' - Reward: 1.000, Tokens: 214, Time: 101.4ms
+2025-11-15 13:35:16,629 [INFO] Article 242: 'George Beare (footballer)...' - Reward: 1.000, Tokens: 426, Time: 101.6ms
+2025-11-15 13:35:16,730 [INFO] Article 243: 'C. H. Elting...' - Reward: 1.000, Tokens: 279, Time: 101.4ms
+2025-11-15 13:35:16,832 [INFO] Article 244: 'Maurice Tourneux...' - Reward: 1.000, Tokens: 348, Time: 101.6ms
+2025-11-15 13:35:16,935 [INFO] Article 245: 'Andrew Jackson Kirk...' - Reward: 1.000, Tokens: 347, Time: 101.8ms
+2025-11-15 13:35:17,037 [INFO] Article 246: 'Venera 16...' - Reward: 1.000, Tokens: 512, Time: 102.0ms
+2025-11-15 13:35:17,139 [INFO] Article 247: 'Howle...' - Reward: 1.000, Tokens: 233, Time: 101.2ms
+2025-11-15 13:35:17,240 [INFO] Article 248: '2024 Cimahi mayoral election...' - Reward: 1.000, Tokens: 430, Time: 101.6ms
+2025-11-15 13:35:17,343 [INFO] Article 249: 'Knut Værnes...' - Reward: 1.000, Tokens: 543, Time: 102.0ms
+2025-11-15 13:35:17,444 [INFO] Article 250: 'Riba (disambiguation)...' - Reward: 1.000, Tokens: 148, Time: 101.0ms
+2025-11-15 13:35:17,548 [INFO] Article 251: 'Simone Rao Grimaldi...' - Reward: 1.000, Tokens: 176, Time: 101.0ms
+2025-11-15 13:35:17,650 [INFO] Article 252: 'Apollo 11 Cave...' - Reward: 1.000, Tokens: 504, Time: 101.9ms
+2025-11-15 13:35:17,751 [INFO] Article 253: 'Nanomedicine (Elsevier journal)...' - Reward: 1.000, Tokens: 181, Time: 101.0ms
+2025-11-15 13:35:17,853 [INFO] Article 254: 'Tom Clark (cricketer, born 2001)...' - Reward: 1.000, Tokens: 179, Time: 101.1ms
+2025-11-15 13:35:17,955 [INFO] Article 255: 'Sargon Gabriel...' - Reward: 1.000, Tokens: 443, Time: 101.8ms
+2025-11-15 13:35:18,057 [INFO] Article 256: 'Education in Warsaw...' - Reward: 1.000, Tokens: 442, Time: 102.0ms
+2025-11-15 13:35:18,159 [INFO] Article 257: 'Ronald M. Hahn...' - Reward: 1.000, Tokens: 404, Time: 101.7ms
+2025-11-15 13:35:18,261 [INFO] Article 258: 'Bimokalner...' - Reward: 1.000, Tokens: 63, Time: 101.0ms
+2025-11-15 13:35:18,362 [INFO] Article 259: 'Operating agreement...' - Reward: 1.000, Tokens: 315, Time: 101.6ms
+2025-11-15 13:35:18,464 [INFO] Article 260: 'Hune Covered Bridge...' - Reward: 1.000, Tokens: 201, Time: 101.1ms
+2025-11-15 13:35:18,566 [INFO] Article 261: 'William H. O'Dell...' - Reward: 1.000, Tokens: 294, Time: 101.5ms
+2025-11-15 13:35:18,667 [INFO] Article 262: 'Us Against the World...' - Reward: 1.000, Tokens: 168, Time: 101.1ms
+2025-11-15 13:35:18,769 [INFO] Article 263: 'Rapid Fire Theatre...' - Reward: 1.000, Tokens: 473, Time: 102.0ms
+2025-11-15 13:35:18,871 [INFO] Article 264: 'Cytochrome c nitrite reductase...' - Reward: 1.000, Tokens: 332, Time: 101.3ms
+2025-11-15 13:35:18,972 [INFO] Article 265: 'Charlotte Lehmann...' - Reward: 1.000, Tokens: 96, Time: 100.8ms
+2025-11-15 13:35:19,075 [INFO] Article 266: '1999 NCAA Division I men's ice hockey tournament...' - Reward: 1.000, Tokens: 428, Time: 102.3ms
+2025-11-15 13:35:19,176 [INFO] Article 267: '2021 Supercopa do Brasil...' - Reward: 1.000, Tokens: 156, Time: 101.3ms
+2025-11-15 13:35:19,278 [INFO] Article 268: 'George Bell (activist)...' - Reward: 1.000, Tokens: 266, Time: 101.4ms
+2025-11-15 13:35:19,380 [INFO] Article 269: '66th Honinbo...' - Reward: 1.000, Tokens: 201, Time: 101.3ms
+2025-11-15 13:35:19,482 [INFO] Article 270: 'Barro...' - Reward: 1.000, Tokens: 425, Time: 101.9ms
+2025-11-15 13:35:19,583 [INFO] Article 271: 'History of the Church...' - Reward: 1.000, Tokens: 80, Time: 100.8ms
+2025-11-15 13:35:19,684 [INFO] Article 272: 'New Hope, Florida...' - Reward: 1.000, Tokens: 55, Time: 100.6ms
+2025-11-15 13:35:19,786 [INFO] Article 273: 'Erika Burgess...' - Reward: 1.000, Tokens: 109, Time: 101.1ms
+2025-11-15 13:35:19,888 [INFO] Article 274: 'River Raid...' - Reward: 1.000, Tokens: 458, Time: 102.0ms
+2025-11-15 13:35:19,989 [INFO] Article 275: 'Nawabzada Farid Salahuddin...' - Reward: 1.000, Tokens: 119, Time: 101.1ms
+2025-11-15 13:35:20,091 [INFO] Article 276: 'W. H. L. McCarthy...' - Reward: 1.000, Tokens: 438, Time: 101.7ms
+2025-11-15 13:35:20,193 [INFO] Article 277: '1953 Tennessee Volunteers football team...' - Reward: 1.000, Tokens: 116, Time: 100.9ms
+2025-11-15 13:35:20,294 [INFO] Article 278: 'Vanity Vain...' - Reward: 1.000, Tokens: 190, Time: 101.2ms
+2025-11-15 13:35:20,396 [INFO] Article 279: 'Lehize Hilal Benli...' - Reward: 1.000, Tokens: 141, Time: 101.1ms
+2025-11-15 13:35:20,497 [INFO] Article 280: 'Victor Perez...' - Reward: 1.000, Tokens: 172, Time: 101.2ms
+2025-11-15 13:35:20,600 [INFO] Article 281: 'Myosotis pottsiana...' - Reward: 1.000, Tokens: 553, Time: 102.1ms
+2025-11-15 13:35:20,702 [INFO] Article 282: 'Chairman of the Conservative Party...' - Reward: 1.000, Tokens: 201, Time: 101.4ms
+2025-11-15 13:35:20,804 [INFO] Article 283: 'War Memorial (Angri)...' - Reward: 1.000, Tokens: 477, Time: 101.7ms
+2025-11-15 13:35:20,906 [INFO] Article 284: 'Sumer–Elam war...' - Reward: 1.000, Tokens: 519, Time: 102.3ms
+2025-11-15 13:35:21,008 [INFO] Article 285: 'Nancy Wood (author)...' - Reward: 1.000, Tokens: 419, Time: 101.9ms
+2025-11-15 13:35:21,110 [INFO] Article 286: 'Isthmus of Ak-Monay...' - Reward: 1.000, Tokens: 310, Time: 101.2ms
+2025-11-15 13:35:21,211 [INFO] Article 287: 'Ministry of Punishments...' - Reward: 1.000, Tokens: 74, Time: 101.0ms
+2025-11-15 13:35:21,313 [INFO] Article 288: 'East Herts Miniature Railway...' - Reward: 1.000, Tokens: 156, Time: 101.3ms
+2025-11-15 13:35:21,414 [INFO] Article 289: 'United States Post Office (Freeport, New York)...' - Reward: 1.000, Tokens: 167, Time: 100.9ms
+2025-11-15 13:35:21,515 [INFO] Article 290: '1956 Villanova Wildcats football team...' - Reward: 1.000, Tokens: 59, Time: 100.7ms
+2025-11-15 13:35:21,616 [INFO] Article 291: 'L21...' - Reward: 1.000, Tokens: 144, Time: 100.8ms
+2025-11-15 13:35:21,719 [INFO] Article 292: 'Gunnery and Torpedo Division (Royal Navy)...' - Reward: 1.000, Tokens: 419, Time: 101.8ms
+2025-11-15 13:35:21,821 [INFO] Article 293: 'Alhambra Springs...' - Reward: 1.000, Tokens: 472, Time: 101.9ms
+2025-11-15 13:35:21,922 [INFO] Article 294: 'Ahmet Can Arık...' - Reward: 1.000, Tokens: 103, Time: 101.0ms
+2025-11-15 13:35:22,025 [INFO] Article 295: 'Wendy Campbell-Purdie...' - Reward: 1.000, Tokens: 450, Time: 101.9ms
+2025-11-15 13:35:22,126 [INFO] Article 296: 'Bob Ajisafe...' - Reward: 1.000, Tokens: 335, Time: 101.6ms
+2025-11-15 13:35:22,228 [INFO] Article 297: '33rd Annie Awards...' - Reward: 1.000, Tokens: 331, Time: 101.5ms
+2025-11-15 13:35:22,330 [INFO] Article 298: 'Byul...' - Reward: 1.000, Tokens: 232, Time: 101.5ms
+2025-11-15 13:35:22,433 [INFO] Article 299: 'Balloonfest '86...' - Reward: 1.000, Tokens: 444, Time: 102.1ms
+2025-11-15 13:35:22,535 [INFO] Article 300: 'Church of St Mary the Virgin, Wistaston...' - Reward: 1.000, Tokens: 473, Time: 102.1ms
+2025-11-15 13:35:22,639 [INFO] Article 301: 'National Register of Historic Places listings in W...' - Reward: 1.000, Tokens: 147, Time: 101.0ms
+2025-11-15 13:35:22,741 [INFO] Article 302: 'Impatiens hawkeri...' - Reward: 1.000, Tokens: 165, Time: 101.1ms
+2025-11-15 13:35:22,842 [INFO] Article 303: 'Ychoux...' - Reward: 1.000, Tokens: 51, Time: 100.9ms
+2025-11-15 13:35:22,943 [INFO] Article 304: 'Ministry of Culture (Estonia)...' - Reward: 1.000, Tokens: 194, Time: 101.4ms
+2025-11-15 13:35:23,046 [INFO] Article 305: 'Montegufoni Castle...' - Reward: 1.000, Tokens: 503, Time: 101.9ms
+2025-11-15 13:35:23,148 [INFO] Article 306: 'Dimitris Paraskevas...' - Reward: 1.000, Tokens: 442, Time: 101.9ms
+2025-11-15 13:35:23,249 [INFO] Article 307: 'WHI...' - Reward: 1.000, Tokens: 112, Time: 100.8ms
+2025-11-15 13:35:23,351 [INFO] Article 308: 'Tanzania Railways Corporation...' - Reward: 1.000, Tokens: 477, Time: 101.8ms
+2025-11-15 13:35:23,453 [INFO] Article 309: 'Angel City FC...' - Reward: 1.000, Tokens: 467, Time: 101.8ms
+2025-11-15 13:35:23,556 [INFO] Article 310: 'Heinrich Reinhold...' - Reward: 1.000, Tokens: 534, Time: 102.0ms
+2025-11-15 13:35:23,657 [INFO] Article 311: 'The Margin (novel)...' - Reward: 1.000, Tokens: 132, Time: 101.1ms
+2025-11-15 13:35:23,760 [INFO] Article 312: 'Traralgon...' - Reward: 1.000, Tokens: 545, Time: 102.1ms
+2025-11-15 13:35:23,862 [INFO] Article 313: 'Coloman of Galicia...' - Reward: 1.000, Tokens: 487, Time: 101.8ms
+2025-11-15 13:35:23,964 [INFO] Article 314: 'Sailing at the 2000 Summer Olympics – Laser...' - Reward: 1.000, Tokens: 226, Time: 101.5ms
+2025-11-15 13:35:24,066 [INFO] Article 315: '1988 United States Senate election in North Dakota...' - Reward: 1.000, Tokens: 336, Time: 101.7ms
+2025-11-15 13:35:24,167 [INFO] Article 316: 'Scott Clinic...' - Reward: 1.000, Tokens: 137, Time: 101.2ms
+2025-11-15 13:35:24,270 [INFO] Article 317: 'Edward Roseman...' - Reward: 1.000, Tokens: 467, Time: 102.0ms
+2025-11-15 13:35:24,372 [INFO] Article 318: 'Astrid Johannessen...' - Reward: 1.000, Tokens: 256, Time: 101.4ms
+2025-11-15 13:35:24,473 [INFO] Article 319: 'Portland Pilots women's soccer...' - Reward: 1.000, Tokens: 74, Time: 100.8ms
+2025-11-15 13:35:24,574 [INFO] Article 320: 'Fencing at the 2015 Summer Universiade – Women's i...' - Reward: 1.000, Tokens: 61, Time: 100.9ms
+2025-11-15 13:35:24,676 [INFO] Article 321: 'Ioakeim Martianos...' - Reward: 1.000, Tokens: 199, Time: 101.1ms
+2025-11-15 13:35:24,777 [INFO] Article 322: 'Šaš...' - Reward: 1.000, Tokens: 132, Time: 101.1ms
+2025-11-15 13:35:24,880 [INFO] Article 323: 'Precordial thump...' - Reward: 1.000, Tokens: 462, Time: 102.1ms
+2025-11-15 13:35:24,982 [INFO] Article 324: 'Execution of Mohsen Shekari...' - Reward: 1.000, Tokens: 475, Time: 102.1ms
+2025-11-15 13:35:25,084 [INFO] Article 325: 'Akram Khan Durrani...' - Reward: 1.000, Tokens: 474, Time: 101.6ms
+2025-11-15 13:35:25,186 [INFO] Article 326: 'Kady McDermott...' - Reward: 1.000, Tokens: 404, Time: 101.9ms
+2025-11-15 13:35:25,289 [INFO] Article 327: 'Minami (name)...' - Reward: 1.000, Tokens: 522, Time: 101.8ms
+2025-11-15 13:35:25,390 [INFO] Article 328: 'Giulio Fantuzzi...' - Reward: 1.000, Tokens: 123, Time: 100.9ms
+2025-11-15 13:35:25,492 [INFO] Article 329: 'Bunny and Claude (We Rob Carrot Patches)...' - Reward: 1.000, Tokens: 505, Time: 102.0ms
+2025-11-15 13:35:25,595 [INFO] Article 330: 'The Experienced English Housekeeper...' - Reward: 1.000, Tokens: 481, Time: 102.0ms
+2025-11-15 13:35:25,696 [INFO] Article 331: 'Taiwan Travelogue...' - Reward: 1.000, Tokens: 208, Time: 101.1ms
+2025-11-15 13:35:25,797 [INFO] Article 332: 'Roger Johnson...' - Reward: 1.000, Tokens: 116, Time: 101.0ms
+2025-11-15 13:35:25,899 [INFO] Article 333: 'Mount Zion Baptist Church (Miami)...' - Reward: 1.000, Tokens: 76, Time: 101.1ms
+2025-11-15 13:35:26,000 [INFO] Article 334: 'TV5...' - Reward: 1.000, Tokens: 219, Time: 101.2ms
+2025-11-15 13:35:26,102 [INFO] Article 335: '2016 Kiribati presidential election...' - Reward: 1.000, Tokens: 88, Time: 101.0ms
+2025-11-15 13:35:26,204 [INFO] Article 336: 'Paul Fredricks...' - Reward: 1.000, Tokens: 464, Time: 101.8ms
+2025-11-15 13:35:26,306 [INFO] Article 337: 'Veniamin Basner...' - Reward: 1.000, Tokens: 499, Time: 101.8ms
+2025-11-15 13:35:26,407 [INFO] Article 338: 'Beate Uhse Erotic Museum...' - Reward: 1.000, Tokens: 215, Time: 101.2ms
+2025-11-15 13:35:26,510 [INFO] Article 339: '2014 Forest Hills Drive...' - Reward: 1.000, Tokens: 430, Time: 101.8ms
+2025-11-15 13:35:26,612 [INFO] Article 340: 'Leonhard Koeppe...' - Reward: 1.000, Tokens: 493, Time: 102.0ms
+2025-11-15 13:35:26,714 [INFO] Article 341: 'Miss Venezuela 2024...' - Reward: 1.000, Tokens: 408, Time: 102.0ms
+2025-11-15 13:35:26,816 [INFO] Article 342: 'Miha Gale...' - Reward: 1.000, Tokens: 50, Time: 101.0ms
+2025-11-15 13:35:26,917 [INFO] Article 343: 'HR 3159...' - Reward: 1.000, Tokens: 243, Time: 101.0ms
+2025-11-15 13:35:27,019 [INFO] Article 344: 'Camille Martin...' - Reward: 1.000, Tokens: 468, Time: 101.8ms
+2025-11-15 13:35:27,120 [INFO] Article 345: 'Kishori Lal (Kullu politician)...' - Reward: 1.000, Tokens: 63, Time: 100.8ms
+2025-11-15 13:35:27,223 [INFO] Article 346: 'Constituencies of the Parliament of the United Kin...' - Reward: 1.000, Tokens: 403, Time: 102.0ms
+2025-11-15 13:35:27,325 [INFO] Article 347: '2025 national electoral calendar...' - Reward: 1.000, Tokens: 448, Time: 101.5ms
+2025-11-15 13:35:27,427 [INFO] Article 348: 'Sam Carey...' - Reward: 1.000, Tokens: 484, Time: 102.1ms
+2025-11-15 13:35:27,528 [INFO] Article 349: 'Takakazu Kuriyama...' - Reward: 1.000, Tokens: 220, Time: 101.1ms
+2025-11-15 13:35:27,630 [INFO] Article 350: '1979 Cornell Big Red football team...' - Reward: 1.000, Tokens: 130, Time: 100.9ms
+2025-11-15 13:35:27,734 [INFO] Article 351: '2022 UCI Women's World Tour...' - Reward: 1.000, Tokens: 452, Time: 101.8ms
+2025-11-15 13:35:27,837 [INFO] Article 352: 'Mitchell, Oregon...' - Reward: 1.000, Tokens: 458, Time: 101.9ms
+2025-11-15 13:35:27,939 [INFO] Article 353: 'Arcángel & De la Ghetto...' - Reward: 1.000, Tokens: 453, Time: 101.5ms
+2025-11-15 13:35:28,041 [INFO] Article 354: 'Road Trips Volume 3 Number 1...' - Reward: 1.000, Tokens: 584, Time: 101.9ms
+2025-11-15 13:35:28,143 [INFO] Article 355: 'Inna Bulkina...' - Reward: 1.000, Tokens: 531, Time: 101.7ms
+2025-11-15 13:35:28,245 [INFO] Article 356: 'Matt Daylight...' - Reward: 1.000, Tokens: 257, Time: 101.4ms
+2025-11-15 13:35:28,346 [INFO] Article 357: 'Eanfrith of Hwicce...' - Reward: 1.000, Tokens: 67, Time: 100.8ms
+2025-11-15 13:35:28,447 [INFO] Article 358: 'Roman Vondráček...' - Reward: 1.000, Tokens: 166, Time: 101.1ms
+2025-11-15 13:35:28,548 [INFO] Article 359: 'Archie Clement (footballer)...' - Reward: 1.000, Tokens: 49, Time: 100.9ms
+2025-11-15 13:35:28,651 [INFO] Article 360: 'Ralph Kiner...' - Reward: 1.000, Tokens: 422, Time: 102.0ms
+2025-11-15 13:35:28,753 [INFO] Article 361: 'The Silent Invasion (comics)...' - Reward: 1.000, Tokens: 503, Time: 101.7ms
+2025-11-15 13:35:28,855 [INFO] Article 362: 'Jamie Shea...' - Reward: 1.000, Tokens: 359, Time: 101.6ms
+2025-11-15 13:35:28,956 [INFO] Article 363: 'Brennan v HM Advocate...' - Reward: 1.000, Tokens: 262, Time: 101.2ms
+2025-11-15 13:35:29,059 [INFO] Article 364: 'Big Red...' - Reward: 1.000, Tokens: 489, Time: 102.0ms
+2025-11-15 13:35:29,161 [INFO] Article 365: 'Crest of the Blue Ridge Henderson County AVA...' - Reward: 1.000, Tokens: 442, Time: 101.8ms
+2025-11-15 13:35:29,263 [INFO] Article 366: 'Ivor Phillips (cricketer)...' - Reward: 1.000, Tokens: 251, Time: 101.3ms
+2025-11-15 13:35:29,364 [INFO] Article 367: 'John MacLeod (canoeist)...' - Reward: 1.000, Tokens: 272, Time: 101.5ms
+2025-11-15 13:35:29,467 [INFO] Article 368: 'Gabriele Mehl...' - Reward: 1.000, Tokens: 323, Time: 101.9ms
+2025-11-15 13:35:29,568 [INFO] Article 369: 'Tioman (state constituency)...' - Reward: 1.000, Tokens: 62, Time: 101.0ms
+2025-11-15 13:35:29,669 [INFO] Article 370: 'Bharatiya Kranti Dal...' - Reward: 1.000, Tokens: 167, Time: 101.3ms
+2025-11-15 13:35:29,771 [INFO] Article 371: 'List of ambassadors of Peru to Canada...' - Reward: 1.000, Tokens: 43, Time: 100.9ms
+2025-11-15 13:35:29,873 [INFO] Article 372: 'Alpheus S. Williams...' - Reward: 1.000, Tokens: 444, Time: 102.1ms
+2025-11-15 13:35:29,976 [INFO] Article 373: 'Anarithma pamila...' - Reward: 1.000, Tokens: 576, Time: 101.8ms
+2025-11-15 13:35:30,078 [INFO] Article 374: 'Antonio Barbaro...' - Reward: 1.000, Tokens: 507, Time: 101.9ms
+2025-11-15 13:35:30,181 [INFO] Article 375: '125th Street station (IRT Lexington Avenue Line)...' - Reward: 1.000, Tokens: 432, Time: 102.7ms
+2025-11-15 13:35:30,283 [INFO] Article 376: 'Sophia Desta...' - Reward: 1.000, Tokens: 482, Time: 102.0ms
+2025-11-15 13:35:30,386 [INFO] Article 377: 'Paul Coll...' - Reward: 1.000, Tokens: 437, Time: 102.0ms
+2025-11-15 13:35:30,487 [INFO] Article 378: 'Comarcas of the Community of Madrid...' - Reward: 1.000, Tokens: 68, Time: 100.8ms
+2025-11-15 13:35:30,589 [INFO] Article 379: 'São João de Areias...' - Reward: 1.000, Tokens: 485, Time: 101.8ms
+2025-11-15 13:35:30,690 [INFO] Article 380: 'Yoyetta kershawi...' - Reward: 1.000, Tokens: 154, Time: 100.9ms
+2025-11-15 13:35:30,793 [INFO] Article 381: 'Crown King, Arizona...' - Reward: 1.000, Tokens: 461, Time: 101.9ms
+2025-11-15 13:35:30,895 [INFO] Article 382: 'CVV-4 Pellicano...' - Reward: 1.000, Tokens: 501, Time: 102.2ms
+2025-11-15 13:35:30,997 [INFO] Article 383: 'Pollimyrus isidori...' - Reward: 1.000, Tokens: 271, Time: 101.5ms
+2025-11-15 13:35:31,099 [INFO] Article 384: 'Beaverton, Alabama...' - Reward: 1.000, Tokens: 467, Time: 101.8ms
+2025-11-15 13:35:31,201 [INFO] Article 385: '5th Space Launch Squadron...' - Reward: 1.000, Tokens: 335, Time: 101.5ms
+2025-11-15 13:35:31,303 [INFO] Article 386: 'John W. Wells...' - Reward: 1.000, Tokens: 460, Time: 101.9ms
+2025-11-15 13:35:31,405 [INFO] Article 387: 'Trésor Regional Nature Reserve...' - Reward: 1.000, Tokens: 314, Time: 101.7ms
+2025-11-15 13:35:31,508 [INFO] Article 388: 'Ruth Fowler Edwards...' - Reward: 1.000, Tokens: 447, Time: 102.0ms
+2025-11-15 13:35:31,610 [INFO] Article 389: 'David Penman...' - Reward: 1.000, Tokens: 413, Time: 102.0ms
+2025-11-15 13:35:31,712 [INFO] Article 390: 'Tsingy forest rail...' - Reward: 1.000, Tokens: 186, Time: 101.2ms
+2025-11-15 13:35:31,814 [INFO] Article 391: 'Ernest Hotson...' - Reward: 1.000, Tokens: 460, Time: 101.6ms
+2025-11-15 13:35:31,915 [INFO] Article 392: 'Arthur Dinaux...' - Reward: 1.000, Tokens: 172, Time: 101.0ms
+2025-11-15 13:35:32,016 [INFO] Article 393: 'Dun Sar...' - Reward: 1.000, Tokens: 80, Time: 100.9ms
+2025-11-15 13:35:32,118 [INFO] Article 394: 'Cinema of Portugal...' - Reward: 1.000, Tokens: 494, Time: 101.9ms
+2025-11-15 13:35:32,220 [INFO] Article 395: 'Sergey Maslov (footballer, born 1990)...' - Reward: 1.000, Tokens: 80, Time: 100.9ms
+2025-11-15 13:35:32,322 [INFO] Article 396: 'Chiasmocleis ventrimaculata...' - Reward: 1.000, Tokens: 511, Time: 102.0ms
+2025-11-15 13:35:32,424 [INFO] Article 397: 'Stanisław Kiszka...' - Reward: 1.000, Tokens: 465, Time: 101.6ms
+2025-11-15 13:35:32,526 [INFO] Article 398: 'JFS...' - Reward: 1.000, Tokens: 232, Time: 101.3ms
+2025-11-15 13:35:32,628 [INFO] Article 399: 'Afforestation in Scotland...' - Reward: 1.000, Tokens: 396, Time: 102.0ms
+2025-11-15 13:35:32,730 [INFO] Article 400: 'Bank of issue...' - Reward: 1.000, Tokens: 419, Time: 102.1ms
+2025-11-15 13:35:32,835 [INFO] Article 401: 'St Giles' Church, Matlock...' - Reward: 1.000, Tokens: 431, Time: 101.9ms
+2025-11-15 13:35:32,937 [INFO] Article 402: 'Stefano Seedorf...' - Reward: 1.000, Tokens: 316, Time: 101.5ms
+2025-11-15 13:35:33,039 [INFO] Article 403: 'Pan-European Institute...' - Reward: 1.000, Tokens: 456, Time: 101.8ms
+2025-11-15 13:35:33,142 [INFO] Article 404: 'Wade Miley...' - Reward: 1.000, Tokens: 431, Time: 102.2ms
+2025-11-15 13:35:33,243 [INFO] Article 405: 'Kalanjukittiya Thankam...' - Reward: 1.000, Tokens: 136, Time: 100.9ms
+2025-11-15 13:35:33,345 [INFO] Article 406: 'Justin Bibb...' - Reward: 1.000, Tokens: 413, Time: 102.1ms
+2025-11-15 13:35:33,448 [INFO] Article 407: 'Speirs shadow ministry...' - Reward: 1.000, Tokens: 347, Time: 101.7ms
+2025-11-15 13:35:33,549 [INFO] Article 408: 'Milk River (Jamaica)...' - Reward: 1.000, Tokens: 57, Time: 100.9ms
+2025-11-15 13:35:33,651 [INFO] Article 409: 'Tess Girard...' - Reward: 1.000, Tokens: 299, Time: 101.4ms
+2025-11-15 13:35:33,752 [INFO] Article 410: 'Pine Ridge School Building...' - Reward: 1.000, Tokens: 178, Time: 101.1ms
+2025-11-15 13:35:33,854 [INFO] Article 411: 'Oujiang Beikou Bridge...' - Reward: 1.000, Tokens: 369, Time: 101.6ms
+2025-11-15 13:35:33,956 [INFO] Article 412: 'Rishi Rithvik...' - Reward: 1.000, Tokens: 324, Time: 101.4ms
+2025-11-15 13:35:34,058 [INFO] Article 413: 'Canterbury election of 1205...' - Reward: 1.000, Tokens: 432, Time: 102.0ms
+2025-11-15 13:35:34,159 [INFO] Article 414: 'Brocchinia tanimbarensis...' - Reward: 1.000, Tokens: 69, Time: 101.0ms
+2025-11-15 13:35:34,262 [INFO] Article 415: 'Perrier...' - Reward: 1.000, Tokens: 461, Time: 101.8ms
+2025-11-15 13:35:34,363 [INFO] Article 416: 'Violetta Napierska...' - Reward: 1.000, Tokens: 164, Time: 101.0ms
+2025-11-15 13:35:34,465 [INFO] Article 417: 'Alavijeh...' - Reward: 1.000, Tokens: 182, Time: 101.2ms
+2025-11-15 13:35:34,566 [INFO] Article 418: 'Monument au Fantôme...' - Reward: 1.000, Tokens: 195, Time: 101.1ms
+2025-11-15 13:35:34,668 [INFO] Article 419: '1994–95 Arizona State Sun Devils men's basketball ...' - Reward: 1.000, Tokens: 146, Time: 101.2ms
+2025-11-15 13:35:34,769 [INFO] Article 420: 'Sangrur Municipal Council...' - Reward: 1.000, Tokens: 145, Time: 101.2ms
+2025-11-15 13:35:34,871 [INFO] Article 421: '2023 FIFA Women's World Cup knockout stage...' - Reward: 1.000, Tokens: 251, Time: 101.3ms
+2025-11-15 13:35:34,972 [INFO] Article 422: 'Plant Life Records...' - Reward: 1.000, Tokens: 140, Time: 101.3ms
+2025-11-15 13:35:35,075 [INFO] Article 423: 'Path tracing...' - Reward: 1.000, Tokens: 441, Time: 102.0ms
+2025-11-15 13:35:35,177 [INFO] Article 424: 'Vasily Savvin...' - Reward: 1.000, Tokens: 452, Time: 102.0ms
+2025-11-15 13:35:35,279 [INFO] Article 425: 'Dreadlocks...' - Reward: 1.000, Tokens: 508, Time: 101.9ms
+2025-11-15 13:35:35,381 [INFO] Article 426: 'Filholiidae...' - Reward: 1.000, Tokens: 166, Time: 101.1ms
+2025-11-15 13:35:35,483 [INFO] Article 427: 'Edgar Lissel...' - Reward: 1.000, Tokens: 427, Time: 101.6ms
+2025-11-15 13:35:35,585 [INFO] Article 428: 'The Alchemist (Witchcraft album)...' - Reward: 1.000, Tokens: 267, Time: 101.5ms
+2025-11-15 13:35:35,686 [INFO] Article 429: 'Amirabad-e Olya...' - Reward: 1.000, Tokens: 97, Time: 100.9ms
+2025-11-15 13:35:35,788 [INFO] Article 430: 'Les Chansons d'Aragon...' - Reward: 1.000, Tokens: 477, Time: 102.0ms
+2025-11-15 13:35:35,890 [INFO] Article 431: 'Roger Bhatnagar...' - Reward: 1.000, Tokens: 456, Time: 102.0ms
+2025-11-15 13:35:35,991 [INFO] Article 432: 'Proctor Burman...' - Reward: 1.000, Tokens: 71, Time: 100.7ms
+2025-11-15 13:35:36,093 [INFO] Article 433: 'Black-crowned antshrike...' - Reward: 1.000, Tokens: 567, Time: 101.7ms
+2025-11-15 13:35:36,195 [INFO] Article 434: 'Yufkalı, Şemdinli...' - Reward: 1.000, Tokens: 157, Time: 100.8ms
+2025-11-15 13:35:36,296 [INFO] Article 435: 'Opstad...' - Reward: 1.000, Tokens: 54, Time: 100.9ms
+2025-11-15 13:35:36,398 [INFO] Article 436: 'Lechuza (album)...' - Reward: 1.000, Tokens: 531, Time: 101.9ms
+2025-11-15 13:35:36,499 [INFO] Article 437: 'Machinery (disambiguation)...' - Reward: 1.000, Tokens: 125, Time: 101.1ms
+2025-11-15 13:35:36,601 [INFO] Article 438: 'Irving S. Shapiro...' - Reward: 1.000, Tokens: 331, Time: 101.6ms
+2025-11-15 13:35:36,703 [INFO] Article 439: 'Sonja Nef...' - Reward: 1.000, Tokens: 258, Time: 101.1ms
+2025-11-15 13:35:36,805 [INFO] Article 440: 'Youssou N'Dour...' - Reward: 1.000, Tokens: 530, Time: 101.9ms
+2025-11-15 13:35:36,906 [INFO] Article 441: 'Demo Finland...' - Reward: 1.000, Tokens: 125, Time: 101.0ms
+2025-11-15 13:35:37,009 [INFO] Article 442: 'The Only One...' - Reward: 1.000, Tokens: 610, Time: 101.9ms
+2025-11-15 13:35:37,111 [INFO] Article 443: '11 West 54th Street...' - Reward: 1.000, Tokens: 431, Time: 101.9ms
+2025-11-15 13:35:37,213 [INFO] Article 444: 'Adam Nevill...' - Reward: 1.000, Tokens: 531, Time: 102.0ms
+2025-11-15 13:35:37,315 [INFO] Article 445: 'Jan van de Werve, 7th Lord of Hovorst...' - Reward: 1.000, Tokens: 229, Time: 101.0ms
+2025-11-15 13:35:37,417 [INFO] Article 446: 'Colombia and the World Bank...' - Reward: 1.000, Tokens: 410, Time: 102.3ms
+2025-11-15 13:35:37,519 [INFO] Article 447: 'Cuscus...' - Reward: 1.000, Tokens: 177, Time: 101.2ms
+2025-11-15 13:35:37,621 [INFO] Article 448: 'List of United States representatives in the 73rd ...' - Reward: 1.000, Tokens: 290, Time: 101.8ms
+2025-11-15 13:35:37,722 [INFO] Article 449: 'Tumtum Lake...' - Reward: 1.000, Tokens: 106, Time: 101.0ms
+2025-11-15 13:35:37,825 [INFO] Article 450: 'Waves (Katrina and the Waves album)...' - Reward: 1.000, Tokens: 429, Time: 102.1ms
+2025-11-15 13:35:37,930 [INFO] Article 451: 'South Africa at the 2019 African Games...' - Reward: 1.000, Tokens: 474, Time: 101.7ms
+2025-11-15 13:35:38,031 [INFO] Article 452: 'Caballeronia grimmiae...' - Reward: 1.000, Tokens: 68, Time: 100.7ms
+2025-11-15 13:35:38,133 [INFO] Article 453: 'The Last Wave...' - Reward: 1.000, Tokens: 426, Time: 101.8ms
+2025-11-15 13:35:38,133 [INFO] Epoch 1 complete - Articles: 453, Avg Reward: 0.933, Total: 422.60
+2025-11-15 13:35:38,237 [INFO] Article 454: 'Dal Fiachrach Suighe...' - Reward: 1.000, Tokens: 231, Time: 101.6ms
+2025-11-15 13:35:38,339 [INFO] Article 455: 'Inna Bulkina...' - Reward: 1.000, Tokens: 531, Time: 101.8ms
+2025-11-15 13:35:38,441 [INFO] Article 456: 'Chris Houston (American football)...' - Reward: 1.000, Tokens: 413, Time: 101.8ms
+2025-11-15 13:35:38,543 [INFO] Article 457: 'Path tracing...' - Reward: 1.000, Tokens: 441, Time: 101.9ms
+2025-11-15 13:35:38,646 [INFO] Article 458: 'Stefano Seedorf...' - Reward: 1.000, Tokens: 316, Time: 101.8ms
+2025-11-15 13:35:38,747 [INFO] Article 459: 'Sonja Nef...' - Reward: 1.000, Tokens: 258, Time: 101.4ms
+2025-11-15 13:35:38,849 [INFO] Article 460: 'Stefon...' - Reward: 1.000, Tokens: 448, Time: 101.8ms
+2025-11-15 13:35:38,952 [INFO] Article 461: 'Precordial thump...' - Reward: 1.000, Tokens: 462, Time: 102.1ms
+2025-11-15 13:35:39,054 [INFO] Article 462: 'Stanisław Kiszka...' - Reward: 1.000, Tokens: 465, Time: 101.7ms
+2025-11-15 13:35:39,156 [INFO] Article 463: 'Aizuma Station...' - Reward: 1.000, Tokens: 272, Time: 102.0ms
+2025-11-15 13:35:39,257 [INFO] Article 464: 'Witta, son of Wecta...' - Reward: 1.000, Tokens: 90, Time: 100.8ms
+2025-11-15 13:35:39,360 [INFO] Article 465: 'Canterbury election of 1205...' - Reward: 1.000, Tokens: 432, Time: 101.9ms
+2025-11-15 13:35:39,462 [INFO] Article 466: 'Elm, Cambridgeshire...' - Reward: 1.000, Tokens: 468, Time: 102.0ms
+2025-11-15 13:35:39,564 [INFO] Article 467: 'Sam Carey...' - Reward: 1.000, Tokens: 484, Time: 102.0ms
+2025-11-15 13:35:39,667 [INFO] Article 468: 'Tau Orionis...' - Reward: 1.000, Tokens: 559, Time: 101.8ms
+2025-11-15 13:35:39,769 [INFO] Article 469: '2019 Men's EuroHockey Junior Championship...' - Reward: 1.000, Tokens: 274, Time: 101.7ms
+2025-11-15 13:35:39,870 [INFO] Article 470: 'Hune Covered Bridge...' - Reward: 1.000, Tokens: 201, Time: 101.2ms
+2025-11-15 13:35:39,971 [INFO] Article 471: 'Amirabad-e Olya...' - Reward: 1.000, Tokens: 97, Time: 100.9ms
+2025-11-15 13:35:40,074 [INFO] Article 472: 'Black-crowned antshrike...' - Reward: 1.000, Tokens: 567, Time: 102.1ms
+2025-11-15 13:35:40,176 [INFO] Article 473: 'Akram Khan Durrani...' - Reward: 1.000, Tokens: 474, Time: 102.0ms
+2025-11-15 13:35:40,278 [INFO] Article 474: 'Chiasmocleis ventrimaculata...' - Reward: 1.000, Tokens: 511, Time: 101.7ms
+2025-11-15 13:35:40,380 [INFO] Article 475: 'Takakazu Kuriyama...' - Reward: 1.000, Tokens: 220, Time: 101.3ms
+2025-11-15 13:35:40,481 [INFO] Article 476: 'Bellavia...' - Reward: 1.000, Tokens: 113, Time: 100.9ms
+2025-11-15 13:35:40,583 [INFO] Article 477: 'The Patriots (TV series)...' - Reward: 1.000, Tokens: 457, Time: 101.9ms
+2025-11-15 13:35:40,685 [INFO] Article 478: '1956 Villanova Wildcats football team...' - Reward: 1.000, Tokens: 59, Time: 100.9ms
+2025-11-15 13:35:40,786 [INFO] Article 479: 'Pleurotomella amphiblestrum...' - Reward: 1.000, Tokens: 243, Time: 101.1ms
+2025-11-15 13:35:40,888 [INFO] Article 480: 'Montegufoni Castle...' - Reward: 1.000, Tokens: 503, Time: 101.8ms
+2025-11-15 13:35:40,990 [INFO] Article 481: 'Nicholas Segrave, 1st Baron Segrave...' - Reward: 1.000, Tokens: 473, Time: 101.8ms
+2025-11-15 13:35:41,093 [INFO] Article 482: 'Paul Terasaki...' - Reward: 1.000, Tokens: 442, Time: 101.9ms
+2025-11-15 13:35:41,195 [INFO] Article 483: 'Myosotis pottsiana...' - Reward: 1.000, Tokens: 553, Time: 102.0ms
+2025-11-15 13:35:41,297 [INFO] Article 484: 'Perrier...' - Reward: 1.000, Tokens: 461, Time: 101.7ms
+2025-11-15 13:35:41,398 [INFO] Article 485: 'Drumore, Pennsylvania...' - Reward: 1.000, Tokens: 97, Time: 101.1ms
+2025-11-15 13:35:41,500 [INFO] Article 486: '66th Honinbo...' - Reward: 1.000, Tokens: 201, Time: 101.0ms
+2025-11-15 13:35:41,601 [INFO] Article 487: 'Lopholatilus...' - Reward: 1.000, Tokens: 160, Time: 100.9ms
+2025-11-15 13:35:41,702 [INFO] Article 488: 'Byul...' - Reward: 1.000, Tokens: 232, Time: 101.3ms
+2025-11-15 13:35:41,804 [INFO] Article 489: 'Deltobathra...' - Reward: 1.000, Tokens: 104, Time: 101.0ms
+2025-11-15 13:35:41,906 [INFO] Article 490: 'Elina Lampela...' - Reward: 1.000, Tokens: 393, Time: 102.0ms
+2025-11-15 13:35:42,008 [INFO] Article 491: 'Carnage (band)...' - Reward: 1.000, Tokens: 332, Time: 101.6ms
+2025-11-15 13:35:42,110 [INFO] Article 492: 'Barro...' - Reward: 1.000, Tokens: 425, Time: 101.5ms
+2025-11-15 13:35:42,211 [INFO] Article 493: 'Šaš...' - Reward: 1.000, Tokens: 132, Time: 101.0ms
+2025-11-15 13:35:42,315 [INFO] Article 494: 'The Alchemist (Witchcraft album)...' - Reward: 1.000, Tokens: 267, Time: 103.7ms
+2025-11-15 13:35:42,417 [INFO] Article 495: 'Ministry of Culture (Estonia)...' - Reward: 1.000, Tokens: 194, Time: 101.5ms
+2025-11-15 13:35:42,519 [INFO] Article 496: 'Trouw...' - Reward: 1.000, Tokens: 444, Time: 102.0ms
+2025-11-15 13:35:42,621 [INFO] Article 497: 'Grace Bussell...' - Reward: 1.000, Tokens: 466, Time: 101.7ms
+2025-11-15 13:35:42,723 [INFO] Article 498: 'Le Sueur (surname)...' - Reward: 1.000, Tokens: 496, Time: 101.6ms
+2025-11-15 13:35:42,825 [INFO] Article 499: 'Tess Girard...' - Reward: 1.000, Tokens: 299, Time: 101.6ms
+2025-11-15 13:35:42,927 [INFO] Article 500: 'Oujiang Beikou Bridge...' - Reward: 1.000, Tokens: 369, Time: 101.5ms
+2025-11-15 13:35:43,033 [INFO] Article 501: 'List of United States representatives in the 73rd ...' - Reward: 1.000, Tokens: 290, Time: 101.7ms
+2025-11-15 13:35:43,134 [INFO] Article 502: 'Hillside School, Addis Ababa...' - Reward: 1.000, Tokens: 104, Time: 101.1ms
+2025-11-15 13:35:43,236 [INFO] Article 503: 'Toother...' - Reward: 1.000, Tokens: 197, Time: 101.2ms
+2025-11-15 13:35:43,337 [INFO] Article 504: 'Tioman (state constituency)...' - Reward: 1.000, Tokens: 62, Time: 100.6ms
+2025-11-15 13:35:43,438 [INFO] Article 505: 'National Institute of Infectious Diseases...' - Reward: 1.000, Tokens: 90, Time: 100.9ms
+2025-11-15 13:35:43,539 [INFO] Article 506: 'Wadi El Haour...' - Reward: 1.000, Tokens: 86, Time: 100.8ms
+2025-11-15 13:35:43,641 [INFO] Article 507: 'Antonio Barbaro...' - Reward: 1.000, Tokens: 507, Time: 102.0ms
+2025-11-15 13:35:43,743 [INFO] Article 508: 'Progomphus...' - Reward: 1.000, Tokens: 124, Time: 101.2ms
+2025-11-15 13:35:43,844 [INFO] Article 509: 'WHI...' - Reward: 1.000, Tokens: 112, Time: 101.1ms
+2025-11-15 13:35:43,946 [INFO] Article 510: 'Sir John Hopkins, 1st Baronet...' - Reward: 1.000, Tokens: 160, Time: 100.9ms
+2025-11-15 13:35:44,048 [INFO] Article 511: 'Hovnatanian...' - Reward: 1.000, Tokens: 411, Time: 101.6ms
+2025-11-15 13:35:44,150 [INFO] Article 512: 'Golisoda...' - Reward: 1.000, Tokens: 503, Time: 101.9ms
+2025-11-15 13:35:44,251 [INFO] Article 513: 'Yoyetta kershawi...' - Reward: 1.000, Tokens: 154, Time: 101.2ms
+2025-11-15 13:35:44,353 [INFO] Article 514: '2003–04 FIBA Europe League...' - Reward: 1.000, Tokens: 214, Time: 101.4ms
+2025-11-15 13:35:44,455 [INFO] Article 515: 'Geology of Kansas...' - Reward: 1.000, Tokens: 491, Time: 102.0ms
+2025-11-15 13:35:44,557 [INFO] Article 516: '2016 Kiribati presidential election...' - Reward: 1.000, Tokens: 88, Time: 100.8ms
+2025-11-15 13:35:44,658 [INFO] Article 517: 'Standing Advisory Committee before the European Pa...' - Reward: 1.000, Tokens: 191, Time: 101.0ms
+2025-11-15 13:35:44,760 [INFO] Article 518: 'Constituencies of the Parliament of the United Kin...' - Reward: 1.000, Tokens: 403, Time: 101.9ms
+2025-11-15 13:35:44,861 [INFO] Article 519: 'L21...' - Reward: 1.000, Tokens: 144, Time: 101.0ms
+2025-11-15 13:35:44,964 [INFO] Article 520: 'Camille Martin...' - Reward: 1.000, Tokens: 468, Time: 102.1ms
+2025-11-15 13:35:45,066 [INFO] Article 521: 'Neddie Seagoon...' - Reward: 1.000, Tokens: 534, Time: 102.0ms
+2025-11-15 13:35:45,169 [INFO] Article 522: 'Miroslav Šmíd...' - Reward: 1.000, Tokens: 527, Time: 101.8ms
+2025-11-15 13:35:45,271 [INFO] Article 523: 'Wendy Campbell-Purdie...' - Reward: 1.000, Tokens: 450, Time: 102.4ms
+2025-11-15 13:35:45,373 [INFO] Article 524: 'History of the Church...' - Reward: 1.000, Tokens: 80, Time: 100.9ms
+2025-11-15 13:35:45,475 [INFO] Article 525: '1999 NCAA Division I men's ice hockey tournament...' - Reward: 1.000, Tokens: 428, Time: 102.1ms
+2025-11-15 13:35:45,577 [INFO] Article 526: 'JFS...' - Reward: 1.000, Tokens: 232, Time: 101.4ms
+2025-11-15 13:35:45,680 [INFO] Article 527: 'Dimitris Paraskevas...' - Reward: 1.000, Tokens: 442, Time: 102.0ms
+2025-11-15 13:35:45,782 [INFO] Article 528: 'Nancy Wood (author)...' - Reward: 1.000, Tokens: 419, Time: 101.8ms
+2025-11-15 13:35:45,883 [INFO] Article 529: 'Plant Life Records...' - Reward: 1.000, Tokens: 140, Time: 101.0ms
+2025-11-15 13:35:45,985 [INFO] Article 530: 'Bradly van Hoeven...' - Reward: 1.000, Tokens: 298, Time: 101.2ms
+2025-11-15 13:35:46,086 [INFO] Article 531: 'Konstantinos Spetsiotis...' - Reward: 1.000, Tokens: 85, Time: 101.0ms
+2025-11-15 13:35:46,187 [INFO] Article 532: 'Vassmolösa...' - Reward: 1.000, Tokens: 92, Time: 101.0ms
+2025-11-15 13:35:46,289 [INFO] Article 533: '2015 Malaysia FA Cup final...' - Reward: 1.000, Tokens: 67, Time: 101.0ms
+2025-11-15 13:35:46,390 [INFO] Article 534: 'River Calder, Cumbria...' - Reward: 1.000, Tokens: 156, Time: 100.9ms
+2025-11-15 13:35:46,491 [INFO] Article 535: 'Xu Yinghui...' - Reward: 1.000, Tokens: 68, Time: 100.7ms
+2025-11-15 13:35:46,593 [INFO] Article 536: 'Maurice Tourneux...' - Reward: 1.000, Tokens: 348, Time: 101.5ms
+2025-11-15 13:35:46,694 [INFO] Article 537: 'Foothill Horizons Outdoor School...' - Reward: 1.000, Tokens: 213, Time: 101.4ms
+2025-11-15 13:35:46,796 [INFO] Article 538: 'Scott Clinic...' - Reward: 1.000, Tokens: 137, Time: 101.2ms
+2025-11-15 13:35:46,898 [INFO] Article 539: 'Jonathan C. Jones...' - Reward: 1.000, Tokens: 383, Time: 101.7ms
+2025-11-15 13:35:47,000 [INFO] Article 540: 'List of current Philippine vice governors...' - Reward: 1.000, Tokens: 394, Time: 101.6ms
+2025-11-15 13:35:47,102 [INFO] Article 541: 'Dudley Norton...' - Reward: 1.000, Tokens: 313, Time: 101.4ms
+2025-11-15 13:35:47,204 [INFO] Article 542: 'Vasily Savvin...' - Reward: 1.000, Tokens: 452, Time: 101.7ms
+2025-11-15 13:35:47,306 [INFO] Article 543: 'Oliver Duff Greene...' - Reward: 1.000, Tokens: 217, Time: 101.4ms
+2025-11-15 13:35:47,407 [INFO] Article 544: 'Lloyd R. Welch...' - Reward: 1.000, Tokens: 220, Time: 101.3ms
+2025-11-15 13:35:47,509 [INFO] Article 545: 'List of Hapoel Hadera F.C. seasons...' - Reward: 1.000, Tokens: 189, Time: 101.3ms
+2025-11-15 13:35:47,610 [INFO] Article 546: 'Men in White (TV series)...' - Reward: 1.000, Tokens: 82, Time: 100.7ms
+2025-11-15 13:35:47,712 [INFO] Article 547: 'Matt Daylight...' - Reward: 1.000, Tokens: 257, Time: 101.4ms
+2025-11-15 13:35:47,813 [INFO] Article 548: 'The School Teacher...' - Reward: 1.000, Tokens: 361, Time: 101.4ms
+2025-11-15 13:35:47,915 [INFO] Article 549: 'Cytochrome c nitrite reductase...' - Reward: 1.000, Tokens: 332, Time: 101.4ms
+2025-11-15 13:35:48,017 [INFO] Article 550: 'The Experienced English Housekeeper...' - Reward: 1.000, Tokens: 481, Time: 102.0ms
+2025-11-15 13:35:48,121 [INFO] Article 551: 'Comarcas of the Community of Madrid...' - Reward: 1.000, Tokens: 68, Time: 101.0ms
+2025-11-15 13:35:48,222 [INFO] Article 552: 'Archie Clement (footballer)...' - Reward: 1.000, Tokens: 49, Time: 100.7ms
+2025-11-15 13:35:48,324 [INFO] Article 553: '1953 Tennessee Volunteers football team...' - Reward: 1.000, Tokens: 116, Time: 101.0ms
+2025-11-15 13:35:48,426 [INFO] Article 554: 'KJ-52...' - Reward: 1.000, Tokens: 543, Time: 101.9ms
+2025-11-15 13:35:48,528 [INFO] Article 555: 'Miss Venezuela 2024...' - Reward: 1.000, Tokens: 408, Time: 101.7ms
+2025-11-15 13:35:48,630 [INFO] Article 556: 'Rapid Fire Theatre...' - Reward: 1.000, Tokens: 473, Time: 101.9ms
+2025-11-15 13:35:48,731 [INFO] Article 557: 'Milk River (Jamaica)...' - Reward: 1.000, Tokens: 57, Time: 100.9ms
+2025-11-15 13:35:48,833 [INFO] Article 558: '1979 Cornell Big Red football team...' - Reward: 1.000, Tokens: 130, Time: 100.9ms
+2025-11-15 13:35:48,935 [INFO] Article 559: 'Bank of issue...' - Reward: 1.000, Tokens: 419, Time: 101.7ms
+2025-11-15 13:35:49,037 [INFO] Article 560: 'David Lewiston...' - Reward: 1.000, Tokens: 459, Time: 101.8ms
+2025-11-15 13:35:49,139 [INFO] Article 561: 'Rishi Rithvik...' - Reward: 1.000, Tokens: 324, Time: 101.7ms
+2025-11-15 13:35:49,241 [INFO] Article 562: 'Coloman of Galicia...' - Reward: 1.000, Tokens: 487, Time: 101.9ms
+2025-11-15 13:35:49,343 [INFO] Article 563: 'Hoo Anthiya Uhoo Anthiya...' - Reward: 1.000, Tokens: 327, Time: 101.6ms
+2025-11-15 13:35:49,445 [INFO] Article 564: 'Speirs shadow ministry...' - Reward: 1.000, Tokens: 347, Time: 101.7ms
+2025-11-15 13:35:49,547 [INFO] Article 565: 'Pollex laosi...' - Reward: 1.000, Tokens: 91, Time: 100.9ms
+2025-11-15 13:35:49,648 [INFO] Article 566: 'Violetta Napierska...' - Reward: 1.000, Tokens: 164, Time: 101.1ms
+2025-11-15 13:35:49,749 [INFO] Article 567: 'Universal Bank...' - Reward: 1.000, Tokens: 86, Time: 101.0ms
+2025-11-15 13:35:49,852 [INFO] Article 568: 'Kōyasan chōishi-michi...' - Reward: 1.000, Tokens: 518, Time: 102.0ms
+2025-11-15 13:35:49,953 [INFO] Article 569: 'Irwin Belk...' - Reward: 1.000, Tokens: 190, Time: 101.3ms
+2025-11-15 13:35:50,054 [INFO] Article 570: 'Adelabad...' - Reward: 1.000, Tokens: 89, Time: 100.7ms
+2025-11-15 13:35:50,157 [INFO] Article 571: 'Cinema of Portugal...' - Reward: 1.000, Tokens: 494, Time: 102.4ms
+2025-11-15 13:35:50,258 [INFO] Article 572: '2018–19 Maltese Division 1...' - Reward: 1.000, Tokens: 127, Time: 101.0ms
+2025-11-15 13:35:50,361 [INFO] Article 573: 'Die (manufacturing)...' - Reward: 1.000, Tokens: 435, Time: 101.9ms
+2025-11-15 13:35:50,461 [INFO] Article 574: 'Thryssa setirostris...' - Reward: 1.000, Tokens: 60, Time: 100.5ms
+2025-11-15 13:35:50,563 [INFO] Article 575: 'Roger Bhatnagar...' - Reward: 1.000, Tokens: 456, Time: 101.9ms
+2025-11-15 13:35:50,665 [INFO] Article 576: 'Kishori Lal (Kullu politician)...' - Reward: 1.000, Tokens: 63, Time: 100.7ms
+2025-11-15 13:35:50,766 [INFO] Article 577: 'Izani Husin...' - Reward: 1.000, Tokens: 212, Time: 101.1ms
+2025-11-15 13:35:50,867 [INFO] Article 578: 'Demo Finland...' - Reward: 1.000, Tokens: 125, Time: 100.9ms
+2025-11-15 13:35:50,969 [INFO] Article 579: 'Michael Mirolla...' - Reward: 1.000, Tokens: 343, Time: 101.7ms
+2025-11-15 13:35:51,071 [INFO] Article 580: 'Dreadlocks...' - Reward: 1.000, Tokens: 508, Time: 101.8ms
+2025-11-15 13:35:51,173 [INFO] Article 581: 'Crown Prince Frederik Land...' - Reward: 1.000, Tokens: 167, Time: 101.2ms
+2025-11-15 13:35:51,275 [INFO] Article 582: 'The Less Deceived...' - Reward: 1.000, Tokens: 474, Time: 101.8ms
+2025-11-15 13:35:51,377 [INFO] Article 583: 'Hovgaard Islands...' - Reward: 1.000, Tokens: 144, Time: 101.1ms
+2025-11-15 13:35:51,478 [INFO] Article 584: 'Machinery (disambiguation)...' - Reward: 1.000, Tokens: 125, Time: 100.9ms
+2025-11-15 13:35:51,580 [INFO] Article 585: 'Education in Warsaw...' - Reward: 1.000, Tokens: 442, Time: 101.9ms
+2025-11-15 13:35:51,681 [INFO] Article 586: 'Chater Plain...' - Reward: 1.000, Tokens: 126, Time: 100.9ms
+2025-11-15 13:35:51,783 [INFO] Article 587: 'Jamie Shea...' - Reward: 1.000, Tokens: 359, Time: 101.9ms
+2025-11-15 13:35:51,885 [INFO] Article 588: 'Vuma FM...' - Reward: 1.000, Tokens: 141, Time: 100.8ms
+2025-11-15 13:35:51,987 [INFO] Article 589: 'Franc Weerwind...' - Reward: 1.000, Tokens: 429, Time: 101.9ms
+2025-11-15 13:35:52,089 [INFO] Article 590: '2025–26 PBA season...' - Reward: 1.000, Tokens: 416, Time: 101.9ms
+2025-11-15 13:35:52,191 [INFO] Article 591: 'Hototogisu (magazine)...' - Reward: 1.000, Tokens: 548, Time: 102.1ms
+2025-11-15 13:35:52,294 [INFO] Article 592: 'Anarithma pamila...' - Reward: 1.000, Tokens: 576, Time: 102.0ms
+2025-11-15 13:35:52,396 [INFO] Article 593: 'Rodislav Chizhikov...' - Reward: 1.000, Tokens: 222, Time: 101.4ms
+2025-11-15 13:35:52,497 [INFO] Article 594: 'Hedemora stadshotell...' - Reward: 1.000, Tokens: 375, Time: 101.4ms
+2025-11-15 13:35:52,600 [INFO] Article 595: 'Cimarron Hotel...' - Reward: 1.000, Tokens: 419, Time: 102.3ms
+2025-11-15 13:35:52,702 [INFO] Article 596: 'Erika Burgess...' - Reward: 1.000, Tokens: 109, Time: 101.1ms
+2025-11-15 13:35:52,804 [INFO] Article 597: 'Balloonfest '86...' - Reward: 1.000, Tokens: 444, Time: 101.9ms
+2025-11-15 13:35:52,906 [INFO] Article 598: 'Duke Keomuka...' - Reward: 1.000, Tokens: 446, Time: 101.7ms
+2025-11-15 13:35:53,008 [INFO] Article 599: 'Meneval...' - Reward: 1.000, Tokens: 505, Time: 102.1ms
+2025-11-15 13:35:53,110 [INFO] Article 600: '56th Golden Bell Awards...' - Reward: 1.000, Tokens: 116, Time: 100.8ms
+2025-11-15 13:35:53,214 [INFO] Article 601: 'I'll Never Get Out of This World Alive (album)...' - Reward: 1.000, Tokens: 361, Time: 101.6ms
+2025-11-15 13:35:53,315 [INFO] Article 602: 'Proctor Burman...' - Reward: 1.000, Tokens: 71, Time: 100.8ms
+2025-11-15 13:35:53,417 [INFO] Article 603: 'Walter Wigmore...' - Reward: 1.000, Tokens: 405, Time: 101.9ms
+2025-11-15 13:35:53,519 [INFO] Article 604: 'Annah Mac...' - Reward: 1.000, Tokens: 398, Time: 101.6ms
+2025-11-15 13:35:53,622 [INFO] Article 605: 'Adam Nevill...' - Reward: 1.000, Tokens: 531, Time: 102.0ms
+2025-11-15 13:35:53,724 [INFO] Article 606: 'The Tax Inspector...' - Reward: 1.000, Tokens: 482, Time: 101.7ms
+2025-11-15 13:35:53,826 [INFO] Article 607: 'Astrid Johannessen...' - Reward: 1.000, Tokens: 256, Time: 101.3ms
+2025-11-15 13:35:53,927 [INFO] Article 608: 'Rıdvan Şimşek...' - Reward: 1.000, Tokens: 278, Time: 101.4ms
+2025-11-15 13:35:54,029 [INFO] Article 609: 'Yuri Stepanov (actor)...' - Reward: 1.000, Tokens: 179, Time: 101.1ms
+2025-11-15 13:35:54,131 [INFO] Article 610: 'Colombia and the World Bank...' - Reward: 1.000, Tokens: 410, Time: 102.0ms
+2025-11-15 13:35:54,233 [INFO] Article 611: 'High-field domain...' - Reward: 1.000, Tokens: 372, Time: 101.6ms
+2025-11-15 13:35:54,335 [INFO] Article 612: 'WFRM...' - Reward: 1.000, Tokens: 497, Time: 101.8ms
+2025-11-15 13:35:54,437 [INFO] Article 613: 'McLouth Steel...' - Reward: 1.000, Tokens: 462, Time: 101.8ms
+2025-11-15 13:35:54,539 [INFO] Article 614: 'Simone Rao Grimaldi...' - Reward: 1.000, Tokens: 176, Time: 101.2ms
+2025-11-15 13:35:54,640 [INFO] Article 615: '1994–95 Arizona State Sun Devils men's basketball ...' - Reward: 1.000, Tokens: 146, Time: 101.1ms
+2025-11-15 13:35:54,743 [INFO] Article 616: 'South Africa at the 2019 African Games...' - Reward: 1.000, Tokens: 474, Time: 101.9ms
+2025-11-15 13:35:54,844 [INFO] Article 617: 'Ministry of Punishments...' - Reward: 1.000, Tokens: 74, Time: 101.0ms
+2025-11-15 13:35:54,946 [INFO] Article 618: 'Ruth Fowler Edwards...' - Reward: 1.000, Tokens: 447, Time: 101.6ms
+2025-11-15 13:35:55,048 [INFO] Article 619: 'Angel City FC...' - Reward: 1.000, Tokens: 467, Time: 101.8ms
+2025-11-15 13:35:55,151 [INFO] Article 620: 'Veniamin Basner...' - Reward: 1.000, Tokens: 499, Time: 101.9ms
+2025-11-15 13:35:55,252 [INFO] Article 621: 'Lois Jackman...' - Reward: 1.000, Tokens: 226, Time: 101.5ms
+2025-11-15 13:35:55,354 [INFO] Article 622: 'Verbascum virgatum...' - Reward: 1.000, Tokens: 150, Time: 101.2ms
+2025-11-15 13:35:55,456 [INFO] Article 623: 'Stephen Myler...' - Reward: 1.000, Tokens: 450, Time: 102.0ms
+2025-11-15 13:35:55,557 [INFO] Article 624: 'Baliya...' - Reward: 1.000, Tokens: 107, Time: 100.7ms
+2025-11-15 13:35:55,659 [INFO] Article 625: 'Trapdoor Fucking Exit...' - Reward: 1.000, Tokens: 181, Time: 101.0ms
+2025-11-15 13:35:55,761 [INFO] Article 626: 'Venera 16...' - Reward: 1.000, Tokens: 512, Time: 101.9ms
+2025-11-15 13:35:55,862 [INFO] Article 627: 'National Register of Historic Places listings in W...' - Reward: 1.000, Tokens: 147, Time: 101.2ms
+2025-11-15 13:35:55,965 [INFO] Article 628: '2022 UCI Women's World Tour...' - Reward: 1.000, Tokens: 452, Time: 102.0ms
+2025-11-15 13:35:56,066 [INFO] Article 629: 'Vanity Vain...' - Reward: 1.000, Tokens: 190, Time: 101.3ms
+2025-11-15 13:35:56,168 [INFO] Article 630: 'Sophia Desta...' - Reward: 1.000, Tokens: 482, Time: 101.7ms
+2025-11-15 13:35:56,271 [INFO] Article 631: 'George Tuchet, 1st Earl of Castlehaven...' - Reward: 1.000, Tokens: 533, Time: 101.9ms
+2025-11-15 13:35:56,373 [INFO] Article 632: 'Bunny and Claude (We Rob Carrot Patches)...' - Reward: 1.000, Tokens: 505, Time: 102.0ms
+2025-11-15 13:35:56,475 [INFO] Article 633: 'Jan van de Werve, 7th Lord of Hovorst...' - Reward: 1.000, Tokens: 229, Time: 101.3ms
+2025-11-15 13:35:56,577 [INFO] Article 634: 'Boris Eidelmann...' - Reward: 1.000, Tokens: 409, Time: 101.8ms
+2025-11-15 13:35:56,678 [INFO] Article 635: 'Tumtum Lake...' - Reward: 1.000, Tokens: 106, Time: 101.0ms
+2025-11-15 13:35:56,780 [INFO] Article 636: 'Euglossa mixta...' - Reward: 1.000, Tokens: 467, Time: 101.7ms
+2025-11-15 13:35:56,882 [INFO] Article 637: 'Japan National Route 8...' - Reward: 1.000, Tokens: 583, Time: 101.9ms
+2025-11-15 13:35:56,985 [INFO] Article 638: 'Naseer Shamma...' - Reward: 1.000, Tokens: 508, Time: 102.0ms
+2025-11-15 13:35:57,086 [INFO] Article 639: 'Turkana Central Constituency...' - Reward: 1.000, Tokens: 41, Time: 100.9ms
+2025-11-15 13:35:57,187 [INFO] Article 640: 'Enicostema...' - Reward: 1.000, Tokens: 93, Time: 101.0ms
+2025-11-15 13:35:57,289 [INFO] Article 641: '1956 French Togoland autonomy referendum...' - Reward: 1.000, Tokens: 157, Time: 101.2ms
+2025-11-15 13:35:57,391 [INFO] Article 642: 'Leonhard Koeppe...' - Reward: 1.000, Tokens: 493, Time: 101.7ms
+2025-11-15 13:35:57,493 [INFO] Article 643: 'Summits On The Air...' - Reward: 1.000, Tokens: 420, Time: 101.9ms
+2025-11-15 13:35:57,595 [INFO] Article 644: 'Pamplonita River...' - Reward: 1.000, Tokens: 493, Time: 101.7ms
+2025-11-15 13:35:57,696 [INFO] Article 645: 'King of the Dead...' - Reward: 1.000, Tokens: 94, Time: 100.9ms
+2025-11-15 13:35:57,799 [INFO] Article 646: 'This Is 40...' - Reward: 1.000, Tokens: 448, Time: 102.1ms
+2025-11-15 13:35:57,900 [INFO] Article 647: 'List of Moyashimon chapters...' - Reward: 1.000, Tokens: 193, Time: 101.2ms
+2025-11-15 13:35:58,002 [INFO] Article 648: 'Brennan v HM Advocate...' - Reward: 1.000, Tokens: 262, Time: 101.3ms
+2025-11-15 13:35:58,104 [INFO] Article 649: 'Paul Fredricks...' - Reward: 1.000, Tokens: 464, Time: 101.9ms
+2025-11-15 13:35:58,206 [INFO] Article 650: 'War Memorial (Angri)...' - Reward: 1.000, Tokens: 477, Time: 102.0ms
+2025-11-15 13:35:58,312 [INFO] Article 651: 'Women's literary salons and societies in the Arab ...' - Reward: 1.000, Tokens: 400, Time: 102.0ms
+2025-11-15 13:35:58,413 [INFO] Article 652: 'Lehize Hilal Benli...' - Reward: 1.000, Tokens: 141, Time: 101.1ms
+2025-11-15 13:35:58,515 [INFO] Article 653: 'Ychoux...' - Reward: 1.000, Tokens: 51, Time: 101.0ms
+2025-11-15 13:35:58,617 [INFO] Article 654: 'Digital Dog...' - Reward: 1.000, Tokens: 636, Time: 101.7ms
+2025-11-15 13:35:58,719 [INFO] Article 655: '1925 Burmese general election...' - Reward: 1.000, Tokens: 364, Time: 101.7ms
+2025-11-15 13:35:58,821 [INFO] Article 656: 'W. H. L. McCarthy...' - Reward: 1.000, Tokens: 438, Time: 101.8ms
+2025-11-15 13:35:58,923 [INFO] Article 657: 'Tamagotchi (Omar Apollo song)...' - Reward: 1.000, Tokens: 471, Time: 102.0ms
+2025-11-15 13:35:59,025 [INFO] Article 658: 'Beate Uhse Erotic Museum...' - Reward: 1.000, Tokens: 215, Time: 101.4ms
+2025-11-15 13:35:59,126 [INFO] Article 659: 'Kalanjukittiya Thankam...' - Reward: 1.000, Tokens: 136, Time: 101.1ms
+2025-11-15 13:35:59,228 [INFO] Article 660: 'St Giles' Church, Matlock...' - Reward: 1.000, Tokens: 431, Time: 101.6ms
+2025-11-15 13:35:59,329 [INFO] Article 661: 'Arthur Dinaux...' - Reward: 1.000, Tokens: 172, Time: 101.0ms
+2025-11-15 13:35:59,431 [INFO] Article 662: 'C. H. Elting...' - Reward: 1.000, Tokens: 279, Time: 101.6ms
+2025-11-15 13:35:59,533 [INFO] Article 663: 'Eidangerfjord...' - Reward: 1.000, Tokens: 213, Time: 101.1ms
+2025-11-15 13:35:59,635 [INFO] Article 664: 'Esther Nkansah...' - Reward: 1.000, Tokens: 230, Time: 101.5ms
+2025-11-15 13:35:59,737 [INFO] Article 665: 'Muhammadu Dikko Yusufu...' - Reward: 1.000, Tokens: 484, Time: 102.0ms
+2025-11-15 13:35:59,838 [INFO] Article 666: 'List of non-Dinosauria fossil trackway articles...' - Reward: 1.000, Tokens: 157, Time: 100.9ms
+2025-11-15 13:35:59,940 [INFO] Article 667: 'CVV-4 Pellicano...' - Reward: 1.000, Tokens: 501, Time: 101.8ms
+2025-11-15 13:36:00,042 [INFO] Article 668: 'Gianduja (commedia dell'arte)...' - Reward: 1.000, Tokens: 335, Time: 101.6ms
+2025-11-15 13:36:00,144 [INFO] Article 669: 'Planing (shaping)...' - Reward: 1.000, Tokens: 439, Time: 101.9ms
+2025-11-15 13:36:00,247 [INFO] Article 670: 'Wade Miley...' - Reward: 1.000, Tokens: 431, Time: 102.0ms
+2025-11-15 13:36:00,349 [INFO] Article 671: 'Jim (book)...' - Reward: 1.000, Tokens: 404, Time: 101.8ms
+2025-11-15 13:36:00,450 [INFO] Article 672: 'New Hope, Florida...' - Reward: 1.000, Tokens: 55, Time: 100.6ms
+2025-11-15 13:36:00,551 [INFO] Article 673: 'Robert McLaren...' - Reward: 1.000, Tokens: 126, Time: 101.0ms
+2025-11-15 13:36:00,652 [INFO] Article 674: 'Vogelsang (Bavarian Forest)...' - Reward: 1.000, Tokens: 153, Time: 101.0ms
+2025-11-15 13:36:00,755 [INFO] Article 675: 'Road Trips Volume 3 Number 1...' - Reward: 1.000, Tokens: 584, Time: 101.9ms
+2025-11-15 13:36:00,857 [INFO] Article 676: 'Said bin Ahmad Al Busaidi...' - Reward: 1.000, Tokens: 396, Time: 101.7ms
+2025-11-15 13:36:00,958 [INFO] Article 677: 'Monument au Fantôme...' - Reward: 1.000, Tokens: 195, Time: 101.4ms
+2025-11-15 13:36:01,060 [INFO] Article 678: 'China Gate Castle Park...' - Reward: 1.000, Tokens: 121, Time: 100.7ms
+2025-11-15 13:36:01,162 [INFO] Article 679: 'Polar motion...' - Reward: 1.000, Tokens: 469, Time: 101.9ms
+2025-11-15 13:36:01,264 [INFO] Article 680: '2025 national electoral calendar...' - Reward: 1.000, Tokens: 448, Time: 101.8ms
+2025-11-15 13:36:01,366 [INFO] Article 681: 'Alpheus S. Williams...' - Reward: 1.000, Tokens: 444, Time: 102.1ms
+2025-11-15 13:36:01,469 [INFO] Article 682: 'Kady McDermott...' - Reward: 1.000, Tokens: 404, Time: 102.0ms
+2025-11-15 13:36:01,571 [INFO] Article 683: 'Muhammad Yusuf Khan Hazara...' - Reward: 1.000, Tokens: 486, Time: 102.1ms
+2025-11-15 13:36:01,672 [INFO] Article 684: 'Robert Staddon (English sportsman)...' - Reward: 1.000, Tokens: 130, Time: 100.9ms
+2025-11-15 13:36:01,775 [INFO] Article 685: 'Edgar Lissel...' - Reward: 1.000, Tokens: 427, Time: 101.9ms
+2025-11-15 13:36:01,876 [INFO] Article 686: 'Ahmet Can Arık...' - Reward: 1.000, Tokens: 103, Time: 101.0ms
+2025-11-15 13:36:01,977 [INFO] Article 687: 'Bimokalner...' - Reward: 1.000, Tokens: 63, Time: 101.0ms
+2025-11-15 13:36:02,079 [INFO] Article 688: 'Mitchell, Oregon...' - Reward: 1.000, Tokens: 458, Time: 101.7ms
+2025-11-15 13:36:02,182 [INFO] Article 689: 'Barbudan independence movement...' - Reward: 1.000, Tokens: 386, Time: 102.0ms
+2025-11-15 13:36:02,284 [INFO] Article 690: 'Raipur, Sareni...' - Reward: 1.000, Tokens: 489, Time: 102.2ms
+2025-11-15 13:36:02,387 [INFO] Article 691: 'Tuku Morgan...' - Reward: 1.000, Tokens: 437, Time: 102.1ms
+2025-11-15 13:36:02,488 [INFO] Article 692: 'Hingston...' - Reward: 1.000, Tokens: 110, Time: 101.1ms
+2025-11-15 13:36:02,590 [INFO] Article 693: 'Jimmy Conway (footballer)...' - Reward: 1.000, Tokens: 413, Time: 102.0ms
+2025-11-15 13:36:02,693 [INFO] Article 694: 'Windwagon Smith...' - Reward: 1.000, Tokens: 461, Time: 102.0ms
+2025-11-15 13:36:02,795 [INFO] Article 695: 'Knut Værnes...' - Reward: 1.000, Tokens: 543, Time: 102.1ms
+2025-11-15 13:36:02,897 [INFO] Article 696: 'Ozegna Castle...' - Reward: 1.000, Tokens: 301, Time: 101.3ms
+2025-11-15 13:36:02,999 [INFO] Article 697: 'Most favoured nation...' - Reward: 1.000, Tokens: 417, Time: 101.8ms
+2025-11-15 13:36:03,101 [INFO] Article 698: 'William Lee Scott...' - Reward: 1.000, Tokens: 292, Time: 101.7ms
+2025-11-15 13:36:03,203 [INFO] Article 699: 'Alhambra Springs...' - Reward: 1.000, Tokens: 472, Time: 102.1ms
+2025-11-15 13:36:03,305 [INFO] Article 700: 'SMS Teluk Intan...' - Reward: 1.000, Tokens: 248, Time: 101.6ms
+2025-11-15 13:36:03,409 [INFO] Article 701: 'Us Against the World...' - Reward: 1.000, Tokens: 168, Time: 101.0ms
+2025-11-15 13:36:03,511 [INFO] Article 702: 'Crest of the Blue Ridge Henderson County AVA...' - Reward: 1.000, Tokens: 442, Time: 101.7ms
+2025-11-15 13:36:03,613 [INFO] Article 703: 'Bob Ajisafe...' - Reward: 1.000, Tokens: 335, Time: 101.4ms
+2025-11-15 13:36:03,714 [INFO] Article 704: 'List of lighthouses in Friesland...' - Reward: 1.000, Tokens: 87, Time: 100.8ms
+2025-11-15 13:36:03,816 [INFO] Article 705: 'Alberto Leanizbarrutia...' - Reward: 1.000, Tokens: 96, Time: 101.0ms
+2025-11-15 13:36:03,918 [INFO] Article 706: 'Kenvue...' - Reward: 1.000, Tokens: 462, Time: 102.0ms
+2025-11-15 13:36:04,020 [INFO] Article 707: 'Ralph Kiner...' - Reward: 1.000, Tokens: 422, Time: 102.0ms
+2025-11-15 13:36:04,122 [INFO] Article 708: 'Trent Barrett...' - Reward: 1.000, Tokens: 455, Time: 101.8ms
+2025-11-15 13:36:04,225 [INFO] Article 709: '2014 Forest Hills Drive...' - Reward: 1.000, Tokens: 430, Time: 101.8ms
+2025-11-15 13:36:04,326 [INFO] Article 710: 'Ayesem...' - Reward: 1.000, Tokens: 255, Time: 101.3ms
+2025-11-15 13:36:04,428 [INFO] Article 711: 'Brute Force: Cracking the Data Encryption Standard...' - Reward: 1.000, Tokens: 208, Time: 101.3ms
+2025-11-15 13:36:04,530 [INFO] Article 712: 'David Penman...' - Reward: 1.000, Tokens: 413, Time: 101.8ms
+2025-11-15 13:36:04,631 [INFO] Article 713: 'Yufkalı, Şemdinli...' - Reward: 1.000, Tokens: 157, Time: 101.0ms
+2025-11-15 13:36:04,734 [INFO] Article 714: 'Youssou N'Dour...' - Reward: 1.000, Tokens: 530, Time: 102.0ms
+2025-11-15 13:36:04,835 [INFO] Article 715: 'Margarete Kupfer...' - Reward: 1.000, Tokens: 78, Time: 100.7ms
+2025-11-15 13:36:04,936 [INFO] Article 716: 'John MacLeod (canoeist)...' - Reward: 1.000, Tokens: 272, Time: 101.4ms
+2025-11-15 13:36:05,038 [INFO] Article 717: 'Miha Gale...' - Reward: 1.000, Tokens: 50, Time: 100.9ms
+2025-11-15 13:36:05,139 [INFO] Article 718: 'Riba (disambiguation)...' - Reward: 1.000, Tokens: 148, Time: 101.2ms
+2025-11-15 13:36:05,241 [INFO] Article 719: 'William H. O'Dell...' - Reward: 1.000, Tokens: 294, Time: 101.6ms
+2025-11-15 13:36:05,343 [INFO] Article 720: 'Beaverton, Alabama...' - Reward: 1.000, Tokens: 467, Time: 101.9ms
+2025-11-15 13:36:05,445 [INFO] Article 721: 'Saint Francis with the Blood of Christ...' - Reward: 1.000, Tokens: 367, Time: 101.5ms
+2025-11-15 13:36:05,547 [INFO] Article 722: 'Jodi (musician)...' - Reward: 1.000, Tokens: 144, Time: 100.9ms
+2025-11-15 13:36:05,649 [INFO] Article 723: 'Millersville Marauders...' - Reward: 1.000, Tokens: 505, Time: 102.0ms
+2025-11-15 13:36:05,750 [INFO] Article 724: 'Taiwan Travelogue...' - Reward: 1.000, Tokens: 208, Time: 101.2ms
+2025-11-15 13:36:05,852 [INFO] Article 725: 'Yoann Martelat...' - Reward: 1.000, Tokens: 235, Time: 101.3ms
+2025-11-15 13:36:05,954 [INFO] Article 726: 'Sumer–Elam war...' - Reward: 1.000, Tokens: 519, Time: 102.0ms
+2025-11-15 13:36:06,056 [INFO] Article 727: 'Cyril Fagan...' - Reward: 1.000, Tokens: 211, Time: 101.1ms
+2025-11-15 13:36:06,157 [INFO] Article 728: 'Dave Naylor...' - Reward: 1.000, Tokens: 83, Time: 100.8ms
+2025-11-15 13:36:06,259 [INFO] Article 729: 'Tanzania Railways Corporation...' - Reward: 1.000, Tokens: 477, Time: 102.1ms
+2025-11-15 13:36:06,362 [INFO] Article 730: 'Edward Roseman...' - Reward: 1.000, Tokens: 467, Time: 102.0ms
+2025-11-15 13:36:06,463 [INFO] Article 731: 'Mount Zion Baptist Church (Miami)...' - Reward: 1.000, Tokens: 76, Time: 101.0ms
+2025-11-15 13:36:06,565 [INFO] Article 732: 'Impatiens hawkeri...' - Reward: 1.000, Tokens: 165, Time: 101.2ms
+2025-11-15 13:36:06,666 [INFO] Article 733: 'List of county routes in Westchester County, New Y...' - Reward: 1.000, Tokens: 168, Time: 101.0ms
+2025-11-15 13:36:06,768 [INFO] Article 734: 'John W. Wells...' - Reward: 1.000, Tokens: 460, Time: 101.9ms
+2025-11-15 13:36:06,870 [INFO] Article 735: '11 West 54th Street...' - Reward: 1.000, Tokens: 431, Time: 102.0ms
+2025-11-15 13:36:06,973 [INFO] Article 736: '1954 Philadelphia Athletics season...' - Reward: 1.000, Tokens: 405, Time: 101.9ms
+2025-11-15 13:36:07,074 [INFO] Article 737: '2021 Supercopa do Brasil...' - Reward: 1.000, Tokens: 156, Time: 101.2ms
+2025-11-15 13:36:07,176 [INFO] Article 738: 'Noriko Sakai discography...' - Reward: 1.000, Tokens: 53, Time: 101.0ms
+2025-11-15 13:36:07,278 [INFO] Article 739: '2000 FIFA Club World Championship...' - Reward: 1.000, Tokens: 438, Time: 101.8ms
+2025-11-15 13:36:07,379 [INFO] Article 740: 'Eanfrith of Hwicce...' - Reward: 1.000, Tokens: 67, Time: 100.7ms
+2025-11-15 13:36:07,481 [INFO] Article 741: 'São João de Areias...' - Reward: 1.000, Tokens: 485, Time: 102.1ms
+2025-11-15 13:36:07,583 [INFO] Article 742: 'Tsingy forest rail...' - Reward: 1.000, Tokens: 186, Time: 101.3ms
+2025-11-15 13:36:07,686 [INFO] Article 743: 'List of literary works relating to Tamil sexual mi...' - Reward: 1.000, Tokens: 489, Time: 102.0ms
+2025-11-15 13:36:07,787 [INFO] Article 744: 'Mick Murray...' - Reward: 1.000, Tokens: 77, Time: 101.0ms
+2025-11-15 13:36:07,889 [INFO] Article 745: 'Asbel Rutto...' - Reward: 1.000, Tokens: 267, Time: 101.2ms
+2025-11-15 13:36:07,990 [INFO] Article 746: 'Cuscus...' - Reward: 1.000, Tokens: 177, Time: 101.1ms
+2025-11-15 13:36:08,091 [INFO] Article 747: 'Swinside (Derwent Water)...' - Reward: 1.000, Tokens: 227, Time: 101.1ms
+2025-11-15 13:36:08,192 [INFO] Article 748: 'List of ambassadors of Peru to Canada...' - Reward: 1.000, Tokens: 43, Time: 100.8ms
+2025-11-15 13:36:08,294 [INFO] Article 749: 'Gramola...' - Reward: 1.000, Tokens: 393, Time: 101.7ms
+2025-11-15 13:36:08,396 [INFO] Article 750: 'East Herts Miniature Railway...' - Reward: 1.000, Tokens: 156, Time: 101.2ms
+2025-11-15 13:36:08,500 [INFO] Article 751: 'Russell Winter (rugby union)...' - Reward: 1.000, Tokens: 236, Time: 101.1ms
+2025-11-15 13:36:08,601 [INFO] Article 752: 'List of UK garage songs...' - Reward: 1.000, Tokens: 95, Time: 101.0ms
+2025-11-15 13:36:08,704 [INFO] Article 753: 'The Last Wave...' - Reward: 1.000, Tokens: 426, Time: 102.0ms
+2025-11-15 13:36:08,805 [INFO] Article 754: 'Josua Vici...' - Reward: 1.000, Tokens: 119, Time: 101.1ms
+2025-11-15 13:36:08,907 [INFO] Article 755: 'United States Post Office (Freeport, New York)...' - Reward: 1.000, Tokens: 167, Time: 101.2ms
+2025-11-15 13:36:09,008 [INFO] Article 756: 'Dun Sar...' - Reward: 1.000, Tokens: 80, Time: 100.9ms
+2025-11-15 13:36:09,110 [INFO] Article 757: 'Paul Christie (musician)...' - Reward: 1.000, Tokens: 528, Time: 102.3ms
+2025-11-15 13:36:09,212 [INFO] Article 758: 'HIST1H2BK...' - Reward: 1.000, Tokens: 215, Time: 101.0ms
+2025-11-15 13:36:09,313 [INFO] Article 759: 'Bragernes...' - Reward: 1.000, Tokens: 258, Time: 101.4ms
+2025-11-15 13:36:09,415 [INFO] Article 760: '1992 Italian general election in Sardinia...' - Reward: 1.000, Tokens: 65, Time: 100.9ms
+2025-11-15 13:36:09,517 [INFO] Article 761: 'Afforestation in Scotland...' - Reward: 1.000, Tokens: 396, Time: 102.0ms
+2025-11-15 13:36:09,619 [INFO] Article 762: 'Alavijeh...' - Reward: 1.000, Tokens: 182, Time: 101.5ms
+2025-11-15 13:36:09,722 [INFO] Article 763: 'Stanley Glacier...' - Reward: 1.000, Tokens: 132, Time: 102.0ms
+2025-11-15 13:36:09,824 [INFO] Article 764: 'Lechuza (album)...' - Reward: 1.000, Tokens: 531, Time: 101.9ms
+2025-11-15 13:36:09,925 [INFO] Article 765: 'The Margin (novel)...' - Reward: 1.000, Tokens: 132, Time: 101.1ms
+2025-11-15 13:36:10,027 [INFO] Article 766: 'Frequency domain decomposition...' - Reward: 1.000, Tokens: 249, Time: 101.1ms
+2025-11-15 13:36:10,134 [INFO] Article 767: 'Pan-European Institute...' - Reward: 1.000, Tokens: 456, Time: 107.3ms
+2025-11-15 13:36:10,236 [INFO] Article 768: 'TV5...' - Reward: 1.000, Tokens: 219, Time: 101.5ms
+2025-11-15 13:36:10,337 [INFO] Article 769: 'Phoebemima...' - Reward: 1.000, Tokens: 122, Time: 100.7ms
+2025-11-15 13:36:10,439 [INFO] Article 770: 'Ioakeim Martianos...' - Reward: 1.000, Tokens: 199, Time: 101.1ms
+2025-11-15 13:36:10,541 [INFO] Article 771: 'Wattisfield...' - Reward: 1.000, Tokens: 475, Time: 102.1ms
+2025-11-15 13:36:10,643 [INFO] Article 772: 'Bharatiya Kranti Dal...' - Reward: 1.000, Tokens: 167, Time: 101.2ms
+2025-11-15 13:36:10,745 [INFO] Article 773: 'HR 3159...' - Reward: 1.000, Tokens: 243, Time: 101.4ms
+2025-11-15 13:36:10,846 [INFO] Article 774: 'Olavi Mannonen...' - Reward: 1.000, Tokens: 144, Time: 101.1ms
+2025-11-15 13:36:10,948 [INFO] Article 775: 'KXDD (FM)...' - Reward: 1.000, Tokens: 307, Time: 101.4ms
+2025-11-15 13:36:11,049 [INFO] Article 776: 'Andy Stevenson (motorsport)...' - Reward: 1.000, Tokens: 127, Time: 101.2ms
+2025-11-15 13:36:11,151 [INFO] Article 777: 'Hasanabad, Khalajestan...' - Reward: 1.000, Tokens: 68, Time: 100.9ms
+2025-11-15 13:36:11,253 [INFO] Article 778: 'Anatoly Demitkov...' - Reward: 1.000, Tokens: 469, Time: 101.8ms
+2025-11-15 13:36:11,354 [INFO] Article 779: 'Lukas Zuccarello...' - Reward: 1.000, Tokens: 83, Time: 100.7ms
+2025-11-15 13:36:11,456 [INFO] Article 780: '2024 Cimahi mayoral election...' - Reward: 1.000, Tokens: 430, Time: 101.9ms
+2025-11-15 13:36:11,557 [INFO] Article 781: 'Costa Rican Athletics Federation...' - Reward: 1.000, Tokens: 238, Time: 101.2ms
+2025-11-15 13:36:11,660 [INFO] Article 782: 'George Beare (footballer)...' - Reward: 1.000, Tokens: 426, Time: 102.5ms
+2025-11-15 13:36:11,762 [INFO] Article 783: 'Chip Banks...' - Reward: 1.000, Tokens: 386, Time: 101.9ms
+2025-11-15 13:36:11,865 [INFO] Article 784: 'River Raid...' - Reward: 1.000, Tokens: 458, Time: 102.0ms
+2025-11-15 13:36:11,967 [INFO] Article 785: 'Monteverde (Rome)...' - Reward: 1.000, Tokens: 360, Time: 101.7ms
+2025-11-15 13:36:12,069 [INFO] Article 786: 'Beth Elliott...' - Reward: 1.000, Tokens: 448, Time: 101.9ms
+2025-11-15 13:36:12,170 [INFO] Article 787: 'Chickenpox (disambiguation)...' - Reward: 1.000, Tokens: 113, Time: 100.7ms
+2025-11-15 13:36:12,272 [INFO] Article 788: 'Roger Johnson...' - Reward: 1.000, Tokens: 116, Time: 101.1ms
+2025-11-15 13:36:12,374 [INFO] Article 789: 'Irving S. Shapiro...' - Reward: 1.000, Tokens: 331, Time: 101.7ms
+2025-11-15 13:36:12,475 [INFO] Article 790: 'List of ships named Oracabessa...' - Reward: 1.000, Tokens: 251, Time: 101.3ms
+2025-11-15 13:36:12,577 [INFO] Article 791: 'Camilla Grudova...' - Reward: 1.000, Tokens: 207, Time: 101.4ms
+2025-11-15 13:36:12,679 [INFO] Article 792: 'Ivor Phillips (cricketer)...' - Reward: 1.000, Tokens: 251, Time: 101.3ms
+2025-11-15 13:36:12,781 [INFO] Article 793: 'Celtic Folkweave...' - Reward: 1.000, Tokens: 497, Time: 101.6ms
+2025-11-15 13:36:12,883 [INFO] Article 794: 'Scott Mountains (California)...' - Reward: 1.000, Tokens: 353, Time: 101.5ms
+2025-11-15 13:36:12,985 [INFO] Article 795: '125th Street station (IRT Lexington Avenue Line)...' - Reward: 1.000, Tokens: 432, Time: 102.0ms
+2025-11-15 13:36:13,087 [INFO] Article 796: 'Ernest Hotson...' - Reward: 1.000, Tokens: 460, Time: 102.0ms
+2025-11-15 13:36:13,189 [INFO] Article 797: 'Vyshchi Lubianky...' - Reward: 1.000, Tokens: 278, Time: 101.2ms
+2025-11-15 13:36:13,291 [INFO] Article 798: 'Christian Jankowski...' - Reward: 1.000, Tokens: 470, Time: 102.1ms
+2025-11-15 13:36:13,392 [INFO] Article 799: 'Golf Club Halt railway station (England)...' - Reward: 1.000, Tokens: 69, Time: 100.6ms
+2025-11-15 13:36:13,495 [INFO] Article 800: 'Kanaighat Upazila...' - Reward: 1.000, Tokens: 505, Time: 102.0ms
+2025-11-15 13:36:13,600 [INFO] Article 801: 'Dennison School House...' - Reward: 1.000, Tokens: 350, Time: 101.7ms
+2025-11-15 13:36:13,701 [INFO] Article 802: 'Filholiidae...' - Reward: 1.000, Tokens: 166, Time: 101.2ms
+2025-11-15 13:36:13,804 [INFO] Article 803: 'Les Chansons d'Aragon...' - Reward: 1.000, Tokens: 477, Time: 102.0ms
+2025-11-15 13:36:13,906 [INFO] Article 804: 'Good Views, Bad News...' - Reward: 1.000, Tokens: 432, Time: 102.0ms
+2025-11-15 13:36:14,008 [INFO] Article 805: 'Paul Coll...' - Reward: 1.000, Tokens: 437, Time: 101.7ms
+2025-11-15 13:36:14,109 [INFO] Article 806: 'Erkki Kataja...' - Reward: 1.000, Tokens: 66, Time: 100.8ms
+2025-11-15 13:36:14,211 [INFO] Article 807: 'The Only One...' - Reward: 1.000, Tokens: 610, Time: 101.8ms
+2025-11-15 13:36:14,313 [INFO] Article 808: '2023 Asian Shooting Championships...' - Reward: 1.000, Tokens: 142, Time: 101.2ms
+2025-11-15 13:36:14,415 [INFO] Article 809: 'Peter Gabriel...' - Reward: 1.000, Tokens: 435, Time: 102.0ms
+2025-11-15 13:36:14,518 [INFO] Article 810: 'Sanya Phoenix International Airport...' - Reward: 1.000, Tokens: 427, Time: 101.7ms
+2025-11-15 13:36:14,619 [INFO] Article 811: 'Grandcour Castle...' - Reward: 1.000, Tokens: 43, Time: 100.7ms
+2025-11-15 13:36:14,720 [INFO] Article 812: 'Roman Vondráček...' - Reward: 1.000, Tokens: 166, Time: 101.0ms
+2025-11-15 13:36:14,821 [INFO] Article 813: 'Xwejni Bay...' - Reward: 1.000, Tokens: 116, Time: 101.0ms
+2025-11-15 13:36:14,923 [INFO] Article 814: 'Opstad...' - Reward: 1.000, Tokens: 54, Time: 101.0ms
+2025-11-15 13:36:15,026 [INFO] Article 815: 'Turgyn Syzdyqov...' - Reward: 1.000, Tokens: 527, Time: 102.7ms
+2025-11-15 13:36:15,128 [INFO] Article 816: 'Kemner v. Monsanto...' - Reward: 1.000, Tokens: 439, Time: 102.0ms
+2025-11-15 13:36:15,230 [INFO] Article 817: 'Dominion of Newfoundland...' - Reward: 1.000, Tokens: 398, Time: 101.9ms
+2025-11-15 13:36:15,333 [INFO] Article 818: 'Greathed Manor...' - Reward: 1.000, Tokens: 451, Time: 102.1ms
+2025-11-15 13:36:15,434 [INFO] Article 819: 'Isayevo, Novlenskoye Rural Settlement, Vologodsky ...' - Reward: 1.000, Tokens: 87, Time: 100.8ms
+2025-11-15 13:36:15,536 [INFO] Article 820: 'Eastern Argus...' - Reward: 1.000, Tokens: 265, Time: 101.4ms
+2025-11-15 13:36:15,637 [INFO] Article 821: 'Beregovka...' - Reward: 1.000, Tokens: 88, Time: 100.8ms
+2025-11-15 13:36:15,739 [INFO] Article 822: 'Wirelesspt...' - Reward: 1.000, Tokens: 374, Time: 102.0ms
+2025-11-15 13:36:15,841 [INFO] Article 823: 'Tarashcha...' - Reward: 1.000, Tokens: 462, Time: 101.6ms
+2025-11-15 13:36:15,943 [INFO] Article 824: 'Arcángel & De la Ghetto...' - Reward: 1.000, Tokens: 453, Time: 101.6ms
+2025-11-15 13:36:16,045 [INFO] Article 825: '5th Space Launch Squadron...' - Reward: 1.000, Tokens: 335, Time: 101.7ms
+2025-11-15 13:36:16,147 [INFO] Article 826: 'Canoabo...' - Reward: 1.000, Tokens: 65, Time: 101.0ms
+2025-11-15 13:36:16,249 [INFO] Article 827: 'Crown King, Arizona...' - Reward: 1.000, Tokens: 461, Time: 102.0ms
+2025-11-15 13:36:16,350 [INFO] Article 828: 'First Goh Chok Tong Cabinet...' - Reward: 1.000, Tokens: 101, Time: 101.1ms
+2025-11-15 13:36:16,451 [INFO] Article 829: 'National records in the 400 metres hurdles...' - Reward: 1.000, Tokens: 69, Time: 100.8ms
+2025-11-15 13:36:16,554 [INFO] Article 830: 'Justin Bibb...' - Reward: 1.000, Tokens: 413, Time: 102.0ms
+2025-11-15 13:36:16,655 [INFO] Article 831: 'Aleksandar Radosavljević (footballer, born 1979)...' - Reward: 1.000, Tokens: 262, Time: 101.3ms
+2025-11-15 13:36:16,758 [INFO] Article 832: 'The Silent Invasion (comics)...' - Reward: 1.000, Tokens: 503, Time: 102.1ms
+2025-11-15 13:36:16,860 [INFO] Article 833: 'Ronald M. Hahn...' - Reward: 1.000, Tokens: 404, Time: 101.5ms
+2025-11-15 13:36:16,961 [INFO] Article 834: 'Jan Jeřábek (footballer, born 1992)...' - Reward: 1.000, Tokens: 66, Time: 101.0ms
+2025-11-15 13:36:17,063 [INFO] Article 835: 'NASUWT...' - Reward: 1.000, Tokens: 394, Time: 101.8ms
+2025-11-15 13:36:17,165 [INFO] Article 836: 'Pollimyrus isidori...' - Reward: 1.000, Tokens: 271, Time: 101.4ms
+2025-11-15 13:36:17,267 [INFO] Article 837: '1988 United States Senate election in North Dakota...' - Reward: 1.000, Tokens: 336, Time: 101.7ms
+2025-11-15 13:36:17,369 [INFO] Article 838: 'George Bell (activist)...' - Reward: 1.000, Tokens: 266, Time: 101.7ms
+2025-11-15 13:36:17,471 [INFO] Article 839: 'Trésor Regional Nature Reserve...' - Reward: 1.000, Tokens: 314, Time: 101.5ms
+2025-11-15 13:36:17,573 [INFO] Article 840: '2023 FIFA Women's World Cup knockout stage...' - Reward: 1.000, Tokens: 251, Time: 101.3ms
+2025-11-15 13:36:17,675 [INFO] Article 841: 'Anthony Pleeth...' - Reward: 1.000, Tokens: 423, Time: 101.8ms
+2025-11-15 13:36:17,776 [INFO] Article 842: 'Sailing at the 2000 Summer Olympics – Laser...' - Reward: 1.000, Tokens: 226, Time: 101.2ms
+2025-11-15 13:36:17,879 [INFO] Article 843: 'Juancho Polo Valencia...' - Reward: 1.000, Tokens: 441, Time: 102.0ms
+2025-11-15 13:36:17,980 [INFO] Article 844: 'Portland Pilots women's soccer...' - Reward: 1.000, Tokens: 74, Time: 101.1ms
+2025-11-15 13:36:18,081 [INFO] Article 845: 'Edward Cotton (priest, died 1675)...' - Reward: 1.000, Tokens: 91, Time: 100.9ms
+2025-11-15 13:36:18,182 [INFO] Article 846: 'Make Love to Me (1941 song)...' - Reward: 1.000, Tokens: 68, Time: 100.7ms
+2025-11-15 13:36:18,284 [INFO] Article 847: 'Caballeronia grimmiae...' - Reward: 1.000, Tokens: 68, Time: 100.8ms
+2025-11-15 13:36:18,386 [INFO] Article 848: 'Maths Mansion...' - Reward: 1.000, Tokens: 474, Time: 101.8ms
+2025-11-15 13:36:18,487 [INFO] Article 849: 'Thein Tun...' - Reward: 1.000, Tokens: 112, Time: 101.1ms
+2025-11-15 13:36:18,589 [INFO] Article 850: 'Aioiyama Station...' - Reward: 1.000, Tokens: 138, Time: 101.2ms
+2025-11-15 13:36:18,692 [INFO] Article 851: 'Melanie Bolaños...' - Reward: 1.000, Tokens: 69, Time: 100.9ms
+2025-11-15 13:36:18,795 [INFO] Article 852: 'St Olaf's Church, Wasdale...' - Reward: 1.000, Tokens: 463, Time: 101.7ms
+2025-11-15 13:36:18,896 [INFO] Article 853: 'Tom Clark (cricketer, born 2001)...' - Reward: 1.000, Tokens: 179, Time: 101.3ms
+2025-11-15 13:36:18,999 [INFO] Article 854: 'Member of the Scottish Parliament...' - Reward: 1.000, Tokens: 419, Time: 102.0ms
+2025-11-15 13:36:19,100 [INFO] Article 855: 'Pine Ridge School Building...' - Reward: 1.000, Tokens: 178, Time: 101.3ms
+2025-11-15 13:36:19,203 [INFO] Article 856: 'Andrew Smith (Maroon)...' - Reward: 1.000, Tokens: 446, Time: 102.1ms
+2025-11-15 13:36:19,304 [INFO] Article 857: 'David Chadwick Smith...' - Reward: 1.000, Tokens: 79, Time: 101.1ms
+2025-11-15 13:36:19,406 [INFO] Article 858: 'Gabriele Mehl...' - Reward: 1.000, Tokens: 323, Time: 101.4ms
+2025-11-15 13:36:19,507 [INFO] Article 859: 'Asperula albiflora...' - Reward: 1.000, Tokens: 133, Time: 100.9ms
+2025-11-15 13:36:19,609 [INFO] Article 860: 'Nawabzada Farid Salahuddin...' - Reward: 1.000, Tokens: 119, Time: 100.9ms
+2025-11-15 13:36:19,710 [INFO] Article 861: '2015 Chrono des Nations...' - Reward: 1.000, Tokens: 54, Time: 100.9ms
+2025-11-15 13:36:19,812 [INFO] Article 862: 'Necton...' - Reward: 1.000, Tokens: 459, Time: 102.0ms
+2025-11-15 13:36:19,915 [INFO] Article 863: 'Church of St Mary the Virgin, Wistaston...' - Reward: 1.000, Tokens: 473, Time: 102.0ms
+2025-11-15 13:36:20,017 [INFO] Article 864: 'Kongsi Raya (film)...' - Reward: 1.000, Tokens: 495, Time: 101.7ms
+2025-11-15 13:36:20,119 [INFO] Article 865: 'Roderick S. McCook...' - Reward: 1.000, Tokens: 254, Time: 101.6ms
+2025-11-15 13:36:20,221 [INFO] Article 866: 'Lantung...' - Reward: 1.000, Tokens: 417, Time: 101.8ms
+2025-11-15 13:36:20,323 [INFO] Article 867: 'Andrew Jackson Kirk...' - Reward: 1.000, Tokens: 347, Time: 101.7ms
+2025-11-15 13:36:20,425 [INFO] Article 868: 'Operating agreement...' - Reward: 1.000, Tokens: 315, Time: 101.8ms
+2025-11-15 13:36:20,527 [INFO] Article 869: 'Isthmus of Ak-Monay...' - Reward: 1.000, Tokens: 310, Time: 101.3ms
+2025-11-15 13:36:20,629 [INFO] Article 870: 'Gunnery and Torpedo Division (Royal Navy)...' - Reward: 1.000, Tokens: 419, Time: 101.9ms
+2025-11-15 13:36:20,730 [INFO] Article 871: 'Sergey Maslov (footballer, born 1990)...' - Reward: 1.000, Tokens: 80, Time: 100.8ms
+2025-11-15 13:36:20,832 [INFO] Article 872: 'Apollo 11 Cave...' - Reward: 1.000, Tokens: 504, Time: 102.0ms
+2025-11-15 13:36:20,934 [INFO] Article 873: 'USS Bergen...' - Reward: 1.000, Tokens: 460, Time: 102.0ms
+2025-11-15 13:36:21,038 [INFO] Article 874: 'Traralgon...' - Reward: 1.000, Tokens: 545, Time: 103.1ms
+2025-11-15 13:36:21,141 [INFO] Article 875: 'American Satellite Corporation...' - Reward: 1.000, Tokens: 405, Time: 102.2ms
+2025-11-15 13:36:21,243 [INFO] Article 876: 'Minami (name)...' - Reward: 1.000, Tokens: 522, Time: 101.8ms
+2025-11-15 13:36:21,346 [INFO] Article 877: 'Apple (name)...' - Reward: 1.000, Tokens: 411, Time: 102.3ms
+2025-11-15 13:36:21,447 [INFO] Article 878: 'Harrigan Hill...' - Reward: 1.000, Tokens: 123, Time: 101.0ms
+2025-11-15 13:36:21,548 [INFO] Article 879: 'Stuffed ribs...' - Reward: 1.000, Tokens: 223, Time: 101.3ms
+2025-11-15 13:36:21,650 [INFO] Article 880: 'Charlotte Lehmann...' - Reward: 1.000, Tokens: 96, Time: 100.9ms
+2025-11-15 13:36:21,751 [INFO] Article 881: 'Sangrur Municipal Council...' - Reward: 1.000, Tokens: 145, Time: 101.3ms
+2025-11-15 13:36:21,853 [INFO] Article 882: 'Giulio Fantuzzi...' - Reward: 1.000, Tokens: 123, Time: 100.9ms
+2025-11-15 13:36:21,954 [INFO] Article 883: 'Gasparia lomasi...' - Reward: 1.000, Tokens: 167, Time: 101.0ms
+2025-11-15 13:36:22,056 [INFO] Article 884: 'Ramona Badescu (author)...' - Reward: 1.000, Tokens: 359, Time: 101.6ms
+2025-11-15 13:36:22,158 [INFO] Article 885: 'Big Red...' - Reward: 1.000, Tokens: 489, Time: 102.1ms
+2025-11-15 13:36:22,260 [INFO] Article 886: 'Brocchinia tanimbarensis...' - Reward: 1.000, Tokens: 69, Time: 100.9ms
+2025-11-15 13:36:22,361 [INFO] Article 887: 'Christopher Edwards (clinician)...' - Reward: 1.000, Tokens: 164, Time: 101.3ms
+2025-11-15 13:36:22,463 [INFO] Article 888: 'Heinrich Reinhold...' - Reward: 1.000, Tokens: 534, Time: 101.8ms
+2025-11-15 13:36:22,566 [INFO] Article 889: 'West Side High School (New Jersey)...' - Reward: 1.000, Tokens: 416, Time: 102.2ms
+2025-11-15 13:36:22,667 [INFO] Article 890: 'Nanomedicine (Elsevier journal)...' - Reward: 1.000, Tokens: 181, Time: 101.2ms
+2025-11-15 13:36:22,770 [INFO] Article 891: 'Sargon Gabriel...' - Reward: 1.000, Tokens: 443, Time: 101.8ms
+2025-11-15 13:36:22,871 [INFO] Article 892: '33rd Annie Awards...' - Reward: 1.000, Tokens: 331, Time: 101.4ms
+2025-11-15 13:36:22,973 [INFO] Article 893: 'Fencing at the 2015 Summer Universiade – Women's i...' - Reward: 1.000, Tokens: 61, Time: 101.0ms
+2025-11-15 13:36:23,074 [INFO] Article 894: 'Robert McNeill (footballer)...' - Reward: 1.000, Tokens: 104, Time: 100.8ms
+2025-11-15 13:36:23,176 [INFO] Article 895: 'Waves (Katrina and the Waves album)...' - Reward: 1.000, Tokens: 429, Time: 101.9ms
+2025-11-15 13:36:23,278 [INFO] Article 896: 'Victor Perez...' - Reward: 1.000, Tokens: 172, Time: 101.2ms
+2025-11-15 13:36:23,380 [INFO] Article 897: 'Thillalangadi...' - Reward: 1.000, Tokens: 516, Time: 102.1ms
+2025-11-15 13:36:23,482 [INFO] Article 898: 'Hyomin...' - Reward: 1.000, Tokens: 476, Time: 102.0ms
+2025-11-15 13:36:23,585 [INFO] Article 899: 'Battle of Megara...' - Reward: 1.000, Tokens: 453, Time: 101.9ms
+2025-11-15 13:36:23,687 [INFO] Article 900: '1878 lynchings in Posey County, Indiana...' - Reward: 1.000, Tokens: 463, Time: 101.7ms
+2025-11-15 13:36:23,791 [INFO] Article 901: 'Charles Stuart Gregson...' - Reward: 1.000, Tokens: 231, Time: 101.5ms
+2025-11-15 13:36:23,893 [INFO] Article 902: 'Howle...' - Reward: 1.000, Tokens: 233, Time: 101.3ms
+2025-11-15 13:36:23,995 [INFO] Article 903: 'Chairman of the Conservative Party...' - Reward: 1.000, Tokens: 201, Time: 101.6ms
+2025-11-15 13:36:24,097 [INFO] Article 904: 'Royal County of Berkshire Polo Club...' - Reward: 1.000, Tokens: 431, Time: 102.0ms
+2025-11-15 13:36:24,198 [INFO] Article 905: 'Saifuzzaman...' - Reward: 1.000, Tokens: 105, Time: 101.1ms
+2025-11-15 13:36:24,300 [INFO] Article 906: 'Execution of Mohsen Shekari...' - Reward: 1.000, Tokens: 475, Time: 101.6ms
+2025-11-15 13:36:24,301 [INFO] Epoch 2 complete - Articles: 453, Avg Reward: 1.000, Total: 453.00
+2025-11-15 13:36:24,403 [INFO] Article 907: 'River Calder, Cumbria...' - Reward: 1.000, Tokens: 156, Time: 101.1ms
+2025-11-15 13:36:24,504 [INFO] Article 908: 'Hovgaard Islands...' - Reward: 1.000, Tokens: 144, Time: 101.0ms
+2025-11-15 13:36:24,606 [INFO] Article 909: 'Oliver Duff Greene...' - Reward: 1.000, Tokens: 217, Time: 101.5ms
+2025-11-15 13:36:24,708 [INFO] Article 910: '2022 UCI Women's World Tour...' - Reward: 1.000, Tokens: 452, Time: 101.7ms
+2025-11-15 13:36:24,811 [INFO] Article 911: 'Coloman of Galicia...' - Reward: 1.000, Tokens: 487, Time: 102.0ms
+2025-11-15 13:36:24,913 [INFO] Article 912: 'Colombia and the World Bank...' - Reward: 1.000, Tokens: 410, Time: 101.7ms
+2025-11-15 13:36:25,015 [INFO] Article 913: 'The Tax Inspector...' - Reward: 1.000, Tokens: 482, Time: 101.8ms
+2025-11-15 13:36:25,117 [INFO] Article 914: 'Monteverde (Rome)...' - Reward: 1.000, Tokens: 360, Time: 101.7ms
+2025-11-15 13:36:25,219 [INFO] Article 915: 'Chairman of the Conservative Party...' - Reward: 1.000, Tokens: 201, Time: 101.5ms
+2025-11-15 13:36:25,320 [INFO] Article 916: 'Us Against the World...' - Reward: 1.000, Tokens: 168, Time: 101.2ms
+2025-11-15 13:36:25,422 [INFO] Article 917: 'Dal Fiachrach Suighe...' - Reward: 1.000, Tokens: 231, Time: 101.3ms
+2025-11-15 13:36:25,524 [INFO] Article 918: 'Millersville Marauders...' - Reward: 1.000, Tokens: 505, Time: 101.7ms
+2025-11-15 13:36:25,626 [INFO] Article 919: 'Gunnery and Torpedo Division (Royal Navy)...' - Reward: 1.000, Tokens: 419, Time: 101.9ms
+2025-11-15 13:36:25,727 [INFO] Article 920: '2015 Malaysia FA Cup final...' - Reward: 1.000, Tokens: 67, Time: 100.9ms
+2025-11-15 13:36:25,830 [INFO] Article 921: 'Barbudan independence movement...' - Reward: 1.000, Tokens: 386, Time: 102.0ms
+2025-11-15 13:36:25,932 [INFO] Article 922: 'Dennison School House...' - Reward: 1.000, Tokens: 350, Time: 101.9ms
+2025-11-15 13:36:26,034 [INFO] Article 923: 'Camilla Grudova...' - Reward: 1.000, Tokens: 207, Time: 101.4ms
+2025-11-15 13:36:26,136 [INFO] Article 924: 'The Patriots (TV series)...' - Reward: 1.000, Tokens: 457, Time: 101.7ms
+2025-11-15 13:36:26,237 [INFO] Article 925: 'Chater Plain...' - Reward: 1.000, Tokens: 126, Time: 100.9ms
+2025-11-15 13:36:26,338 [INFO] Article 926: 'Violetta Napierska...' - Reward: 1.000, Tokens: 164, Time: 101.0ms
+2025-11-15 13:36:26,440 [INFO] Article 927: 'David Penman...' - Reward: 1.000, Tokens: 413, Time: 102.0ms
+2025-11-15 13:36:26,542 [INFO] Article 928: 'Victor Perez...' - Reward: 1.000, Tokens: 172, Time: 101.3ms
+2025-11-15 13:36:26,644 [INFO] Article 929: 'Tarashcha...' - Reward: 1.000, Tokens: 462, Time: 102.0ms
+2025-11-15 13:36:26,746 [INFO] Article 930: 'Jimmy Conway (footballer)...' - Reward: 1.000, Tokens: 413, Time: 101.7ms
+2025-11-15 13:36:26,848 [INFO] Article 931: 'Pleurotomella amphiblestrum...' - Reward: 1.000, Tokens: 243, Time: 101.0ms
+2025-11-15 13:36:26,950 [INFO] Article 932: 'Barro...' - Reward: 1.000, Tokens: 425, Time: 101.7ms
+2025-11-15 13:36:27,052 [INFO] Article 933: 'Christian Jankowski...' - Reward: 1.000, Tokens: 470, Time: 101.8ms
+2025-11-15 13:36:27,153 [INFO] Article 934: 'Pollex laosi...' - Reward: 1.000, Tokens: 91, Time: 100.9ms
+2025-11-15 13:36:27,255 [INFO] Article 935: 'St Olaf's Church, Wasdale...' - Reward: 1.000, Tokens: 463, Time: 101.8ms
+2025-11-15 13:36:27,356 [INFO] Article 936: 'List of lighthouses in Friesland...' - Reward: 1.000, Tokens: 87, Time: 100.7ms
+2025-11-15 13:36:27,458 [INFO] Article 937: 'Eastern Argus...' - Reward: 1.000, Tokens: 265, Time: 101.3ms
+2025-11-15 13:36:27,560 [INFO] Article 938: 'Annah Mac...' - Reward: 1.000, Tokens: 398, Time: 101.7ms
+2025-11-15 13:36:27,662 [INFO] Article 939: '33rd Annie Awards...' - Reward: 1.000, Tokens: 331, Time: 101.4ms
+2025-11-15 13:36:27,765 [INFO] Article 940: 'Anarithma pamila...' - Reward: 1.000, Tokens: 576, Time: 103.4ms
+2025-11-15 13:36:27,866 [INFO] Article 941: 'Tioman (state constituency)...' - Reward: 1.000, Tokens: 62, Time: 100.9ms
+2025-11-15 13:36:27,968 [INFO] Article 942: 'Saint Francis with the Blood of Christ...' - Reward: 1.000, Tokens: 367, Time: 101.4ms
+2025-11-15 13:36:28,070 [INFO] Article 943: 'Inna Bulkina...' - Reward: 1.000, Tokens: 531, Time: 101.8ms
+2025-11-15 13:36:28,172 [INFO] Article 944: 'Nanomedicine (Elsevier journal)...' - Reward: 1.000, Tokens: 181, Time: 101.2ms
+2025-11-15 13:36:28,273 [INFO] Article 945: 'Erika Burgess...' - Reward: 1.000, Tokens: 109, Time: 100.9ms
+2025-11-15 13:36:28,375 [INFO] Article 946: '1954 Philadelphia Athletics season...' - Reward: 1.000, Tokens: 405, Time: 101.8ms
+2025-11-15 13:36:28,478 [INFO] Article 947: 'Leonhard Koeppe...' - Reward: 1.000, Tokens: 493, Time: 102.1ms
+2025-11-15 13:36:28,579 [INFO] Article 948: 'Roger Johnson...' - Reward: 1.000, Tokens: 116, Time: 100.9ms
+2025-11-15 13:36:28,681 [INFO] Article 949: '2025 national electoral calendar...' - Reward: 1.000, Tokens: 448, Time: 101.8ms
+2025-11-15 13:36:28,783 [INFO] Article 950: 'David Lewiston...' - Reward: 1.000, Tokens: 459, Time: 102.1ms
+2025-11-15 13:36:28,888 [INFO] Article 951: 'John W. Wells...' - Reward: 1.000, Tokens: 460, Time: 101.9ms
+2025-11-15 13:36:28,990 [INFO] Article 952: 'George Bell (activist)...' - Reward: 1.000, Tokens: 266, Time: 101.6ms
+2025-11-15 13:36:29,093 [INFO] Article 953: 'Summits On The Air...' - Reward: 1.000, Tokens: 420, Time: 101.9ms
+2025-11-15 13:36:29,194 [INFO] Article 954: 'Amirabad-e Olya...' - Reward: 1.000, Tokens: 97, Time: 100.7ms
+2025-11-15 13:36:29,296 [INFO] Article 955: 'Andrew Smith (Maroon)...' - Reward: 1.000, Tokens: 446, Time: 101.8ms
+2025-11-15 13:36:29,398 [INFO] Article 956: 'Wade Miley...' - Reward: 1.000, Tokens: 431, Time: 102.0ms
+2025-11-15 13:36:29,500 [INFO] Article 957: 'Tsingy forest rail...' - Reward: 1.000, Tokens: 186, Time: 101.2ms
+2025-11-15 13:36:29,602 [INFO] Article 958: 'Elm, Cambridgeshire...' - Reward: 1.000, Tokens: 468, Time: 101.8ms
+2025-11-15 13:36:29,704 [INFO] Article 959: 'List of Hapoel Hadera F.C. seasons...' - Reward: 1.000, Tokens: 189, Time: 101.4ms
+2025-11-15 13:36:29,806 [INFO] Article 960: 'Adam Nevill...' - Reward: 1.000, Tokens: 531, Time: 101.7ms
+2025-11-15 13:36:29,907 [INFO] Article 961: 'List of UK garage songs...' - Reward: 1.000, Tokens: 95, Time: 100.8ms
+2025-11-15 13:36:30,008 [INFO] Article 962: 'Kalanjukittiya Thankam...' - Reward: 1.000, Tokens: 136, Time: 101.0ms
+2025-11-15 13:36:30,109 [INFO] Article 963: 'Gasparia lomasi...' - Reward: 1.000, Tokens: 167, Time: 101.1ms
+2025-11-15 13:36:30,211 [INFO] Article 964: 'Drumore, Pennsylvania...' - Reward: 1.000, Tokens: 97, Time: 100.9ms
+2025-11-15 13:36:30,313 [INFO] Article 965: '1925 Burmese general election...' - Reward: 1.000, Tokens: 364, Time: 101.9ms
+2025-11-15 13:36:30,414 [INFO] Article 966: 'Lopholatilus...' - Reward: 1.000, Tokens: 160, Time: 100.8ms
+2025-11-15 13:36:30,515 [INFO] Article 967: 'Tom Clark (cricketer, born 2001)...' - Reward: 1.000, Tokens: 179, Time: 101.0ms
+2025-11-15 13:36:30,618 [INFO] Article 968: 'Kemner v. Monsanto...' - Reward: 1.000, Tokens: 439, Time: 102.0ms
+2025-11-15 13:36:30,719 [INFO] Article 969: 'Xu Yinghui...' - Reward: 1.000, Tokens: 68, Time: 101.0ms
+2025-11-15 13:36:30,820 [INFO] Article 970: '1956 Villanova Wildcats football team...' - Reward: 1.000, Tokens: 59, Time: 100.9ms
+2025-11-15 13:36:30,922 [INFO] Article 971: 'Gianduja (commedia dell'arte)...' - Reward: 1.000, Tokens: 335, Time: 101.6ms
+2025-11-15 13:36:31,024 [INFO] Article 972: 'McLouth Steel...' - Reward: 1.000, Tokens: 462, Time: 101.7ms
+2025-11-15 13:36:31,127 [INFO] Article 973: 'Maths Mansion...' - Reward: 1.000, Tokens: 474, Time: 102.0ms
+2025-11-15 13:36:31,229 [INFO] Article 974: 'Apple (name)...' - Reward: 1.000, Tokens: 411, Time: 102.0ms
+2025-11-15 13:36:31,331 [INFO] Article 975: 'Path tracing...' - Reward: 1.000, Tokens: 441, Time: 102.0ms
+2025-11-15 13:36:31,433 [INFO] Article 976: '1999 NCAA Division I men's ice hockey tournament...' - Reward: 1.000, Tokens: 428, Time: 101.9ms
+2025-11-15 13:36:31,535 [INFO] Article 977: 'Portland Pilots women's soccer...' - Reward: 1.000, Tokens: 74, Time: 101.1ms
+2025-11-15 13:36:31,636 [INFO] Article 978: 'Yoann Martelat...' - Reward: 1.000, Tokens: 235, Time: 101.0ms
+2025-11-15 13:36:31,737 [INFO] Article 979: 'Thryssa setirostris...' - Reward: 1.000, Tokens: 60, Time: 100.7ms
+2025-11-15 13:36:31,839 [INFO] Article 980: '2024 Cimahi mayoral election...' - Reward: 1.000, Tokens: 430, Time: 102.0ms
+2025-11-15 13:36:31,941 [INFO] Article 981: 'Traralgon...' - Reward: 1.000, Tokens: 545, Time: 101.8ms
+2025-11-15 13:36:32,043 [INFO] Article 982: 'Izani Husin...' - Reward: 1.000, Tokens: 212, Time: 101.3ms
+2025-11-15 13:36:32,145 [INFO] Article 983: 'The Experienced English Housekeeper...' - Reward: 1.000, Tokens: 481, Time: 102.1ms
+2025-11-15 13:36:32,247 [INFO] Article 984: 'Windwagon Smith...' - Reward: 1.000, Tokens: 461, Time: 101.8ms
+2025-11-15 13:36:32,350 [INFO] Article 985: 'Digital Dog...' - Reward: 1.000, Tokens: 636, Time: 101.9ms
+2025-11-15 13:36:32,451 [INFO] Article 986: 'National Institute of Infectious Diseases...' - Reward: 1.000, Tokens: 90, Time: 101.0ms
+2025-11-15 13:36:32,553 [INFO] Article 987: 'Afforestation in Scotland...' - Reward: 1.000, Tokens: 396, Time: 101.8ms
+2025-11-15 13:36:32,656 [INFO] Article 988: 'Boris Eidelmann...' - Reward: 1.000, Tokens: 409, Time: 102.5ms
+2025-11-15 13:36:32,759 [INFO] Article 989: 'Ralph Kiner...' - Reward: 1.000, Tokens: 422, Time: 102.0ms
+2025-11-15 13:36:32,860 [INFO] Article 990: 'Stanley Glacier...' - Reward: 1.000, Tokens: 132, Time: 100.9ms
+2025-11-15 13:36:32,962 [INFO] Article 991: '125th Street station (IRT Lexington Avenue Line)...' - Reward: 1.000, Tokens: 432, Time: 101.9ms
+2025-11-15 13:36:33,064 [INFO] Article 992: 'KJ-52...' - Reward: 1.000, Tokens: 543, Time: 101.8ms
+2025-11-15 13:36:33,166 [INFO] Article 993: 'Raipur, Sareni...' - Reward: 1.000, Tokens: 489, Time: 101.8ms
+2025-11-15 13:36:33,268 [INFO] Article 994: 'List of Moyashimon chapters...' - Reward: 1.000, Tokens: 193, Time: 101.5ms
+2025-11-15 13:36:33,369 [INFO] Article 995: 'Ychoux...' - Reward: 1.000, Tokens: 51, Time: 100.9ms
+2025-11-15 13:36:33,472 [INFO] Article 996: 'Naseer Shamma...' - Reward: 1.000, Tokens: 508, Time: 101.9ms
+2025-11-15 13:36:33,574 [INFO] Article 997: 'Bunny and Claude (We Rob Carrot Patches)...' - Reward: 1.000, Tokens: 505, Time: 101.9ms
+2025-11-15 13:36:33,675 [INFO] Article 998: 'Machinery (disambiguation)...' - Reward: 1.000, Tokens: 125, Time: 100.9ms
+2025-11-15 13:36:33,777 [INFO] Article 999: 'Big Red...' - Reward: 1.000, Tokens: 489, Time: 101.8ms
+2025-11-15 13:36:33,879 [INFO] Article 1000: 'Stefano Seedorf...' - Reward: 1.000, Tokens: 316, Time: 101.5ms
+2025-11-15 13:36:33,984 [INFO] Article 1001: 'Trésor Regional Nature Reserve...' - Reward: 1.000, Tokens: 314, Time: 101.6ms
+2025-11-15 13:36:34,085 [INFO] Article 1002: 'Ministry of Punishments...' - Reward: 1.000, Tokens: 74, Time: 100.9ms
+2025-11-15 13:36:34,186 [INFO] Article 1003: 'Lehize Hilal Benli...' - Reward: 1.000, Tokens: 141, Time: 101.1ms
+2025-11-15 13:36:34,289 [INFO] Article 1004: 'CVV-4 Pellicano...' - Reward: 1.000, Tokens: 501, Time: 101.9ms
+2025-11-15 13:36:34,391 [INFO] Article 1005: 'Thillalangadi...' - Reward: 1.000, Tokens: 516, Time: 101.8ms
+2025-11-15 13:36:34,493 [INFO] Article 1006: 'Canterbury election of 1205...' - Reward: 1.000, Tokens: 432, Time: 101.8ms
+2025-11-15 13:36:34,594 [INFO] Article 1007: '2021 Supercopa do Brasil...' - Reward: 1.000, Tokens: 156, Time: 101.1ms
+2025-11-15 13:36:34,696 [INFO] Article 1008: 'Waves (Katrina and the Waves album)...' - Reward: 1.000, Tokens: 429, Time: 101.7ms
+2025-11-15 13:36:34,799 [INFO] Article 1009: 'Gramola...' - Reward: 1.000, Tokens: 393, Time: 102.1ms
+2025-11-15 13:36:34,900 [INFO] Article 1010: 'List of ships named Oracabessa...' - Reward: 1.000, Tokens: 251, Time: 101.1ms
+2025-11-15 13:36:35,002 [INFO] Article 1011: 'Rishi Rithvik...' - Reward: 1.000, Tokens: 324, Time: 101.5ms
+2025-11-15 13:36:35,104 [INFO] Article 1012: 'Precordial thump...' - Reward: 1.000, Tokens: 462, Time: 102.0ms
+2025-11-15 13:36:35,206 [INFO] Article 1013: 'Bragernes...' - Reward: 1.000, Tokens: 258, Time: 101.5ms
+2025-11-15 13:36:35,308 [INFO] Article 1014: 'Verbascum virgatum...' - Reward: 1.000, Tokens: 150, Time: 100.9ms
+2025-11-15 13:36:35,409 [INFO] Article 1015: 'List of county routes in Westchester County, New Y...' - Reward: 1.000, Tokens: 168, Time: 101.1ms
+2025-11-15 13:36:35,511 [INFO] Article 1016: 'Speirs shadow ministry...' - Reward: 1.000, Tokens: 347, Time: 101.8ms
+2025-11-15 13:36:35,612 [INFO] Article 1017: 'Caballeronia grimmiae...' - Reward: 1.000, Tokens: 68, Time: 100.7ms
+2025-11-15 13:36:35,714 [INFO] Article 1018: 'Šaš...' - Reward: 1.000, Tokens: 132, Time: 101.0ms
+2025-11-15 13:36:35,816 [INFO] Article 1019: 'Pamplonita River...' - Reward: 1.000, Tokens: 493, Time: 102.2ms
+2025-11-15 13:36:35,917 [INFO] Article 1020: 'Comarcas of the Community of Madrid...' - Reward: 1.000, Tokens: 68, Time: 100.7ms
+2025-11-15 13:36:36,018 [INFO] Article 1021: 'Isayevo, Novlenskoye Rural Settlement, Vologodsky ...' - Reward: 1.000, Tokens: 87, Time: 100.9ms
+2025-11-15 13:36:36,120 [INFO] Article 1022: 'KXDD (FM)...' - Reward: 1.000, Tokens: 307, Time: 101.4ms
+2025-11-15 13:36:36,222 [INFO] Article 1023: '1878 lynchings in Posey County, Indiana...' - Reward: 1.000, Tokens: 463, Time: 101.9ms
+2025-11-15 13:36:36,326 [INFO] Article 1024: 'John MacLeod (canoeist)...' - Reward: 1.000, Tokens: 272, Time: 103.9ms
+2025-11-15 13:36:36,429 [INFO] Article 1025: 'Robert McNeill (footballer)...' - Reward: 1.000, Tokens: 104, Time: 101.6ms
+2025-11-15 13:36:36,531 [INFO] Article 1026: 'Kenvue...' - Reward: 1.000, Tokens: 462, Time: 101.7ms
+2025-11-15 13:36:36,632 [INFO] Article 1027: 'Impatiens hawkeri...' - Reward: 1.000, Tokens: 165, Time: 101.1ms
+2025-11-15 13:36:36,734 [INFO] Article 1028: 'Angel City FC...' - Reward: 1.000, Tokens: 467, Time: 101.9ms
+2025-11-15 13:36:36,836 [INFO] Article 1029: 'Anatoly Demitkov...' - Reward: 1.000, Tokens: 469, Time: 101.9ms
+2025-11-15 13:36:36,938 [INFO] Article 1030: 'Bimokalner...' - Reward: 1.000, Tokens: 63, Time: 101.0ms
+2025-11-15 13:36:37,040 [INFO] Article 1031: 'Le Sueur (surname)...' - Reward: 1.000, Tokens: 496, Time: 102.0ms
+2025-11-15 13:36:37,141 [INFO] Article 1032: 'Turkana Central Constituency...' - Reward: 1.000, Tokens: 41, Time: 100.7ms
+2025-11-15 13:36:37,244 [INFO] Article 1033: 'Les Chansons d'Aragon...' - Reward: 1.000, Tokens: 477, Time: 102.4ms
+2025-11-15 13:36:37,346 [INFO] Article 1034: 'Justin Bibb...' - Reward: 1.000, Tokens: 413, Time: 102.0ms
+2025-11-15 13:36:37,448 [INFO] Article 1035: 'Baliya...' - Reward: 1.000, Tokens: 107, Time: 101.2ms
+2025-11-15 13:36:37,550 [INFO] Article 1036: 'Tuku Morgan...' - Reward: 1.000, Tokens: 437, Time: 102.0ms
+2025-11-15 13:36:37,652 [INFO] Article 1037: 'Foothill Horizons Outdoor School...' - Reward: 1.000, Tokens: 213, Time: 101.4ms
+2025-11-15 13:36:37,754 [INFO] Article 1038: 'Tau Orionis...' - Reward: 1.000, Tokens: 559, Time: 101.7ms
+2025-11-15 13:36:37,855 [INFO] Article 1039: 'Ahmet Can Arık...' - Reward: 1.000, Tokens: 103, Time: 100.9ms
+2025-11-15 13:36:37,956 [INFO] Article 1040: 'Noriko Sakai discography...' - Reward: 1.000, Tokens: 53, Time: 100.8ms
+2025-11-15 13:36:38,059 [INFO] Article 1041: 'Paul Fredricks...' - Reward: 1.000, Tokens: 464, Time: 102.0ms
+2025-11-15 13:36:38,160 [INFO] Article 1042: 'SMS Teluk Intan...' - Reward: 1.000, Tokens: 248, Time: 101.4ms
+2025-11-15 13:36:38,262 [INFO] Article 1043: 'Takakazu Kuriyama...' - Reward: 1.000, Tokens: 220, Time: 101.4ms
+2025-11-15 13:36:38,364 [INFO] Article 1044: 'Grace Bussell...' - Reward: 1.000, Tokens: 466, Time: 101.6ms
+2025-11-15 13:36:38,465 [INFO] Article 1045: 'Robert McLaren...' - Reward: 1.000, Tokens: 126, Time: 100.8ms
+2025-11-15 13:36:38,567 [INFO] Article 1046: 'Cyril Fagan...' - Reward: 1.000, Tokens: 211, Time: 101.2ms
+2025-11-15 13:36:38,670 [INFO] Article 1047: 'Edward Roseman...' - Reward: 1.000, Tokens: 467, Time: 102.9ms
+2025-11-15 13:36:38,772 [INFO] Article 1048: 'Akram Khan Durrani...' - Reward: 1.000, Tokens: 474, Time: 102.0ms
+2025-11-15 13:36:38,875 [INFO] Article 1049: 'Dreadlocks...' - Reward: 1.000, Tokens: 508, Time: 102.0ms
+2025-11-15 13:36:38,976 [INFO] Article 1050: 'Sir John Hopkins, 1st Baronet...' - Reward: 1.000, Tokens: 160, Time: 101.0ms
+2025-11-15 13:36:39,081 [INFO] Article 1051: 'Kanaighat Upazila...' - Reward: 1.000, Tokens: 505, Time: 102.2ms
+2025-11-15 13:36:39,183 [INFO] Article 1052: 'Vuma FM...' - Reward: 1.000, Tokens: 141, Time: 101.1ms
+2025-11-15 13:36:39,284 [INFO] Article 1053: 'Konstantinos Spetsiotis...' - Reward: 1.000, Tokens: 85, Time: 100.9ms
+2025-11-15 13:36:39,386 [INFO] Article 1054: 'Charles Stuart Gregson...' - Reward: 1.000, Tokens: 231, Time: 101.4ms
+2025-11-15 13:36:39,488 [INFO] Article 1055: '1988 United States Senate election in North Dakota...' - Reward: 1.000, Tokens: 336, Time: 101.7ms
+2025-11-15 13:36:39,589 [INFO] Article 1056: 'Dave Naylor...' - Reward: 1.000, Tokens: 83, Time: 100.8ms
+2025-11-15 13:36:39,691 [INFO] Article 1057: 'Ruth Fowler Edwards...' - Reward: 1.000, Tokens: 447, Time: 101.9ms
+2025-11-15 13:36:39,792 [INFO] Article 1058: 'Opstad...' - Reward: 1.000, Tokens: 54, Time: 100.7ms
+2025-11-15 13:36:39,893 [INFO] Article 1059: '2023 Asian Shooting Championships...' - Reward: 1.000, Tokens: 142, Time: 101.1ms
+2025-11-15 13:36:39,996 [INFO] Article 1060: 'Gabriele Mehl...' - Reward: 1.000, Tokens: 323, Time: 101.8ms
+2025-11-15 13:36:40,098 [INFO] Article 1061: 'Turgyn Syzdyqov...' - Reward: 1.000, Tokens: 527, Time: 102.0ms
+2025-11-15 13:36:40,199 [INFO] Article 1062: 'Toother...' - Reward: 1.000, Tokens: 197, Time: 101.0ms
+2025-11-15 13:36:40,302 [INFO] Article 1063: 'Beth Elliott...' - Reward: 1.000, Tokens: 448, Time: 102.0ms
+2025-11-15 13:36:40,404 [INFO] Article 1064: 'W. H. L. McCarthy...' - Reward: 1.000, Tokens: 438, Time: 101.9ms
+2025-11-15 13:36:40,505 [INFO] Article 1065: 'Lloyd R. Welch...' - Reward: 1.000, Tokens: 220, Time: 101.4ms
+2025-11-15 13:36:40,607 [INFO] Article 1066: 'Matt Daylight...' - Reward: 1.000, Tokens: 257, Time: 101.6ms
+2025-11-15 13:36:40,709 [INFO] Article 1067: 'Swinside (Derwent Water)...' - Reward: 1.000, Tokens: 227, Time: 101.3ms
+2025-11-15 13:36:40,810 [INFO] Article 1068: 'Cuscus...' - Reward: 1.000, Tokens: 177, Time: 101.0ms
+2025-11-15 13:36:40,911 [INFO] Article 1069: 'Margarete Kupfer...' - Reward: 1.000, Tokens: 78, Time: 100.7ms
+2025-11-15 13:36:41,013 [INFO] Article 1070: 'Anthony Pleeth...' - Reward: 1.000, Tokens: 423, Time: 101.9ms
+2025-11-15 13:36:41,115 [INFO] Article 1071: 'Hingston...' - Reward: 1.000, Tokens: 110, Time: 101.1ms
+2025-11-15 13:36:41,217 [INFO] Article 1072: 'Byul...' - Reward: 1.000, Tokens: 232, Time: 101.5ms
+2025-11-15 13:36:41,319 [INFO] Article 1073: 'Chip Banks...' - Reward: 1.000, Tokens: 386, Time: 101.9ms
+2025-11-15 13:36:41,421 [INFO] Article 1074: 'Aizuma Station...' - Reward: 1.000, Tokens: 272, Time: 101.2ms
+2025-11-15 13:36:41,522 [INFO] Article 1075: 'Hovnatanian...' - Reward: 1.000, Tokens: 411, Time: 101.5ms
+2025-11-15 13:36:41,624 [INFO] Article 1076: 'List of literary works relating to Tamil sexual mi...' - Reward: 1.000, Tokens: 489, Time: 101.9ms
+2025-11-15 13:36:41,726 [INFO] Article 1077: 'Ioakeim Martianos...' - Reward: 1.000, Tokens: 199, Time: 101.3ms
+2025-11-15 13:36:41,828 [INFO] Article 1078: 'Chickenpox (disambiguation)...' - Reward: 1.000, Tokens: 113, Time: 101.1ms
+2025-11-15 13:36:41,930 [INFO] Article 1079: 'Hyomin...' - Reward: 1.000, Tokens: 476, Time: 101.9ms
+2025-11-15 13:36:42,032 [INFO] Article 1080: '5th Space Launch Squadron...' - Reward: 1.000, Tokens: 335, Time: 101.5ms
+2025-11-15 13:36:42,133 [INFO] Article 1081: 'Crown Prince Frederik Land...' - Reward: 1.000, Tokens: 167, Time: 101.0ms
+2025-11-15 13:36:42,234 [INFO] Article 1082: 'Robert Staddon (English sportsman)...' - Reward: 1.000, Tokens: 130, Time: 101.0ms
+2025-11-15 13:36:42,337 [INFO] Article 1083: 'Heinrich Reinhold...' - Reward: 1.000, Tokens: 534, Time: 102.0ms
+2025-11-15 13:36:42,438 [INFO] Article 1084: '1953 Tennessee Volunteers football team...' - Reward: 1.000, Tokens: 116, Time: 101.1ms
+2025-11-15 13:36:42,540 [INFO] Article 1085: 'HIST1H2BK...' - Reward: 1.000, Tokens: 215, Time: 101.1ms
+2025-11-15 13:36:42,642 [INFO] Article 1086: 'Cytochrome c nitrite reductase...' - Reward: 1.000, Tokens: 332, Time: 101.3ms
+2025-11-15 13:36:42,744 [INFO] Article 1087: 'Tanzania Railways Corporation...' - Reward: 1.000, Tokens: 477, Time: 101.9ms
+2025-11-15 13:36:42,846 [INFO] Article 1088: '2025–26 PBA season...' - Reward: 1.000, Tokens: 416, Time: 101.8ms
+2025-11-15 13:36:42,947 [INFO] Article 1089: 'Eanfrith of Hwicce...' - Reward: 1.000, Tokens: 67, Time: 100.9ms
+2025-11-15 13:36:43,049 [INFO] Article 1090: 'Beaverton, Alabama...' - Reward: 1.000, Tokens: 467, Time: 101.9ms
+2025-11-15 13:36:43,151 [INFO] Article 1091: 'Standing Advisory Committee before the European Pa...' - Reward: 1.000, Tokens: 191, Time: 101.1ms
+2025-11-15 13:36:43,253 [INFO] Article 1092: 'Royal County of Berkshire Polo Club...' - Reward: 1.000, Tokens: 431, Time: 101.6ms
+2025-11-15 13:36:43,355 [INFO] Article 1093: 'Miroslav Šmíd...' - Reward: 1.000, Tokens: 527, Time: 101.8ms
+2025-11-15 13:36:43,457 [INFO] Article 1094: 'Bank of issue...' - Reward: 1.000, Tokens: 419, Time: 101.8ms
+2025-11-15 13:36:43,558 [INFO] Article 1095: 'Progomphus...' - Reward: 1.000, Tokens: 124, Time: 101.1ms
+2025-11-15 13:36:43,660 [INFO] Article 1096: 'Jan van de Werve, 7th Lord of Hovorst...' - Reward: 1.000, Tokens: 229, Time: 101.3ms
+2025-11-15 13:36:43,761 [INFO] Article 1097: 'Melanie Bolaños...' - Reward: 1.000, Tokens: 69, Time: 101.0ms
+2025-11-15 13:36:43,864 [INFO] Article 1098: 'The Last Wave...' - Reward: 1.000, Tokens: 426, Time: 101.7ms
+2025-11-15 13:36:43,965 [INFO] Article 1099: '2019 Men's EuroHockey Junior Championship...' - Reward: 1.000, Tokens: 274, Time: 101.6ms
+2025-11-15 13:36:44,067 [INFO] Article 1100: 'Andy Stevenson (motorsport)...' - Reward: 1.000, Tokens: 127, Time: 101.2ms
+2025-11-15 13:36:44,172 [INFO] Article 1101: 'Muhammadu Dikko Yusufu...' - Reward: 1.000, Tokens: 484, Time: 102.0ms
+2025-11-15 13:36:44,274 [INFO] Article 1102: 'Riba (disambiguation)...' - Reward: 1.000, Tokens: 148, Time: 101.0ms
+2025-11-15 13:36:44,375 [INFO] Article 1103: 'Fencing at the 2015 Summer Universiade – Women's i...' - Reward: 1.000, Tokens: 61, Time: 100.7ms
+2025-11-15 13:36:44,477 [INFO] Article 1104: 'São João de Areias...' - Reward: 1.000, Tokens: 485, Time: 101.7ms
+2025-11-15 13:36:44,578 [INFO] Article 1105: 'Alberto Leanizbarrutia...' - Reward: 1.000, Tokens: 96, Time: 100.8ms
+2025-11-15 13:36:44,679 [INFO] Article 1106: 'Isthmus of Ak-Monay...' - Reward: 1.000, Tokens: 310, Time: 101.2ms
+2025-11-15 13:36:44,782 [INFO] Article 1107: 'Vasily Savvin...' - Reward: 1.000, Tokens: 452, Time: 101.8ms
+2025-11-15 13:36:44,883 [INFO] Article 1108: 'Beate Uhse Erotic Museum...' - Reward: 1.000, Tokens: 215, Time: 101.4ms
+2025-11-15 13:36:44,986 [INFO] Article 1109: 'Duke Keomuka...' - Reward: 1.000, Tokens: 446, Time: 102.0ms
+2025-11-15 13:36:45,087 [INFO] Article 1110: 'Rıdvan Şimşek...' - Reward: 1.000, Tokens: 278, Time: 101.1ms
+2025-11-15 13:36:45,188 [INFO] Article 1111: 'Harrigan Hill...' - Reward: 1.000, Tokens: 123, Time: 101.0ms
+2025-11-15 13:36:45,290 [INFO] Article 1112: 'Esther Nkansah...' - Reward: 1.000, Tokens: 230, Time: 101.5ms
+2025-11-15 13:36:45,392 [INFO] Article 1113: 'The Margin (novel)...' - Reward: 1.000, Tokens: 132, Time: 101.1ms
+2025-11-15 13:36:45,493 [INFO] Article 1114: 'WHI...' - Reward: 1.000, Tokens: 112, Time: 100.9ms
+2025-11-15 13:36:45,595 [INFO] Article 1115: 'List of United States representatives in the 73rd ...' - Reward: 1.000, Tokens: 290, Time: 101.7ms
+2025-11-15 13:36:45,696 [INFO] Article 1116: 'National Register of Historic Places listings in W...' - Reward: 1.000, Tokens: 147, Time: 101.0ms
+2025-11-15 13:36:45,798 [INFO] Article 1117: 'Paul Coll...' - Reward: 1.000, Tokens: 437, Time: 102.0ms
+2025-11-15 13:36:45,901 [INFO] Article 1118: 'Polar motion...' - Reward: 1.000, Tokens: 469, Time: 101.9ms
+2025-11-15 13:36:46,003 [INFO] Article 1119: 'Trent Barrett...' - Reward: 1.000, Tokens: 455, Time: 102.0ms
+2025-11-15 13:36:46,104 [INFO] Article 1120: 'Jan Jeřábek (footballer, born 1992)...' - Reward: 1.000, Tokens: 66, Time: 101.0ms
+2025-11-15 13:36:46,206 [INFO] Article 1121: '2018–19 Maltese Division 1...' - Reward: 1.000, Tokens: 127, Time: 101.2ms
+2025-11-15 13:36:46,307 [INFO] Article 1122: 'Olavi Mannonen...' - Reward: 1.000, Tokens: 144, Time: 100.9ms
+2025-11-15 13:36:46,409 [INFO] Article 1123: 'High-field domain...' - Reward: 1.000, Tokens: 372, Time: 101.4ms
+2025-11-15 13:36:46,512 [INFO] Article 1124: 'Balloonfest '86...' - Reward: 1.000, Tokens: 444, Time: 102.8ms
+2025-11-15 13:36:46,614 [INFO] Article 1125: '2023 FIFA Women's World Cup knockout stage...' - Reward: 1.000, Tokens: 251, Time: 101.6ms
+2025-11-15 13:36:46,716 [INFO] Article 1126: 'Juancho Polo Valencia...' - Reward: 1.000, Tokens: 441, Time: 102.0ms
+2025-11-15 13:36:46,818 [INFO] Article 1127: 'Phoebemima...' - Reward: 1.000, Tokens: 122, Time: 101.1ms
+2025-11-15 13:36:46,919 [INFO] Article 1128: 'Bellavia...' - Reward: 1.000, Tokens: 113, Time: 100.9ms
+2025-11-15 13:36:47,022 [INFO] Article 1129: 'Tamagotchi (Omar Apollo song)...' - Reward: 1.000, Tokens: 471, Time: 102.4ms
+2025-11-15 13:36:47,124 [INFO] Article 1130: 'Golf Club Halt railway station (England)...' - Reward: 1.000, Tokens: 69, Time: 101.6ms
+2025-11-15 13:36:47,226 [INFO] Article 1131: 'Russell Winter (rugby union)...' - Reward: 1.000, Tokens: 236, Time: 101.5ms
+2025-11-15 13:36:47,329 [INFO] Article 1132: 'Geology of Kansas...' - Reward: 1.000, Tokens: 491, Time: 102.1ms
+2025-11-15 13:36:47,431 [INFO] Article 1133: 'Ramona Badescu (author)...' - Reward: 1.000, Tokens: 359, Time: 101.6ms
+2025-11-15 13:36:47,533 [INFO] Article 1134: 'Church of St Mary the Virgin, Wistaston...' - Reward: 1.000, Tokens: 473, Time: 101.6ms
+2025-11-15 13:36:47,635 [INFO] Article 1135: 'Sam Carey...' - Reward: 1.000, Tokens: 484, Time: 101.7ms
+2025-11-15 13:36:47,736 [INFO] Article 1136: 'Deltobathra...' - Reward: 1.000, Tokens: 104, Time: 101.0ms
+2025-11-15 13:36:47,838 [INFO] Article 1137: 'Andrew Jackson Kirk...' - Reward: 1.000, Tokens: 347, Time: 101.7ms
+2025-11-15 13:36:47,939 [INFO] Article 1138: 'East Herts Miniature Railway...' - Reward: 1.000, Tokens: 156, Time: 101.2ms
+2025-11-15 13:36:48,041 [INFO] Article 1139: 'Ozegna Castle...' - Reward: 1.000, Tokens: 301, Time: 101.5ms
+2025-11-15 13:36:48,142 [INFO] Article 1140: 'Charlotte Lehmann...' - Reward: 1.000, Tokens: 96, Time: 100.8ms
+2025-11-15 13:36:48,244 [INFO] Article 1141: 'JFS...' - Reward: 1.000, Tokens: 232, Time: 101.3ms
+2025-11-15 13:36:48,346 [INFO] Article 1142: 'Trouw...' - Reward: 1.000, Tokens: 444, Time: 102.1ms
+2025-11-15 13:36:48,449 [INFO] Article 1143: 'Alpheus S. Williams...' - Reward: 1.000, Tokens: 444, Time: 102.0ms
+2025-11-15 13:36:48,551 [INFO] Article 1144: 'The Less Deceived...' - Reward: 1.000, Tokens: 474, Time: 102.1ms
+2025-11-15 13:36:48,653 [INFO] Article 1145: 'Trapdoor Fucking Exit...' - Reward: 1.000, Tokens: 181, Time: 101.2ms
+2025-11-15 13:36:48,755 [INFO] Article 1146: 'Hototogisu (magazine)...' - Reward: 1.000, Tokens: 548, Time: 101.8ms
+2025-11-15 13:36:48,856 [INFO] Article 1147: 'Milk River (Jamaica)...' - Reward: 1.000, Tokens: 57, Time: 100.7ms
+2025-11-15 13:36:48,958 [INFO] Article 1148: 'Scott Mountains (California)...' - Reward: 1.000, Tokens: 353, Time: 101.7ms
+2025-11-15 13:36:49,059 [INFO] Article 1149: '2016 Kiribati presidential election...' - Reward: 1.000, Tokens: 88, Time: 101.0ms
+2025-11-15 13:36:49,162 [INFO] Article 1150: 'Myosotis pottsiana...' - Reward: 1.000, Tokens: 553, Time: 102.1ms
+2025-11-15 13:36:49,267 [INFO] Article 1151: 'Edgar Lissel...' - Reward: 1.000, Tokens: 427, Time: 101.8ms
+2025-11-15 13:36:49,368 [INFO] Article 1152: 'Bradly van Hoeven...' - Reward: 1.000, Tokens: 298, Time: 101.3ms
+2025-11-15 13:36:49,470 [INFO] Article 1153: 'TV5...' - Reward: 1.000, Tokens: 219, Time: 101.2ms
+2025-11-15 13:36:49,572 [INFO] Article 1154: '2000 FIFA Club World Championship...' - Reward: 1.000, Tokens: 438, Time: 102.0ms
+2025-11-15 13:36:49,674 [INFO] Article 1155: 'Pollimyrus isidori...' - Reward: 1.000, Tokens: 271, Time: 101.4ms
+2025-11-15 13:36:49,776 [INFO] Article 1156: 'Crown King, Arizona...' - Reward: 1.000, Tokens: 461, Time: 102.0ms
+2025-11-15 13:36:49,878 [INFO] Article 1157: 'The Silent Invasion (comics)...' - Reward: 1.000, Tokens: 503, Time: 102.0ms
+2025-11-15 13:36:49,980 [INFO] Article 1158: 'Maurice Tourneux...' - Reward: 1.000, Tokens: 348, Time: 101.3ms
+2025-11-15 13:36:50,082 [INFO] Article 1159: 'George Tuchet, 1st Earl of Castlehaven...' - Reward: 1.000, Tokens: 533, Time: 101.9ms
+2025-11-15 13:36:50,183 [INFO] Article 1160: 'Men in White (TV series)...' - Reward: 1.000, Tokens: 82, Time: 100.8ms
+2025-11-15 13:36:50,286 [INFO] Article 1161: '11 West 54th Street...' - Reward: 1.000, Tokens: 431, Time: 102.0ms
+2025-11-15 13:36:50,388 [INFO] Article 1162: 'Miss Venezuela 2024...' - Reward: 1.000, Tokens: 408, Time: 101.8ms
+2025-11-15 13:36:50,490 [INFO] Article 1163: 'Operating agreement...' - Reward: 1.000, Tokens: 315, Time: 101.7ms
+2025-11-15 13:36:50,592 [INFO] Article 1164: 'Road Trips Volume 3 Number 1...' - Reward: 1.000, Tokens: 584, Time: 101.8ms
+2025-11-15 13:36:50,694 [INFO] Article 1165: 'Good Views, Bad News...' - Reward: 1.000, Tokens: 432, Time: 101.8ms
+2025-11-15 13:36:50,796 [INFO] Article 1166: 'William H. O'Dell...' - Reward: 1.000, Tokens: 294, Time: 101.6ms
+2025-11-15 13:36:50,898 [INFO] Article 1167: 'Celtic Folkweave...' - Reward: 1.000, Tokens: 497, Time: 101.8ms
+2025-11-15 13:36:51,001 [INFO] Article 1168: 'Wendy Campbell-Purdie...' - Reward: 1.000, Tokens: 450, Time: 102.0ms
+2025-11-15 13:36:51,102 [INFO] Article 1169: 'Canoabo...' - Reward: 1.000, Tokens: 65, Time: 100.9ms
+2025-11-15 13:36:51,203 [INFO] Article 1170: 'Lois Jackman...' - Reward: 1.000, Tokens: 226, Time: 101.1ms
+2025-11-15 13:36:51,305 [INFO] Article 1171: 'Minami (name)...' - Reward: 1.000, Tokens: 522, Time: 101.9ms
+2025-11-15 13:36:51,408 [INFO] Article 1172: 'Youssou N'Dour...' - Reward: 1.000, Tokens: 530, Time: 101.9ms
+2025-11-15 13:36:51,510 [INFO] Article 1173: 'Black-crowned antshrike...' - Reward: 1.000, Tokens: 567, Time: 101.9ms
+2025-11-15 13:36:51,612 [INFO] Article 1174: 'USS Bergen...' - Reward: 1.000, Tokens: 460, Time: 101.9ms
+2025-11-15 13:36:51,715 [INFO] Article 1175: 'Veniamin Basner...' - Reward: 1.000, Tokens: 499, Time: 101.9ms
+2025-11-15 13:36:51,816 [INFO] Article 1176: 'Hillside School, Addis Ababa...' - Reward: 1.000, Tokens: 104, Time: 100.9ms
+2025-11-15 13:36:51,918 [INFO] Article 1177: 'Jim (book)...' - Reward: 1.000, Tokens: 404, Time: 101.7ms
+2025-11-15 13:36:52,020 [INFO] Article 1178: 'Said bin Ahmad Al Busaidi...' - Reward: 1.000, Tokens: 396, Time: 101.8ms
+2025-11-15 13:36:52,122 [INFO] Article 1179: 'Sumer–Elam war...' - Reward: 1.000, Tokens: 519, Time: 102.0ms
+2025-11-15 13:36:52,225 [INFO] Article 1180: 'Venera 16...' - Reward: 1.000, Tokens: 512, Time: 102.0ms
+2025-11-15 13:36:52,326 [INFO] Article 1181: '1994–95 Arizona State Sun Devils men's basketball ...' - Reward: 1.000, Tokens: 146, Time: 101.2ms
+2025-11-15 13:36:52,428 [INFO] Article 1182: 'Alhambra Springs...' - Reward: 1.000, Tokens: 472, Time: 101.8ms
+2025-11-15 13:36:52,530 [INFO] Article 1183: 'Michael Mirolla...' - Reward: 1.000, Tokens: 343, Time: 101.6ms
+2025-11-15 13:36:52,633 [INFO] Article 1184: 'Peter Gabriel...' - Reward: 1.000, Tokens: 435, Time: 101.9ms
+2025-11-15 13:36:52,734 [INFO] Article 1185: 'War Memorial (Angri)...' - Reward: 1.000, Tokens: 477, Time: 101.6ms
+2025-11-15 13:36:52,837 [INFO] Article 1186: 'NASUWT...' - Reward: 1.000, Tokens: 394, Time: 101.8ms
+2025-11-15 13:36:52,939 [INFO] Article 1187: 'Greathed Manor...' - Reward: 1.000, Tokens: 451, Time: 102.0ms
+2025-11-15 13:36:53,040 [INFO] Article 1188: 'National records in the 400 metres hurdles...' - Reward: 1.000, Tokens: 69, Time: 100.7ms
+2025-11-15 13:36:53,142 [INFO] Article 1189: 'Roger Bhatnagar...' - Reward: 1.000, Tokens: 456, Time: 102.2ms
+2025-11-15 13:36:53,245 [INFO] Article 1190: 'Kongsi Raya (film)...' - Reward: 1.000, Tokens: 495, Time: 101.9ms
+2025-11-15 13:36:53,346 [INFO] Article 1191: 'First Goh Chok Tong Cabinet...' - Reward: 1.000, Tokens: 101, Time: 101.1ms
+2025-11-15 13:36:53,449 [INFO] Article 1192: 'The Only One...' - Reward: 1.000, Tokens: 610, Time: 102.0ms
+2025-11-15 13:36:53,551 [INFO] Article 1193: 'Sophia Desta...' - Reward: 1.000, Tokens: 482, Time: 102.1ms
+2025-11-15 13:36:53,653 [INFO] Article 1194: 'Hune Covered Bridge...' - Reward: 1.000, Tokens: 201, Time: 101.1ms
+2025-11-15 13:36:53,754 [INFO] Article 1195: 'Ronald M. Hahn...' - Reward: 1.000, Tokens: 404, Time: 101.5ms
+2025-11-15 13:36:53,856 [INFO] Article 1196: 'List of ambassadors of Peru to Canada...' - Reward: 1.000, Tokens: 43, Time: 100.8ms
+2025-11-15 13:36:53,958 [INFO] Article 1197: 'Stephen Myler...' - Reward: 1.000, Tokens: 450, Time: 101.9ms
+2025-11-15 13:36:54,060 [INFO] Article 1198: 'Vyshchi Lubianky...' - Reward: 1.000, Tokens: 278, Time: 101.4ms
+2025-11-15 13:36:54,161 [INFO] Article 1199: '66th Honinbo...' - Reward: 1.000, Tokens: 201, Time: 101.3ms
+2025-11-15 13:36:54,263 [INFO] Article 1200: 'Brute Force: Cracking the Data Encryption Standard...' - Reward: 1.000, Tokens: 208, Time: 101.0ms
+2025-11-15 13:36:54,368 [INFO] Article 1201: 'Franc Weerwind...' - Reward: 1.000, Tokens: 429, Time: 102.0ms
+2025-11-15 13:36:54,469 [INFO] Article 1202: 'Archie Clement (footballer)...' - Reward: 1.000, Tokens: 49, Time: 100.7ms
+2025-11-15 13:36:54,570 [INFO] Article 1203: 'Plant Life Records...' - Reward: 1.000, Tokens: 140, Time: 101.1ms
+2025-11-15 13:36:54,672 [INFO] Article 1204: 'Nancy Wood (author)...' - Reward: 1.000, Tokens: 419, Time: 102.0ms
+2025-11-15 13:36:54,775 [INFO] Article 1205: 'American Satellite Corporation...' - Reward: 1.000, Tokens: 405, Time: 102.0ms
+2025-11-15 13:36:54,876 [INFO] Article 1206: 'King of the Dead...' - Reward: 1.000, Tokens: 94, Time: 100.8ms
+2025-11-15 13:36:54,977 [INFO] Article 1207: 'Witta, son of Wecta...' - Reward: 1.000, Tokens: 90, Time: 100.9ms
+2025-11-15 13:36:55,079 [INFO] Article 1208: 'David Chadwick Smith...' - Reward: 1.000, Tokens: 79, Time: 101.0ms
+2025-11-15 13:36:55,181 [INFO] Article 1209: 'Execution of Mohsen Shekari...' - Reward: 1.000, Tokens: 475, Time: 101.8ms
+2025-11-15 13:36:55,282 [INFO] Article 1210: 'Proctor Burman...' - Reward: 1.000, Tokens: 71, Time: 100.8ms
+2025-11-15 13:36:55,383 [INFO] Article 1211: 'Howle...' - Reward: 1.000, Tokens: 233, Time: 101.3ms
+2025-11-15 13:36:55,485 [INFO] Article 1212: 'Cimarron Hotel...' - Reward: 1.000, Tokens: 419, Time: 101.6ms
+2025-11-15 13:36:55,588 [INFO] Article 1213: 'Euglossa mixta...' - Reward: 1.000, Tokens: 467, Time: 101.9ms
+2025-11-15 13:36:55,689 [INFO] Article 1214: 'Costa Rican Athletics Federation...' - Reward: 1.000, Tokens: 238, Time: 101.4ms
+2025-11-15 13:36:55,792 [INFO] Article 1215: 'Cinema of Portugal...' - Reward: 1.000, Tokens: 494, Time: 102.1ms
+2025-11-15 13:36:55,894 [INFO] Article 1216: 'WFRM...' - Reward: 1.000, Tokens: 497, Time: 102.0ms
+2025-11-15 13:36:55,996 [INFO] Article 1217: 'West Side High School (New Jersey)...' - Reward: 1.000, Tokens: 416, Time: 102.0ms
+2025-11-15 13:36:56,098 [INFO] Article 1218: 'List of non-Dinosauria fossil trackway articles...' - Reward: 1.000, Tokens: 157, Time: 100.9ms
+2025-11-15 13:36:56,200 [INFO] Article 1219: 'Elina Lampela...' - Reward: 1.000, Tokens: 393, Time: 101.8ms
+2025-11-15 13:36:56,302 [INFO] Article 1220: 'Arcángel & De la Ghetto...' - Reward: 1.000, Tokens: 453, Time: 101.7ms
+2025-11-15 13:36:56,404 [INFO] Article 1221: 'River Raid...' - Reward: 1.000, Tokens: 458, Time: 102.0ms
+2025-11-15 13:36:56,506 [INFO] Article 1222: 'Simone Rao Grimaldi...' - Reward: 1.000, Tokens: 176, Time: 101.3ms
+2025-11-15 13:36:56,608 [INFO] Article 1223: 'Hedemora stadshotell...' - Reward: 1.000, Tokens: 375, Time: 101.7ms
+2025-11-15 13:36:56,710 [INFO] Article 1224: 'Neddie Seagoon...' - Reward: 1.000, Tokens: 534, Time: 101.7ms
+2025-11-15 13:36:56,812 [INFO] Article 1225: 'Asbel Rutto...' - Reward: 1.000, Tokens: 267, Time: 101.2ms
+2025-11-15 13:36:56,914 [INFO] Article 1226: 'Pan-European Institute...' - Reward: 1.000, Tokens: 456, Time: 102.0ms
+2025-11-15 13:36:57,016 [INFO] Article 1227: 'South Africa at the 2019 African Games...' - Reward: 1.000, Tokens: 474, Time: 102.0ms
+2025-11-15 13:36:57,118 [INFO] Article 1228: 'Saifuzzaman...' - Reward: 1.000, Tokens: 105, Time: 101.0ms
+2025-11-15 13:36:57,220 [INFO] Article 1229: 'Chris Houston (American football)...' - Reward: 1.000, Tokens: 413, Time: 102.0ms
+2025-11-15 13:36:57,322 [INFO] Article 1230: 'Member of the Scottish Parliament...' - Reward: 1.000, Tokens: 419, Time: 101.8ms
+2025-11-15 13:36:57,424 [INFO] Article 1231: 'Stefon...' - Reward: 1.000, Tokens: 448, Time: 101.9ms
+2025-11-15 13:36:57,526 [INFO] Article 1232: 'Astrid Johannessen...' - Reward: 1.000, Tokens: 256, Time: 101.4ms
+2025-11-15 13:36:57,628 [INFO] Article 1233: 'Kady McDermott...' - Reward: 1.000, Tokens: 404, Time: 102.0ms
+2025-11-15 13:36:57,730 [INFO] Article 1234: 'Josua Vici...' - Reward: 1.000, Tokens: 119, Time: 101.1ms
+2025-11-15 13:36:57,831 [INFO] Article 1235: 'Erkki Kataja...' - Reward: 1.000, Tokens: 66, Time: 101.0ms
+2025-11-15 13:36:57,932 [INFO] Article 1236: 'Kishori Lal (Kullu politician)...' - Reward: 1.000, Tokens: 63, Time: 100.7ms
+2025-11-15 13:36:58,034 [INFO] Article 1237: 'Vogelsang (Bavarian Forest)...' - Reward: 1.000, Tokens: 153, Time: 101.0ms
+2025-11-15 13:36:58,136 [INFO] Article 1238: 'Lantung...' - Reward: 1.000, Tokens: 417, Time: 102.0ms
+2025-11-15 13:36:58,238 [INFO] Article 1239: 'Muhammad Yusuf Khan Hazara...' - Reward: 1.000, Tokens: 486, Time: 102.1ms
+2025-11-15 13:36:58,340 [INFO] Article 1240: 'Christopher Edwards (clinician)...' - Reward: 1.000, Tokens: 164, Time: 101.4ms
+2025-11-15 13:36:58,443 [INFO] Article 1241: 'Apollo 11 Cave...' - Reward: 1.000, Tokens: 504, Time: 102.1ms
+2025-11-15 13:36:58,545 [INFO] Article 1242: 'Sargon Gabriel...' - Reward: 1.000, Tokens: 443, Time: 101.7ms
+2025-11-15 13:36:58,646 [INFO] Article 1243: '1979 Cornell Big Red football team...' - Reward: 1.000, Tokens: 130, Time: 101.0ms
+2025-11-15 13:36:58,747 [INFO] Article 1244: 'Xwejni Bay...' - Reward: 1.000, Tokens: 116, Time: 101.0ms
+2025-11-15 13:36:58,850 [INFO] Article 1245: 'St Giles' Church, Matlock...' - Reward: 1.000, Tokens: 431, Time: 101.9ms
+2025-11-15 13:36:58,951 [INFO] Article 1246: 'Vassmolösa...' - Reward: 1.000, Tokens: 92, Time: 101.1ms
+2025-11-15 13:36:59,052 [INFO] Article 1247: 'Edward Cotton (priest, died 1675)...' - Reward: 1.000, Tokens: 91, Time: 101.1ms
+2025-11-15 13:36:59,154 [INFO] Article 1248: 'Planing (shaping)...' - Reward: 1.000, Tokens: 439, Time: 101.7ms
+2025-11-15 13:36:59,256 [INFO] Article 1249: 'Ayesem...' - Reward: 1.000, Tokens: 255, Time: 101.3ms
+2025-11-15 13:36:59,358 [INFO] Article 1250: 'Stanisław Kiszka...' - Reward: 1.000, Tokens: 465, Time: 102.0ms
+2025-11-15 13:36:59,463 [INFO] Article 1251: 'Ministry of Culture (Estonia)...' - Reward: 1.000, Tokens: 194, Time: 101.3ms
+2025-11-15 13:36:59,565 [INFO] Article 1252: 'Bob Ajisafe...' - Reward: 1.000, Tokens: 335, Time: 101.7ms
+2025-11-15 13:36:59,666 [INFO] Article 1253: 'L21...' - Reward: 1.000, Tokens: 144, Time: 101.1ms
+2025-11-15 13:36:59,768 [INFO] Article 1254: 'Carnage (band)...' - Reward: 1.000, Tokens: 332, Time: 101.4ms
+2025-11-15 13:36:59,869 [INFO] Article 1255: 'Jodi (musician)...' - Reward: 1.000, Tokens: 144, Time: 101.1ms
+2025-11-15 13:36:59,971 [INFO] Article 1256: 'Ivor Phillips (cricketer)...' - Reward: 1.000, Tokens: 251, Time: 101.4ms
+2025-11-15 13:37:00,072 [INFO] Article 1257: 'Dun Sar...' - Reward: 1.000, Tokens: 80, Time: 100.9ms
+2025-11-15 13:37:00,174 [INFO] Article 1258: 'Universal Bank...' - Reward: 1.000, Tokens: 86, Time: 101.0ms
+2025-11-15 13:37:00,275 [INFO] Article 1259: 'Eidangerfjord...' - Reward: 1.000, Tokens: 213, Time: 101.3ms
+2025-11-15 13:37:00,377 [INFO] Article 1260: 'Lechuza (album)...' - Reward: 1.000, Tokens: 531, Time: 101.7ms
+2025-11-15 13:37:00,479 [INFO] Article 1261: 'Make Love to Me (1941 song)...' - Reward: 1.000, Tokens: 68, Time: 100.8ms
+2025-11-15 13:37:00,580 [INFO] Article 1262: 'Roman Vondráček...' - Reward: 1.000, Tokens: 166, Time: 101.2ms
+2025-11-15 13:37:00,682 [INFO] Article 1263: 'Yuri Stepanov (actor)...' - Reward: 1.000, Tokens: 179, Time: 101.1ms
+2025-11-15 13:37:00,783 [INFO] Article 1264: 'Tumtum Lake...' - Reward: 1.000, Tokens: 106, Time: 101.1ms
+2025-11-15 13:37:00,885 [INFO] Article 1265: 'I'll Never Get Out of This World Alive (album)...' - Reward: 1.000, Tokens: 361, Time: 101.8ms
+2025-11-15 13:37:00,987 [INFO] Article 1266: 'Crest of the Blue Ridge Henderson County AVA...' - Reward: 1.000, Tokens: 442, Time: 101.6ms
+2025-11-15 13:37:01,089 [INFO] Article 1267: '2003–04 FIBA Europe League...' - Reward: 1.000, Tokens: 214, Time: 101.3ms
+2025-11-15 13:37:01,191 [INFO] Article 1268: 'This Is 40...' - Reward: 1.000, Tokens: 448, Time: 102.1ms
+2025-11-15 13:37:01,294 [INFO] Article 1269: 'Jamie Shea...' - Reward: 1.000, Tokens: 359, Time: 102.4ms
+2025-11-15 13:37:01,396 [INFO] Article 1270: 'Filholiidae...' - Reward: 1.000, Tokens: 166, Time: 101.7ms
+2025-11-15 13:37:01,498 [INFO] Article 1271: 'Mount Zion Baptist Church (Miami)...' - Reward: 1.000, Tokens: 76, Time: 101.0ms
+2025-11-15 13:37:01,599 [INFO] Article 1272: 'Adelabad...' - Reward: 1.000, Tokens: 89, Time: 100.7ms
+2025-11-15 13:37:01,700 [INFO] Article 1273: 'Yoyetta kershawi...' - Reward: 1.000, Tokens: 154, Time: 101.2ms
+2025-11-15 13:37:01,802 [INFO] Article 1274: 'Wadi El Haour...' - Reward: 1.000, Tokens: 86, Time: 101.0ms
+2025-11-15 13:37:01,904 [INFO] Article 1275: 'Walter Wigmore...' - Reward: 1.000, Tokens: 405, Time: 101.9ms
+2025-11-15 13:37:02,006 [INFO] Article 1276: 'Wattisfield...' - Reward: 1.000, Tokens: 475, Time: 102.0ms
+2025-11-15 13:37:02,108 [INFO] Article 1277: 'Roderick S. McCook...' - Reward: 1.000, Tokens: 254, Time: 101.3ms
+2025-11-15 13:37:02,209 [INFO] Article 1278: 'Asperula albiflora...' - Reward: 1.000, Tokens: 133, Time: 100.8ms
+2025-11-15 13:37:02,310 [INFO] Article 1279: 'New Hope, Florida...' - Reward: 1.000, Tokens: 55, Time: 100.8ms
+2025-11-15 13:37:02,413 [INFO] Article 1280: 'Paul Christie (musician)...' - Reward: 1.000, Tokens: 528, Time: 101.9ms
+2025-11-15 13:37:02,514 [INFO] Article 1281: 'The Alchemist (Witchcraft album)...' - Reward: 1.000, Tokens: 267, Time: 101.4ms
+2025-11-15 13:37:02,616 [INFO] Article 1282: 'William Lee Scott...' - Reward: 1.000, Tokens: 292, Time: 101.5ms
+2025-11-15 13:37:02,718 [INFO] Article 1283: 'Frequency domain decomposition...' - Reward: 1.000, Tokens: 249, Time: 101.0ms
+2025-11-15 13:37:02,820 [INFO] Article 1284: 'Constituencies of the Parliament of the United Kin...' - Reward: 1.000, Tokens: 403, Time: 101.8ms
+2025-11-15 13:37:02,921 [INFO] Article 1285: 'Oujiang Beikou Bridge...' - Reward: 1.000, Tokens: 369, Time: 101.3ms
+2025-11-15 13:37:03,023 [INFO] Article 1286: 'Aioiyama Station...' - Reward: 1.000, Tokens: 138, Time: 101.0ms
+2025-11-15 13:37:03,125 [INFO] Article 1287: 'Kōyasan chōishi-michi...' - Reward: 1.000, Tokens: 518, Time: 102.1ms
+2025-11-15 13:37:03,227 [INFO] Article 1288: 'Women's literary salons and societies in the Arab ...' - Reward: 1.000, Tokens: 400, Time: 102.0ms
+2025-11-15 13:37:03,329 [INFO] Article 1289: 'HR 3159...' - Reward: 1.000, Tokens: 243, Time: 101.1ms
+2025-11-15 13:37:03,431 [INFO] Article 1290: 'Wirelesspt...' - Reward: 1.000, Tokens: 374, Time: 101.8ms
+2025-11-15 13:37:03,532 [INFO] Article 1291: 'Yufkalı, Şemdinli...' - Reward: 1.000, Tokens: 157, Time: 100.8ms
+2025-11-15 13:37:03,634 [INFO] Article 1292: 'Chiasmocleis ventrimaculata...' - Reward: 1.000, Tokens: 511, Time: 101.9ms
+2025-11-15 13:37:03,736 [INFO] Article 1293: 'Nicholas Segrave, 1st Baron Segrave...' - Reward: 1.000, Tokens: 473, Time: 101.9ms
+2025-11-15 13:37:03,838 [INFO] Article 1294: 'Sailing at the 2000 Summer Olympics – Laser...' - Reward: 1.000, Tokens: 226, Time: 101.3ms
+2025-11-15 13:37:03,940 [INFO] Article 1295: 'Antonio Barbaro...' - Reward: 1.000, Tokens: 507, Time: 101.7ms
+2025-11-15 13:37:04,042 [INFO] Article 1296: 'Knut Værnes...' - Reward: 1.000, Tokens: 543, Time: 101.8ms
+2025-11-15 13:37:04,143 [INFO] Article 1297: 'Mick Murray...' - Reward: 1.000, Tokens: 77, Time: 100.8ms
+2025-11-15 13:37:04,245 [INFO] Article 1298: 'Giulio Fantuzzi...' - Reward: 1.000, Tokens: 123, Time: 101.1ms
+2025-11-15 13:37:04,346 [INFO] Article 1299: 'United States Post Office (Freeport, New York)...' - Reward: 1.000, Tokens: 167, Time: 101.2ms
+2025-11-15 13:37:04,448 [INFO] Article 1300: 'Stuffed ribs...' - Reward: 1.000, Tokens: 223, Time: 101.2ms
+2025-11-15 13:37:04,552 [INFO] Article 1301: 'Camille Martin...' - Reward: 1.000, Tokens: 468, Time: 101.8ms
+2025-11-15 13:37:04,655 [INFO] Article 1302: 'Education in Warsaw...' - Reward: 1.000, Tokens: 442, Time: 102.1ms
+2025-11-15 13:37:04,756 [INFO] Article 1303: 'Bharatiya Kranti Dal...' - Reward: 1.000, Tokens: 167, Time: 101.0ms
+2025-11-15 13:37:04,858 [INFO] Article 1304: 'Beregovka...' - Reward: 1.000, Tokens: 88, Time: 101.0ms
+2025-11-15 13:37:04,960 [INFO] Article 1305: 'Tess Girard...' - Reward: 1.000, Tokens: 299, Time: 101.6ms
+2025-11-15 13:37:05,062 [INFO] Article 1306: 'Dimitris Paraskevas...' - Reward: 1.000, Tokens: 442, Time: 102.0ms
+2025-11-15 13:37:05,163 [INFO] Article 1307: '56th Golden Bell Awards...' - Reward: 1.000, Tokens: 116, Time: 100.9ms
+2025-11-15 13:37:05,264 [INFO] Article 1308: 'Lukas Zuccarello...' - Reward: 1.000, Tokens: 83, Time: 100.8ms
+2025-11-15 13:37:05,366 [INFO] Article 1309: 'Sonja Nef...' - Reward: 1.000, Tokens: 258, Time: 101.2ms
+2025-11-15 13:37:05,467 [INFO] Article 1310: 'Sergey Maslov (footballer, born 1990)...' - Reward: 1.000, Tokens: 80, Time: 100.9ms
+2025-11-15 13:37:05,568 [INFO] Article 1311: 'Sangrur Municipal Council...' - Reward: 1.000, Tokens: 145, Time: 101.2ms
+2025-11-15 13:37:05,670 [INFO] Article 1312: 'Brocchinia tanimbarensis...' - Reward: 1.000, Tokens: 69, Time: 100.9ms
+2025-11-15 13:37:05,771 [INFO] Article 1313: 'Monument au Fantôme...' - Reward: 1.000, Tokens: 195, Time: 101.1ms
+2025-11-15 13:37:05,873 [INFO] Article 1314: 'Scott Clinic...' - Reward: 1.000, Tokens: 137, Time: 101.0ms
+2025-11-15 13:37:05,974 [INFO] Article 1315: 'Pine Ridge School Building...' - Reward: 1.000, Tokens: 178, Time: 101.1ms
+2025-11-15 13:37:06,076 [INFO] Article 1316: 'Meneval...' - Reward: 1.000, Tokens: 505, Time: 102.0ms
+2025-11-15 13:37:06,178 [INFO] Article 1317: 'Brennan v HM Advocate...' - Reward: 1.000, Tokens: 262, Time: 101.5ms
+2025-11-15 13:37:06,280 [INFO] Article 1318: 'Rodislav Chizhikov...' - Reward: 1.000, Tokens: 222, Time: 101.3ms
+2025-11-15 13:37:06,382 [INFO] Article 1319: '2014 Forest Hills Drive...' - Reward: 1.000, Tokens: 430, Time: 101.7ms
+2025-11-15 13:37:06,483 [INFO] Article 1320: '1992 Italian general election in Sardinia...' - Reward: 1.000, Tokens: 65, Time: 100.7ms
+2025-11-15 13:37:06,584 [INFO] Article 1321: 'China Gate Castle Park...' - Reward: 1.000, Tokens: 121, Time: 100.9ms
+2025-11-15 13:37:06,685 [INFO] Article 1322: 'Grandcour Castle...' - Reward: 1.000, Tokens: 43, Time: 100.9ms
+2025-11-15 13:37:06,788 [INFO] Article 1323: 'Most favoured nation...' - Reward: 1.000, Tokens: 417, Time: 101.9ms
+2025-11-15 13:37:06,890 [INFO] Article 1324: 'Golisoda...' - Reward: 1.000, Tokens: 503, Time: 101.9ms
+2025-11-15 13:37:06,991 [INFO] Article 1325: 'Nawabzada Farid Salahuddin...' - Reward: 1.000, Tokens: 119, Time: 100.8ms
+2025-11-15 13:37:07,093 [INFO] Article 1326: 'Dudley Norton...' - Reward: 1.000, Tokens: 313, Time: 101.5ms
+2025-11-15 13:37:07,194 [INFO] Article 1327: '1956 French Togoland autonomy referendum...' - Reward: 1.000, Tokens: 157, Time: 101.1ms
+2025-11-15 13:37:07,297 [INFO] Article 1328: 'Mitchell, Oregon...' - Reward: 1.000, Tokens: 458, Time: 102.0ms
+2025-11-15 13:37:07,399 [INFO] Article 1329: 'Die (manufacturing)...' - Reward: 1.000, Tokens: 435, Time: 101.9ms
+2025-11-15 13:37:07,501 [INFO] Article 1330: 'List of current Philippine vice governors...' - Reward: 1.000, Tokens: 394, Time: 101.9ms
+2025-11-15 13:37:07,603 [INFO] Article 1331: 'Dominion of Newfoundland...' - Reward: 1.000, Tokens: 398, Time: 101.7ms
+2025-11-15 13:37:07,705 [INFO] Article 1332: 'Sanya Phoenix International Airport...' - Reward: 1.000, Tokens: 427, Time: 101.8ms
+2025-11-15 13:37:07,807 [INFO] Article 1333: 'Jonathan C. Jones...' - Reward: 1.000, Tokens: 383, Time: 101.5ms
+2025-11-15 13:37:07,909 [INFO] Article 1334: 'Japan National Route 8...' - Reward: 1.000, Tokens: 583, Time: 101.9ms
+2025-11-15 13:37:08,011 [INFO] Article 1335: 'Demo Finland...' - Reward: 1.000, Tokens: 125, Time: 101.1ms
+2025-11-15 13:37:08,113 [INFO] Article 1336: 'George Beare (footballer)...' - Reward: 1.000, Tokens: 426, Time: 101.8ms
+2025-11-15 13:37:08,215 [INFO] Article 1337: 'Paul Terasaki...' - Reward: 1.000, Tokens: 442, Time: 101.7ms
+2025-11-15 13:37:08,316 [INFO] Article 1338: 'History of the Church...' - Reward: 1.000, Tokens: 80, Time: 100.8ms
+2025-11-15 13:37:08,418 [INFO] Article 1339: 'The School Teacher...' - Reward: 1.000, Tokens: 361, Time: 101.5ms
+2025-11-15 13:37:08,519 [INFO] Article 1340: 'Thein Tun...' - Reward: 1.000, Tokens: 112, Time: 101.0ms
+2025-11-15 13:37:08,621 [INFO] Article 1341: 'Vanity Vain...' - Reward: 1.000, Tokens: 190, Time: 101.2ms
+2025-11-15 13:37:08,723 [INFO] Article 1342: 'Irving S. Shapiro...' - Reward: 1.000, Tokens: 331, Time: 101.7ms
+2025-11-15 13:37:08,824 [INFO] Article 1343: '2015 Chrono des Nations...' - Reward: 1.000, Tokens: 54, Time: 100.7ms
+2025-11-15 13:37:08,927 [INFO] Article 1344: 'Battle of Megara...' - Reward: 1.000, Tokens: 453, Time: 102.4ms
+2025-11-15 13:37:09,028 [INFO] Article 1345: 'Enicostema...' - Reward: 1.000, Tokens: 93, Time: 100.8ms
+2025-11-15 13:37:09,129 [INFO] Article 1346: 'Arthur Dinaux...' - Reward: 1.000, Tokens: 172, Time: 101.0ms
+2025-11-15 13:37:09,231 [INFO] Article 1347: 'Montegufoni Castle...' - Reward: 1.000, Tokens: 503, Time: 101.8ms
+2025-11-15 13:37:09,333 [INFO] Article 1348: 'Alavijeh...' - Reward: 1.000, Tokens: 182, Time: 101.2ms
+2025-11-15 13:37:09,434 [INFO] Article 1349: 'Miha Gale...' - Reward: 1.000, Tokens: 50, Time: 100.6ms
+2025-11-15 13:37:09,536 [INFO] Article 1350: 'Necton...' - Reward: 1.000, Tokens: 459, Time: 101.7ms
+2025-11-15 13:37:09,641 [INFO] Article 1351: 'Ernest Hotson...' - Reward: 1.000, Tokens: 460, Time: 102.0ms
+2025-11-15 13:37:09,743 [INFO] Article 1352: 'Perrier...' - Reward: 1.000, Tokens: 461, Time: 101.9ms
+2025-11-15 13:37:09,845 [INFO] Article 1353: 'Taiwan Travelogue...' - Reward: 1.000, Tokens: 208, Time: 101.4ms
+2025-11-15 13:37:09,947 [INFO] Article 1354: 'Hoo Anthiya Uhoo Anthiya...' - Reward: 1.000, Tokens: 327, Time: 101.5ms
+2025-11-15 13:37:10,048 [INFO] Article 1355: 'Aleksandar Radosavljević (footballer, born 1979)...' - Reward: 1.000, Tokens: 262, Time: 101.2ms
+2025-11-15 13:37:10,150 [INFO] Article 1356: 'C. H. Elting...' - Reward: 1.000, Tokens: 279, Time: 101.8ms
+2025-11-15 13:37:10,252 [INFO] Article 1357: 'Irwin Belk...' - Reward: 1.000, Tokens: 190, Time: 101.1ms
+2025-11-15 13:37:10,353 [INFO] Article 1358: 'Hasanabad, Khalajestan...' - Reward: 1.000, Tokens: 68, Time: 100.9ms
+2025-11-15 13:37:10,455 [INFO] Article 1359: 'Rapid Fire Theatre...' - Reward: 1.000, Tokens: 473, Time: 102.0ms
+2025-11-15 13:37:10,456 [INFO] Epoch 3 complete - Articles: 453, Avg Reward: 1.000, Total: 453.00
+2025-11-15 13:37:10,463 [INFO] Saved article logs to training_logs/session_20251115_133451/article_logs.csv
+2025-11-15 13:37:10,463 [INFO] Saved metrics to training_logs/session_20251115_133451/metrics.json
+2025-11-15 13:37:10,463 [INFO] Saved token statistics to training_logs/session_20251115_133451/token_stats.json
+2025-11-15 13:37:10,464 [INFO] Generating training visualizations...
+2025-11-15 13:37:11,826 [INFO] Saved reward progression chart
+2025-11-15 13:37:12,568 [INFO] Saved processing time analysis
+2025-11-15 13:37:13,239 [INFO] Saved token statistics
+2025-11-15 13:37:13,771 [INFO] Saved reward-length correlation
+2025-11-15 13:37:13,771 [INFO] All visualizations saved to training_logs/session_20251115_133451
+2025-11-15 13:37:13,772 [INFO] Training summary report saved to training_logs/session_20251115_133451/training_summary.txt

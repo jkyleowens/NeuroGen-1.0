@@ -272,6 +272,7 @@ private:
     std::unique_ptr<InputController> input_controller_;
     std::unique_ptr<BrainModuleArchitecture> brain_architecture_;
     std::unordered_map<std::string, std::unique_ptr<SpecializedModule>> modules_;
+    std::unordered_map<std::string, int> module_neuron_counts_;  // Track neuron counts per module
 
     struct AgentMetrics {
         int total_actions = 0;

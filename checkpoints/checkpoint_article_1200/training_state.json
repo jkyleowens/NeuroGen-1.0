@@ -7,23 +7,23 @@
     1.0
   ],
   "metrics": {
-    "articles_processed": 928,
-    "total_reward": 928.0,
+    "articles_processed": 946,
+    "total_reward": 946.0,
     "avg_reward_per_article": 1.0,
     "learning_progress": [
       {
         "epoch": 1,
-        "articles": 464,
-        "reward": 464.0,
+        "articles": 473,
+        "reward": 473.0,
         "avg_reward": 1.0
       },
       {
         "epoch": 2,
-        "articles": 928,
-        "reward": 928.0,
+        "articles": 946,
+        "reward": 946.0,
         "avg_reward": 1.0
       }
     ]
   },
-  "timestamp": "2025-11-15T10:39:56.762028"
+  "timestamp": "2025-11-15T11:09:24.552983"
 }

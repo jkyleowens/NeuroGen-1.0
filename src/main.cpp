@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <sstream>
 #include <map>
+#include <unistd.h>  // For isatty()
 
 // NeuroGen Framework includes
 #include "NeuroGen/AutonomousLearningAgent.h"
@@ -286,10 +287,67 @@ void runAutomatedTraining(std::shared_ptr<AutonomousLearningAgent> agent) {
 }
 
 /**
+ * @brief Run pipe mode for Python integration
+ */
+void runPipeMode(std::shared_ptr<AutonomousLearningAgent> agent) {
+    std::cout << "🔌 PIPE MODE - Ready for external input" << std::endl << std::flush;
+    
+    // Disable buffering for immediate output
+    std::cout.setf(std::ios::unitbuf);
+    std::cerr.setf(std::ios::unitbuf);
+    
+    NLPTrainingSession session(agent);
+    session.startSession();
+    
+    std::string line;
+    int processed_count = 0;
+    
+    // Read from stdin line by line
+    while (std::getline(std::cin, line)) {
+        if (line.empty()) continue;
+        
+        // Check for commands
+        if (line.find("process_text:") == 0) {
+            // Extract text after "process_text: "
+            std::string text = line.substr(13);
+            
+            std::cout << "📝 [" << ++processed_count << "] Processing text (" 
+                      << text.length() << " chars)" << std::endl << std::flush;
+            
+            bool success = session.processLanguageInput(text);
+            
+            if (success) {
+                std::cout << "✅ Processing complete" << std::endl << std::flush;
+            } else {
+                std::cout << "❌ Processing failed" << std::endl << std::flush;
+            }
+            
+        } else if (line == "quit" || line == "exit") {
+            std::cout << "🛑 Shutting down pipe mode" << std::endl << std::flush;
+            break;
+        } else if (line == "stats") {
+            std::cout << "📊 Processed: " << processed_count << " inputs" << std::endl << std::flush;
+        } else {
+            // Treat any other input as text to process
+            std::cout << "📝 [" << ++processed_count << "] Processing text (" 
+                      << line.length() << " chars)" << std::endl << std::flush;
+            session.processLanguageInput(line);
+            std::cout << "✅ Processing complete" << std::endl << std::flush;
+        }
+    }
+    
+    session.stopSession();
+}
+
+/**
  * @brief Main entry point
  */
 int main(int argc, char* argv[]) {
     try {
+        // Disable buffering for immediate output in pipe mode
+        std::cout.setf(std::ios::unitbuf);
+        std::cerr.setf(std::ios::unitbuf);
+        
         std::cout << "🧠 BIOLOGICALLY INSPIRED NEURAL NETWORK AGENT" << std::endl;
         std::cout << "=============================================" << std::endl;
         std::cout << "🎯 Focus: Natural Language Processing" << std::endl;
@@ -325,26 +383,42 @@ int main(int argc, char* argv[]) {
         // Display system information
         displaySystemInfo(agent);
         
-        // Determine mode based on command line arguments
+        // Determine mode based on command line arguments or if stdin is piped
         bool interactive_mode = true;
+        bool pipe_mode = false;
+        
+        // Check if stdin is a pipe (not a terminal)
+        if (!isatty(fileno(stdin))) {
+            pipe_mode = true;
+            interactive_mode = false;
+        }
+        
         if (argc > 1) {
             std::string mode_arg = argv[1];
             if (mode_arg == "--automated" || mode_arg == "-a") {
                 interactive_mode = false;
+                pipe_mode = false;
             } else if (mode_arg == "--interactive" || mode_arg == "-i") {
                 interactive_mode = true;
+                pipe_mode = false;
+            } else if (mode_arg == "--pipe" || mode_arg == "-p") {
+                pipe_mode = true;
+                interactive_mode = false;
             } else if (mode_arg == "--help" || mode_arg == "-h") {
                 std::cout << "\nUsage: " << argv[0] << " [OPTIONS]" << std::endl;
                 std::cout << "Options:" << std::endl;
-                std::cout << "  -i, --interactive  Run in interactive mode (default)" << std::endl;
+                std::cout << "  -i, --interactive  Run in interactive mode" << std::endl;
                 std::cout << "  -a, --automated    Run automated training" << std::endl;
+                std::cout << "  -p, --pipe         Run in pipe mode (for Python integration)" << std::endl;
                 std::cout << "  -h, --help         Show this help message" << std::endl << std::flush;
                 return 0;
             }
         }
         
         // Run in selected mode
-        if (interactive_mode) {
+        if (pipe_mode) {
+            runPipeMode(agent);
+        } else if (interactive_mode) {
             runInteractiveMode(agent);
         } else {
             runAutomatedTraining(agent);

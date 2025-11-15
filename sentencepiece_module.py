@@ -89,7 +89,3 @@ class TokenizerModule:
         if model_file.exists():
             self.load_model(str(model_file))
 
-# Usage example
-tokenizer = TokenizerModule()
-tokenizer.train('corpus.txt', vocab_size=16000)
-tokenizer.save_state('./modules/tokenizer')

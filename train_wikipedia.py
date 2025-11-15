@@ -28,6 +28,7 @@ import signal
 import sentencepiece as spm
 import threading
 import queue
+from sentencepiece_module import TokenizerModule
 
 
 class WikipediaDataLoader:
@@ -182,16 +183,18 @@ class WikipediaDataLoader:
 class NeuroGenAgent:
     """Interface to the C++ NeuroGen autonomous agent"""
     
-    def __init__(self, executable_path='./NeuroGen', config=None):
+    def __init__(self, executable_path='./NeuroGen', config=None, tokenizer=None):
         """
         Initialize the NeuroGen agent interface.
         
         Args:
             executable_path: Path to NeuroGen executable
             config: Agent configuration
+            tokenizer: TokenizerModule instance for text processing
         """
         self.executable_path = executable_path
         self.config = config or {}
+        self.tokenizer = tokenizer
         self.process = None
         self.stdout_queue = queue.Queue()
         self.stderr_queue = queue.Queue()
@@ -199,7 +202,8 @@ class NeuroGenAgent:
             'browsing': {'urls_visited': 0, 'pages_read': 0},
             'learning': {'total_reward': 0.0, 'curiosity_score': 0.5},
             'memory': {'working_memory_size': 0, 'episodic_memory_size': 0, 'total_stored': 0},
-            'modules': {}
+            'modules': {},
+            'tokenizer': {'vocab_size': 0, 'tokens_processed': 0}
         }
         self.curiosity_score = 0.5
         
@@ -231,6 +235,11 @@ class NeuroGenAgent:
         
         if not Path(self.executable_path).exists():
             raise FileNotFoundError(f"NeuroGen executable not found: {self.executable_path}")
+        
+        # Update tokenizer stats if available
+        if self.tokenizer:
+            self.stats['tokenizer']['vocab_size'] = self.tokenizer.get_vocab_size()
+            print(f"[NeuroGen] Using tokenizer with vocab size: {self.stats['tokenizer']['vocab_size']}")
         
         # Start the NeuroGen process
         try:
@@ -277,15 +286,35 @@ class NeuroGenAgent:
             content: Article text content
             
         Returns:
-            Result dictionary with reward
+            Result dictionary with reward and token info
         """
         if not self.process or self.process.poll() is not None:
             print("[Warning] NeuroGen process not running")
-            return {'reward': 0.0, 'error': 'Process not running'}
+            return {'reward': 0.0, 'error': 'Process not running', 'tokens': []}
         
         try:
+            # Tokenize content if tokenizer is available
+            tokens = []
+            tokenized_text = content[:2000]
+            
+            if self.tokenizer:
+                try:
+                    # Encode text to token IDs
+                    tokens = self.tokenizer.encode(content[:2000], add_bos=True, add_eos=True)
+                    self.stats['tokenizer']['tokens_processed'] += len(tokens)
+                    
+                    # Convert tokens to string representation for processing
+                    token_pieces = self.tokenizer.encode_as_pieces(content[:2000])
+                    tokenized_text = " ".join(token_pieces[:100])  # Limit to first 100 pieces
+                    
+                    if len(tokens) > 0:
+                        print(f"[Tokenizer] Encoded {len(tokens)} tokens from text")
+                except Exception as e:
+                    print(f"[Warning] Tokenization failed: {e}")
+                    tokenized_text = content[:2000]
+            
             # Send content to NeuroGen via stdin using the command format
-            command = f"process_text: {content[:2000]}\n"
+            command = f"process_text: {tokenized_text}\n"
             content_bytes = command.encode('utf-8', errors='replace')
             self.process.stdin.write(content_bytes)
             self.process.stdin.flush()
@@ -300,18 +329,24 @@ class NeuroGenAgent:
             if stderr:
                 print(f"[NeuroGen STDERR] {stderr.strip()}")
 
-            # Simple reward mechanism (e.g., based on output length)
-            reward = len(stdout.strip()) / 100.0
+            # Enhanced reward mechanism considering tokenization
+            base_reward = len(stdout.strip()) / 100.0
+            token_reward = len(tokens) / 1000.0 if tokens else 0.0
+            reward = base_reward + token_reward
             
-            return {'reward': reward}
+            # Update stats
+            self.stats['browsing']['urls_visited'] += 1
+            self.stats['browsing']['pages_read'] += 1
+            
+            return {'reward': reward, 'tokens': tokens, 'num_tokens': len(tokens)}
             
         except (IOError, BrokenPipeError) as e:
             print(f"[Error] Communication error with NeuroGen process: {e}")
             self.shutdown()
-            return {'reward': 0.0, 'error': str(e)}
+            return {'reward': 0.0, 'error': str(e), 'tokens': []}
         except Exception as e:
             print(f"[Error] An unexpected error occurred in browse_page: {e}")
-            return {'reward': 0.0, 'error': str(e)}
+            return {'reward': 0.0, 'error': str(e), 'tokens': []}
     
     def save(self, path):
         """Save agent state (C++ handles this internally)"""
@@ -322,6 +357,12 @@ class NeuroGenAgent:
         stats_file = save_dir / 'python_stats.json'
         with open(stats_file, 'w') as f:
             json.dump(self.stats, f, indent=2)
+        
+        # Save tokenizer state if available
+        if self.tokenizer:
+            tokenizer_dir = save_dir / 'tokenizer'
+            self.tokenizer.save_state(str(tokenizer_dir))
+            print(f"[NeuroGen] Saved tokenizer state")
         
         print(f"[NeuroGen] Saved state to {path}")
     
@@ -645,17 +686,44 @@ def main():
     print("STEP 2: TRAINING SENTENCEPIECE TOKENIZER")
     print("="*60)
     
-    corpus_path = loader.create_tokenizer_corpus(articles)
+    # Load existing SentencePiece tokenizer model
+    tokenizer_model_path = './nlp_agent_tokenizer.model'
+    tokenizer = TokenizerModule()
+    
+    if not Path(tokenizer_model_path).exists():
+        print(f"\n[Error] Tokenizer model not found: {tokenizer_model_path}")
+        print(f"Please train the tokenizer first using sentencepiece_train.py")
+        print(f"Or create a corpus and train with:")
+        print(f"  corpus_path = loader.create_tokenizer_corpus(articles)")
+        print(f"  python sentencepiece_train.py")
+        sys.exit(1)
+    
+    print(f"\n[Tokenizer] Loading existing tokenizer: {tokenizer_model_path}")
+    tokenizer.load_model(tokenizer_model_path)
+    print(f"✓ Loaded tokenizer with vocab size: {tokenizer.get_vocab_size()}")
+    print(f"✓ Model file: {tokenizer_model_path}")
+    print(f"✓ Vocab file: ./nlp_agent_tokenizer.vocab")
+    
+    # Test the tokenizer
+    test_text = "The autonomous agent learns from Wikipedia articles."
+    test_tokens = tokenizer.encode(test_text, add_bos=True, add_eos=True)
+    test_pieces = tokenizer.encode_as_pieces(test_text)
+    print(f"\n[Tokenizer] Test encoding:")
+    print(f"  Text: {test_text}")
+    print(f"  Tokens: {test_tokens[:10]}... ({len(test_tokens)} total)")
+    print(f"  Pieces: {test_pieces[:10]}... ({len(test_pieces)} total)")
+    print(f"  Decoded: {tokenizer.decode(test_tokens)}")
     
     # Step 3: Initialize agent
     print("\n" + "="*60)
     print("STEP 3: INITIALIZING AUTONOMOUS AGENT")
     print("="*60)
     
-    # Agent configuration
+    # Agent configuration (use actual vocab size from loaded tokenizer)
+    actual_vocab_size = tokenizer.get_vocab_size()
     agent_config = {
         'embedding_dim': args.embedding_dim,
-        'vocab_size': args.vocab_size,
+        'vocab_size': actual_vocab_size,
         'tokenizer': {
             'model_type': 'bpe',
             'max_length': 512
@@ -685,14 +753,15 @@ def main():
         }
     }
     
-    agent = NeuroGenAgent(executable_path='./NeuroGen', config=agent_config)
+    agent = NeuroGenAgent(executable_path='./NeuroGen', config=agent_config, tokenizer=tokenizer)
     
-    print("\nInitializing agent with Wikipedia corpus...")
-    if not agent.initialize(corpus_path=corpus_path):
+    print("\nInitializing agent with tokenizer...")
+    if not agent.initialize(corpus_path=None):
         print("[Error] Failed to initialize agent. Exiting.")
         sys.exit(1)
     
     print("✓ Agent initialized and ready for training")
+    print(f"✓ Tokenizer integrated with {tokenizer.get_vocab_size()} vocabulary size")
     
     # Step 4: Train agent
     print("\n" + "="*60)
@@ -731,6 +800,13 @@ def main():
     print(f"  Working memory: {stats['memory']['working_memory_size']}")
     print(f"  Episodic memory: {stats['memory']['episodic_memory_size']}")
     print(f"  Total memories: {stats['memory']['total_stored']}")
+    
+    print(f"\nTokenizer Performance:")
+    print(f"  Vocabulary size: {stats['tokenizer']['vocab_size']}")
+    print(f"  Tokens processed: {stats['tokenizer']['tokens_processed']}")
+    if stats['tokenizer']['tokens_processed'] > 0 and metrics['articles_processed'] > 0:
+        avg_tokens = stats['tokenizer']['tokens_processed'] / metrics['articles_processed']
+        print(f"  Average tokens/article: {avg_tokens:.1f}")
     
     print(f"\nModule Performance:")
     for module_id, perf in stats['modules'].items():

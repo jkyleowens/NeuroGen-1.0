@@ -1,19 +1,33 @@
 {
-  "total_epochs": 1,
-  "total_articles": 93,
-  "final_reward": 93.0,
+  "total_epochs": 3,
+  "total_articles": 1419,
+  "final_reward": 1419.0,
   "episode_rewards": [
+    1.0,
+    1.0,
     1.0
   ],
   "metrics": {
-    "articles_processed": 93,
-    "total_reward": 93.0,
+    "articles_processed": 1419,
+    "total_reward": 1419.0,
     "avg_reward_per_article": 1.0,
     "learning_progress": [
       {
         "epoch": 1,
-        "articles": 93,
-        "reward": 93.0,
+        "articles": 473,
+        "reward": 473.0,
+        "avg_reward": 1.0
+      },
+      {
+        "epoch": 2,
+        "articles": 946,
+        "reward": 946.0,
+        "avg_reward": 1.0
+      },
+      {
+        "epoch": 3,
+        "articles": 1419,
+        "reward": 1419.0,
         "avg_reward": 1.0
       }
     ]
@@ -49,5 +63,5 @@
       "learning_rate": 0.01
     }
   },
-  "completed_at": "2025-11-13T17:43:06.529242"
+  "completed_at": "2025-11-15T11:09:46.861332"
 }

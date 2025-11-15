@@ -215,7 +215,7 @@ void runInteractiveMode(std::shared_ptr<AutonomousLearningAgent> agent) {
         } else if (input == "save") {
             std::cout << "💾 Saving current state..." << std::endl;
             // Save using available method
-            if (agent && agent->saveAgentState("nlp_checkpoint")) {
+            if (agent && agent->saveAgentState("neural_network_state")) {
                 std::cout << "✅ State saved successfully" << std::endl;
             } else {
                 std::cout << "❌ Failed to save state" << std::endl;
@@ -365,17 +365,26 @@ int main(int argc, char* argv[]) {
         config.stdp_learning_rate = 0.01;    // Increased learning rate to compensate
         
         std::cout << "🔧 Initializing NLP-focused neural architecture..." << std::endl << std::flush;
-        
+
         // Create autonomous learning agent
         auto agent = std::make_shared<AutonomousLearningAgent>(config);
-        
+
         // Initialize agent
         if (!agent->initialize(false)) {  // Don't reset existing model
             std::cerr << "❌ Failed to initialize agent" << std::endl << std::flush;
             return -1;
         }
-        
+
         std::cout << "✅ Agent initialized successfully" << std::endl << std::flush;
+
+        // Try to load saved state from previous session
+        std::string save_path = "neural_network_state";
+        std::cout << "\n🔍 Checking for saved neural network state..." << std::endl << std::flush;
+        if (agent->loadAgentState(save_path)) {
+            std::cout << "✅ Successfully loaded previous training state" << std::endl << std::flush;
+        } else {
+            std::cout << "ℹ️  No previous state found - starting with fresh network" << std::endl << std::flush;
+        }
         
         // Display system information
         displaySystemInfo(agent);
@@ -422,7 +431,7 @@ int main(int argc, char* argv[]) {
         }
         
         std::cout << "\n💾 Saving final state..." << std::endl << std::flush;
-        if (agent->saveAgentState("nlp_final_state")) {
+        if (agent->saveAgentState("neural_network_state")) {
             std::cout << "✅ Final state saved successfully" << std::endl << std::flush;
         } else {
             std::cout << "⚠️  Warning: Failed to save final state" << std::endl << std::flush;

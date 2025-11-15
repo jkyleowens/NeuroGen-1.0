@@ -685,16 +685,41 @@ bool AutonomousLearningAgent::saveAgentState(const std::string& save_path) {
     try {
         std::filesystem::create_directories(save_path);
         std::cout << "💾 Saving agent state to: " << save_path << std::endl << std::flush;
-        
-        // Save basic state info
-        std::ofstream state_file(save_path + "/agent_state.txt");
+
+        // Save brain architecture (all neural modules)
+        if (brain_architecture_) {
+            if (!brain_architecture_->saveLearningState(save_path, "checkpoint")) {
+                std::cerr << "⚠️  Warning: Failed to save brain architecture state" << std::endl << std::flush;
+            } else {
+                std::cout << "✅ Brain architecture state saved" << std::endl << std::flush;
+            }
+        }
+
+        // Save agent metadata and hyperparameters
+        std::ofstream state_file(save_path + "/agent_metadata.txt");
         if (state_file.is_open()) {
             state_file << "Timestamp: " << getCurrentTimestamp() << "\n";
             state_file << "Total Neurons: " << getTotalNeuronCount() << "\n";
             state_file << "Exploration Rate: " << exploration_rate_ << "\n";
+            state_file << "Total Actions: " << metrics_.total_actions << "\n";
+            state_file << "Successful Actions: " << metrics_.successful_actions << "\n";
+            state_file << "Average Reward: " << metrics_.average_reward << "\n";
             state_file.close();
+            std::cout << "✅ Agent metadata saved" << std::endl << std::flush;
         }
-        
+
+        // Save binary state for quick loading
+        std::ofstream binary_state(save_path + "/agent_state.bin", std::ios::binary);
+        if (binary_state.is_open()) {
+            binary_state.write(reinterpret_cast<const char*>(&exploration_rate_), sizeof(exploration_rate_));
+            binary_state.write(reinterpret_cast<const char*>(&metrics_.total_actions), sizeof(metrics_.total_actions));
+            binary_state.write(reinterpret_cast<const char*>(&metrics_.successful_actions), sizeof(metrics_.successful_actions));
+            binary_state.write(reinterpret_cast<const char*>(&metrics_.average_reward), sizeof(metrics_.average_reward));
+            binary_state.close();
+            std::cout << "✅ Agent binary state saved" << std::endl << std::flush;
+        }
+
+        std::cout << "💾 Agent state saved successfully to: " << save_path << std::endl << std::flush;
         return true;
     } catch (const std::exception& e) {
         std::cerr << "❌ Failed to save agent state: " << e.what() << std::endl << std::flush;
@@ -703,8 +728,61 @@ bool AutonomousLearningAgent::saveAgentState(const std::string& save_path) {
 }
 
 bool AutonomousLearningAgent::loadAgentState(const std::string& load_path) {
-    std::cout << "📂 Loading agent state from: " << load_path << std::endl << std::flush;
-    return true;
+    try {
+        std::cout << "📂 Loading agent state from: " << load_path << std::endl << std::flush;
+
+        // Check if save directory exists
+        if (!std::filesystem::exists(load_path)) {
+            std::cout << "ℹ️  No saved state found at: " << load_path << std::endl << std::flush;
+            std::cout << "ℹ️  Starting with fresh neural network initialization" << std::endl << std::flush;
+            return false;
+        }
+
+        // Load brain architecture (all neural modules)
+        if (brain_architecture_) {
+            if (!brain_architecture_->loadLearningState(load_path, "checkpoint")) {
+                std::cerr << "⚠️  Warning: Failed to load brain architecture state" << std::endl << std::flush;
+            } else {
+                std::cout << "✅ Brain architecture state loaded" << std::endl << std::flush;
+            }
+        }
+
+        // Load binary state if available
+        std::string binary_path = load_path + "/agent_state.bin";
+        if (std::filesystem::exists(binary_path)) {
+            std::ifstream binary_state(binary_path, std::ios::binary);
+            if (binary_state.is_open()) {
+                binary_state.read(reinterpret_cast<char*>(&exploration_rate_), sizeof(exploration_rate_));
+                binary_state.read(reinterpret_cast<char*>(&metrics_.total_actions), sizeof(metrics_.total_actions));
+                binary_state.read(reinterpret_cast<char*>(&metrics_.successful_actions), sizeof(metrics_.successful_actions));
+                binary_state.read(reinterpret_cast<char*>(&metrics_.average_reward), sizeof(metrics_.average_reward));
+                binary_state.close();
+                std::cout << "✅ Agent binary state loaded" << std::endl << std::flush;
+            }
+        }
+
+        // Load and display metadata
+        std::string metadata_path = load_path + "/agent_metadata.txt";
+        if (std::filesystem::exists(metadata_path)) {
+            std::ifstream metadata_file(metadata_path);
+            if (metadata_file.is_open()) {
+                std::cout << "📊 Loaded agent metadata:" << std::endl;
+                std::string line;
+                while (std::getline(metadata_file, line)) {
+                    std::cout << "   " << line << std::endl;
+                }
+                metadata_file.close();
+            }
+        }
+
+        std::cout << "📂 Agent state loaded successfully from: " << load_path << std::endl << std::flush;
+        std::cout << "🧠 Resuming training from previous session" << std::endl << std::flush;
+        return true;
+    } catch (const std::exception& e) {
+        std::cerr << "❌ Failed to load agent state: " << e.what() << std::endl << std::flush;
+        std::cerr << "ℹ️  Starting with fresh neural network initialization" << std::endl << std::flush;
+        return false;
+    }
 }
 
 bool AutonomousLearningAgent::saveModule(const std::string& module_name, const std::string& save_path) {

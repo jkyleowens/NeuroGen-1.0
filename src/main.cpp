@@ -92,12 +92,9 @@ public:
             metrics_.reasoning_score = 0.7f + (static_cast<float>(rand()) / RAND_MAX) * 0.3f;
             metrics_.response_quality = 0.75f + (static_cast<float>(rand()) / RAND_MAX) * 0.25f;
             metrics_.learning_efficiency = static_cast<float>(metrics_.successful_responses) / metrics_.processed_inputs;
-            
-            // Get response after brief processing time
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-            std::string response = agent_->generateLanguageResponse();
-            
-            std::cout << "🤖 Response: " << response << std::endl;
+
+            // Token IDs and decoded text are already output by the C++ agent
+            // No automated response needed - just show processing time
             std::cout << "⏱️  Processing time: " << duration.count() << "ms" << std::endl;
             
             // Display metrics using local tracking

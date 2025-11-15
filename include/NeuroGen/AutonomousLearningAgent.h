@@ -174,6 +174,12 @@ public:
     void updateLanguageMetrics(float comprehension_score);
     std::string generateNextWordPrediction(const std::string& context, const std::vector<float>& neural_output);
 
+    // Streaming token generation interface
+    std::vector<float> getCurrentNeuralOutput() const;
+    int generateNextToken(std::vector<float>& current_state, float temperature = 0.8f);
+    std::string decodeToken(int token_id) const;
+    bool isEndOfSequenceToken(int token_id) const { return token_id == 3; }
+
     // ========================================================================
     // CORE PROCESSING METHODS
     // ========================================================================

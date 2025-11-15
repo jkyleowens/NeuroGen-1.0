@@ -932,9 +932,9 @@ std::string AutonomousLearningAgent::generateLanguageResponse() {
         // If we have generated tokens, decode them
         if (!last_generated_tokens_.empty()) {
             std::cout << "🔤 Decoding " << last_generated_tokens_.size() << " generated tokens..." << std::endl << std::flush;
-            
+
             std::string decoded_text = decodeTokenSequence(last_generated_tokens_);
-            
+
             if (!decoded_text.empty()) {
                 std::cout << "✅ Successfully decoded token sequence" << std::endl << std::flush;
                 return decoded_text;
@@ -958,6 +958,89 @@ std::string AutonomousLearningAgent::generateLanguageResponse() {
         std::cerr << "Failed to generate language response: " << e.what() << std::endl;
         return "Error generating response.";
     }
+}
+
+// ============================================================================
+// STREAMING TOKEN GENERATION INTERFACE
+// ============================================================================
+
+std::vector<float> AutonomousLearningAgent::getCurrentNeuralOutput() const {
+    // Return the current environmental context which contains the neural state
+    // after processing the input
+    if (modules_.count("motor_cortex")) {
+        // Use motor cortex output for language generation
+        std::vector<float> current_context = environmental_context_;
+        return const_cast<AutonomousLearningAgent*>(this)->modules_["motor_cortex"]->process(current_context);
+    }
+
+    // Fallback to environmental context
+    return environmental_context_;
+}
+
+int AutonomousLearningAgent::generateNextToken(std::vector<float>& current_state, float temperature) {
+    // Compute logits from current state
+    std::vector<float> logits = computeTokenLogits(current_state);
+
+    // Sample next token
+    int token_id = sampleToken(logits, temperature);
+
+    // Update state for next iteration (feedback mechanism)
+    // In a real implementation, this would use token embeddings
+    for (size_t j = 0; j < current_state.size() && j < 10; ++j) {
+        current_state[j] += 0.01f * (token_id % 100 - 50);
+    }
+
+    return token_id;
+}
+
+std::string AutonomousLearningAgent::decodeToken(int token_id) const {
+    // Load vocabulary from file (cached after first load)
+    static std::map<int, std::string> vocab_cache;
+    static bool vocab_loaded = false;
+
+    if (!vocab_loaded) {
+        std::ifstream vocab_file("nlp_agent_tokenizer.vocab");
+
+        if (vocab_file.is_open()) {
+            std::string line;
+            int line_num = 0;
+
+            while (std::getline(vocab_file, line) && line_num < 32000) {
+                size_t tab_pos = line.find('\t');
+                if (tab_pos != std::string::npos) {
+                    std::string token = line.substr(0, tab_pos);
+                    vocab_cache[line_num] = token;
+                }
+                line_num++;
+            }
+            vocab_file.close();
+            vocab_loaded = true;
+        } else {
+            vocab_loaded = true; // Don't try again
+        }
+    }
+
+    // Skip special tokens (BOS, PAD, EOS)
+    if (token_id == 0 || token_id == 2 || token_id == 3) {
+        return "";
+    }
+
+    // Look up token in vocabulary
+    if (vocab_cache.count(token_id)) {
+        std::string token = vocab_cache[token_id];
+
+        // Handle SentencePiece special character ▁ (represents space)
+        if (token.length() >= 3 && token[0] == (char)0xE2 &&
+            token[1] == (char)0x96 && token[2] == (char)0x81) {
+            // Return space + rest of token
+            return " " + token.substr(3);
+        }
+
+        return token;
+    }
+
+    // Unknown token
+    return " <unk:" + std::to_string(token_id) + ">";
 }
 
 void AutonomousLearningAgent::execute_action() {

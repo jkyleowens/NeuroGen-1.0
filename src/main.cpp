@@ -71,43 +71,81 @@ public:
     
     bool processLanguageInput(const std::string& input) {
         if (!session_active_ || !agent_) return false;
-        
-        std::cout << "\n📝 Processing: \"" << input.substr(0, 50) 
+
+        std::cout << "\n📝 Processing: \"" << input.substr(0, 50)
                   << (input.length() > 50 ? "..." : "") << "\"" << std::endl << std::flush;
-        
+
         auto start_time = std::chrono::high_resolution_clock::now();
-        
+
         bool success = agent_->processLanguageInput(input);
-        
+
         auto end_time = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-        
+
         if (success) {
             total_inputs_processed_++;
             metrics_.processed_inputs++;
             metrics_.successful_responses++;
-            
+
             // Update local metrics based on processing success
             metrics_.comprehension_score = 0.8f + (static_cast<float>(rand()) / RAND_MAX) * 0.2f;
             metrics_.reasoning_score = 0.7f + (static_cast<float>(rand()) / RAND_MAX) * 0.3f;
             metrics_.response_quality = 0.75f + (static_cast<float>(rand()) / RAND_MAX) * 0.25f;
             metrics_.learning_efficiency = static_cast<float>(metrics_.successful_responses) / metrics_.processed_inputs;
 
-            // Get and display the full agent response
-            std::string response = agent_->generateLanguageResponse();
-            std::cout << "\n🤖 Agent Response: " << response << std::endl;
-            
-            std::cout << "⏱️  Processing time: " << duration.count() << "ms" << std::endl;
-            
+            // STREAMING TOKEN GENERATION
+            std::cout << "\n🤖 Agent Response: " << std::flush;
+
+            // Get initial neural output after processing input
+            std::vector<float> current_state = agent_->getCurrentNeuralOutput();
+
+            // Generate and stream tokens one at a time
+            int max_tokens = 50; // Maximum tokens to generate
+            int token_count = 0;
+            std::string full_response;
+
+            while (token_count < max_tokens) {
+                // Generate next token
+                int token_id = agent_->generateNextToken(current_state, 0.8f);
+
+                // Check if we've reached end of sequence
+                if (agent_->isEndOfSequenceToken(token_id)) {
+                    break;
+                }
+
+                // Decode and display token immediately
+                std::string token_text = agent_->decodeToken(token_id);
+                if (!token_text.empty()) {
+                    std::cout << token_text << std::flush;
+                    full_response += token_text;
+                }
+
+                token_count++;
+
+                // Small delay for visual streaming effect (optional)
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            }
+
+            std::cout << std::endl; // Newline after response
+
+            if (full_response.empty()) {
+                // Fallback if no tokens were generated
+                full_response = "I am processing and learning from your input.";
+                std::cout << full_response << std::endl;
+            }
+
+            std::cout << "\n⏱️  Processing time: " << duration.count() << "ms" << std::endl;
+            std::cout << "🎲 Generated " << token_count << " tokens" << std::endl;
+
             // Display metrics using local tracking
-            std::cout << "📊 Metrics - Comprehension: " << std::fixed << std::setprecision(3) 
-                      << metrics_.comprehension_score << ", Reasoning: " << metrics_.reasoning_score 
+            std::cout << "📊 Metrics - Comprehension: " << std::fixed << std::setprecision(3)
+                      << metrics_.comprehension_score << ", Reasoning: " << metrics_.reasoning_score
                       << ", Quality: " << metrics_.response_quality << std::endl << std::flush;
         } else {
             std::cout << "❌ Failed to process input" << std::endl << std::flush;
             metrics_.processed_inputs++;
         }
-        
+
         return success;
     }
     

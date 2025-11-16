@@ -1108,22 +1108,95 @@ class NeuroGenAgent:
             return {'reward': 0.0, 'error': str(e), 'tokens': []}
     
     def save(self, path):
-        """Save agent state (C++ handles this internally)"""
+        """Save agent state including neural network weights"""
         save_dir = Path(path)
         save_dir.mkdir(parents=True, exist_ok=True)
         
-        # Save Python-side stats
+        print(f"\n[Save] Saving agent to: {path}")
+        
+        # 1. Command C++ agent to save its neural network state
+        if self.process and self.process.poll() is None:
+            try:
+                # Send save command to C++ agent
+                command = f"save_model: {save_dir.absolute()}\n"
+                self.process.stdin.write(command.encode('utf-8'))
+                self.process.stdin.flush()
+                
+                # Wait for confirmation
+                stdout, stderr = self._wait_for_response(timeout=5.0)
+                if stdout and "[Save]" in stdout:
+                    print(f"[NeuroGen] C++ model saved successfully")
+                else:
+                    print(f"[Warning] No save confirmation from C++ agent")
+                    
+            except Exception as e:
+                print(f"[Warning] Error saving C++ model: {e}")
+        
+        # 2. Save Python-side stats
         stats_file = save_dir / 'python_stats.json'
         with open(stats_file, 'w') as f:
             json.dump(self.stats, f, indent=2)
+        print(f"[Save] Python stats saved: {stats_file}")
         
-        # Save tokenizer state if available
+        # 3. Save tokenizer state if available
         if self.tokenizer:
             tokenizer_dir = save_dir / 'tokenizer'
-            self.tokenizer.save_state(str(tokenizer_dir))
-            print(f"[NeuroGen] Saved tokenizer state")
+            tokenizer_dir.mkdir(parents=True, exist_ok=True)
+            # Copy tokenizer model files
+            import shutil
+            if Path('nlp_agent_tokenizer.model').exists():
+                shutil.copy2('nlp_agent_tokenizer.model', tokenizer_dir / 'tokenizer.model')
+            if Path('nlp_agent_tokenizer.vocab').exists():
+                shutil.copy2('nlp_agent_tokenizer.vocab', tokenizer_dir / 'tokenizer.vocab')
+            print(f"[Save] Tokenizer files saved: {tokenizer_dir}")
         
-        print(f"[NeuroGen] Saved state to {path}")
+        print(f"[Save] Agent state saved successfully to: {path}\n")
+    
+    def load(self, path):
+        """Load agent state including neural network weights"""
+        load_dir = Path(path)
+        
+        if not load_dir.exists():
+            print(f"[Load Error] Directory does not exist: {path}")
+            return False
+        
+        print(f"\n[Load] Loading agent from: {path}")
+        
+        # 1. Command C++ agent to load its neural network state
+        if self.process and self.process.poll() is None:
+            try:
+                # Send load command to C++ agent
+                command = f"load_model: {load_dir.absolute()}\n"
+                self.process.stdin.write(command.encode('utf-8'))
+                self.process.stdin.flush()
+                
+                # Wait for confirmation
+                stdout, stderr = self._wait_for_response(timeout=5.0)
+                if stdout and "[Load]" in stdout:
+                    print(f"[NeuroGen] C++ model loaded successfully")
+                else:
+                    print(f"[Warning] No load confirmation from C++ agent")
+                    
+            except Exception as e:
+                print(f"[Warning] Error loading C++ model: {e}")
+                return False
+        
+        # 2. Load Python-side stats
+        stats_file = load_dir / 'python_stats.json'
+        if stats_file.exists():
+            with open(stats_file, 'r') as f:
+                self.stats = json.load(f)
+            print(f"[Load] Python stats loaded: {stats_file}")
+        
+        # 3. Load tokenizer state if available
+        tokenizer_dir = load_dir / 'tokenizer'
+        if tokenizer_dir.exists():
+            model_file = tokenizer_dir / 'tokenizer.model'
+            if model_file.exists() and self.tokenizer:
+                print(f"[Load] Tokenizer available: {tokenizer_dir}")
+        
+        print(f"[Load] Agent state loaded successfully from: {path}\n")
+        return True
     
     def get_statistics(self):
         """Get current statistics"""

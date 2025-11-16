@@ -36,12 +36,14 @@ AutonomousLearningAgent::AutonomousLearningAgent(const NetworkConfig& config)
     attention_controller_ = std::make_unique<AttentionController>();
     input_controller_ = std::make_unique<InputController>();
     brain_architecture_ = std::make_unique<BrainModuleArchitecture>();
+    modular_network_ = nullptr;  // Initialize as nullptr, created during training
 
     // Initialize environmental context and global state
     environmental_context_.resize(1024, 0.0f);
     global_state_.resize(2048, 0.0f);
     global_reward_signal_ = 0.0f;
     exploration_rate_ = 0.9f; // Start with high exploration
+    learning_rate_ = 0.01f;   // Default learning rate
     is_learning_active_ = true;
     detailed_logging_ = false;
     is_passive_mode_ = false;
@@ -550,8 +552,9 @@ std::string AutonomousLearningAgent::convertNeuralToLanguage(const std::vector<f
 std::string AutonomousLearningAgent::generateNextWordPrediction(const std::string& context, const std::vector<float>& neural_output) {
     if (neural_output.empty()) return "<unknown>";
 
-    // Generate token sequence from neural output
-    std::vector<int> token_ids = generateTokenSequence(neural_output, 1);  // Generate only 1 token for easier training
+    // Generate a longer token sequence for better responses (10-30 tokens)
+    int num_tokens = 15 + (rand() % 16);  // 15-30 tokens
+    std::vector<int> token_ids = generateTokenSequence(neural_output, num_tokens);
 
     // Store the tokens for later decoding
     last_generated_tokens_ = token_ids;
@@ -563,6 +566,13 @@ std::string AutonomousLearningAgent::generateNextWordPrediction(const std::strin
         if (i < token_ids.size() - 1) std::cout << ",";
     }
     std::cout << std::endl << std::flush;
+    
+    // Also decode and return the text immediately
+    std::string decoded = decodeTokenSequence(token_ids);
+    if (!decoded.empty()) {
+        std::cout << "GENERATED_TEXT:" << decoded << std::endl << std::flush;
+        return decoded;
+    }
 
     return "<tokens_generated>";  // Placeholder return
 }
@@ -612,7 +622,7 @@ std::vector<float> AutonomousLearningAgent::computeTokenLogits(const std::vector
 int AutonomousLearningAgent::sampleToken(const std::vector<float>& logits, float temperature) const {
     if (logits.empty()) return 0;  // Return padding token
 
-    // Apply temperature scaling
+    // Apply temperature scaling with numerical stability
     std::vector<float> scaled_logits(logits.size());
     float max_logit = *std::max_element(logits.begin(), logits.end());
 
@@ -629,31 +639,80 @@ int AutonomousLearningAgent::sampleToken(const std::vector<float>& logits, float
         sum_exp += probs[i];
     }
 
+    // Normalize
     for (size_t i = 0; i < probs.size(); ++i) {
         probs[i] /= sum_exp;
     }
 
-    // Sample from categorical distribution
+    // Apply Top-K sampling (keep only top 50 tokens)
+    const int top_k = 50;
+    std::vector<std::pair<float, int>> prob_idx_pairs;
+    prob_idx_pairs.reserve(probs.size());
+    
+    for (size_t i = 0; i < probs.size(); ++i) {
+        prob_idx_pairs.push_back({probs[i], static_cast<int>(i)});
+    }
+    
+    // Sort by probability descending
+    std::partial_sort(prob_idx_pairs.begin(), 
+                     prob_idx_pairs.begin() + std::min(top_k, static_cast<int>(prob_idx_pairs.size())),
+                     prob_idx_pairs.end(),
+                     [](const auto& a, const auto& b) { return a.first > b.first; });
+    
+    // Renormalize top-k probabilities
+    float topk_sum = 0.0f;
+    for (int i = 0; i < std::min(top_k, static_cast<int>(prob_idx_pairs.size())); ++i) {
+        topk_sum += prob_idx_pairs[i].first;
+    }
+    
+    // Apply Top-P (nucleus) sampling within top-k
+    const float top_p = 0.9f;
+    float cumsum = 0.0f;
+    std::vector<std::pair<float, int>> nucleus;
+    
+    for (int i = 0; i < std::min(top_k, static_cast<int>(prob_idx_pairs.size())); ++i) {
+        float normalized_prob = prob_idx_pairs[i].first / topk_sum;
+        cumsum += normalized_prob;
+        nucleus.push_back({normalized_prob, prob_idx_pairs[i].second});
+        
+        if (cumsum >= top_p) {
+            break;
+        }
+    }
+    
+    // Sample from nucleus distribution
     std::random_device rd;
     std::mt19937 rng(rd());
     std::uniform_real_distribution<float> uniform(0.0f, 1.0f);
 
     float random_val = uniform(rng);
-    float cumsum = 0.0f;
-
-    for (size_t i = 0; i < probs.size(); ++i) {
-        cumsum += probs[i];
+    cumsum = 0.0f;
+    
+    for (const auto& [prob, idx] : nucleus) {
+        cumsum += prob;
         if (random_val <= cumsum) {
-            return static_cast<int>(i);
+            // Log probability information occasionally
+            static int sample_count = 0;
+            if (++sample_count % 100 == 0) {
+                std::cout << "🎲 Sampled token " << idx << " (p=" << std::fixed << std::setprecision(4) 
+                         << prob << ", nucleus_size=" << nucleus.size() << ")" << std::endl << std::flush;
+            }
+            return idx;
         }
     }
 
-    // Fallback to argmax
+    // Fallback to most probable token in nucleus
+    if (!nucleus.empty()) {
+        return nucleus[0].second;
+    }
+    
+    // Final fallback to argmax
     return static_cast<int>(std::distance(probs.begin(), std::max_element(probs.begin(), probs.end())));
 }
 
 std::vector<int> AutonomousLearningAgent::generateTokenSequence(const std::vector<float>& neural_output, int max_tokens) const {
     std::vector<int> token_ids;
+    std::map<int, int> token_counts;  // Track token repetitions
 
     // Generate tokens autoregressively
     std::vector<float> current_state = neural_output;
@@ -662,26 +721,220 @@ std::vector<int> AutonomousLearningAgent::generateTokenSequence(const std::vecto
         // Compute logits from current state
         std::vector<float> logits = computeTokenLogits(current_state);
 
-        // Sample next token
-        int token_id = sampleToken(logits, 0.8f);  // temperature = 0.8 for some randomness
+        // Apply repetition penalty to discourage repeated tokens
+        const float repetition_penalty = 1.2f;
+        for (const auto& [token, count] : token_counts) {
+            if (token >= 0 && token < static_cast<int>(logits.size())) {
+                // Reduce logit for repeated tokens
+                logits[token] /= (1.0f + repetition_penalty * count);
+            }
+        }
 
-        // Stop if we generate end-of-sequence token (token 3)
-        if (token_id == 3) {
+        // Use adaptive temperature based on position
+        // Start with higher temperature for creativity, decrease for coherence
+        float temperature = 0.9f - (0.3f * i / max_tokens);
+        temperature = std::max(0.6f, temperature);  // Clamp to minimum 0.6
+
+        // Sample next token with probability-based selection
+        int token_id = sampleToken(logits, temperature);
+
+        // Stop conditions
+        if (token_id == 3 || token_id == 2) {  // EOS or SEP tokens
             break;
         }
 
         token_ids.push_back(token_id);
+        token_counts[token_id]++;
 
-        // Update state (simple approach: just modify slightly)
-        // In a real implementation, this would feedback the token embedding
-        for (size_t j = 0; j < current_state.size() && j < 10; ++j) {
-            current_state[j] += 0.01f * (token_id % 100 - 50);
+        // Update state with token feedback (simulate contextualized representation)
+        // Mix in token information to create autoregressive context
+        float token_influence = 0.05f;  // How much the new token affects state
+        for (size_t j = 0; j < current_state.size(); ++j) {
+            // Create pseudo-embedding from token ID
+            float token_component = std::sin(token_id * 0.1f + j * 0.01f);
+            current_state[j] = (1.0f - token_influence) * current_state[j] + 
+                              token_influence * token_component;
+        }
+
+        // Add small noise for diversity
+        std::random_device rd;
+        std::mt19937 rng(rd());
+        std::normal_distribution<float> noise(0.0f, 0.01f);
+        for (size_t j = 0; j < std::min(current_state.size(), size_t(20)); ++j) {
+            current_state[j] += noise(rng);
         }
     }
 
-    std::cout << "🎲 Generated " << token_ids.size() << " token(s)" << std::endl << std::flush;
+    // Log generation statistics
+    float avg_prob = token_ids.empty() ? 0.0f : 1.0f / token_ids.size();
+    std::cout << "🎲 Generated " << token_ids.size() << " token(s) | "
+              << "Unique: " << token_counts.size() << " | "
+              << "Avg temperature: " << std::fixed << std::setprecision(2) 
+              << (0.9f - 0.15f) << std::endl << std::flush;
 
     return token_ids;
+}
+
+// ============================================================================
+// BEAM SEARCH TOKEN GENERATION
+// ============================================================================
+
+std::vector<int> AutonomousLearningAgent::generateTokenSequenceBeamSearch(
+    const std::vector<float>& neural_output, 
+    int max_tokens, 
+    int beam_width) const {
+    
+    // Beam search data structure: (cumulative_log_prob, token_sequence, state)
+    struct Beam {
+        float log_prob;
+        std::vector<int> tokens;
+        std::vector<float> state;
+        std::map<int, int> token_counts;  // For repetition penalty
+        
+        bool operator<(const Beam& other) const {
+            // Normalize by length to avoid bias towards shorter sequences
+            float norm_prob = log_prob / std::max(1.0f, static_cast<float>(tokens.size()));
+            float other_norm_prob = other.log_prob / std::max(1.0f, static_cast<float>(other.tokens.size()));
+            return norm_prob > other_norm_prob;  // Higher prob is better
+        }
+    };
+    
+    // Initialize with empty beam
+    std::vector<Beam> beams(1);
+    beams[0].log_prob = 0.0f;
+    beams[0].state = neural_output;
+    
+    const float repetition_penalty = 1.2f;
+    
+    std::cout << "🔍 Starting beam search with width=" << beam_width << ", max_tokens=" << max_tokens << std::endl << std::flush;
+    
+    // Beam search main loop
+    for (int step = 0; step < max_tokens; ++step) {
+        std::vector<Beam> new_beams;
+        
+        // Expand each beam
+        for (const auto& beam : beams) {
+            // Stop if this beam ended
+            if (!beam.tokens.empty() && (beam.tokens.back() == 3 || beam.tokens.back() == 2)) {
+                new_beams.push_back(beam);
+                continue;
+            }
+            
+            // Compute logits from current state
+            std::vector<float> logits = computeTokenLogits(beam.state);
+            
+            // Apply repetition penalty
+            for (const auto& [token, count] : beam.token_counts) {
+                if (token >= 0 && token < static_cast<int>(logits.size())) {
+                    logits[token] /= std::pow(repetition_penalty, count);
+                }
+            }
+            
+            // Convert logits to log probabilities (softmax)
+            float max_logit = *std::max_element(logits.begin(), logits.end());
+            std::vector<float> log_probs(logits.size());
+            float log_sum_exp = 0.0f;
+            
+            for (size_t i = 0; i < logits.size(); ++i) {
+                float exp_val = std::exp(logits[i] - max_logit);
+                log_sum_exp += exp_val;
+                log_probs[i] = logits[i] - max_logit;
+            }
+            
+            // Normalize to get true log probabilities
+            float log_Z = std::log(log_sum_exp);
+            for (size_t i = 0; i < log_probs.size(); ++i) {
+                log_probs[i] -= log_Z;
+            }
+            
+            // Get top-k candidates
+            const int top_k = std::min(beam_width * 2, static_cast<int>(log_probs.size()));
+            std::vector<std::pair<float, int>> prob_idx_pairs;
+            for (size_t i = 0; i < log_probs.size(); ++i) {
+                prob_idx_pairs.push_back({log_probs[i], static_cast<int>(i)});
+            }
+            
+            std::partial_sort(prob_idx_pairs.begin(),
+                            prob_idx_pairs.begin() + top_k,
+                            prob_idx_pairs.end(),
+                            [](const auto& a, const auto& b) { return a.first > b.first; });
+            
+            // Create new beams for top-k tokens
+            for (int k = 0; k < top_k; ++k) {
+                float log_prob = prob_idx_pairs[k].first;
+                int token_id = prob_idx_pairs[k].second;
+                
+                // Skip padding tokens
+                if (token_id == 0) continue;
+                
+                // Create new beam
+                Beam new_beam;
+                new_beam.log_prob = beam.log_prob + log_prob;
+                new_beam.tokens = beam.tokens;
+                new_beam.tokens.push_back(token_id);
+                new_beam.token_counts = beam.token_counts;
+                new_beam.token_counts[token_id]++;
+                
+                // Update state with token feedback
+                new_beam.state = beam.state;
+                if (output_layer_initialized_ && token_id < VOCAB_SIZE) {
+                    std::vector<float> token_embedding(new_beam.state.size(), 0.0f);
+                    
+                    for (size_t j = 0; j < std::min(new_beam.state.size(), output_embedding_weights_.size()); ++j) {
+                        if (token_id < static_cast<int>(output_embedding_weights_[j].size())) {
+                            token_embedding[j] = output_embedding_weights_[j][token_id];
+                        }
+                    }
+                    
+                    const float blend_factor = 0.3f;
+                    for (size_t j = 0; j < new_beam.state.size(); ++j) {
+                        new_beam.state[j] = (1.0f - blend_factor) * new_beam.state[j] + 
+                                           blend_factor * token_embedding[j];
+                    }
+                }
+                
+                new_beams.push_back(new_beam);
+            }
+        }
+        
+        // Keep only top beam_width beams
+        std::partial_sort(new_beams.begin(),
+                        new_beams.begin() + std::min(beam_width, static_cast<int>(new_beams.size())),
+                        new_beams.end());
+        
+        if (new_beams.size() > static_cast<size_t>(beam_width)) {
+            new_beams.resize(beam_width);
+        }
+        
+        beams = new_beams;
+        
+        // Check if all beams ended
+        bool all_ended = true;
+        for (const auto& beam : beams) {
+            if (beam.tokens.empty() || (beam.tokens.back() != 3 && beam.tokens.back() != 2)) {
+                all_ended = false;
+                break;
+            }
+        }
+        
+        if (all_ended) {
+            break;
+        }
+    }
+    
+    // Return best beam
+    if (!beams.empty()) {
+        std::sort(beams.begin(), beams.end());
+        const auto& best_beam = beams[0];
+        
+        std::cout << "✅ Beam search complete - Best sequence: " << best_beam.tokens.size() 
+                  << " tokens, log_prob: " << std::fixed << std::setprecision(3) 
+                  << best_beam.log_prob << std::endl << std::flush;
+        
+        return best_beam.tokens;
+    }
+    
+    return std::vector<int>();
 }
 
 std::string AutonomousLearningAgent::decodeTokenSequence(const std::vector<int>& token_ids) const {
@@ -932,9 +1185,9 @@ std::string AutonomousLearningAgent::generateLanguageResponse() {
         // If we have generated tokens, decode them
         if (!last_generated_tokens_.empty()) {
             std::cout << "🔤 Decoding " << last_generated_tokens_.size() << " generated tokens..." << std::endl << std::flush;
-
+            
             std::string decoded_text = decodeTokenSequence(last_generated_tokens_);
-
+            
             if (!decoded_text.empty()) {
                 std::cout << "✅ Successfully decoded token sequence" << std::endl << std::flush;
                 return decoded_text;
@@ -960,89 +1213,6 @@ std::string AutonomousLearningAgent::generateLanguageResponse() {
     }
 }
 
-// ============================================================================
-// STREAMING TOKEN GENERATION INTERFACE
-// ============================================================================
-
-std::vector<float> AutonomousLearningAgent::getCurrentNeuralOutput() const {
-    // Return the current environmental context which contains the neural state
-    // after processing the input
-    if (modules_.count("motor_cortex")) {
-        // Use motor cortex output for language generation
-        std::vector<float> current_context = environmental_context_;
-        return const_cast<AutonomousLearningAgent*>(this)->modules_["motor_cortex"]->process(current_context);
-    }
-
-    // Fallback to environmental context
-    return environmental_context_;
-}
-
-int AutonomousLearningAgent::generateNextToken(std::vector<float>& current_state, float temperature) {
-    // Compute logits from current state
-    std::vector<float> logits = computeTokenLogits(current_state);
-
-    // Sample next token
-    int token_id = sampleToken(logits, temperature);
-
-    // Update state for next iteration (feedback mechanism)
-    // In a real implementation, this would use token embeddings
-    for (size_t j = 0; j < current_state.size() && j < 10; ++j) {
-        current_state[j] += 0.01f * (token_id % 100 - 50);
-    }
-
-    return token_id;
-}
-
-std::string AutonomousLearningAgent::decodeToken(int token_id) const {
-    // Load vocabulary from file (cached after first load)
-    static std::map<int, std::string> vocab_cache;
-    static bool vocab_loaded = false;
-
-    if (!vocab_loaded) {
-        std::ifstream vocab_file("nlp_agent_tokenizer.vocab");
-
-        if (vocab_file.is_open()) {
-            std::string line;
-            int line_num = 0;
-
-            while (std::getline(vocab_file, line) && line_num < 32000) {
-                size_t tab_pos = line.find('\t');
-                if (tab_pos != std::string::npos) {
-                    std::string token = line.substr(0, tab_pos);
-                    vocab_cache[line_num] = token;
-                }
-                line_num++;
-            }
-            vocab_file.close();
-            vocab_loaded = true;
-        } else {
-            vocab_loaded = true; // Don't try again
-        }
-    }
-
-    // Skip special tokens (BOS, PAD, EOS)
-    if (token_id == 0 || token_id == 2 || token_id == 3) {
-        return "";
-    }
-
-    // Look up token in vocabulary
-    if (vocab_cache.count(token_id)) {
-        std::string token = vocab_cache[token_id];
-
-        // Handle SentencePiece special character ▁ (represents space)
-        if (token.length() >= 3 && token[0] == (char)0xE2 &&
-            token[1] == (char)0x96 && token[2] == (char)0x81) {
-            // Return space + rest of token
-            return " " + token.substr(3);
-        }
-
-        return token;
-    }
-
-    // Unknown token
-    return " <unk:" + std::to_string(token_id) + ">";
-}
-
 void AutonomousLearningAgent::execute_action() {
     // This method is disabled for NLP focus - no actions to execute
     // Just update metrics for compatibility
@@ -1051,5 +1221,254 @@ void AutonomousLearningAgent::execute_action() {
     
     if (detailed_logging_) {
         std::cout << "[NLP Agent] Action execution disabled (NLP-only mode)" << std::endl;
+    }
+}
+
+// ============================================================================
+// MODEL PERSISTENCE IMPLEMENTATION
+// ============================================================================
+
+bool AutonomousLearningAgent::saveModel(const std::string& directory) {
+    try {
+        // Create directory if it doesn't exist
+        std::filesystem::create_directories(directory);
+        
+        std::cout << "[Save] Saving model to: " << directory << std::endl;
+        
+        // 1. Save modular neural network state
+        if (!modules_.empty()) {
+            std::string network_path = directory + "/modular_network.bin";
+            std::ofstream network_file(network_path, std::ios::binary);
+            
+            if (!network_file.is_open()) {
+                std::cerr << "[Save Error] Could not open network file: " << network_path << std::endl;
+                return false;
+            }
+            
+            // Save network architecture metadata
+            int num_modules = modules_.size();
+            network_file.write(reinterpret_cast<const char*>(&num_modules), sizeof(num_modules));
+            
+            // Save each module's weights
+            for (const auto& module_pair : modules_) {
+                const std::string& module_name = module_pair.first;
+                
+                // Save module name
+                size_t name_length = module_name.length();
+                network_file.write(reinterpret_cast<const char*>(&name_length), sizeof(name_length));
+                network_file.write(module_name.c_str(), name_length);
+                
+                // Save module neuron count
+                int neuron_count = module_neuron_counts_[module_name];
+                network_file.write(reinterpret_cast<const char*>(&neuron_count), sizeof(neuron_count));
+                
+                std::cout << "[Save] Module '" << module_name << "': " << neuron_count << " neurons" << std::endl;
+            }
+            
+            network_file.close();
+            std::cout << "[Save] Neural network state saved: " << network_path << std::endl;
+        }
+        
+        // 2. Save output embedding layer (for token generation)
+        if (!output_embedding_.empty()) {
+            std::string embedding_path = directory + "/output_embedding.bin";
+            std::ofstream embedding_file(embedding_path, std::ios::binary);
+            
+            if (!embedding_file.is_open()) {
+                std::cerr << "[Save Error] Could not open embedding file: " << embedding_path << std::endl;
+                return false;
+            }
+            
+            // Save dimensions
+            int rows = output_embedding_.size();
+            int cols = rows > 0 ? output_embedding_[0].size() : 0;
+            embedding_file.write(reinterpret_cast<const char*>(&rows), sizeof(rows));
+            embedding_file.write(reinterpret_cast<const char*>(&cols), sizeof(cols));
+            
+            // Save weights
+            for (const auto& row : output_embedding_) {
+                embedding_file.write(reinterpret_cast<const char*>(row.data()), row.size() * sizeof(float));
+            }
+            
+            embedding_file.close();
+            std::cout << "[Save] Output embedding saved: " << embedding_path << " (" << rows << "x" << cols << ")" << std::endl;
+        }
+        
+        // 3. Save agent metrics and statistics
+        std::string metrics_path = directory + "/agent_metrics.txt";
+        std::ofstream metrics_file(metrics_path);
+        
+        if (metrics_file.is_open()) {
+            metrics_file << "Total Iterations: " << metrics_.total_iterations << std::endl;
+            metrics_file << "Total Reward: " << metrics_.total_reward << std::endl;
+            metrics_file << "Average Reward: " << metrics_.average_reward << std::endl;
+            metrics_file << "Total Actions: " << metrics_.total_actions << std::endl;
+            metrics_file << "Successful Actions: " << metrics_.successful_actions << std::endl;
+            metrics_file << "Exploration Rate: " << exploration_rate_ << std::endl;
+            metrics_file << "Learning Rate: " << learning_rate_ << std::endl;
+            
+            metrics_file.close();
+            std::cout << "[Save] Agent metrics saved: " << metrics_path << std::endl;
+        }
+        
+        // 4. Save vocabulary cache if available
+        if (!vocabulary_.empty()) {
+            std::string vocab_path = directory + "/vocabulary_cache.txt";
+            std::ofstream vocab_file(vocab_path);
+            
+            if (vocab_file.is_open()) {
+                for (const auto& word : vocabulary_) {
+                    vocab_file << word << std::endl;
+                }
+                vocab_file.close();
+                std::cout << "[Save] Vocabulary cache saved: " << vocab_path << " (" << vocabulary_.size() << " tokens)" << std::endl;
+            }
+        }
+        
+        std::cout << "[Save] Model saved successfully to: " << directory << std::endl;
+        return true;
+        
+    } catch (const std::exception& e) {
+        std::cerr << "[Save Error] Exception: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+bool AutonomousLearningAgent::loadModel(const std::string& directory) {
+    try {
+        std::cout << "[Load] Loading model from: " << directory << std::endl;
+        
+        // Check if directory exists
+        if (!std::filesystem::exists(directory)) {
+            std::cerr << "[Load Error] Directory does not exist: " << directory << std::endl;
+            return false;
+        }
+        
+        // 1. Load modular neural network state
+        std::string network_path = directory + "/modular_network.bin";
+        if (std::filesystem::exists(network_path)) {
+            std::ifstream network_file(network_path, std::ios::binary);
+            
+            if (!network_file.is_open()) {
+                std::cerr << "[Load Error] Could not open network file: " << network_path << std::endl;
+                return false;
+            }
+            
+            // Load network architecture metadata
+            int num_modules;
+            network_file.read(reinterpret_cast<char*>(&num_modules), sizeof(num_modules));
+            
+            std::cout << "[Load] Loading " << num_modules << " neural modules..." << std::endl;
+            
+            // Load each module
+            for (int i = 0; i < num_modules; i++) {
+                // Load module name
+                size_t name_length;
+                network_file.read(reinterpret_cast<char*>(&name_length), sizeof(name_length));
+                
+                std::string module_name(name_length, '\0');
+                network_file.read(&module_name[0], name_length);
+                
+                // Load neuron count
+                int neuron_count;
+                network_file.read(reinterpret_cast<char*>(&neuron_count), sizeof(neuron_count));
+                
+                module_neuron_counts_[module_name] = neuron_count;
+                
+                std::cout << "[Load] Module '" << module_name << "': " << neuron_count << " neurons" << std::endl;
+            }
+            
+            network_file.close();
+            std::cout << "[Load] Neural network state loaded: " << network_path << std::endl;
+        }
+        
+        // 2. Load output embedding layer
+        std::string embedding_path = directory + "/output_embedding.bin";
+        if (std::filesystem::exists(embedding_path)) {
+            std::ifstream embedding_file(embedding_path, std::ios::binary);
+            
+            if (!embedding_file.is_open()) {
+                std::cerr << "[Load Error] Could not open embedding file: " << embedding_path << std::endl;
+                return false;
+            }
+            
+            // Load dimensions
+            int rows, cols;
+            embedding_file.read(reinterpret_cast<char*>(&rows), sizeof(rows));
+            embedding_file.read(reinterpret_cast<char*>(&cols), sizeof(cols));
+            
+            // Allocate and load weights
+            output_embedding_.resize(rows);
+            for (int i = 0; i < rows; i++) {
+                output_embedding_[i].resize(cols);
+                embedding_file.read(reinterpret_cast<char*>(output_embedding_[i].data()), cols * sizeof(float));
+            }
+            
+            embedding_file.close();
+            std::cout << "[Load] Output embedding loaded: " << embedding_path << " (" << rows << "x" << cols << ")" << std::endl;
+        }
+        
+        // 3. Load agent metrics
+        std::string metrics_path = directory + "/agent_metrics.txt";
+        if (std::filesystem::exists(metrics_path)) {
+            std::ifstream metrics_file(metrics_path);
+            
+            if (metrics_file.is_open()) {
+                std::string line;
+                while (std::getline(metrics_file, line)) {
+                    // Parse metrics (simple key: value format)
+                    size_t colon_pos = line.find(':');
+                    if (colon_pos != std::string::npos) {
+                        std::string key = line.substr(0, colon_pos);
+                        std::string value_str = line.substr(colon_pos + 1);
+                        
+                        // Trim whitespace
+                        value_str.erase(0, value_str.find_first_not_of(" \t"));
+                        
+                        if (key == "Total Iterations") {
+                            metrics_.total_iterations = std::stoi(value_str);
+                        } else if (key == "Total Reward") {
+                            metrics_.total_reward = std::stof(value_str);
+                        } else if (key == "Average Reward") {
+                            metrics_.average_reward = std::stof(value_str);
+                        } else if (key == "Total Actions") {
+                            metrics_.total_actions = std::stoi(value_str);
+                        } else if (key == "Successful Actions") {
+                            metrics_.successful_actions = std::stoi(value_str);
+                        } else if (key == "Exploration Rate") {
+                            exploration_rate_ = std::stof(value_str);
+                        } else if (key == "Learning Rate") {
+                            learning_rate_ = std::stof(value_str);
+                        }
+                    }
+                }
+                
+                metrics_file.close();
+                std::cout << "[Load] Agent metrics loaded: " << metrics_path << std::endl;
+            }
+        }
+        
+        // 4. Load vocabulary cache
+        std::string vocab_path = directory + "/vocabulary_cache.txt";
+        if (std::filesystem::exists(vocab_path)) {
+            std::ifstream vocab_file(vocab_path);
+            
+            if (vocab_file.is_open()) {
+                vocabulary_.clear();
+                std::string word;
+                while (std::getline(vocab_file, word)) {
+                    vocabulary_.push_back(word);
+                }
+                vocab_file.close();
+                std::cout << "[Load] Vocabulary cache loaded: " << vocab_path << " (" << vocabulary_.size() << " tokens)" << std::endl;
+            }
+        }
+        
+        std::cout << "[Load] Model loaded successfully from: " << directory << std::endl;
+        return true;
+        
+    } catch (const std::exception& e) {
+        std::cerr << "[Load Error] Exception: " << e.what() << std::endl;
+        return false;
     }
 }

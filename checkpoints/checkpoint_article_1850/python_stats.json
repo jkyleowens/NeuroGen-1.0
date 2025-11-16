@@ -1,0 +1,20 @@
+{
+  "browsing": {
+    "urls_visited": 1850,
+    "pages_read": 1850
+  },
+  "learning": {
+    "total_reward": 0.0,
+    "curiosity_score": 0.5
+  },
+  "memory": {
+    "working_memory_size": 0,
+    "episodic_memory_size": 0,
+    "total_stored": 0
+  },
+  "modules": {},
+  "tokenizer": {
+    "vocab_size": 32000,
+    "tokens_processed": 21768500
+  }
+}

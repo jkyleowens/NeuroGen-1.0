@@ -96,6 +96,10 @@ public:
     void update(float dt);
     void shutdown();
 
+    // Model Persistence
+    bool saveModel(const std::string& directory);
+    bool loadModel(const std::string& directory);
+
     // Autonomous Learning Control
     void startAutonomousLearning();
     void stopAutonomousLearning();
@@ -173,12 +177,6 @@ public:
     std::string generateLanguageResponse();
     void updateLanguageMetrics(float comprehension_score);
     std::string generateNextWordPrediction(const std::string& context, const std::vector<float>& neural_output);
-
-    // Streaming token generation interface
-    std::vector<float> getCurrentNeuralOutput() const;
-    int generateNextToken(std::vector<float>& current_state, float temperature = 0.8f);
-    std::string decodeToken(int token_id) const;
-    bool isEndOfSequenceToken(int token_id) const { return token_id == 3; }
 
     // ========================================================================
     // CORE PROCESSING METHODS
@@ -279,20 +277,31 @@ private:
     std::unique_ptr<BrainModuleArchitecture> brain_architecture_;
     std::unordered_map<std::string, std::unique_ptr<SpecializedModule>> modules_;
     std::unordered_map<std::string, int> module_neuron_counts_;  // Track neuron counts per module
+    
+    // Modular neural network (for saving/loading)
+    std::unique_ptr<ModularNeuralNetwork> modular_network_;
+    std::unordered_map<std::string, std::unique_ptr<SpecializedModule>> specialized_modules_;
 
     struct AgentMetrics {
         int total_actions = 0;
         int successful_actions = 0;
+        int total_iterations = 0;
         float average_reward = 0.0f;
+        float total_reward = 0.0f;
     };
 
     AgentMetrics metrics_;
+    
+    // Learning parameters
+    float learning_rate_;
 
     // Token generation state
     static constexpr int VOCAB_SIZE = 32000;
     mutable std::vector<std::vector<float>> output_embedding_weights_;  // Neural output -> token logits projection
+    mutable std::vector<std::vector<float>> output_embedding_;  // Output embedding layer for save/load
     mutable bool output_layer_initialized_ = false;
     mutable std::vector<int> last_generated_tokens_;  // Store last generated token IDs
+    mutable std::vector<std::string> vocabulary_;  // Vocabulary cache
 
     // ========================================================================
     // INTERNAL METHODS
@@ -363,6 +372,9 @@ private:
     std::vector<float> computeTokenLogits(const std::vector<float>& neural_output) const;
     int sampleToken(const std::vector<float>& logits, float temperature = 1.0f) const;
     std::vector<int> generateTokenSequence(const std::vector<float>& neural_output, int max_tokens = 20) const;
+    std::vector<int> generateTokenSequenceBeamSearch(const std::vector<float>& neural_output, 
+                                                      int max_tokens = 20, 
+                                                      int beam_width = 3) const;
     std::string decodeTokenSequence(const std::vector<int>& token_ids) const;
 
     /**

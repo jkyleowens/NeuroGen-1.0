@@ -28,10 +28,8 @@ NVCCFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -arch=sm_75 -O3 
              --expt-relaxed-constexpr --expt-extended-lambda -ccbin /usr/bin/clang++
 
 # Linker Flags
-LDFLAGS := -L/usr/lib
-LDLIBS := -lX11
-# Temporarily disabled: -ljsoncpp -lXtst
-# Temporarily disabled CUDA libraries: -lcudart -lcurand -lcublas -lcufft
+LDFLAGS := -L$(CUDA_PATH)/lib64 -L/usr/lib
+LDLIBS := -ljsoncpp -lcudart -lcurand -lcublas -lcufft -lX11 -lXtst
 
 # --- Source Files ---
 
@@ -42,9 +40,7 @@ ALL_CPP_SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
 EXCLUDE_SOURCES := \
     $(SRC_DIR)/NlpAgentImplementation.cpp \
     $(SRC_DIR)/execute_action_temp.cpp \
-    $(SRC_DIR)/DecisionAndActionSystems_fixed.cpp \
-    $(SRC_DIR)/EnhancedLearningSystem.cpp \
-    $(SRC_DIR)/NetworkCUDA.cpp
+    $(SRC_DIR)/DecisionAndActionSystems_fixed.cpp
 
 # Separate main source files
 MAIN_SRC := $(SRC_DIR)/main.cpp
@@ -76,7 +72,7 @@ CUDA_WRAPPER_SOURCES := \
 CUDA_WRAPPER_OBJECTS := $(patsubst $(CUDA_SRC_DIR)/%.cu,$(CUDA_OBJ_DIR)/%.o,$(CUDA_WRAPPER_SOURCES))
 
 # Append CUDA wrapper objects to link line for targets needing EnhancedLearningSystem
-# OBJECTS += $(CUDA_WRAPPER_OBJECTS)  # Temporarily disabled for non-CUDA build
+OBJECTS += $(CUDA_WRAPPER_OBJECTS)
 
 # --- Dependency Files ---
 DEPS := $(patsubst $(SRC_DIR)/%.cpp,$(DEPS_DIR)/%.d,$(CPP_SOURCES))

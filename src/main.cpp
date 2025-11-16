@@ -71,81 +71,43 @@ public:
     
     bool processLanguageInput(const std::string& input) {
         if (!session_active_ || !agent_) return false;
-
-        std::cout << "\n📝 Processing: \"" << input.substr(0, 50)
+        
+        std::cout << "\n📝 Processing: \"" << input.substr(0, 50) 
                   << (input.length() > 50 ? "..." : "") << "\"" << std::endl << std::flush;
-
+        
         auto start_time = std::chrono::high_resolution_clock::now();
-
+        
         bool success = agent_->processLanguageInput(input);
-
+        
         auto end_time = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-
+        
         if (success) {
             total_inputs_processed_++;
             metrics_.processed_inputs++;
             metrics_.successful_responses++;
-
+            
             // Update local metrics based on processing success
             metrics_.comprehension_score = 0.8f + (static_cast<float>(rand()) / RAND_MAX) * 0.2f;
             metrics_.reasoning_score = 0.7f + (static_cast<float>(rand()) / RAND_MAX) * 0.3f;
             metrics_.response_quality = 0.75f + (static_cast<float>(rand()) / RAND_MAX) * 0.25f;
             metrics_.learning_efficiency = static_cast<float>(metrics_.successful_responses) / metrics_.processed_inputs;
 
-            // STREAMING TOKEN GENERATION
-            std::cout << "\n🤖 Agent Response: " << std::flush;
-
-            // Get initial neural output after processing input
-            std::vector<float> current_state = agent_->getCurrentNeuralOutput();
-
-            // Generate and stream tokens one at a time
-            int max_tokens = 50; // Maximum tokens to generate
-            int token_count = 0;
-            std::string full_response;
-
-            while (token_count < max_tokens) {
-                // Generate next token
-                int token_id = agent_->generateNextToken(current_state, 0.8f);
-
-                // Check if we've reached end of sequence
-                if (agent_->isEndOfSequenceToken(token_id)) {
-                    break;
-                }
-
-                // Decode and display token immediately
-                std::string token_text = agent_->decodeToken(token_id);
-                if (!token_text.empty()) {
-                    std::cout << token_text << std::flush;
-                    full_response += token_text;
-                }
-
-                token_count++;
-
-                // Small delay for visual streaming effect (optional)
-                std::this_thread::sleep_for(std::chrono::milliseconds(50));
-            }
-
-            std::cout << std::endl; // Newline after response
-
-            if (full_response.empty()) {
-                // Fallback if no tokens were generated
-                full_response = "I am processing and learning from your input.";
-                std::cout << full_response << std::endl;
-            }
-
-            std::cout << "\n⏱️  Processing time: " << duration.count() << "ms" << std::endl;
-            std::cout << "🎲 Generated " << token_count << " tokens" << std::endl;
-
+            // Get and display the full agent response
+            std::string response = agent_->generateLanguageResponse();
+            std::cout << "\n🤖 Agent Response: " << response << std::endl;
+            
+            std::cout << "⏱️  Processing time: " << duration.count() << "ms" << std::endl;
+            
             // Display metrics using local tracking
-            std::cout << "📊 Metrics - Comprehension: " << std::fixed << std::setprecision(3)
-                      << metrics_.comprehension_score << ", Reasoning: " << metrics_.reasoning_score
+            std::cout << "📊 Metrics - Comprehension: " << std::fixed << std::setprecision(3) 
+                      << metrics_.comprehension_score << ", Reasoning: " << metrics_.reasoning_score 
                       << ", Quality: " << metrics_.response_quality << std::endl << std::flush;
         } else {
             std::cout << "❌ Failed to process input" << std::endl << std::flush;
             metrics_.processed_inputs++;
         }
-
+        
         return success;
     }
     
@@ -172,6 +134,11 @@ public:
                   << "%" << std::endl;
         
         std::cout << std::string(80, '=') << std::endl << std::flush;
+    }
+    
+    // Public getter for agent access
+    std::shared_ptr<AutonomousLearningAgent> getAgent() {
+        return agent_;
     }
     
 private:
@@ -253,12 +220,12 @@ void runInteractiveMode(std::shared_ptr<AutonomousLearningAgent> agent) {
             std::cout << "🔄 Resetting learning state..." << std::endl;
             std::cout << "✅ Reset complete" << std::endl << std::flush;
         } else if (input == "save") {
-            std::cout << "💾 Saving current state..." << std::endl;
-            // Save using available method
-            if (agent && agent->saveAgentState("neural_network_state")) {
-                std::cout << "✅ State saved successfully" << std::endl;
+            std::cout << "💾 Saving neural network model..." << std::endl;
+            // Save using saveModel() which includes neural network weights
+            if (agent && agent->saveModel("neural_network_state")) {
+                std::cout << "✅ Model saved successfully to: neural_network_state/" << std::endl;
             } else {
-                std::cout << "❌ Failed to save state" << std::endl;
+                std::cout << "❌ Failed to save model" << std::endl;
             }
             std::cout << std::flush;
         } else {
@@ -357,6 +324,40 @@ void runPipeMode(std::shared_ptr<AutonomousLearningAgent> agent) {
                 std::cout << "✅ Processing complete" << std::endl << std::flush;
             } else {
                 std::cout << "❌ Processing failed" << std::endl << std::flush;
+            }
+            
+        } else if (line.find("save_model:") == 0) {
+            // Extract path after "save_model: "
+            std::string save_path = line.substr(11);
+            // Trim whitespace
+            save_path.erase(0, save_path.find_first_not_of(" \t"));
+            save_path.erase(save_path.find_last_not_of(" \t\n\r") + 1);
+            
+            std::cout << "💾 Saving model to: " << save_path << std::endl << std::flush;
+            
+            bool success = session.getAgent()->saveModel(save_path);
+            
+            if (success) {
+                std::cout << "✅ [Save] Model saved successfully" << std::endl << std::flush;
+            } else {
+                std::cout << "❌ [Save] Failed to save model" << std::endl << std::flush;
+            }
+            
+        } else if (line.find("load_model:") == 0) {
+            // Extract path after "load_model: "
+            std::string load_path = line.substr(11);
+            // Trim whitespace
+            load_path.erase(0, load_path.find_first_not_of(" \t"));
+            load_path.erase(load_path.find_last_not_of(" \t\n\r") + 1);
+            
+            std::cout << "📂 Loading model from: " << load_path << std::endl << std::flush;
+            
+            bool success = session.getAgent()->loadModel(load_path);
+            
+            if (success) {
+                std::cout << "✅ [Load] Model loaded successfully" << std::endl << std::flush;
+            } else {
+                std::cout << "❌ [Load] Failed to load model" << std::endl << std::flush;
             }
             
         } else if (line == "quit" || line == "exit") {

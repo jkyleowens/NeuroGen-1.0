@@ -1,7 +1,7 @@
 {
   "browsing": {
-    "urls_visited": 906,
-    "pages_read": 906
+    "urls_visited": 942,
+    "pages_read": 942
   },
   "learning": {
     "total_reward": 0.0,
@@ -15,7 +15,6 @@
   "modules": {},
   "tokenizer": {
     "vocab_size": 32000,
-    "tokens_processed": 273094,
-    "tokens_generated": 850
+    "tokens_processed": 11039987
   }
 }

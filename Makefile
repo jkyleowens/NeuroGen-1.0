@@ -16,38 +16,33 @@ CUDA_DEPS_DIR := $(DEPS_DIR)/cuda
 # CUDA Path
 CUDA_PATH := /opt/cuda
 
+PYBIND11_INCLUDES = $(shell python3 -m pybind11 --includes)
+
 # Executable Name
 TARGET := NeuroGen
 TARGET_AUTONOMOUS := NeuroGen_Autonomous
 
 # Compiler Flags
 # Note: The -I$(INCLUDE_DIR) flag tells the compilers where to find your header files.
-CXXFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -O3 -g -fPIC -Wall -ferror-limit=50
+CXXFLAGS := -std=c++17 -I$(INCLUDE_DIR) $(PYBIND11_INCLUDES) -I$(CUDA_PATH)/include -O3 -g -fPIC -Wall -ferror-limit=50
 NVCCFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -arch=sm_75 -O3 -g -lineinfo \
              -Xcompiler -fPIC -Xcompiler -Wall -use_fast_math \
              --expt-relaxed-constexpr --expt-extended-lambda -ccbin /usr/bin/clang++
 
 # Linker Flags
-# When CUDA is not available, comment out CUDA paths and libraries
-# LDFLAGS := -L$(CUDA_PATH)/lib64 -L/usr/lib
-# LDLIBS := -ljsoncpp -lcudart -lcurand -lcublas -lcufft -lX11 -lXtst
-
-# CPU-only build (without CUDA)
-LDFLAGS := -L/usr/lib
-LDLIBS := -lX11
+LDFLAGS := -L$(CUDA_PATH)/lib64 -L/usr/lib
+LDLIBS := -ljsoncpp -lcudart -lcurand -lcublas -lcufft -lX11 -lXtst
 
 # --- Source Files ---
 
 # Automatically find all .cpp files then exclude transitional/duplicate sources
 ALL_CPP_SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
 
-# Excluded sources causing duplicate symbol definitions, deprecated, or requiring CUDA
+# Excluded sources causing duplicate symbol definitions or deprecated
 EXCLUDE_SOURCES := \
     $(SRC_DIR)/NlpAgentImplementation.cpp \
     $(SRC_DIR)/execute_action_temp.cpp \
-    $(SRC_DIR)/DecisionAndActionSystems_fixed.cpp \
-    $(SRC_DIR)/EnhancedLearningSystem.cpp \
-    $(SRC_DIR)/NetworkCUDA.cpp
+    $(SRC_DIR)/DecisionAndActionSystems_fixed.cpp
 
 # Separate main source files
 MAIN_SRC := $(SRC_DIR)/main.cpp
@@ -67,24 +62,19 @@ AUTONOMOUS_MAIN_OBJECT := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(AUTONOMOU
 # Combine all object files
 OBJECTS := $(CPP_OBJECTS)
 
-# CUDA source files providing required wrapper symbols and core network functionality
-# To enable CUDA: uncomment these lines when CUDA toolkit is installed
-# CUDA_WRAPPER_SOURCES := \
-#     $(CUDA_SRC_DIR)/CudaKernelWrappers.cu \
-#     $(CUDA_SRC_DIR)/EnhancedSTDPKernel.cu \
-#     $(CUDA_SRC_DIR)/HebbianLearningKernel.cu \
-#     $(CUDA_SRC_DIR)/HomeostaticMechanismsKernel.cu \
-#     $(CUDA_SRC_DIR)/NeuromodulationKernels.cu \
-#     $(CUDA_SRC_DIR)/LearningStateKernels.cu \
-#     $(CUDA_SRC_DIR)/KernelLaunchWrappers.cu \
-#     $(CUDA_SRC_DIR)/NetworkCUDA.cu \
-#     $(CUDA_SRC_DIR)/NetworkCUDA_Interface.cu
+# CUDA source files providing required wrapper symbols
+CUDA_WRAPPER_SOURCES := \
+    $(CUDA_SRC_DIR)/CudaKernelWrappers.cu \
+    $(CUDA_SRC_DIR)/EnhancedSTDPKernel.cu \
+    $(CUDA_SRC_DIR)/HebbianLearningKernel.cu \
+    $(CUDA_SRC_DIR)/HomeostaticMechanismsKernel.cu \
+    $(CUDA_SRC_DIR)/NeuromodulationKernels.cu
 
 # CUDA objects
-# CUDA_WRAPPER_OBJECTS := $(patsubst $(CUDA_SRC_DIR)/%.cu,$(CUDA_OBJ_DIR)/%.o,$(CUDA_WRAPPER_SOURCES))
+CUDA_WRAPPER_OBJECTS := $(patsubst $(CUDA_SRC_DIR)/%.cu,$(CUDA_OBJ_DIR)/%.o,$(CUDA_WRAPPER_SOURCES))
 
 # Append CUDA wrapper objects to link line for targets needing EnhancedLearningSystem
-# OBJECTS += $(CUDA_WRAPPER_OBJECTS)
+OBJECTS += $(CUDA_WRAPPER_OBJECTS)
 
 # --- Dependency Files ---
 DEPS := $(patsubst $(SRC_DIR)/%.cpp,$(DEPS_DIR)/%.d,$(CPP_SOURCES))

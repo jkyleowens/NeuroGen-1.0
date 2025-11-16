@@ -1,6 +1,7 @@
 #include <NeuroGen/NeuralModule.h>
 #include <stdexcept>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <random>
 #include <algorithm>
@@ -574,26 +575,40 @@ bool NeuralModule::load_state(const std::string& filename) {
 bool NeuralModule::initialize_cuda_resources() {
 #if CUDA_AVAILABLE
     try {
+        std::cout << "\n========================================" << std::endl;
+        std::cout << "🚀 CUDA Device Initialization" << std::endl;
+        std::cout << "========================================" << std::endl;
+
         // Check CUDA availability
         int device_count = 0;
         cudaError_t error = cudaGetDeviceCount(&device_count);
 
         if (error != cudaSuccess || device_count == 0) {
-            std::cout << "CUDA not available for module '" << module_name_
-                      << "'. Using CPU-only processing." << std::endl;
+            std::cout << "❌ CUDA Status: NOT AVAILABLE" << std::endl;
+            std::cout << "   Reason: " << (error != cudaSuccess ? cudaGetErrorString(error) : "No CUDA devices found") << std::endl;
+            std::cout << "   Mode: CPU-only processing" << std::endl;
+            std::cout << "========================================\n" << std::endl;
             cuda_initialized_ = false;
             return true; // CPU-only operation is still valid
         }
 
         // CUDA is available, initialize GPU network
-        std::cout << "Initializing CUDA for module '" << module_name_
-                  << "' (found " << device_count << " CUDA device(s))" << std::endl;
+        std::cout << "✅ CUDA Status: ENABLED AND AVAILABLE" << std::endl;
+        std::cout << "   Devices found: " << device_count << std::endl;
 
         // Get device properties
         cudaDeviceProp prop;
         cudaGetDeviceProperties(&prop, 0);
-        std::cout << "  Using GPU: " << prop.name
-                  << " (Compute Capability: " << prop.major << "." << prop.minor << ")" << std::endl;
+
+        // Calculate memory in GB
+        float total_memory_gb = prop.totalGlobalMem / (1024.0f * 1024.0f * 1024.0f);
+
+        std::cout << "\n📊 GPU Device Information:" << std::endl;
+        std::cout << "   Name: " << prop.name << std::endl;
+        std::cout << "   Compute Capability: " << prop.major << "." << prop.minor << std::endl;
+        std::cout << "   Total Memory: " << std::fixed << std::setprecision(2) << total_memory_gb << " GB" << std::endl;
+        std::cout << "   Multiprocessors: " << prop.multiProcessorCount << std::endl;
+        std::cout << "   Max Threads/Block: " << prop.maxThreadsPerBlock << std::endl;
 
         // Create initial neuron and synapse structures for NetworkCUDA_Interface
         std::vector<GPUNeuronState> initial_neurons(config_.num_neurons);
@@ -638,24 +653,33 @@ bool NeuralModule::initialize_cuda_resources() {
         );
 
         cuda_initialized_ = true;
-        std::cout << "✅ CUDA initialization successful for module '" << module_name_ << "'" << std::endl;
-        std::cout << "  Neurons: " << initial_neurons.size()
-                  << ", Synapses: " << initial_synapses.size() << std::endl;
+
+        std::cout << "\n💚 Initialization Status: SUCCESS" << std::endl;
+        std::cout << "   Neural Network: " << initial_neurons.size() << " neurons, "
+                  << initial_synapses.size() << " synapses" << std::endl;
+        std::cout << "   Acceleration: GPU (CUDA)" << std::endl;
+        std::cout << "========================================\n" << std::endl;
 
         return true;
 
     } catch (const std::exception& e) {
-        std::cerr << "⚠️ CUDA initialization failed for module '" << module_name_
-                  << "': " << e.what() << std::endl;
-        std::cerr << "  Falling back to CPU-only processing." << std::endl;
+        std::cerr << "\n⚠️  CUDA Initialization Failed!" << std::endl;
+        std::cerr << "   Error: " << e.what() << std::endl;
+        std::cerr << "   Fallback: CPU-only processing" << std::endl;
+        std::cerr << "========================================\n" << std::endl;
         cuda_initialized_ = false;
         return true; // CPU fallback
     }
 #else
     // CUDA not compiled in - use CPU-only processing
-    std::cout << "ℹ️  Module '" << module_name_
-              << "': CUDA support not enabled at compile-time. Using CPU processing." << std::endl;
-    std::cout << "  To enable CUDA: recompile with -DUSE_CUDA when CUDA toolkit is installed" << std::endl;
+    std::cout << "\n========================================" << std::endl;
+    std::cout << "ℹ️  CUDA Device Initialization" << std::endl;
+    std::cout << "========================================" << std::endl;
+    std::cout << "❌ CUDA Status: NOT COMPILED" << std::endl;
+    std::cout << "   Reason: CUDA support not enabled at compile-time" << std::endl;
+    std::cout << "   Mode: CPU-only processing" << std::endl;
+    std::cout << "   Tip: Recompile with -DUSE_CUDA when CUDA toolkit is installed" << std::endl;
+    std::cout << "========================================\n" << std::endl;
     cuda_initialized_ = false;
     return true; // CPU-only operation
 #endif

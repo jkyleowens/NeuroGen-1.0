@@ -1,0 +1,7 @@
+Total Iterations: 0
+Total Reward: 0
+Average Reward: 0
+Total Actions: 1760
+Successful Actions: 0
+Exploration Rate: 0.9
+Learning Rate: 0.01

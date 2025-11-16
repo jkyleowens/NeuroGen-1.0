@@ -25,12 +25,10 @@ from tqdm import tqdm
 import requests
 from bs4 import BeautifulSoup
 import random
-import subprocess
 import sys
 import signal
-import sentencepiece as spm
 import threading
-import queue
+import sentencepiece as spm
 from sentencepiece_module import TokenizerModule
 import logging
 import csv
@@ -40,7 +38,7 @@ matplotlib.use('Agg')  # Use non-interactive backend
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
+import neural_network
 class RateLimiter:
     """Thread-safe rate limiter using proper synchronization"""
 
@@ -781,23 +779,21 @@ class TrainingLogger:
 
 
 class NeuroGenAgent:
-    """Interface to the C++ NeuroGen autonomous agent"""
+    """Interface to the C++ NeuroGen autonomous agent using neural_network.so module"""
     
     def __init__(self, executable_path='./NeuroGen', config=None, tokenizer=None):
         """
         Initialize the NeuroGen agent interface.
         
         Args:
-            executable_path: Path to NeuroGen executable
+            executable_path: Path to NeuroGen executable (kept for compatibility but not used)
             config: Agent configuration
             tokenizer: TokenizerModule instance for text processing
         """
-        self.executable_path = executable_path
+        self.executable_path = executable_path  # Kept for compatibility
         self.config = config or {}
         self.tokenizer = tokenizer
-        self.process = None
-        self.stdout_queue = queue.Queue()
-        self.stderr_queue = queue.Queue()
+        self.network = None  # Will hold the neural_network.Network instance
         self.stats = {
             'browsing': {'urls_visited': 0, 'pages_read': 0},
             'learning': {'total_reward': 0.0, 'curiosity_score': 0.5},
@@ -806,154 +802,38 @@ class NeuroGenAgent:
             'tokenizer': {'vocab_size': 0, 'tokens_processed': 0}
         }
         self.curiosity_score = 0.5
-        
-    def _enqueue_output(self, out, q):
-        """Thread target to read a stream and put lines into a queue."""
-        for line in iter(out.readline, b''):
-            q.put(line)
-        out.close()
-
-    def _read_streams(self):
-        """Read all available lines from stdout and stderr queues."""
-        stdout_lines = []
-        stderr_lines = []
-        while not self.stdout_queue.empty():
-            try:
-                stdout_lines.append(self.stdout_queue.get_nowait().decode('utf-8', errors='replace'))
-            except queue.Empty:
-                break
-        while not self.stderr_queue.empty():
-            try:
-                stderr_lines.append(self.stderr_queue.get_nowait().decode('utf-8', errors='replace'))
-            except queue.Empty:
-                break
-        return "".join(stdout_lines), "".join(stderr_lines)
-
-    def _wait_for_process_ready(self, timeout=5.0):
-        """
-        Wait for process to be ready by polling output streams.
-
-        Args:
-            timeout: Maximum time to wait in seconds
-
-        Returns:
-            True if process is ready, False otherwise
-        """
-        start_time = time.time()
-        poll_interval = 0.1
-
-        while time.time() - start_time < timeout:
-            # Check if process has crashed
-            if self.process.poll() is not None:
-                return False
-
-            # Check for any output indicating the process is running
-            stdout, stderr = self._read_streams()
-            if stdout or stderr:
-                # Process has produced output, it's ready
-                return True
-
-            # Brief sleep before next poll
-            time.sleep(poll_interval)
-
-        # Timeout - check one more time if process is still alive
-        return self.process.poll() is None
-
-    def _wait_for_response(self, timeout=1.0, poll_interval=0.01):
-        """
-        Wait for agent response by polling output streams.
-
-        Args:
-            timeout: Maximum time to wait in seconds
-            poll_interval: How often to check for output in seconds
-
-        Returns:
-            Tuple of (stdout, stderr) strings
-        """
-        start_time = time.time()
-        accumulated_stdout = []
-        accumulated_stderr = []
-
-        while time.time() - start_time < timeout:
-            # Check if process has crashed
-            if self.process.poll() is not None:
-                break
-
-            # Try to read from queues
-            stdout, stderr = self._read_streams()
-
-            if stdout:
-                accumulated_stdout.append(stdout)
-            if stderr:
-                accumulated_stderr.append(stderr)
-
-            # If we have output, check if it's a complete response
-            if accumulated_stdout or accumulated_stderr:
-                combined_stdout = "".join(accumulated_stdout)
-                combined_stderr = "".join(accumulated_stderr)
-
-                # Check if we have a complete response (contains expected markers)
-                # For next-token prediction, we look for the prediction marker
-                if "NEXT_WORD_PREDICTION:" in combined_stdout:
-                    return combined_stdout, combined_stderr
-
-                # If no prediction marker yet, continue waiting but return after a short delay
-                # to avoid waiting too long if the agent doesn't produce the expected format
-                if time.time() - start_time > 0.2:  # After 200ms, return what we have
-                    return combined_stdout, combined_stderr
-
-            # Brief sleep before next poll
-            time.sleep(poll_interval)
-
-        # Return whatever we've accumulated
-        return "".join(accumulated_stdout), "".join(accumulated_stderr)
 
     def initialize(self, corpus_path=None):
-        """Initialize the NeuroGen C++ agent"""
-        print(f"\n[NeuroGen] Starting C++ agent: {self.executable_path}")
+        """Initialize the NeuroGen neural network using the Python module"""
+        print(f"\n[NeuroGen] Initializing neural network module...")
         
-        if not Path(self.executable_path).exists():
-            raise FileNotFoundError(f"NeuroGen executable not found: {self.executable_path}")
-        
+
         # Update tokenizer stats if available
         if self.tokenizer:
             self.stats['tokenizer']['vocab_size'] = self.tokenizer.get_vocab_size()
             print(f"[NeuroGen] Using tokenizer with vocab size: {self.stats['tokenizer']['vocab_size']}")
         
-        # Start the NeuroGen process
+        # Initialize the neural network
         try:
-            self.process = subprocess.Popen(
-                [self.executable_path],
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE
-            )
+            # Create network configuration
+            # Adjust these parameters based on your NetworkConfig in the C++ code
+            config = neural_network.NetworkConfig()
+            config.num_neurons = self.config.get('num_neurons', 10000)
+            config.num_synapses = self.config.get('num_synapses', 50000)
+            config.dt = self.config.get('dt', 0.001)
+            config.learning_rate = self.config.get('learning_rate', 0.01)
             
-            # Start threads to read stdout and stderr
-            self.stdout_thread = threading.Thread(target=self._enqueue_output, args=(self.process.stdout, self.stdout_queue))
-            self.stderr_thread = threading.Thread(target=self._enqueue_output, args=(self.process.stderr, self.stderr_queue))
-            self.stdout_thread.daemon = True
-            self.stderr_thread.daemon = True
-            self.stdout_thread.start()
-            self.stderr_thread.start()
-
-            # Wait for process to be ready (with timeout)
-            print("[NeuroGen] Waiting for process to initialize...")
-            if not self._wait_for_process_ready(timeout=5.0):
-                stdout, stderr = self._read_streams()
-                raise RuntimeError(f"NeuroGen process failed to start within timeout. Stderr: {stderr}")
-
-            stdout, stderr = self._read_streams()
-            if stdout:
-                print(f"[NeuroGen STDOUT] {stdout.strip()}")
-            if stderr:
-                print(f"[NeuroGen STDERR] {stderr.strip()}")
+            # Create the network instance
+            self.network = neural_network.Network(config)
             
-            print("[NeuroGen] C++ agent initialized successfully")
+            print(f"[NeuroGen] Neural network initialized with {config.num_neurons} neurons")
+            print(f"[NeuroGen] Learning rate: {config.learning_rate}")
             return True
             
         except Exception as e:
-            print(f"[Error] Failed to initialize NeuroGen: {e}")
+            print(f"[Error] Failed to initialize neural network: {e}")
+            import traceback
+            traceback.print_exc()
             return False
     
     def browse_page(self, url, content):
@@ -972,9 +852,9 @@ class NeuroGenAgent:
         Returns:
             Result dictionary with reward and token info
         """
-        if not self.process or self.process.poll() is not None:
-            print("[Warning] NeuroGen process not running")
-            return {'reward': 0.0, 'error': 'Process not running', 'tokens': []}
+        if not self.network:
+            print("[Warning] Neural network not initialized")
+            return {'reward': 0.0, 'error': 'Network not initialized', 'tokens': []}
 
         try:
             # Tokenize content if tokenizer is available
@@ -1020,56 +900,38 @@ class NeuroGenAgent:
                 # Target: the token at position
                 target_token = tokens[position]
 
-                # Convert context tokens to text for the agent
-                context_text = self.tokenizer.decode(context_tokens)
-                target_text = self.tokenizer.decode([target_token])
+                try:
+                    # Convert token IDs to floats for neural network input
+                    # The network expects a vector of floats
+                    input_vector = [float(t) for t in context_tokens]
+                    
+                    # Step the network with the input
+                    # This performs one forward pass and returns the network's prediction
+                    predicted_token_id = self.network.step(0.001, input_vector)  # dt=0.001
+                    
+                    # Calculate reward based on prediction accuracy
+                    if predicted_token_id == target_token:
+                        reward = 1.0
+                        correct_predictions += 1
+                    else:
+                        # Partial credit if prediction is close
+                        reward = 0.1 if abs(predicted_token_id - target_token) < 10 else 0.0
+                    
+                    # Apply reward for learning (reinforcement signal)
+                    self.network.apply_reward(reward)
+                    
+                    total_reward += reward
+                    num_predictions += 1
 
-                # Send context to agent for next-token prediction
-                command = f"process_text: {context_text}\n"
-                content_bytes = command.encode('utf-8', errors='replace')
-                self.process.stdin.write(content_bytes)
-                self.process.stdin.flush()
+                    # Log progress every 10 predictions
+                    if (i + 1) % 10 == 0:
+                        accuracy = correct_predictions / num_predictions if num_predictions > 0 else 0
+                        print(f"  [{i+1}/{len(training_positions)}] Accuracy: {accuracy:.2%}, "
+                              f"Avg reward: {total_reward/num_predictions:.3f}")
 
-                # Wait for agent response with timeout (much more efficient than fixed sleep)
-                stdout, stderr = self._wait_for_response(timeout=0.5, poll_interval=0.01)
-
-                # Parse prediction and compare with target
-                predicted_token = None
-                if stdout and "NEXT_WORD_PREDICTION:" in stdout:
-                    try:
-                        # Extract the predicted text
-                        pred_line = [line for line in stdout.split('\n') if 'NEXT_WORD_PREDICTION:' in line][0]
-                        predicted_text = pred_line.split('NEXT_WORD_PREDICTION:')[1].strip()
-
-                        # Calculate reward based on similarity to target
-                        # Simple reward: 1.0 if exact match, partial credit for similarity
-                        if predicted_text.lower() == target_text.lower():
-                            reward = 1.0
-                            correct_predictions += 1
-                        elif predicted_text and target_text.lower() in predicted_text.lower():
-                            reward = 0.5
-                        elif predicted_text:
-                            reward = 0.1
-                        else:
-                            reward = 0.0
-
-                        # Send reward signal to agent for learning
-                        reward_command = f"REWARD_SIGNAL: {reward}\n"
-                        self.process.stdin.write(reward_command.encode('utf-8'))
-                        self.process.stdin.flush()
-
-                        total_reward += reward
-                        num_predictions += 1
-
-                        # Log progress every 10 predictions
-                        if (i + 1) % 10 == 0:
-                            accuracy = correct_predictions / num_predictions if num_predictions > 0 else 0
-                            print(f"  [{i+1}/{len(training_positions)}] Accuracy: {accuracy:.2%}, "
-                                  f"Avg reward: {total_reward/num_predictions:.3f}")
-
-                    except Exception as e:
-                        print(f"[Warning] Failed to parse prediction: {e}")
-                        num_predictions += 1
+                except Exception as e:
+                    print(f"[Warning] Failed to process prediction: {e}")
+                    num_predictions += 1
 
                 # Update stats
                 self.stats['tokenizer']['tokens_processed'] = \
@@ -1097,10 +959,6 @@ class NeuroGenAgent:
                 'correct_predictions': correct_predictions
             }
 
-        except (IOError, BrokenPipeError) as e:
-            print(f"[Error] Communication error with NeuroGen process: {e}")
-            self.shutdown()
-            return {'reward': 0.0, 'error': str(e), 'tokens': []}
         except Exception as e:
             print(f"[Error] An unexpected error occurred in browse_page: {e}")
             import traceback
@@ -1114,23 +972,14 @@ class NeuroGenAgent:
         
         print(f"\n[Save] Saving agent to: {path}")
         
-        # 1. Command C++ agent to save its neural network state
-        if self.process and self.process.poll() is None:
+        # 1. Save neural network state using the module
+        if self.network:
             try:
-                # Send save command to C++ agent
-                command = f"save_model: {save_dir.absolute()}\n"
-                self.process.stdin.write(command.encode('utf-8'))
-                self.process.stdin.flush()
-                
-                # Wait for confirmation
-                stdout, stderr = self._wait_for_response(timeout=5.0)
-                if stdout and "[Save]" in stdout:
-                    print(f"[NeuroGen] C++ model saved successfully")
-                else:
-                    print(f"[Warning] No save confirmation from C++ agent")
-                    
+                model_path = str(save_dir / 'network_model.bin')
+                self.network.save_model(model_path)
+                print(f"[NeuroGen] Neural network model saved successfully")
             except Exception as e:
-                print(f"[Warning] Error saving C++ model: {e}")
+                print(f"[Warning] Error saving neural network model: {e}")
         
         # 2. Save Python-side stats
         stats_file = save_dir / 'python_stats.json'
@@ -1162,23 +1011,18 @@ class NeuroGenAgent:
         
         print(f"\n[Load] Loading agent from: {path}")
         
-        # 1. Command C++ agent to load its neural network state
-        if self.process and self.process.poll() is None:
+        # 1. Load neural network state using the module
+        if self.network:
             try:
-                # Send load command to C++ agent
-                command = f"load_model: {load_dir.absolute()}\n"
-                self.process.stdin.write(command.encode('utf-8'))
-                self.process.stdin.flush()
-                
-                # Wait for confirmation
-                stdout, stderr = self._wait_for_response(timeout=5.0)
-                if stdout and "[Load]" in stdout:
-                    print(f"[NeuroGen] C++ model loaded successfully")
+                model_path = str(load_dir / 'network_model.bin')
+                if Path(model_path).exists():
+                    self.network.load_model(model_path)
+                    print(f"[NeuroGen] Neural network model loaded successfully")
                 else:
-                    print(f"[Warning] No load confirmation from C++ agent")
-                    
+                    print(f"[Warning] Model file not found: {model_path}")
+                    return False
             except Exception as e:
-                print(f"[Warning] Error loading C++ model: {e}")
+                print(f"[Warning] Error loading neural network model: {e}")
                 return False
         
         # 2. Load Python-side stats
@@ -1211,38 +1055,19 @@ class NeuroGenAgent:
     
     def shutdown(self):
         """Shutdown the NeuroGen agent"""
-        if self.process:
-            try:
-                self.process.stdin.close()
-                self.process.terminate()
-                self.process.wait(timeout=5)
-                print("[NeuroGen] Agent shut down successfully")
-            except Exception as e:
-                print(f"[Warning] Error shutting down agent: {e}")
-                self.process.kill()
+        print("\n[NeuroGen] Shutting down neural network...")
         
-        if self.process and self.process.poll() is None:
-            print("\n[NeuroGen] Shutting down C++ agent...")
+        # Clean up network resources
+        if self.network:
             try:
-                self.process.stdin.close()
-                self.process.terminate()
-                self.process.wait(timeout=5)
-                print("[NeuroGen] C++ agent shut down.")
-            except (IOError, BrokenPipeError):
-                # Process might already be gone
+                # Get final statistics if available
+                stats = self.network.get_stats()
+                print(f"[NeuroGen] Final network stats: {stats}")
+            except:
                 pass
-            except subprocess.TimeoutExpired:
-                print("[Warning] NeuroGen process did not terminate gracefully, killing.")
-                self.process.kill()
             
-            # Read any final output
-            stdout, stderr = self._read_streams()
-            if stdout:
-                print(f"[NeuroGen Final STDOUT] {stdout.strip()}")
-            if stderr:
-                print(f"[NeuroGen Final STDERR] {stderr.strip()}")
-
-        self.process = None
+            self.network = None
+            print("[NeuroGen] Neural network shut down successfully")
 
 
 class WikipediaTrainer:

@@ -1472,3 +1472,57 @@ bool AutonomousLearningAgent::loadModel(const std::string& directory) {
         return false;
     }
 }
+
+// ============================================================================
+// STATUS AND REPORTING METHODS
+// ============================================================================
+
+std::string AutonomousLearningAgent::getStatusReport() const {
+    std::ostringstream report;
+    
+    report << "\n=== Autonomous Learning Agent Status ===\n";
+    report << "Simulation Time: " << std::fixed << std::setprecision(2) << simulation_time_ << "s\n";
+    report << "Learning Active: " << (is_learning_active_ ? "Yes" : "No") << "\n";
+    report << "Passive Mode: " << (is_passive_mode_ ? "Yes" : "No") << "\n";
+    report << "Exploration Rate: " << std::fixed << std::setprecision(4) << exploration_rate_ << "\n";
+    report << "Learning Rate: " << std::fixed << std::setprecision(6) << learning_rate_ << "\n";
+    report << "\n--- Performance Metrics ---\n";
+    report << "Total Iterations: " << metrics_.total_iterations << "\n";
+    report << "Total Actions: " << metrics_.total_actions << "\n";
+    report << "Successful Actions: " << metrics_.successful_actions << "\n";
+    report << "Success Rate: " << std::fixed << std::setprecision(2) 
+           << (metrics_.total_actions > 0 ? (100.0 * metrics_.successful_actions / metrics_.total_actions) : 0.0) << "%\n";
+    report << "Total Reward: " << std::fixed << std::setprecision(2) << metrics_.total_reward << "\n";
+    report << "Average Reward: " << std::fixed << std::setprecision(4) << metrics_.average_reward << "\n";
+    report << "Current Reward: " << std::fixed << std::setprecision(4) << global_reward_signal_ << "\n";
+    
+    if (attention_controller_) {
+        report << "\n--- Attention System ---\n";
+        auto weights = attention_controller_->get_attention_weight_map();
+        for (const auto& [module, weight] : weights) {
+            report << "  " << module << ": " << std::fixed << std::setprecision(3) << weight << "\n";
+        }
+    }
+    
+    if (memory_system_) {
+        report << "\n--- Memory System ---\n";
+        report << "Memory Episodes: " << memory_system_->getEpisodeCount() << "\n";
+    }
+    
+    report << "\n--- Goals ---\n";
+    report << "Total Goals: " << current_goals_.size() << "\n";
+    for (size_t i = 0; i < current_goals_.size(); ++i) {
+        report << "  Goal " << i << ": " << current_goals_[i] << "\n";
+    }
+    
+    report << "========================================\n";
+    
+    return report.str();
+}
+
+std::map<std::string, float> AutonomousLearningAgent::getAttentionWeights() const {
+    if (attention_controller_) {
+        return attention_controller_->get_attention_weight_map();
+    }
+    return std::map<std::string, float>();
+}

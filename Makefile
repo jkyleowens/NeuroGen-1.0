@@ -18,31 +18,30 @@ CUDA_PATH := /opt/cuda
 
 PYBIND11_INCLUDES = $(shell python3 -m pybind11 --includes)
 
-# Executable Name
-TARGET := NeuroGen
+# Executable and Module Names
+TARGET_SO := neural_network.so
+TARGET_NEUROGEN := NeuroGen
 TARGET_AUTONOMOUS := NeuroGen_Autonomous
-
+ 
 # Python configuration for pybind11
 PYTHON_CONFIG := python3-config
 PYTHON_LDFLAGS := $(shell $(PYTHON_CONFIG) --ldflags --embed 2>/dev/null || $(PYTHON_CONFIG) --ldflags)
 PYTHON_INCLUDES := $(shell $(PYTHON_CONFIG) --includes)
 PYBIND11_INCLUDES := $(shell python3 -m pybind11 --includes 2>/dev/null)
-
+ 
 # Compiler Flags
-# Note: The -I$(INCLUDE_DIR) flag tells the compilers where to find your header files.
-CXXFLAGS := -std=c++17 -I$(INCLUDE_DIR) $(PYBIND11_INCLUDES) -I$(CUDA_PATH)/include -O3 -g -fPIC -Wall -ferror-limit=50
+CXXFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include $(PYTHON_INCLUDES) $(PYBIND11_INCLUDES) -O3 -g -fPIC -Wall -ferror-limit=50
 NVCCFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -arch=sm_75 -O3 -g -lineinfo \
              -Xcompiler -fPIC -Xcompiler -Wall -use_fast_math \
              --expt-relaxed-constexpr --expt-extended-lambda -ccbin /usr/bin/clang++
+ 
+# Linker Flags - WITH CUDA for executables
+LDFLAGS_CUDA := -L$(CUDA_PATH)/lib64 -L/usr/lib
+LDLIBS_CUDA := -lcudart -lcurand -lcublas -lX11 -lXtst
 
-# Linker Flags for Python module (shared library)
-# When CUDA is not available, comment out CUDA paths and libraries
-# LDFLAGS := -L$(CUDA_PATH)/lib64 -L/usr/lib
-# LDLIBS := -ljsoncpp -lcudart -lcurand -lcublas -lcufft -lX11 -lXtst
-
-# CPU-only build (without CUDA) - Python module
-LDFLAGS := -L/usr/lib $(PYTHON_LDFLAGS)
-LDLIBS := -lX11
+# Linker Flags - For Python module (needs Python libs)
+LDFLAGS_PYTHON := -L$(CUDA_PATH)/lib64 -L/usr/lib $(PYTHON_LDFLAGS)
+LDLIBS_PYTHON := -lcudart -lcurand -lcublas -lX11 -lXtst
 
 # --- Source Files ---
 
@@ -55,25 +54,25 @@ EXCLUDE_SOURCES := \
     $(SRC_DIR)/execute_action_temp.cpp \
     $(SRC_DIR)/DecisionAndActionSystems_fixed.cpp
 
-# Separate main source files (excluded from Python module build)
+# Separate main source files
 MAIN_SRC := $(SRC_DIR)/main.cpp
 AUTONOMOUS_MAIN_SRC := $(SRC_DIR)/main_autonomous.cpp
+BINDINGS_SRC := $(SRC_DIR)/bindings.cpp
 
-# Filter out excluded sources and main files (Python module doesn't need main)
-CPP_SOURCES := $(filter-out $(EXCLUDE_SOURCES) $(MAIN_SRC) $(AUTONOMOUS_MAIN_SRC), $(ALL_CPP_SOURCES))
+# Filter out excluded sources, main files, and bindings (bindings only for Python module)
+CPP_SOURCES := $(filter-out $(EXCLUDE_SOURCES) $(MAIN_SRC) $(AUTONOMOUS_MAIN_SRC) $(BINDINGS_SRC), $(ALL_CPP_SOURCES))
 
 # --- Object Files ---
 
 # Generate object file names from source file names
 CPP_OBJECTS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(CPP_SOURCES))
 
-# Object for autonomous main (built separately)
+# Objects for main executables
+MAIN_OBJECT := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(MAIN_SRC))
 AUTONOMOUS_MAIN_OBJECT := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(AUTONOMOUS_MAIN_SRC))
+BINDINGS_OBJECT := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(BINDINGS_SRC))
 
-# Combine all object files
-OBJECTS := $(CPP_OBJECTS)
-
-# CUDA source files providing required wrapper symbols
+# CUDA source files
 CUDA_WRAPPER_SOURCES := \
     $(CUDA_SRC_DIR)/CudaKernelWrappers.cu \
     $(CUDA_SRC_DIR)/EnhancedSTDPKernel.cu \
@@ -84,27 +83,39 @@ CUDA_WRAPPER_SOURCES := \
 # CUDA objects
 CUDA_WRAPPER_OBJECTS := $(patsubst $(CUDA_SRC_DIR)/%.cu,$(CUDA_OBJ_DIR)/%.o,$(CUDA_WRAPPER_SOURCES))
 
-# Append CUDA wrapper objects to link line for targets needing EnhancedLearningSystem
-OBJECTS += $(CUDA_WRAPPER_OBJECTS)
+# Core objects (without any main or bindings) - used by executables
+CORE_OBJECTS := $(CPP_OBJECTS) $(CUDA_WRAPPER_OBJECTS)
+
+# Python module objects (core + bindings)
+PYTHON_MODULE_OBJECTS := $(CORE_OBJECTS) $(BINDINGS_OBJECT)
 
 # --- Dependency Files ---
 DEPS := $(patsubst $(SRC_DIR)/%.cpp,$(DEPS_DIR)/%.d,$(CPP_SOURCES))
 
 # --- Build Rules ---
 
-all: $(TARGET)
+all: $(TARGET_SO) $(TARGET_NEUROGEN) $(TARGET_AUTONOMOUS)
 
-autonomous: $(TARGET_AUTONOMOUS)
+# Python module only
+module: $(TARGET_SO)
+
+# Executables only
+executables: $(TARGET_NEUROGEN) $(TARGET_AUTONOMOUS)
 
 # Linking the Python module (shared library)
-$(TARGET): $(OBJECTS)
-	@echo "Linking Python module $(TARGET)..."
-	$(LINK) -shared -o $@ $^ $(LDFLAGS) $(LDLIBS)
+$(TARGET_SO): $(PYTHON_MODULE_OBJECTS)
+	@echo "Linking Python module $(TARGET_SO)..."
+	$(LINK) -shared -o $@ $^ $(LDFLAGS_PYTHON) $(LDLIBS_PYTHON)
+
+# Linking the main NeuroGen executable
+$(TARGET_NEUROGEN): $(CORE_OBJECTS) $(MAIN_OBJECT)
+	@echo "Linking $(TARGET_NEUROGEN) executable..."
+	$(LINK) -o $@ $^ $(LDFLAGS_CUDA) $(LDLIBS_CUDA)
 
 # Linking the autonomous learning executable
-$(TARGET_AUTONOMOUS): $(filter-out $(OBJ_DIR)/main.o,$(OBJECTS)) $(AUTONOMOUS_MAIN_OBJECT)
-	@echo "Linking $(TARGET_AUTONOMOUS)..."
-	$(LINK) -o $@ $^ $(LDFLAGS) $(LDLIBS)
+$(TARGET_AUTONOMOUS): $(CORE_OBJECTS) $(AUTONOMOUS_MAIN_OBJECT)
+	@echo "Linking $(TARGET_AUTONOMOUS) executable..."
+	$(LINK) -o $@ $^ $(LDFLAGS_CUDA) $(LDLIBS_CUDA)
 
 # C++ compilation rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR) $(DEPS_DIR)
@@ -112,7 +123,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR) $(DEPS_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	@$(CXX) $(CXXFLAGS) -MM $< -MT $@ -MF $(patsubst $(SRC_DIR)/%.cpp,$(DEPS_DIR)/%.d,$<)
 
-# CUDA compilation rule (for wrapper sources only for now)
+# CUDA compilation rule
 $(CUDA_OBJ_DIR)/%.o: $(CUDA_SRC_DIR)/%.cu | $(CUDA_OBJ_DIR)
 	@echo "Compiling CUDA source: $<"
 	$(NVCC) $(NVCCFLAGS) -c $< -o $@
@@ -131,13 +142,13 @@ $(CUDA_OBJ_DIR):
 
 clean:
 	@echo "Cleaning up..."
-	rm -rf $(OBJ_DIR) $(CUDA_OBJ_DIR) $(TARGET) $(TARGET_AUTONOMOUS) $(DEPS_DIR)
+	rm -rf $(OBJ_DIR) $(CUDA_OBJ_DIR) $(TARGET_SO) $(TARGET_NEUROGEN) $(TARGET_AUTONOMOUS) $(DEPS_DIR)
 
 # Test targets
-test_brain_architecture: test_brain_module_architecture.cpp $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS) $(LDLIBS)
+test_brain_architecture: test_brain_module_architecture.cpp $(CORE_OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS_CUDA) $(LDLIBS_CUDA)
 
-.PHONY: all autonomous clean test_brain_architecture
+.PHONY: all module executables clean test_brain_architecture
 
 # Include dependency files
 -include $(DEPS)

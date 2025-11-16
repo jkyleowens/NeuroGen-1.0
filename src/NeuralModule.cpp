@@ -34,17 +34,17 @@ NeuralModule::NeuralModule(const std::string& name, const NetworkConfig& config)
       learning_rate_(0.01f),
       plasticity_strength_(1.0f),
       homeostatic_target_(0.1f),
+      average_activity_(0.0f),
+      update_count_(0),
       plasticity_enabled_(true),
       excitability_level_(1.0f),
       adaptation_current_(0.0f),
       background_noise_(0.01f),
       refractory_period_(2.0f),
-      average_activity_(0.0f),
       firing_rate_(0.0f),
       connection_strength_(0.0f),
       plasticity_events_(0.0f),
-      last_update_time_(0.0),
-      update_count_(0) {
+      last_update_time_(0.0) {
     
     // Initialize internal network
     internal_network_ = std::make_unique<Network>(config);
@@ -154,7 +154,7 @@ void NeuralModule::update(float dt, const std::vector<float>& inputs, float rewa
             // For now, generate pseudo-outputs based on activity
             neuron_outputs_.resize(config_.num_neurons);
             for (size_t i = 0; i < neuron_outputs_.size(); ++i) {
-                neuron_outputs_[i] = (cuda_stats.spike_count > 0) ?
+                neuron_outputs_[i] = (cuda_stats.total_spike_count > 0) ?
                     (static_cast<float>(i % 10) / 10.0f) : 0.0f;
             }
 
@@ -574,6 +574,7 @@ bool NeuralModule::load_state(const std::string& filename) {
 
 bool NeuralModule::initialize_cuda_resources() {
 #if CUDA_AVAILABLE
+    std::cout << "🔧 [CUDA Init] Attempting CUDA initialization for module '" << module_name_ << "'..." << std::endl;
     try {
         std::cout << "\n========================================" << std::endl;
         std::cout << "🚀 CUDA Device Initialization" << std::endl;
@@ -620,10 +621,10 @@ bool NeuralModule::initialize_cuda_resources() {
         std::uniform_real_distribution<float> dist(-0.07f, -0.05f); // Resting potential range
 
         for (size_t i = 0; i < config_.num_neurons; ++i) {
-            initial_neurons[i].v = dist(gen);  // Membrane potential
+            initial_neurons[i].V = dist(gen);  // Membrane potential
             initial_neurons[i].u = 0.0f;        // Recovery variable
-            initial_neurons[i].fired = 0;       // Not fired initially
-            initial_neurons[i].neuron_id = i;
+            initial_neurons[i].active = 1;      // Active initially
+            initial_neurons[i].neuron_type = (i % 5 == 0) ? 1 : 0;  // Mix of excitatory/inhibitory
         }
 
         // Create sparse connectivity (simple local connectivity pattern)
@@ -637,8 +638,8 @@ bool NeuralModule::initialize_cuda_resources() {
                 size_t target = (source + conn + 1) % config_.num_neurons;
 
                 GPUSynapse synapse;
-                synapse.source_id = source;
-                synapse.target_id = target;
+                synapse.pre_neuron_idx = source;
+                synapse.post_neuron_idx = target;
                 synapse.weight = weight_dist(gen);
                 synapse.delay = 1; // 1 timestep delay
                 initial_synapses.push_back(synapse);

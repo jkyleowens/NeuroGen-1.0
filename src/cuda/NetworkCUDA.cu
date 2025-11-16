@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 #include <fstream>
 #include <chrono>
 #include <thread>
@@ -225,7 +226,7 @@ bool NetworkCUDA::allocateNeuralNetworkMemory() {
         } else {
             CUDA_CHECK(cudaMalloc(&d_neurons_, neuron_size));
         }
-        
+
         // Allocate synapses
         size_t synapse_size = num_synapses_ * sizeof(GPUSynapse);
         if (memory_pool_enabled_) {
@@ -233,15 +234,21 @@ bool NetworkCUDA::allocateNeuralNetworkMemory() {
         } else {
             CUDA_CHECK(cudaMalloc(&d_synapses_, synapse_size));
         }
-        
+
+        // CRITICAL: Synchronize stream after async allocations
+        // This ensures memory allocations complete before being used
+        if (memory_pool_enabled_) {
+            CUDA_CHECK(cudaStreamSynchronize(default_stream_));
+        }
+
         // Allocate input/output buffers
         CUDA_CHECK(cudaMalloc(&d_inputs_, num_inputs_ * sizeof(float)));
         CUDA_CHECK(cudaMalloc(&d_outputs_, num_outputs_ * sizeof(float)));
-        
+
         std::cout << "💾 Allocated neural network GPU memory:" << std::endl;
         std::cout << "   Neurons: " << neuron_size / (1024*1024) << " MB" << std::endl;
         std::cout << "   Synapses: " << synapse_size / (1024*1024) << " MB" << std::endl;
-        
+
         return true;
     } catch (const std::exception& e) {
         std::cerr << "❌ Error allocating neural network memory: " << e.what() << std::endl;
@@ -956,37 +963,79 @@ bool NetworkCUDA::initializeNeuralNetworkData() {
         // Initialize neurons with default values
         if (d_neurons_) {
             std::vector<GPUNeuronState> initial_neurons(num_neurons_);
+
+            // Zero-initialize all neurons first to avoid garbage values
+            std::memset(initial_neurons.data(), 0, num_neurons_ * sizeof(GPUNeuronState));
+
             for (size_t i = 0; i < num_neurons_; ++i) {
+                // Core membrane dynamics
                 initial_neurons[i].V = -65.0f; // Resting potential
-                initial_neurons[i].ca_conc[0] = 50.0e-9f; // Resting calcium
+                initial_neurons[i].u = 0.0f; // Recovery variable
+                for (int j = 0; j < MAX_COMPARTMENTS; ++j) {
+                    initial_neurons[i].I_syn[j] = 0.0f;
+                    initial_neurons[i].ca_conc[j] = 50.0e-9f; // Resting calcium
+                }
+                initial_neurons[i].I_ext = 0.0f;
+
+                // Timing and activity
+                initial_neurons[i].last_spike_time = -1000.0f; // Far in the past
+                initial_neurons[i].previous_spike_time = -1000.0f;
+                initial_neurons[i].average_firing_rate = 0.0f;
+
+                // Plasticity and adaptation
+                initial_neurons[i].excitability = 1.0f; // Normal excitability
+                initial_neurons[i].synaptic_scaling_factor = 1.0f;
+                initial_neurons[i].threshold = -50.0f; // Firing threshold
+
+                // Network properties
                 initial_neurons[i].active = 1; // Set as active
                 initial_neurons[i].neuron_type = (i % 5 == 0) ? 0 : 1; // 20% inhibitory, 80% excitatory
-                // Initialize other fields to defaults...
             }
-            
-            CUDA_CHECK(cudaMemcpy(d_neurons_, initial_neurons.data(), 
-                                 num_neurons_ * sizeof(GPUNeuronState), 
+
+            CUDA_CHECK(cudaMemcpy(d_neurons_, initial_neurons.data(),
+                                 num_neurons_ * sizeof(GPUNeuronState),
                                  cudaMemcpyHostToDevice));
         }
         
         // Initialize synapses with random weights
         if (d_synapses_) {
             std::vector<GPUSynapse> initial_synapses(num_synapses_);
+
+            // Zero-initialize all synapses first
+            std::memset(initial_synapses.data(), 0, num_synapses_ * sizeof(GPUSynapse));
+
             std::random_device rd;
             std::mt19937 gen(rd());
             std::normal_distribution<float> weight_dist(0.0f, 0.1f);
-            
+
             for (size_t i = 0; i < num_synapses_; ++i) {
-                initial_synapses[i].weight = weight_dist(gen);
+                // Connectivity
                 initial_synapses[i].pre_neuron_idx = static_cast<int>(i % num_neurons_);
                 initial_synapses[i].post_neuron_idx = static_cast<int>((i + 1) % num_neurons_);
                 initial_synapses[i].active = 1; // Set as active
+
+                // Synaptic properties
+                initial_synapses[i].weight = weight_dist(gen);
+                initial_synapses[i].max_weight = 1.0f;
+                initial_synapses[i].min_weight = 0.0f;
+                initial_synapses[i].effective_weight = initial_synapses[i].weight;
+
+                // Plasticity
                 initial_synapses[i].is_plastic = true; // Enable plasticity
-                // Initialize other fields...
+                initial_synapses[i].eligibility_trace = 0.0f;
+                initial_synapses[i].learning_rate = 0.01f;
+
+                // Timing
+                initial_synapses[i].last_pre_spike_time = -1000.0f;
+                initial_synapses[i].last_post_spike_time = -1000.0f;
+
+                // Vesicle dynamics
+                initial_synapses[i].vesicle_count = 100;
+                initial_synapses[i].release_probability = 0.5f;
             }
-            
-            CUDA_CHECK(cudaMemcpy(d_synapses_, initial_synapses.data(), 
-                                 num_synapses_ * sizeof(GPUSynapse), 
+
+            CUDA_CHECK(cudaMemcpy(d_synapses_, initial_synapses.data(),
+                                 num_synapses_ * sizeof(GPUSynapse),
                                  cudaMemcpyHostToDevice));
         }
         

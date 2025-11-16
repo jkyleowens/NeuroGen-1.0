@@ -39,9 +39,9 @@ NVCCFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -arch=sm_75 -O3 
 LDFLAGS_CUDA := -L$(CUDA_PATH)/lib64 -L/usr/lib
 LDLIBS_CUDA := -lcudart -lcurand -lcublas -lX11 -lXtst
 
-# Linker Flags - For Python module (needs Python libs, no CUDA for compatibility)
-LDFLAGS_PYTHON := -L/usr/lib $(PYTHON_LDFLAGS)
-LDLIBS_PYTHON := -lX11
+# Linker Flags - For Python module (needs Python libs)
+LDFLAGS_PYTHON := -L$(CUDA_PATH)/lib64 -L/usr/lib $(PYTHON_LDFLAGS)
+LDLIBS_PYTHON := -lcudart -lcurand -lcublas -lX11 -lXtst
 
 # --- Source Files ---
 

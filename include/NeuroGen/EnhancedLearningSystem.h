@@ -2,7 +2,7 @@
 #define ENHANCED_LEARNING_SYSTEM_H
 
 // Core NeuroGen includes with proper paths
-#ifdef __CUDACC__
+#include <cuda_runtime.h>
 #include <NeuroGen/cuda/GPUNeuralStructures.h>
 #include <NeuroGen/cuda/GridBlockUtils.cuh>
 
@@ -14,8 +14,6 @@
 #include <NeuroGen/cuda/HebbianLearningKernel.cuh>
 #include <NeuroGen/cuda/HomeostaticMechanismsKernel.cuh>
 
-#include <cuda_runtime.h>
-#endif
 #include <vector>
 #include <memory>
 #include <string>

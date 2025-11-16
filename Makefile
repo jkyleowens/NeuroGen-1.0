@@ -16,24 +16,30 @@ CUDA_DEPS_DIR := $(DEPS_DIR)/cuda
 # CUDA Path
 CUDA_PATH := /opt/cuda
 
-# Executable Name
-TARGET := NeuroGen
+# Python Module Name (shared library)
+TARGET := neural_network.so
 TARGET_AUTONOMOUS := NeuroGen_Autonomous
+
+# Python configuration for pybind11
+PYTHON_CONFIG := python3-config
+PYTHON_LDFLAGS := $(shell $(PYTHON_CONFIG) --ldflags --embed 2>/dev/null || $(PYTHON_CONFIG) --ldflags)
+PYTHON_INCLUDES := $(shell $(PYTHON_CONFIG) --includes)
+PYBIND11_INCLUDES := $(shell python3 -m pybind11 --includes 2>/dev/null)
 
 # Compiler Flags
 # Note: The -I$(INCLUDE_DIR) flag tells the compilers where to find your header files.
-CXXFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -O3 -g -fPIC -Wall -ferror-limit=50
+CXXFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include $(PYTHON_INCLUDES) $(PYBIND11_INCLUDES) -O3 -g -fPIC -Wall -ferror-limit=50
 NVCCFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -arch=sm_75 -O3 -g -lineinfo \
              -Xcompiler -fPIC -Xcompiler -Wall -use_fast_math \
              --expt-relaxed-constexpr --expt-extended-lambda -ccbin /usr/bin/clang++
 
-# Linker Flags
+# Linker Flags for Python module (shared library)
 # When CUDA is not available, comment out CUDA paths and libraries
 # LDFLAGS := -L$(CUDA_PATH)/lib64 -L/usr/lib
 # LDLIBS := -ljsoncpp -lcudart -lcurand -lcublas -lcufft -lX11 -lXtst
 
-# CPU-only build (without CUDA)
-LDFLAGS := -L/usr/lib
+# CPU-only build (without CUDA) - Python module
+LDFLAGS := -L/usr/lib $(PYTHON_LDFLAGS)
 LDLIBS := -lX11
 
 # --- Source Files ---
@@ -49,12 +55,12 @@ EXCLUDE_SOURCES := \
     $(SRC_DIR)/EnhancedLearningSystem.cpp \
     $(SRC_DIR)/NetworkCUDA.cpp
 
-# Separate main source files
+# Separate main source files (excluded from Python module build)
 MAIN_SRC := $(SRC_DIR)/main.cpp
 AUTONOMOUS_MAIN_SRC := $(SRC_DIR)/main_autonomous.cpp
 
-# Filter out excluded and autonomous main from default sources
-CPP_SOURCES := $(filter-out $(EXCLUDE_SOURCES) $(AUTONOMOUS_MAIN_SRC), $(ALL_CPP_SOURCES))
+# Filter out excluded sources and main files (Python module doesn't need main)
+CPP_SOURCES := $(filter-out $(EXCLUDE_SOURCES) $(MAIN_SRC) $(AUTONOMOUS_MAIN_SRC), $(ALL_CPP_SOURCES))
 
 # --- Object Files ---
 
@@ -95,10 +101,10 @@ all: $(TARGET)
 
 autonomous: $(TARGET_AUTONOMOUS)
 
-# Linking the final executable
+# Linking the Python module (shared library)
 $(TARGET): $(OBJECTS)
-	@echo "Linking $(TARGET)..."
-	$(LINK) -o $@ $^ $(LDFLAGS) $(LDLIBS)
+	@echo "Linking Python module $(TARGET)..."
+	$(LINK) -shared -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
 # Linking the autonomous learning executable
 $(TARGET_AUTONOMOUS): $(filter-out $(OBJ_DIR)/main.o,$(OBJECTS)) $(AUTONOMOUS_MAIN_OBJECT)

@@ -1,0 +1,18 @@
+{
+  "reward_progression": [],
+  "comprehension_scores": [],
+  "correct_answers": [],
+  "learning_rate": [],
+  "epoch": [
+    1
+  ],
+  "avg_reward": [
+    0.1326497613997879
+  ],
+  "total_reward": [
+    12.203778048780487
+  ],
+  "articles_processed": [
+    92
+  ]
+}

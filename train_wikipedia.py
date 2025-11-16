@@ -15,6 +15,11 @@ Usage:
     python train_wikipedia.py --num_articles 1000 --epochs 5
 """
 
+# Enable synchronous CUDA kernel launches to catch errors immediately
+import os
+os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+print("🔍 CUDA_LAUNCH_BLOCKING enabled - kernels will run synchronously for debugging")
+
 import argparse
 import json
 import time
@@ -886,13 +891,15 @@ class NeuroGenAgent:
 
             # Sample positions for training (to avoid overwhelming the system)
             # In a real LLM, we'd train on ALL positions, but for efficiency we sample
-            max_training_examples = min(50, len(tokens) - 1)  # Train on up to 50 examples per article
+            # REDUCED to 1 example per article for DEBUGGING - will increase after fixing hang
+            max_training_examples = min(1, len(tokens) - 1)  # Train on just 1 example for debugging
             training_positions = np.random.choice(
                 range(1, len(tokens)),
                 size=min(max_training_examples, len(tokens) - 1),
                 replace=False
             )
             training_positions = sorted(training_positions)
+            print(f"[DEBUG] Training on {len(training_positions)} positions out of {len(tokens)} tokens")
 
             for i, position in enumerate(training_positions):
                 # Context: all tokens up to (but not including) position
@@ -905,9 +912,13 @@ class NeuroGenAgent:
                     # The network expects a vector of floats
                     input_vector = [float(t) for t in context_tokens]
                     
-                    # Step the network with the input
+                    # Step the network with the input - WITH TIMING
                     # This performs one forward pass and returns the network's prediction
+                    step_start = time.time()
+                    print(f"    [DEBUG] Calling network.step() with {len(input_vector)} input tokens...")
                     predicted_token_id = self.network.step(0.001, input_vector)  # dt=0.001
+                    step_duration = time.time() - step_start
+                    print(f"    [DEBUG] network.step() completed in {step_duration:.3f}s, predicted: {predicted_token_id}")
                     
                     # Calculate reward based on prediction accuracy
                     if predicted_token_id == target_token:
@@ -917,8 +928,12 @@ class NeuroGenAgent:
                         # Partial credit if prediction is close
                         reward = 0.1 if abs(predicted_token_id - target_token) < 10 else 0.0
                     
-                    # Apply reward for learning (reinforcement signal)
+                    # Apply reward for learning (reinforcement signal) - WITH TIMING
+                    reward_start = time.time()
+                    print(f"    [DEBUG] Calling network.apply_reward({reward:.2f})...")
                     self.network.apply_reward(reward)
+                    reward_duration = time.time() - reward_start
+                    print(f"    [DEBUG] network.apply_reward() completed in {reward_duration:.3f}s")
                     
                     total_reward += reward
                     num_predictions += 1
@@ -930,7 +945,9 @@ class NeuroGenAgent:
                               f"Avg reward: {total_reward/num_predictions:.3f}")
 
                 except Exception as e:
-                    print(f"[Warning] Failed to process prediction: {e}")
+                    print(f"[ERROR] Failed to process prediction at position {i}: {e}")
+                    import traceback
+                    traceback.print_exc()
                     num_predictions += 1
 
                 # Update stats
@@ -1424,8 +1441,13 @@ def main():
     print("="*60)
     
     # Agent configuration (use actual vocab size from loaded tokenizer)
+    # REDUCED network size for faster training with token-by-token prediction
     actual_vocab_size = tokenizer.get_vocab_size()
     agent_config = {
+        'num_neurons': 1000,      # Reduced from 10000 for faster training
+        'num_synapses': 5000,     # Reduced from 50000 for faster training  
+        'dt': 0.01,               # Larger timestep (0.01 vs 0.001) for faster simulation
+        'learning_rate': 0.01,
         'embedding_dim': args.embedding_dim,
         'vocab_size': actual_vocab_size,
         'tokenizer': {

@@ -1,22 +1,22 @@
 {
   "epoch": 2,
   "article_idx": 750,
-  "total_reward": 99.864883507933,
+  "total_reward": 100.56608387349388,
   "episode_rewards": [
-    0.13327898120719564
+    0.133701732162296
   ],
   "metrics": {
-    "articles_processed": 465,
-    "total_reward": 61.97472626134597,
-    "avg_reward_per_article": 0.13327898120719564,
+    "articles_processed": 464,
+    "total_reward": 62.03760372330534,
+    "avg_reward_per_article": 0.133701732162296,
     "learning_progress": [
       {
         "epoch": 1,
-        "articles": 465,
-        "reward": 61.97472626134597,
-        "avg_reward": 0.13327898120719564
+        "articles": 464,
+        "reward": 62.03760372330534,
+        "avg_reward": 0.133701732162296
       }
     ]
   },
-  "timestamp": "2025-11-16T13:54:04.146619"
+  "timestamp": "2025-11-16T14:42:43.437544"
 }

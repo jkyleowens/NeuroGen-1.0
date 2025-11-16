@@ -30,7 +30,7 @@ PYTHON_INCLUDES := $(shell $(PYTHON_CONFIG) --includes)
 PYBIND11_INCLUDES := $(shell python3 -m pybind11 --includes 2>/dev/null)
  
 # Compiler Flags
-CXXFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include $(PYTHON_INCLUDES) $(PYBIND11_INCLUDES) -O3 -g -fPIC -Wall -ferror-limit=50
+CXXFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include $(PYTHON_INCLUDES) $(PYBIND11_INCLUDES) -O3 -g -fPIC -Wall -ferror-limit=50 -DUSE_CUDA
 NVCCFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -arch=sm_75 -O3 -g -lineinfo \
              -Xcompiler -fPIC -Xcompiler -Wall -use_fast_math \
              --expt-relaxed-constexpr --expt-extended-lambda -ccbin /usr/bin/clang++
@@ -50,12 +50,14 @@ ALL_CPP_SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
 
 # Excluded sources causing duplicate symbol definitions or deprecated
 # EnhancedLearningSystem and NetworkCUDA require CUDA and cannot be compiled as regular C++
+# NetworkCUDA.cpp and NetworkCUDA_Interface.cpp are excluded - using .cu versions instead
 EXCLUDE_SOURCES := \
     $(SRC_DIR)/NlpAgentImplementation.cpp \
     $(SRC_DIR)/execute_action_temp.cpp \
     $(SRC_DIR)/DecisionAndActionSystems_fixed.cpp \
     $(SRC_DIR)/EnhancedLearningSystem.cpp \
-    $(SRC_DIR)/NetworkCUDA.cpp
+    $(SRC_DIR)/NetworkCUDA.cpp \
+    $(SRC_DIR)/NetworkCUDA_Interface.cpp
 
 # Separate main source files
 MAIN_SRC := $(SRC_DIR)/main.cpp
@@ -75,13 +77,22 @@ MAIN_OBJECT := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(MAIN_SRC))
 AUTONOMOUS_MAIN_OBJECT := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(AUTONOMOUS_MAIN_SRC))
 BINDINGS_OBJECT := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(BINDINGS_SRC))
 
-# CUDA source files
+# CUDA source files - includes kernels, NetworkCUDA core, and interface
 CUDA_WRAPPER_SOURCES := \
     $(CUDA_SRC_DIR)/CudaKernelWrappers.cu \
     $(CUDA_SRC_DIR)/EnhancedSTDPKernel.cu \
     $(CUDA_SRC_DIR)/HebbianLearningKernel.cu \
     $(CUDA_SRC_DIR)/HomeostaticMechanismsKernel.cu \
-    $(CUDA_SRC_DIR)/NeuromodulationKernels.cu
+    $(CUDA_SRC_DIR)/NeuromodulationKernels.cu \
+    $(CUDA_SRC_DIR)/KernelLaunchWrappers.cu \
+    $(CUDA_SRC_DIR)/IonChannelInitialization.cu \
+    $(CUDA_SRC_DIR)/NeuronUpdateKernel.cu \
+    $(CUDA_SRC_DIR)/CalciumDiffusionKernel.cu \
+    $(CUDA_SRC_DIR)/RewardModulationKernel.cu \
+    $(CUDA_SRC_DIR)/EligibilityAndRewardKernels.cu \
+    $(CUDA_SRC_DIR)/LearningStateKernels.cu \
+    $(CUDA_SRC_DIR)/NetworkCUDA.cu \
+    $(CUDA_SRC_DIR)/NetworkCUDA_Interface.cu
 
 # CUDA objects
 CUDA_WRAPPER_OBJECTS := $(patsubst $(CUDA_SRC_DIR)/%.cu,$(CUDA_OBJ_DIR)/%.o,$(CUDA_WRAPPER_SOURCES))
@@ -89,8 +100,8 @@ CUDA_WRAPPER_OBJECTS := $(patsubst $(CUDA_SRC_DIR)/%.cu,$(CUDA_OBJ_DIR)/%.o,$(CU
 # Core objects (without any main or bindings) - used by executables
 CORE_OBJECTS := $(CPP_OBJECTS) $(CUDA_WRAPPER_OBJECTS)
 
-# Python module objects (C++ only, no CUDA for compatibility)
-PYTHON_MODULE_OBJECTS := $(CPP_OBJECTS) $(BINDINGS_OBJECT)
+# Python module objects - now includes CUDA support!
+PYTHON_MODULE_OBJECTS := $(CPP_OBJECTS) $(CUDA_WRAPPER_OBJECTS) $(BINDINGS_OBJECT)
 
 # --- Dependency Files ---
 DEPS := $(patsubst $(SRC_DIR)/%.cpp,$(DEPS_DIR)/%.d,$(CPP_SOURCES))

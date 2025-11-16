@@ -1,0 +1,9 @@
+2025-11-16 14:32:43,547 [INFO] Training session started: 20251116_143243
+2025-11-16 14:32:43,547 [INFO] Log directory: training_logs/session_20251116_143243
+2025-11-16 14:32:43,797 [INFO] Epoch 1 complete - Articles: 92, Avg Reward: 0.138, Total: 12.65
+2025-11-16 14:32:43,836 [INFO] Saved metrics to training_logs/session_20251116_143243/metrics.json
+2025-11-16 14:32:43,836 [INFO] Saved token statistics to training_logs/session_20251116_143243/token_stats.json
+2025-11-16 14:32:43,836 [INFO] Generating training visualizations...
+2025-11-16 14:32:45,051 [INFO] Saved reward progression chart
+2025-11-16 14:32:45,051 [INFO] All visualizations saved to training_logs/session_20251116_143243
+2025-11-16 14:32:45,051 [INFO] Training summary report saved to training_logs/session_20251116_143243/training_summary.txt

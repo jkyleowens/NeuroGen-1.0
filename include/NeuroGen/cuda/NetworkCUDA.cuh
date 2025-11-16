@@ -659,6 +659,7 @@ private:
     // Timing
     std::chrono::high_resolution_clock::time_point last_update_time_;
     std::vector<float> update_time_history_;
+    float current_time_ = 0.0f;  // Simulation time in milliseconds
     
     // ========================================================================
     // INTERNAL HELPER METHODS

@@ -372,42 +372,45 @@ void NetworkCUDA::update(float dt, float reward_signal, float novelty_signal) {
         std::cerr << "❌ NetworkCUDA not initialized" << std::endl;
         return;
     }
-    
+
     std::lock_guard<std::mutex> lock(cuda_mutex_);
-    
+
     auto start_time = std::chrono::high_resolution_clock::now();
-    
+
     try {
         // Update neuron states
-        KernelLaunchWrappers::update_neuron_states(d_neurons_, 0.0f, dt, num_neurons_);
-        
+        KernelLaunchWrappers::update_neuron_states(d_neurons_, current_time_, dt, num_neurons_);
+
         // Update calcium dynamics
-        KernelLaunchWrappers::update_calcium_dynamics(d_neurons_, 0.0f, dt, num_neurons_);
-        
+        KernelLaunchWrappers::update_calcium_dynamics(d_neurons_, current_time_, dt, num_neurons_);
+
         // Run STDP and update eligibility traces
-        KernelLaunchWrappers::run_stdp_and_eligibility(d_synapses_, d_neurons_, 0.0f, dt, num_synapses_);
-        
+        KernelLaunchWrappers::run_stdp_and_eligibility(d_synapses_, d_neurons_, current_time_, dt, num_synapses_);
+
         // Apply reward and adaptation if there's a reward signal
         if (std::abs(reward_signal) > 0.001f) {
-            KernelLaunchWrappers::apply_reward_and_adaptation(d_synapses_, d_neurons_, reward_signal, 0.0f, dt, num_synapses_);
+            KernelLaunchWrappers::apply_reward_and_adaptation(d_synapses_, d_neurons_, reward_signal, current_time_, dt, num_synapses_);
         }
-        
+
         // Update learning state if enabled
         if (cuda_config_.enable_learning_state_gpu && d_learning_state_) {
             updateLearningStateGPU(reward_signal, novelty_signal, dt);
         }
-        
+
         // Run homeostatic mechanisms
-        KernelLaunchWrappers::run_homeostatic_mechanisms(d_neurons_, d_synapses_, 0.0f, num_neurons_, num_synapses_);
-        
+        KernelLaunchWrappers::run_homeostatic_mechanisms(d_neurons_, d_synapses_, current_time_, num_neurons_, num_synapses_);
+
         // Synchronize default stream
         CUDA_CHECK_RETURN(cudaStreamSynchronize(default_stream_), void());
-        
+
+        // Advance simulation time
+        current_time_ += dt;
+
         // Update performance metrics
         auto end_time = std::chrono::high_resolution_clock::now();
         float update_time_ms = std::chrono::duration<float, std::milli>(end_time - start_time).count();
         updatePerformanceMetrics(update_time_ms);
-        
+
     } catch (const std::exception& e) {
         std::cerr << "❌ Error during GPU update: " << e.what() << std::endl;
     }

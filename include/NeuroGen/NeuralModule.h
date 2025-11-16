@@ -226,7 +226,12 @@ protected:
     
     // Neural network instance
     std::unique_ptr<Network> internal_network_;
-    
+
+#ifdef USE_CUDA
+    // CUDA-accelerated network instance (used when CUDA is available)
+    std::unique_ptr<class NetworkCUDA_Interface> cuda_network_;
+#endif
+
     // Module state
     bool active_;
     bool is_initialized_;

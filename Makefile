@@ -39,9 +39,9 @@ NVCCFLAGS := -std=c++17 -I$(INCLUDE_DIR) -I$(CUDA_PATH)/include -arch=sm_75 -O3 
 LDFLAGS_CUDA := -L$(CUDA_PATH)/lib64 -L/usr/lib
 LDLIBS_CUDA := -lcudart -lcurand -lcublas -lX11 -lXtst
 
-# Linker Flags - For Python module (needs Python libs)
-LDFLAGS_PYTHON := -L$(CUDA_PATH)/lib64 -L/usr/lib $(PYTHON_LDFLAGS)
-LDLIBS_PYTHON := -lcudart -lcurand -lcublas -lX11 -lXtst
+# Linker Flags - For Python module (needs Python libs, no CUDA for compatibility)
+LDFLAGS_PYTHON := -L/usr/lib $(PYTHON_LDFLAGS)
+LDLIBS_PYTHON := -lX11
 
 # --- Source Files ---
 
@@ -49,10 +49,13 @@ LDLIBS_PYTHON := -lcudart -lcurand -lcublas -lX11 -lXtst
 ALL_CPP_SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
 
 # Excluded sources causing duplicate symbol definitions or deprecated
+# EnhancedLearningSystem and NetworkCUDA require CUDA and cannot be compiled as regular C++
 EXCLUDE_SOURCES := \
     $(SRC_DIR)/NlpAgentImplementation.cpp \
     $(SRC_DIR)/execute_action_temp.cpp \
-    $(SRC_DIR)/DecisionAndActionSystems_fixed.cpp
+    $(SRC_DIR)/DecisionAndActionSystems_fixed.cpp \
+    $(SRC_DIR)/EnhancedLearningSystem.cpp \
+    $(SRC_DIR)/NetworkCUDA.cpp
 
 # Separate main source files
 MAIN_SRC := $(SRC_DIR)/main.cpp
@@ -86,8 +89,8 @@ CUDA_WRAPPER_OBJECTS := $(patsubst $(CUDA_SRC_DIR)/%.cu,$(CUDA_OBJ_DIR)/%.o,$(CU
 # Core objects (without any main or bindings) - used by executables
 CORE_OBJECTS := $(CPP_OBJECTS) $(CUDA_WRAPPER_OBJECTS)
 
-# Python module objects (core + bindings)
-PYTHON_MODULE_OBJECTS := $(CORE_OBJECTS) $(BINDINGS_OBJECT)
+# Python module objects (C++ only, no CUDA for compatibility)
+PYTHON_MODULE_OBJECTS := $(CPP_OBJECTS) $(BINDINGS_OBJECT)
 
 # --- Dependency Files ---
 DEPS := $(patsubst $(SRC_DIR)/%.cpp,$(DEPS_DIR)/%.d,$(CPP_SOURCES))

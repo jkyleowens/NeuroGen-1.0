@@ -261,7 +261,19 @@ public:
      * @return Vector of neuron membrane potentials
      */
     std::vector<GPUNeuronState> getNeuronStates() const;
-    
+
+    /**
+     * @brief Get device pointer to neurons (for direct GPU access)
+     * @return Pointer to GPU neuron array
+     */
+    GPUNeuronState* getDeviceNeurons() { return d_neurons_; }
+
+    /**
+     * @brief Get device pointer to synapses (for direct GPU access)
+     * @return Pointer to GPU synapse array
+     */
+    GPUSynapse* getDeviceSynapses() { return d_synapses_; }
+
     /**
      * @brief Get synaptic weights
      * @return Vector of all synaptic weights

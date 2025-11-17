@@ -82,7 +82,7 @@ NetworkStats NetworkCUDA_Interface::get_stats() const {
     if (cuda_network_) {
         // Get basic stats from the network
         auto memory_stats = cuda_network_->getMemoryStats();
-        stats.total_memory_mb = memory_stats.allocated_memory_bytes / (1024.0 * 1024.0);
+        stats.memory_usage_bytes = memory_stats.allocated_memory_bytes;
     }
     return stats;
 }
